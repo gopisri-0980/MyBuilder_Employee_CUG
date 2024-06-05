@@ -1,0 +1,171 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+      <div class="content__loader">
+          <div><i class="Favicon"></i></div>
+      </div>
+  </div>
+</div>
+
+<section class="content">
+
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Projectwise ticket report</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i> 
+                <span (click)="dashtitle()" style="cursor:pointer;">Ticketing Dashboard</span> </a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Projectwise ticket report</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body" style="border-radius: 0px;">
+
+            <div *ngFor="let siteItem of projectWiseTicketReportTableData; let i = index;">
+
+              <p class="titileclassproject"> {{i+1}} . {{siteItem.siteName}}</p><br><br>
+              <div class="table-responsive" style="overflow-x:revert!important;">
+                <table style="border-radius: 10px;" class="display">
+                  <thead>
+                    <tr class="center">
+                      <th>Ticket Type</th>
+                      <th>No.Of.Tickets</th>
+                      <th>New</th>
+                      <th>Open</th>
+                      <th>Inprogress</th>
+                      <th>Reopen</th>
+                      <th>Close</th>
+                      <th>Total Escalated Tickets</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of siteItem.ticktTypewiseTicketCount; let i = index;">
+                      <td class="center">{{item.ticketType}}</td>
+                      <td
+                        (click)="getTicketingDashBoardDetails([siteItem.siteId],['new','open','inprogress','reopen','closed'],[item.ticketTypeId])"
+                        class="center" style="text-decoration: underline; cursor: pointer;">
+                        {{item.totalTickets}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetails([siteItem.siteId],['new'],[item.ticketTypeId])"
+                        class="center" style="text-decoration: underline; cursor: pointer;">
+                        {{item.newT}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetails([siteItem.siteId],['open'],[item.ticketTypeId])"
+                        class="center" style="text-decoration: underline; cursor: pointer;">
+                        {{item.openT}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetails([siteItem.siteId],['inprogress'],[item.ticketTypeId])"
+                        class="center" style="text-decoration: underline; cursor: pointer;">
+                        {{item.inprogressT}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetails([siteItem.siteId],['reopen'],[item.ticketTypeId])"
+                        class="center" style="text-decoration: underline; cursor: pointer;">
+                        {{item.reopenT}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetails([siteItem.siteId],['closed'],[item.ticketTypeId])"
+                        class="center" style="text-decoration: underline; cursor: pointer;">
+                        {{item.closedT}}
+                      </td>
+
+                      <td (click)="getTicketingDashBoardDetails([siteItem.siteId],['Open','closed'], item.escalatedtickets)"
+                      class="center" style="text-decoration: underline; cursor: pointer;">
+                      {{item.totalEscalatedTickets}}
+                    </td>
+
+
+                    </tr>
+
+
+                    <tr style="color: #9E9E9E;border: none;" *ngIf="siteItem.ticktTypewiseTicketCount.length != 0">
+                      <td class="center" style="font-weight: bold;">Total</td>
+                      <td class="center" style="font-weight: bold;">
+                        {{siteItem.noOfTickets}}
+                      </td>
+                      <td class="center" style="font-weight: bold;">
+                        {{siteItem.newTT}}
+                      </td>
+                      <td class="center" style="font-weight: bold;">
+                        {{siteItem.openTT}}
+                      </td>
+                      <td class="center" style="font-weight: bold;">
+                        {{siteItem.inprogressTT}}
+                      </td>
+                      <td class="center" style="font-weight: bold;">
+                        {{siteItem.reOpenTT}}
+                      </td>
+                      <td class="center" style="font-weight: bold;">
+                        {{siteItem.closedTT}}
+                      </td>
+
+                      <td class="center" style="font-weight: bold;">
+                        {{siteItem.totalEscalatedTickets}}
+                      </td>
+                    </tr>
+
+
+                  </tbody>
+
+                 
+
+
+                  <!-- <tbody *ngIf="siteItem.ticktTypewiseTicketCount.length != 0">
+                    <tr style="color: #9E9E9E;border: none;">
+                      <td class="center" style="font-weight: bold;">Total</td>
+                      <td
+                        (click)="getTicketingDashBoardDetailss(siteItem.siteId,['new','open','inprogress','reopen','closed'])"
+                        class="center" style="font-weight: bold;">
+                        {{siteItem.noOfTickets}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetailss(siteItem.siteId,['new'])" class="center"
+                        style="font-weight: bold;">
+                        {{siteItem.newTT}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetailss(siteItem.siteId,['open'])" class="center"
+                        style="font-weight: bold;">
+                        {{siteItem.openTT}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetailss(siteItem.siteId,['inprogress'])" class="center"
+                        style="font-weight: bold;">
+                        {{siteItem.inprogressTT}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetailss(siteItem.siteId,['reopen'])" class="center"
+                        style="font-weight: bold;">
+                        {{siteItem.reOpenTT}}
+                      </td>
+                      <td (click)="getTicketingDashBoardDetailss(siteItem.siteId,['closed'])" class="center"
+                        style="font-weight: bold;">
+                        {{siteItem.closedTT}}
+                      </td>
+                    </tr>
+                  </tbody> -->
+                </table>
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,952 @@
+<head>
+  <style>
+    .excelcls {
+      position: absolute !important;
+      right: 38px !important;
+      top: 15px !important;
+      border-radius: 22px !important;
+      width: 200px !important;
+    }
+
+    .pclass {
+      font-size: 13px;
+      font-family: 'Poppins';
+      font-weight: 600;
+
+    }
+
+
+    textarea {
+      overflow: auto;
+      resize: vertical;
+      height: 200px;
+      border-radius: 5px;
+    }
+
+
+    .go-corner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      overflow: hidden;
+      top: 0;
+      right: 0;
+      background-color: #00838d;
+      border-radius: 0 4px 0 32px;
+    }
+
+    .go-arrow {
+      margin-top: -4px;
+      margin-right: -4px;
+      color: white;
+      font-family: courier, sans;
+    }
+
+    .card1 {
+      display: block;
+      position: relative;
+      max-width: 45%;
+
+      background-color: #f2f8f9;
+      border-radius: 4px;
+      padding: 32px 24px;
+      margin: 12px;
+      text-decoration: none;
+      z-index: 0;
+      overflow: hidden;
+
+    }
+
+    .form-check,
+    label {
+      font-size: 16px;
+      line-height: 1.42857;
+      color: #000;
+      font-weight: 400;
+      font-family: 'Poppins';
+      font-weight: 600;
+      word-spacing: 5px;
+      letter-spacing: 0px;
+    }
+
+    body {
+      background: #f3f3f3;
+      padding: 30px 20px;
+    }
+
+    .dashboard-cards {
+      position: relative;
+      padding-bottom: 50px;
+      margin: 0 !important;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .dashboard-cards .card {
+      background: #ffffff;
+      display: inline-block;
+      perspective: 1000;
+      z-index: 20;
+      padding: 0 !important;
+      margin: 5px 5px 10px 5px;
+      position: relative;
+      text-align: left;
+      transition: all 0.3s 0s ease-in;
+      z-index: 1;
+      width: calc(33.33333333% - 10px);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dashboard-cards .card:hover {
+      box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+      transition: all 0.3s ease;
+      /* background-image: linear-gradient(to right,#25aae1,#30dd8a,#30dd8a,#2bb673);
+  color:#FFF; */
+    }
+
+    .card-title {
+      margin-bottom: 0 !important;
+      ;
+    }
+
+    .dashboard-cards .card .card-title {
+
+      padding: 20px 15px;
+      position: relative;
+      z-index: 0;
+    }
+
+    .dashboard-cards .card .card-title h2 {
+      font-size: 18px;
+      letter-spacing: -0.05em;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins';
+
+    }
+
+    .dashboard-cards .card .card-title h2 small {
+      display: block;
+      font-size: 14px;
+      margin-top: 8px;
+      letter-spacing: -0.025em;
+    }
+
+    .dashboard-cards .card .card-description {
+      position: relative;
+      font-size: 14px;
+      border-top: 1px solid #ddd;
+      padding: 10px 15px 0 15px;
+    }
+
+    .dashboard-cards .card .card-actions {
+      box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+      padding: 10px;
+      text-align: center;
+    }
+
+
+    .dashboard-cards .no-touch .dashboard-cards.showing .card:hover {
+      opacity: 0.94;
+      transform: scale(0.92);
+    }
+
+    .dashboard-cards .card.d-card-show {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+
+    .dashboard-cards .card.d-card-show .card-flap {
+      background: #ffffff;
+      transform: rotateX(0deg);
+    }
+
+    .dashboard-cards .card.d-card-show .flap1 {
+      transition: all 0.3s 0s ease-out;
+    }
+
+    .dashboard-cards .card.d-card-show .flap2 {
+      transition: all 0.3s 0.2s ease-out;
+    }
+
+    .dashboard-cards .card .task-count {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 22px;
+      right: 10px;
+      background: #ecf0f1;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 100%;
+      color: #333333;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .dashboard-cards .task-list {
+      padding: 0 !important;
+    }
+
+    .dashboard-cards .task-list li {
+      padding: 10px 0;
+      padding-left: 10px;
+      margin: 3px 0;
+      list-style-type: none;
+      border-bottom: 1px solid #e9ebed;
+      border-left: 3px solid #f36525;
+      transition: all 0.2s ease;
+    }
+
+    .dashboard-cards .task-list li:hover {
+      background: #ecf0f1;
+      transition: all 0.2s ease;
+    }
+
+    .dashboard-cards .task-list li span {
+      float: right;
+      color: #f36525;
+      margin-right: 5px;
+    }
+
+    .dashboard-cards.showing .card.d-card-show .task-count {
+      color: #ffffff;
+      background: #f36525;
+      transition: all 0.2s ease;
+    }
+
+    .dashboard-cards .card-actions .btn {
+      color: #333;
+    }
+
+    .dashboard-cards .card-actions .btn:hover {
+      color: #f36525;
+    }
+
+    .fromdateval {
+      width: 100%;
+      text-align: center;
+      position: relative;
+      top: 11px;
+      color: orangered;
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+
+    .my__textoverflow {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 200px;
+      display: block;
+      z-index: 99999999;
+    }
+
+    .prgclass {
+      position: relative;
+      top: -12px;
+      font-size: 17px;
+      color: #009688;
+      font-weight: 600;
+      line-height: 35px;
+    }
+
+    .nodata {
+      position: relative;
+      font-size: 18px;
+      color: #607d8b;
+      /* font-weight: 600; */
+      font-family: 'Poppins';
+      left: 39px;
+      top: 5px;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      border-radius: 4px;
+      margin-right: 2px;
+      opacity: 0.9;
+      filter: invert(0.8);
+      position: absolute;
+      right: 35px;
+    }
+
+    ::ng-deep .my-class .modal-dialog {
+      max-width: 30%;
+      width: 30%;
+
+    }
+
+
+
+
+    /* input[type="date"]::-webkit-datetime-edit,
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button {
+      color: #fff;
+      position: relative;
+    }
+
+    input[type="date"]::-webkit-datetime-edit-year-field {
+      position: absolute !important;
+      border-left: 1px solid #8c8c8c;
+      padding: 2px;
+      color: #000;
+      left: 56px;
+    }
+
+    input[type="date"]::-webkit-datetime-edit-month-field {
+      position: absolute !important;
+      border-left: 1px solid #8c8c8c;
+      padding: 2px;
+      color: #000;
+      left: 26px;
+    }
+
+
+    input[type="date"]::-webkit-datetime-edit-day-field {
+      position: absolute !important;
+      color: #000;
+      padding: 2px;
+      left: 4px;
+
+    } */
+
+    .dot {
+      height: 25px;
+      width: 25px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+    }
+  </style>
+
+
+
+</head>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View My Appointments</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer" (click)="homeClick()"></i> View My Appointments</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="maindivclass" style="position: relative; top: 11px;">
+          <form [formGroup]="fg">
+            <div class="row clearfix">
+
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <p class="fieldHeaders">
+                    <label style="position: relative;top: 10px;">Select Project:</label>
+                  </p>
+                  <div class="center">
+                    <select style="width:100%;" class="form-group" id="projectID" single>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div id="blocksID" class="col-sm-3">
+                <div class="form-line">
+                  <p class="fieldHeaders">
+                    <label style="position: relative;top: 10px;">Select Block:</label>
+                  </p>
+                  <div class="center">
+                    <select style="width:100%;" class="form-group" id="BlockId">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <label style="position: relative;top: 10px;">Start Date:</label>
+                  <div class="center" style="position: relative;top: 9px;">
+
+                    <span class="material-icons" style="position: absolute;
+                    right: 19px;top: 7px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+
+                    <input type="date" placeholder="Select Date"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                      class=" form-control" id="fromDate" formControlName="from">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <label style="position: relative;top: 10px;">End Date:</label>
+                  <div class="center" style="position: relative;top: 9px;">
+                    <span class="material-icons" style="position: absolute;
+                    right: 19px;top: 7px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+
+                    <input type="date" placeholder="Select Date"
+                      style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                      class=" form-control" id="toDate" formControlName="to">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="row" style="position: relative;top: 7px;">
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <p class="fieldHeaders">
+                    <label style="position: relative;top: 10px;">Select Status:</label>
+                  </p>
+                  <div class="center">
+                    <select style="width:100%;" class="form-group" id="StatusId" single>
+                      <option value="select">--Select--</option>
+                      <option value="All">All</option>
+                      <option value="Booked">Booked</option>
+                      <option value="Cancelled">Cancelled</option>
+                      <option value="Hold">Hold</option>
+                      <option value="Meeting Happened">Meeting Happened</option>
+                      <option value="Meeting Not Happened">Meeting Not Happened</option>
+
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div style="width:100%;text-align:center;position: relative;top: 11px;">
+                  <button type="button" class="btn-hover color-1" style="width: 200px;font-size: 16px;"
+                    (click)="searchfunction()">Search</button>
+
+                  <button type="button" class="btn-hover color-1" style="width: 200px;font-size: 15px;
+                    font-family: 'Poppins';" (click)="ClearAll()">Clear All</button>
+                </div>
+              </div>
+            </div>
+
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromdateval">Please add a valid from and to date</p>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card" *ngIf="Tablecontroller?.length">
+      <div class="card-body">
+        <p class="titileclassproject"> View My Appointments :
+        </p>
+
+        <button type="button" class="btn btn-info excelcls" (click)="exportAsXLSX()">Export as Excel</button>
+
+        <div class='row dashboard-cards' style="position: relative;">
+          <div class='card col-md-4 card1'
+            *ngFor="let card of Tablecontroller | paginate: { itemsPerPage: 9, currentPage: p }; let i = index">
+            <div class='card-title' *ngIf="card.apptmtStatusName == 'Booked'  && card.isTimeCompleted == false"
+              style="background-color: #f5cb95; height:390px;line-height: 25px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Cust.Name &nbsp; : </span> <span
+                  style="color:#17202A;">{{card.custName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.siteName}}</span></p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Block Name &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.blockName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Flat No &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.flatNo}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);"> Appointment Date &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.slotTime}}</span> </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;text-transform: capitalize;">{{card.apptmtStatusName}}</span> </p>
+
+
+              <button type="button" class="btn btn-outline mr-2" (click)="open(content , card)"
+                style="border-radius: 21px;width: 141px;position: absolute;bottom: 5px;left: 6px;">More
+                Details</button>
+
+
+
+
+              <span class="material-icons" style="position: absolute;
+                right: 11px;bottom: 27px;font-size: 32px; color: var(--orange);" (click)="open1(content1)">cancel
+              </span>
+
+
+
+
+              <button type="button" class="btn btn-info" style="border-radius: 18px !important;background:transparent!important;
+                color: #000 !important;border: 2px solid var(--white) !important;box-shadow: none !important;"
+                *ngIf="card.apptmtSummary != null" (click)="open4(content4 ,card)">Click to view MOM</button>
+
+
+            </div>
+
+
+            <div class='card-title' *ngIf="card.apptmtStatusName == 'Booked'  && card.isTimeCompleted == true"
+              style="background: #FF5858;height:390px;line-height: 25px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Cust.Name &nbsp; : </span> <span
+                  style="color:#17202A;">{{card.custName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.siteName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Block Name &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.blockName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Flat No &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.flatNo}}</span></p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);"> Appointment Date &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.slotTime}}</span> </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;text-transform: capitalize;">{{card.apptmtStatusName}}</span> </p>
+
+              <button type="button" class="btn btn-outline mr-2" (click)="open(content , card)"
+                style="border-radius: 21px;width: 141px;position: absolute;bottom: 5px;left: 6px;">More
+                Details</button>
+
+              <span class="material-icons" style="position: absolute;
+                right: 11px;bottom: 27px;font-size: 32px; color: #b4c5d7;" (click)="open1(content1)">cancel </span>
+
+              <button type="button" class="btn btn-info" style="border-radius: 18px !important;background:transparent!important;
+color: #000 !important;border: 2px solid var(--white) !important;box-shadow: none !important;"
+                *ngIf="card.apptmtSummary != null" (click)="open4(content4 , card)">Click to view MOM</button>
+
+              <button type="button" class="btn btn-info" style="border-radius: 18px !important;background:transparent!important;
+              color: #000 !important;border: 2px solid var(--white) !important;box-shadow: none !important;"
+                *ngIf="card.apptmtStatusName == 'Booked'  && card.isTimeCompleted == true"
+                (click)="open3(content3 ,card)">Edit to include MOM</button>
+
+
+            </div>
+
+
+
+            <div class='card-title' *ngIf="card.apptmtStatusName == 'Cancelled'"
+              style="background: #99f1e0;height:390px;line-height: 25px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Cust.Name &nbsp; : </span> <span
+                  style="color:#17202A;">{{card.custName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.siteName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Block Name &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.blockName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Flat No &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.flatNo}}</span></p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);"> Appointment Date &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.slotTime}}</span> </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;text-transform: capitalize;">{{card.apptmtStatusName}}</span> </p>
+
+              <button type="button" class="btn btn-outline mr-2" (click)="open(content , card)"
+                style="border-radius: 21px;width: 141px;position: absolute;bottom: 5px;left: 6px;">More
+                Details</button>
+
+              <!-- <span class="material-icons" style="position: absolute;
+              right: 11px;bottom: 27px;font-size: 32px; color: #b4c5d7;" (click)="open1(content1)">cancel </span> -->
+
+              <button type="button" class="btn btn-info" style="border-radius: 18px !important;background:transparent!important;
+              color: #000 !important;border: 2px solid var(--white) !important;box-shadow: none !important;"
+                *ngIf="card.apptmtSummary != null" (click)="open4(content4 , card)">Click to view MOM</button>
+            </div>
+
+
+
+
+            <div class='card-title' *ngIf="card.apptmtStatusName == 'Hold'"
+              style="background: #10e810; height:390px;line-height: 25px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Cust.Name &nbsp; : </span> <span
+                  style="color:#17202A;">{{card.custName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.siteName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Block Name &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.blockName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Flat No &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.flatNo}}</span></p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);"> Appointment Date &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.slotTime}}</span> </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;text-transform: capitalize;">{{card.apptmtStatusName}}</span> </p>
+
+              <button type="button" class="btn btn-outline mr-2" (click)="open(content , card)"
+                style="border-radius: 21px;width: 141px;position: absolute;bottom: 5px;left: 6px;">More
+                Details</button>
+
+              <span class="material-icons" style="position: absolute;
+            right: 11px;bottom: 27px;font-size: 32px; color: #b4c5d7;" (click)="open1(content1)">cancel </span>
+
+              <button type="button" class="btn btn-info" style="border-radius: 18px !important;background:transparent!important;
+color: #000 !important;border: 2px solid var(--white) !important;box-shadow: none !important;"
+                *ngIf="card.apptmtSummary != null" (click)="open4(content4 ,card)">Click to view MOM</button>
+
+            </div>
+
+
+
+
+
+
+
+            <div class='card-title' *ngIf="card.apptmtStatusName == 'Meeting Not Happened'"
+              style="background: #6495ED; height:390px; line-height: 25px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Cust.Name &nbsp; : </span> <span
+                  style="color:#17202A;">{{card.custName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.siteName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Block Name &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.blockName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Flat No &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.flatNo}}</span></p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);"> Appointment Date &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.slotTime}}</span> </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;text-transform: capitalize;">{{card.apptmtStatusName}}</span> </p>
+
+              <button type="button" class="btn btn-outline mr-2" (click)="open(content , card)"
+                style="border-radius: 21px;width: 141px;position: absolute;bottom: 5px;left: 6px;">More
+                Details</button>
+
+              <span class="material-icons" style="position: absolute;
+        right: 11px;bottom: 27px;font-size: 32px; color: #b4c5d7;" (click)="open1(content1)">cancel </span>
+
+              <button type="button" class="btn btn-info" style="border-radius: 18px !important;background:transparent!important;
+color: #000 !important;border: 2px solid var(--white) !important;box-shadow: none !important;"
+                *ngIf="card.apptmtSummary != null" (click)="open4(content4 , card)">Click to view MOM</button>
+
+            </div>
+
+
+
+            <div class='card-title' *ngIf="card.apptmtStatusName == 'Meeting Happened'"
+              style="background: #FFBF00;height:390px; line-height: 25px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Cust.Name &nbsp; : </span> <span
+                  style="color:#17202A;">{{card.custName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.siteName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Block Name &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.blockName}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Flat No &nbsp;:</span> &nbsp; <span
+                  style="color:#17202A;">{{card.flatNo}}</span></p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);"> Appointment Date &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span></p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;">{{card.slotTime}}</span> </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp;: </span>&nbsp; <span
+                  style="color:#17202A;text-transform: capitalize;">{{card.apptmtStatusName}}</span> </p>
+
+              <button type="button" class="btn btn-outline mr-2" (click)="open(content , card)"
+                style="border-radius: 21px;width: 141px;position: absolute;bottom: 5px;left: 6px;">More
+                Details</button>
+
+              <span class="material-icons" style="position: absolute;
+      right: 11px;bottom: 27px;font-size: 32px;color: var(--white);" (click)="open1(content1)">cancel </span>
+
+              <button type="button" class="btn btn-info" style="border-radius: 18px !important;background:transparent!important;
+color: #000 !important;border: 2px solid var(--white) !important;box-shadow: none !important;"
+                *ngIf="card.apptmtSummary != null" (click)="open4(content4 ,card)">Click to view MOM</button>
+            </div>
+
+            <ng-template #content1 let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">View My Appointments</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p style="color: #137b89;font-size: 14px;">Do you really want to Cancel ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn-hover color-1" (click)="deletebtnfun(card)">Yes</button>
+                <button type="button" class="btn-hover color-1" (click)="modal.close('Save click')">No</button>
+              </div>
+            </ng-template>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+      </div>
+
+
+      <div *ngIf="Tablecontroller?.length">
+        <div style="text-align: center;position: relative;top: 36px;">
+          <span class="dot" style="background:#FFBF00"></span> <span style="position: relative;
+          top: -8px;left: 6px;">Meeting Happened</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+          <span class="dot" style="background-color: #6495ED"></span> <span style="position: relative;
+          top: -8px;left: 6px;">Meeting Not Happened</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+          <span class="dot" style="background-color: #f5cb95;"></span> <span style="position: relative;
+          top: -8px;left: 6px;">Booked</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+          <span class="dot" style="background-color: #99f1e0"></span> <span style="position: relative;
+          top: -8px;left: 6px;">Cancelled</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+          <span class="dot" style="background-color: #10e810;"></span> <span style="position: relative;
+          top: -8px;left: 6px;">Hold</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="card" *ngIf="Tablecontroller.length == 0">
+      <div class="card-body">
+        <div>
+          <p class="nodata">No Appointments scheduled</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="row prgclass">
+      <div class="col-sm-3"><span style="color: rgba(0, 0, 0, 0.54);">Customer Name </span></div>
+      <div class="col-sm-1"> : </div>
+      <div class="col-sm-8"> <span style="color:#17202A;">{{controller.custName}}</span></div>
+    </div>
+
+    <div class="row prgclass">
+      <div class="col-sm-3"><span style="color: rgba(0, 0, 0, 0.54);">Project Name </span></div>
+      <div class="col-sm-1"> : </div>
+      <div class="col-sm-8"> <span style="color:#17202A;">{{controller.siteName}}</span></div>
+    </div>
+
+    <div class="row prgclass">
+      <div class="col-sm-3"><span style="color: rgba(0, 0, 0, 0.54);">Block Name </span></div>
+      <div class="col-sm-1"> : </div>
+      <div class="col-sm-8"> <span style="color:#17202A;">{{controller.blockName}}</span></div>
+    </div>
+
+
+    <div class="row prgclass">
+      <div class="col-sm-3"><span style="color: rgba(0, 0, 0, 0.54);">Flat Number </span></div>
+      <div class="col-sm-1"> : </div>
+      <div class="col-sm-8"> <span style="color:#17202A;">{{controller.flatNo}}</span></div>
+    </div>
+
+    <div class="row prgclass">
+      <div class="col-sm-3"><span style="color: rgba(0, 0, 0, 0.54);">Date </span></div>
+      <div class="col-sm-1"> : </div>
+      <div class="col-sm-8"> <span style="color:#17202A;">{{controller.apptmtDate | date : 'dd MMMM yyy'}}</span></div>
+    </div>
+
+    <div class="row prgclass">
+      <div class="col-sm-3"><span style="color: rgba(0, 0, 0, 0.54);">Time </span></div>
+      <div class="col-sm-1"> : </div>
+      <div class="col-sm-8"> <span style="color:#17202A;">{{controller.slotTime}}</span></div>
+    </div>
+
+    <div class="row prgclass">
+      <div class="col-sm-3"><span style="color: rgba(0, 0, 0, 0.54);">Appointment For </span></div>
+      <div class="col-sm-1"> : </div>
+      <div class="col-sm-8"> <span style="color:#17202A;">{{controller.apptmtSubTypeName}}</span></div>
+    </div>
+
+    <div class="row prgclass">
+      <div class="col-sm-3"><span style="color: rgba(0, 0, 0, 0.54);">Message </span></div>
+      <div class="col-sm-1"> : </div>
+      <div class="col-sm-8"> <span style="color:#17202A;font-family: 'Poppins';
+    font-size: 14px;">{{controller.apptmtReqComments}}</span></div>
+    </div>
+
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #content4 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">View My Appointments : </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form style="width: 100%;">
+
+      <div class="row">
+        <div class="col-sm-3"><b style="font-size:15px;font-weight:600">Status</b></div>
+        <div class="col-sm-1"> : </div>
+        <div class="col-sm-8">{{apptmtStatusName}}</div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><b style="font-size:15px;font-weight:600">Note Your Minutes of Meeting here</b></div>
+        <div class="col-sm-1"> : </div>
+        <div class="col-sm-8">
+          <pre>{{apptmtReqComments}}</pre>
+        </div>
+      </div>
+
+
+      <!-- <p> <b>Status</b> : {{apptmtStatusName}}</p>
+     <p> <b>Note Your Minutes of Meeting here</b>{{apptmtReqComments}}</p> -->
+
+
+    </form>
+
+
+  </div>
+
+</ng-template>
+
+
+
+
+
+<ng-template #content3 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">View My Appointments : </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form style="width: 100%;">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="position: relative;top: 10px;" class="required">Select Status:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-control" id="popupStatus" single>
+                  <option value="select">--Select--</option>
+                  <option value="Meeting Happened">Meeting Happened</option>
+                  <option value="Meeting Not Happened">Meeting Not Happened</option>
+
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="required">Note Your Minutes of Meeting here</label>
+            <textarea cols="20" rows="20" id="yourminutestextarea"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn-hover color-1" style="width: 200px;font-size: 15px;
+    font-family: 'Poppins';" (click)="savepopupfun1()">Save</button>
+    </form>
+
+
+  </div>
+
+</ng-template>
+
+<section>
+  <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="imagemodal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Appointment Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="height:500px;overflow: scroll;">
+
+            <div style="padding: 20px;background: #faf7f7; border-radius: 10px;">
+              <p class="textmessage"> Hey! Your meeting with below customer(s) has ended. Please "Proceed" to change the
+                status and include Your Minutes of Meeting, Which may help you further.</p>
+              <div *ngFor="let p of popres;let i = index;">
+                <div>
+
+                  <div class="row" style="line-height: 30px;border: 1px solid #f2eeee;">
+                    <div class="col-sm-5"> {{i + 1}} &nbsp; .<b style="font-weight: 600;">Customer Name &nbsp;:
+                        &nbsp;</b> {{p.custName}} </div>
+                    <div class="col-sm-4"> <b style="font-weight: 600;">Appointment Time &nbsp; : &nbsp;</b>
+                      {{p.apptmtDate | date : 'dd MMMM yyy'}}</div>
+                    <div class="col-sm-3">{{p.slotTime}}</div>
+                  </div>
+
+                  <!-- <p class="textmessage"> </p> -->
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-hover color-1" (click)="paymentProceed()">Proceed</button>
+            <button type="button" class="btn-hover color-1" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

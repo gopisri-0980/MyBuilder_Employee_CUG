@@ -1,0 +1,93 @@
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View MPR</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>MPR</a>
+            </li>
+            <li class="breadcrumb-item active">View MPR</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="table-responsive" id="milestone_blocks_tables">
+
+
+          <table id="mpr_view" class="display table table-hover table-checkable order-column width-per-100">
+            <thead>
+              <tr>
+                <th class="center">S.No</th>
+                <th class="center">Uploaded Date</th>
+                <th class="center">Project</th>
+                <th class="center">MPR Name</th>
+                <th class="center">Attachment</th>
+                <th class="center">View Details</th>
+                <th *ngIf="deptid ==994 && roleid == 6" class="center">Delete</th>
+
+
+
+
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- <tr *ngIf = "mpr_list == ''">
+                <td class="center" colspan="12" style="font-size: medium;"> No data available in table</td>
+              </tr> -->
+
+              <tr *ngFor="let item of mpr_list; let i=index" style="cursor: pointer;" >
+                <td class="center">{{i+1}}</td>
+                <td class="center">
+                  
+                  <span *ngIf="item.createdDate != null" style="display: none;">{{item.createdDate}}</span>
+                  <span *ngIf="item.createdDate != null">{{item.createdDate| date : 'dd/MM/yyyy'}}</span>
+                  <span *ngIf="item.createdDate == null"> - </span>
+
+
+                 
+                
+                </td>
+                <td class="center">{{item.typeName}}</td>
+                <td class="center">{{item.mprName}}</td>
+                <td class="center"><span *ngFor="let linklocns of item.mprDocumentsResponseList; let i=index"><span
+                      *ngIf="i=='0'"><img *ngIf="linklocns.locationType!='ExternalServer'"
+                        (click)="attachmentlink(linklocns.documentLocation)"
+                        style="width:20px;height:20px;;margin-left:3px" src="assets/images/pdficon.png"><img
+                        *ngIf="linklocns.locationType =='ExternalServer'"
+                        (click)="attachmentlink(linklocns.documentLocation)"
+                        style="width:20px;height:20px;;margin-left:3px"
+                        src="assets/images/Google-Drive-icon.png"></span></span></td>
+
+
+                <td class="center"><span style="font-weight: 600;text-decoration: underline;" (click)="viewreportfun(item)">View Report</span></td>
+
+
+                <td *ngIf="deptid ==994 && roleid == 6 || deptid ==994 && roleid == 1"><img (click)="mprDelete(item.mprId)"
+                    style="width:20px;height:20px;;margin-left:10px" src="assets/images/download.png"></td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+        </div>
+        <div style="width:100%;text-align:center;" *ngIf="loaderhideme">
+          <img src="assets/images/loader_img.gif" style='width:20px; height:20px'>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section><br>

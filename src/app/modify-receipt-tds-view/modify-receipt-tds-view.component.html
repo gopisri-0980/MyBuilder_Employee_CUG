@@ -1,0 +1,392 @@
+<style>
+  .rowtitlecls {
+    border: 1px solid #f0ecec;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-left: 0%;
+    height: auto;
+  }
+  .pclass {
+    border: 1px solid #9E9E9E;
+    padding: 5px;
+    border-radius: 5px;
+    background: #eae3e3;
+  }
+  .trashicon {
+    position: relative;
+    left: 51px;
+    color: #2196F3;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 23px;
+    width: 30px;
+    height: 30px;
+  }
+
+
+  .trashicon1 {
+    position: relative;
+    left: 0px;
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .sas {
+    position: relative;
+    top: 7px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #4caf50;
+
+  }
+</style>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Receipt TDS</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li *ngIf="headtitlee !='View Customer Data'" class="breadcrumb-item active" style="cursor: pointer;" (click)="backfun()">Modify Transactions</li>
+            <li *ngIf="headtitlee =='View Customer Data'"class="breadcrumb-item active" style="cursor: pointer;" (click)="backfun2()">View Customer Data</li>
+            <!-- <li class="breadcrumb-item active" style="cursor: pointer;" (click)="backfun1()" *ngIf="hideme1">View Temporary Transactions</li> -->
+            <li class="breadcrumb-item active">Receipt TDS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+  
+
+    <div class="row clearfix center">
+      <label class="col-sm-12" style="font-size: inherit; float: right;">
+        Last edit was made on <b>{{lastTransactionEditedDate | date:'medium'}}</b> by <b>{{lastTransactionEditedBy}}</b>
+      </label>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row clearfix">
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label> <b>Transaction Type</b>: {{transactionType}} </label>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label> <b>Transaction ID</b>: {{transactionID}} </label>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label> <b>Attached Files</b>: </label>
+              <li *ngFor="let item of docListArray">
+                <a (click)="viewFiles(item.documentLocation)"
+                  style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+              </li>
+            </div>
+          </div>
+
+          <!-- <div class="col-sm-3">
+            <div class="form-group">
+              <label> <b>Company Bank Acc</b>: {{siteBankAccountNumber}} </label>
+            </div>
+          </div> -->
+
+
+        </div>
+
+
+        <div class="rowtitlecls">
+          <div class="row clearfix ">
+            <div class="col-sm-3">
+              <label class="required"> Challan Number:</label>
+              <input type="text" (keypress)="keyPress($event)"  maxlength=8
+                style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                class=" form-control" id="ChequeNumber">
+            </div>
+
+            <div class="col-sm-3">
+              <label class="required"> Challan Date:</label>
+              <input type="date" value="{{challan_Date| date:'yyyy-MM-dd'}}" 
+                style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                class=" form-control" id="ChequeDate">
+            </div>
+
+
+            <div class="col-sm-3">
+              <label class="required"> Challan Amount:</label>
+              <input type="text" (keypress)="keyPressAmount($event)" 
+                style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                class="form-control" id="ChequeAmount" pattern="^\d*(\.\d{0,2})?$">
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">ACK Number</label>
+                <input  (keypress)="keyPress($event)" maxlength=8 type="text" placeholder="Enter Number"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="ackNumber" >
+              </div>
+            </div>
+            <!-- (keyup)="ack_numberfun($event)"<div class="col-sm-3">
+              <label class="required"> Challan Rec Date:</label>
+              <input type="date" value="{{chequeReceiveDate| date:'yyyy-MM-dd'}}" disabled
+                style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                placeholder="Please choose date" id="receivedDateID">
+            </div> -->
+
+
+          </div>
+
+       
+
+          <div class="row clearfix">
+
+           
+           
+
+            <div class="col-sm-3">
+              <label class="required"> Project Name:</label>
+              <p class="pclass">{{projectName}}</p>
+            </div>
+
+
+
+            <div class="col-sm-3">
+              <label> Block Number:</label>
+              <p class="pclass">{{blockNumber}}</p>
+            </div>
+
+
+            <div class="col-sm-3">
+              <label class="required"> Flat Number:</label>
+              <p class="pclass">{{flatNumber}}</p>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">BSR Code</label>
+                <input  (keypress)="keyPress($event)" maxlength=8 type="text" placeholder="Enter Number"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="bsrNumber" >
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row clearfix">
+
+            
+
+            <!-- (keyup)="bsr_numberfun($event)"<div class="col-sm-3">
+              <label class="required"> Challan Reflection Date:</label>
+              <input type="date"   value="{{challanReflection_Date| date:'yyyy-MM-dd'}}"
+                style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                class=" form-control" id="reflectionDate">
+            </div> -->
+           
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Principal Amount:</label>
+                <input type="text" (keypress)="keyPressAmount($event)" 
+                style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                class=" form-control" id="PrincipalAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+          
+
+
+
+
+          </div>
+
+        </div>
+        <div style="width:100%;border:solid 1px #000;height: 40px;padding: 10px;border-radius:10px;margin-top: 20px;">
+          <label style="float:left; width:50%">Customer Name: <b>{{customerName}}</b></label>
+          <label style="float:left;width:20%">Pending Amount: <b>{{totalPendingAmount | number}}</b></label>
+          <!-- <label style="float:left;width:33.33%">Interest Amount: {{totalInterestAmount | number}}</label> -->
+        </div><br>
+
+        <div class="row clearfix">
+          <div class="col-sm-12">
+            <label>Previous Comments:</label>
+            <div style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;min-height:70px;">
+              <div class="row clearfix" *ngFor="let item of previousCRMComments">
+                <label class="col-sm-4 lableclass datalable">{{item.empName}}:</label>
+                <p class="col-sm-8">{{item.comments}}</p>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- <label class="col-sm-3 lableclass datalable">Attached Files:</label>
+              <div class="col-sm-3">
+                <li *ngFor="let item of docListArray">
+                  <a (click)="viewFiles(item.documentLocation)" style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+                </li>
+              </div> -->
+        </div><br>
+
+        <!-- <div class="row clearfix">
+          <div class="col-sm-2" id="PaymentSetOffDiv">
+            <label style="font-weight: bold;">Payment Setoff</label>
+          </div>
+          <div class="col-sm-4"></div> -->
+
+        <!-- <label class="col-sm-3 lableclass datalable">Company Bank Account:</label>
+              <div class="col-sm-3">
+                <p>{{siteBankAccountNumber}}</p>
+              </div>  -->
+        <!-- </div><br> -->
+
+       
+
+        <div class="rowtitlecls">
+          <div class="row clearfix">
+
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Customer Comments:</label>
+                <p style="border: 1px solid #4d474785; padding: 10px; border-radius:10px;height:auto;min-height:44px;">
+                  {{customerComments}}</p>
+              </div>
+            </div>
+
+            <div class="col-sm-4" id="userCommentsField">
+              <div class="form-group">
+                <label id="userCommentsLabel">Comments:</label>
+                <textarea rows="2" cols="2" style="border-radius:4px;height:auto;" id="CustomerCommentsId"
+                  data-length="120"></textarea>
+              </div>
+            </div>
+            <div class="col-sm-4" id="attchfilehide">
+              <div class="form-group">
+                <label >Attach Files:</label><br>
+                <input type="file" id="files" accept="image/x-png,image/gif,image/jpeg"
+                  (change)="handle_FileSelect($event)"
+                  style="position: relative;color: rgb(0, 0, 0); cursor:pointer;">
+              </div>
+            </div>
+
+          
+
+
+          </div>
+          <div class="row">
+            <div class="container" style="position: relative;
+            top: 22px;display: inline-flex;margin-top: 20px;overflow-x: auto;">
+              <div *ngFor='let url of urls; let i = index;' style="margin-left: 20px;min-width: 20%;">
+                <span *ngIf="url.Type == 'jpg' || url.Type =='png' || url.Type == 'svg' || url.Type == 'jpeg'">
+                  <img [src]="url.upload" height="150" width="150" (click)="fileClickfun(url.upload , url.Type)"
+                    style="cursor:pointer;">
+                  <br />
+                  <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)"
+                    style="cursor:pointer;">
+                </span>
+                <span *ngIf="url.Type == 'N/A' || url.Type == 'pdf' || url.Type == 'PDF' ">
+                  <img src="assets/images/file1.png" height="150" width="150"
+                    (click)="fileClickfun(url.upload , url.Type)" style="cursor:pointer;">
+                  <br />
+                  <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)"
+                    style="cursor:pointer;">
+                </span>
+
+                <p style="position: relative;text-align: center;width: 150px;top: -18px;">{{url.Name}}</p>
+              </div>
+              <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body"style="text-align:center;">
+                      <button type="button" class="close" data-dismiss="modal"><span
+                          aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                      <!-- <object style="width:100%!important;" height="500" [attr.data]="fileName"
+                        type={{filetypeurlsplit1}}
+                        *ngIf="filesplitdata !== 'image' &&  filetypeurlsplit1 == 'application/pdf'"></object>
+ -->
+
+                      <!-- <img [src]="imgsrc" height="450" style="width:auto" *ngIf="filesplitdata == 'image'"> -->
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div *ngIf="transactionStatusNameval == 'Transaction Completed'" style="display: inline-flex;">
+            <label style="position: relative;top: 15px;"><b>Attachment File :</b></label>
+            <div *ngFor="let p of documentLocation">
+              <img src="assets/images/file1.png" (click)="attachmentlink(p.documentLocation)"
+                style=" width: 90px; margin-top: 18px;">
+            </div>
+          </div> -->
+        </div>
+
+
+        <!-- <div class="row clearfix" id="actionButtons">
+          <div class="col-sm-4" style="text-align:center;">
+            <button type="button" class="btn-hover color-1"
+              (click)="approveMisReceiptCheque('Approve')">Approve</button>
+          </div>
+
+          <div class="col-sm-4" style="text-align:center;">
+            <button type="button" class="btn-hover color-1"
+              (click)="rejectAndModifytMisReceiptCheque('Reject')">Reject</button>
+          </div>
+
+          <div class="col-sm-4" style="text-align:center;">
+            <button type="button" class="btn-hover color-1"
+              (click)="rejectAndModifytMisReceiptCheque('Modify')">Modify</button>
+          </div>
+        </div> -->
+
+        <!-- *ngIf="deptid == 993" -->
+        <div style="text-align:center;" *ngIf="operationType == 'ViewCustomerData' && deptid == 993">
+          <button type="button" class="btn-hover color-1" (click)="editSubmit()">Submit</button>
+          <button type="button" class="btn-hover color-1"
+          (click)="Deletelistfun()">Reject</button>
+        </div>
+
+        <div style="text-align:center;" *ngIf="operationType !== 'ViewCustomerData'">
+          <button type="button" class="btn-hover color-1" (click)="editSubmit()">Submit</button>
+          <button type="button" class="btn-hover color-1"
+          (click)="Deletelistfun()">Reject</button>
+        </div>
+
+
+
+      </div>
+    </div>
+    <!-- <div style="text-align:center;" >
+      <button *ngIf="Edit_hide_show || operationType == 'loadCompletedTransaction' && deptid == 993 && roleid != 20" type="button" class="btn-hover color-1" (click)="editSubmit()">Edit and Submit</button>
+            <button  *ngIf="transactionStatusNameval == 'Transaction Completed' && deptid == 993 && roleid != 20 || operationType == 'loadCompletedTransaction' && deptid == 993 && roleid != 20 " type="button" class="btn-hover color-1" (click)="Deletelistfun()">Delete</button> 
+
+    </div> -->
+
+    <!-- <div class="container text-center" *ngIf="transactionStatusNameval == 'Transaction Completed' && deptid == 993">
+      <button type="button" class="btn-hover color-1" (click)="Deletelistfun()">Delete</button>
+
+    </div> -->
+
+  </div>
+
+</section>

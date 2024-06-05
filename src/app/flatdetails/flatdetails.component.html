@@ -1,0 +1,134 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Flat Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i> Ticketing</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'view_my_tickets'"
+              (click)="view_my_tickets()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'viewtickets'"
+              (click)="viewalltickets()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'view_info_request'"
+              (click)="view_info_request()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'escalation_ticket'"
+              (click)="escalation_ticket()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'approve_escalation_ticket'"
+              (click)="approve_escalation_ticket()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'changeticketowner'"
+              (click)="changeticketowner()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'view_closed_tickets'"
+              routerLink="/view-closed-tickets">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.child_condition == 'view_info_request_details'"
+              (click)="viewinforequestdetail()">
+              <a href="#" onClick="return false;">{{this.binding_childpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.child_condition == 'ticket_details'"
+              (click)="ticketdetail()">
+              <a href="#" onClick="return false;">{{this.binding_childpage}}</a>
+            </li>
+
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.child_condition == 'escalation_details'"
+              (click)="escalation_details()">
+              <a href="#" onClick="return false;">{{this.binding_childpage}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.child_condition == 'approve_escalation_details'"
+              (click)="approve_escalation_details()">
+              <a href="#" onClick="return false;">{{this.binding_childpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.child_condition == 'dashboard_ticket_details'"
+              (click)="dashboard_ticket_details()">
+              <a href="#" onClick="return false;">{{this.binding_childpage}}</a>
+            </li>
+
+
+            <li class="breadcrumb-item active">Flat Details</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <ul class="nav nav-tabs tab-nav-right" role="tablist">
+            <li role="presentation">
+              <a href="#flatDetails" data-toggle="tab" class="active show">Flat Details</a>
+            </li>
+            <li role="presentation">
+              <a href="#flatCost" data-toggle="tab">Flat Cost</a>
+            </li>
+            <li role="presentation">
+              <a href="#documents" data-toggle="tab">Documents</a>
+            </li>
+            <!-- <li role="presentation">
+                <a href="#modificationDetails" data-toggle="tab">Modification Details</a>
+              </li> -->
+          </ul>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active show" id="flatDetails">
+              <div *ngFor="let item of DetailsArray">
+                <label class="keyname">{{item.name}}</label>
+                <span>{{item.value}}</span>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="flatCost">
+              <div *ngFor="let item of FlatcostArray">
+                <label class="keyname">{{item.name}}</label>
+                <span>{{item.value}}</span>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="documents">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="primaryclass">
+                  <img *ngFor="let item of uploadeddocs" src="assets/images/pdf.png"
+                    (click)="downloadFile(item.pdfPath)" class="imgcls"><br>
+                  <span *ngFor="let item of uploadeddocs"
+                    style="white-space: normal;width: 130px;font-size: 11px;margin-right: 10px;">{{item.pdfName}}</span>
+                  <span *ngIf="!uploadeddocs" style="font-size:18px;" class="text-center">No Documents</span>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="modificationDetails">
+              <div *ngFor="let item of Modification_Array">
+                <label class="keyname">{{item.name}}</label>
+                <span>{{item.cost}}</span>
+              </div>
+              <span *ngIf="Modification_Array.length==0" style="font-size:18px;" class="text-center">No Modification
+                Details</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

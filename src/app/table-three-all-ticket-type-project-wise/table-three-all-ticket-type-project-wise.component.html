@@ -1,0 +1,158 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+      <div class="content__loader">
+          <div><i class="Favicon"></i></div>
+      </div>
+  </div>
+</div>
+
+<section class="content">
+
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">All ticket types - Projectwise report</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>
+                 <span (click)="dashtitle()" style="cursor:pointer;" *ngIf="this.statusitem !== 'Ticketprojectwisedetails'"> Ticketing Dashboard </span>
+                 <span (click)="dashtitle1()" style="cursor:pointer;" *ngIf="this.statusitem == 'Ticketprojectwisedetails'">Ticket projectwise report</span>
+                
+                </a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">All ticket types - Projectwise report</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body" style="border-radius: 0px;">
+            <div class="table-responsive" style="min-height: 100%;" style="overflow: hidden;">
+              <table style="border-radius: 10px;" id="exampledata" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr class="center">
+                    <th *ngFor="let item of headersArray">{{item}}</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngIf="ticketTypeWiseReports.length == 0">
+                    <td class="center" colspan="7">No data available</td>
+                  </tr>
+                  <tr *ngFor="let mainItem of ticketTypeWiseReports; let i = index;">
+                    <td style="cursor: pointer;" *ngFor="let Item of mainItem; let j = index;" class="center"
+                      [ngStyle]="{'text-decoration':getColor(mainItem[j])}" (click)="eventCapture(i,mainItem , j)">
+                      <span *ngIf="mainItem[j] !== 'N/A'"> {{mainItem[j]}}</span>
+                      <span *ngIf="mainItem[j] == 'N/A'"> - </span>
+                      </td>
+                  </tr>
+
+                  <tr class="center" style="color: #9E9E9E;border: none;" *ngIf="ticketTypeWiseReports.length != 0">
+                    <td class="center" style="font-weight: bold;" *ngFor="let item of sumOfArray; let i = index;">
+                      <span >{{item}}</span>
+                      <!-- <span (click)="totaleventCapture(i,item)" [ngStyle]="{'text-decoration':getColor(item)}">{{item}}</span> -->
+                    </td>
+                  </tr>
+
+                </tbody>
+              
+
+              </table>
+            </div>
+
+            
+            <!-- </div>
+             </div> -->
+
+            <!-- <div >
+               <div class="table-responsive" style="max-height: 260px;">
+                 <table style="border-radius: 10px;">
+                     <thead>
+                
+                         <tr style="display: inline-block;" *ngFor="let item of maxSiteSize; let i = index;" class="center">
+                            
+                                 <th style="width: 100px;">Project</th>
+                                 <th style="width: 49px;">Open</th>
+                                 <th style="width: 49px;">Close</th>
+                               
+                         </tr>
+                     </thead>
+                     
+                     <tbody *ngFor="let mainItem of AllTicketTypesProjectWiseTableData; let i = index;">
+                         
+                                  <tr  style="display: inline-block;" *ngFor="let item of mainItem.siteList; let i = index;">
+                                     <td colspan="3" class="center" style="width: 100px;">{{item.siteName}}</td>
+                                     <td colspan="3" class="center" style="width: 49px;">{{item.openT}}</td>
+                                     <td colspan="3" class="center" style="width: 49px;">{{item.closedT}}</td>
+                                  </tr>
+                               
+                     </tbody>
+                 </table> -->
+
+            <!-- <table style="border-radius: 10px;">
+                   <thead>
+                       <tr class="center">
+                         <th>Ticket Type</th>
+                         <th>Total</th>
+                         <th>Open</th>
+                         <th>Close</th>
+                       </tr>
+                   </thead>
+     
+                   <tbody>
+                     <tr *ngIf="AllTicketTypesProjectWiseTableData.length == 0">
+                         <td class="center" colspan="8">No data available</td>
+                     </tr>
+                   </tbody>
+                   
+                   <tbody *ngFor="let siteItem of AllTicketTypesProjectWiseTableData; let i = index;">
+                         
+                         <tr>
+                           <td style="font-weight: bold; padding: 10px;">{{siteItem.ticketType}}</td>
+                           <td class="center">{{siteItem.totalTickets}}</td>
+                           <td class="center">{{siteItem.openT}}</td>
+                           <td class="center">{{siteItem.closedT}}</td>
+                         </tr>
+                         <tr *ngIf="siteItem.siteList.length == 0">
+                           <td class="center" colspan="7">No data available</td>
+                         </tr>
+                         <tr *ngFor="let item of siteItem.siteList; let i = index;">
+                             <td class="center">{{item.siteName}}</td>
+                             <td class="center">-</td>
+                             <td class="center">{{item.openT}}</td>
+                             <td class="center">{{item.closedT}}</td>
+                         </tr>
+                         <tr *ngIf="siteItem.siteList.length != 0">
+                           <td class="center" style="font-weight: bold;">Total</td>
+                           <td class="center" style="font-weight: bold;">{{siteItem.noOfTickets}}</td>
+                           <td class="center" style="font-weight: bold;">{{siteItem.newTT}}</td>
+                           <td class="center" style="font-weight: bold;">{{siteItem.openTT}}</td>
+                           <td class="center" style="font-weight: bold;">{{siteItem.inprogressTT}}</td>
+                           <td class="center" style="font-weight: bold;">{{siteItem.reOpenTT}}</td>
+                           <td class="center" style="font-weight: bold;">{{siteItem.closedTT}}</td>
+                         </tr>
+                                                 
+                     </tbody>
+                 </table> -->
+            <!-- </div><br> -->
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

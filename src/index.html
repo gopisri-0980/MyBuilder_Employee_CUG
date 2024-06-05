@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ams apps </title>
+  <base href="./">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/images/ams_logo.jpg" type="image/x-icon">
+
+  <!-- Colorpicker Css -->
+  <link href="assets/js/bundles/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css" rel="stylesheet" />
+
+  <!-- Multi Select Css -->
+  <link href="assets/js/bundles/multiselect/css/multi-select.css" rel="stylesheet">
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css"  rel="stylesheet" type="text/css"> -->
+  <link href="assets/css/css_min.css" rel="stylesheet">
+  <!-- Plugins Core Css -->
+  <link href="assets/css/app.min.css" rel="stylesheet">
+
+  <!-- Form Related Css -->
+  <link href="assets/css/form.min.css" rel="stylesheet">
+
+  <!-- Custom Css -->
+  <link href="assets/css/style.css" rel="stylesheet" />
+
+  <!-- Custom Css -->
+  <link href="assets/css/custom.css" rel="stylesheet" />
+
+  <!-- You can choose a theme from css/styles instead of get all themes -->
+  <link href="assets/css/styles/all-themes.css" rel="stylesheet" />
+
+  <link href="assets/js/bundles/rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+  <link href="assets/js/bundles/rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+
+  <!-- Light Gallery Css -->
+  <link href="assets/js/bundles/lightgallery/dist/css/lightgallery.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="assets/css/ckeditor/contents.css" rel="stylesheet">
+
+
+
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css"  rel="stylesheet" type="text/css"> -->
+
+
+  <style>
+    /* .bootstrap-select{
+        border-bottom: none!important;
+    } */
+
+    .required:after {
+      content: " *";
+      color: red;
+      font-size: 16px;
+    }
+
+    .mat-icon-button {
+      padding: 0;
+      min-width: 0;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      line-height: 40px;
+      border-radius: 50%;
+      background: #FFF !important;
+    }
+
+
+    .popover-body {
+      padding: .5rem .75rem;
+      color: #212529 !important;
+      width: auto !important;
+      box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%) !important;
+      z-index: 99999999 !important;
+      background: #5a8498 !important;
+      color: #FFF !important;
+      font-size: 15px !important;
+      font-family: cursive !important;
+      padding: 10px !important;
+
+    }
+
+    .popover {
+      top: 25px !important;
+    }
+
+
+    .mat-datepicker-content .mat-calendar {
+      width: 296px !important;
+      height: 354px !important;
+      margin-left: 30% !important;
+      position: relative !important;
+      top: -182px !important;
+      background: #FFF !important;
+      box-shadow: 0 19px 38px rgb(0 0 0 / 30%), 0 15px 12px rgb(0 0 0 / 22%);
+      transition: all 0.3s cubic-bezier(.25, .8, .25, 1) !important;
+      padding: 15px;
+      left: 68px;
+    }
+
+
+
+    .mat-form-field-appearance-legacy .mat-form-field-prefix .mat-datepicker-toggle-default-icon,
+    .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+      width: 2em !important;
+    }
+
+    .mat-form-field {
+      display: inline-block;
+      position: relative;
+      text-align: left;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+
+    .mat-calendar-body-disabled {
+      cursor: default;
+      color: #a4e6b3;
+    }
+
+    .selected-list .c-btn {
+      width: 40%;
+      padding: 6px;
+      cursor: pointer;
+      display: flex;
+      position: relative;
+      height: 38px;
+      overflow: hidden !important;
+
+    }
+
+    .form-check,
+    label {
+      font-size: 13px !important;
+      line-height: 1.42857;
+      color: #414244;
+      font-weight: 400;
+    }
+
+    .MyDate {
+      border: 1px solid #aaaa !important;
+      border-radius: 5px !important;
+      padding: 8px !important;
+      text-indent: 47px !important;
+    }
+
+    .cuppa-dropdown {
+      position: relative;
+      width: 100% !important;
+
+    }
+
+    .selected-list .c-angle-down,
+    .selected-list .c-angle-up {
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      right: 10px;
+      top: 38% !important;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+
+    .selected-list .c-list .c-token {
+      list-style: none;
+      background: cyan !important;
+      color: #fff !important;
+      border-radius: 2px;
+      overflow-x: auto !important;
+
+      position: relative;
+      padding-right: 25px;
+      top: -8px;
+
+    }
+
+
+    .selected-list[_ngcontent-ivk-c2] .c-btn[_ngcontent-ivk-c2] {
+      width: 100%;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+
+    .selected-list[_ngcontent-kgv-c2] .c-list[_ngcontent-kgv-c2] {
+      float: left;
+      padding: 0px;
+      margin: 0px;
+      width: calc(100% - 20px);
+      display: list-item !important;
+      overflow: hidden !important;
+    }
+
+    .mat-calendar-table tr {
+      border-bottom: transparent !important;
+    }
+
+    .sidebar .menu .list .ml-menu li a {
+      padding-left: 50px;
+      padding-top: 0px;
+      padding-bottom: 5px;
+    }
+
+    .slimScrollBar {
+      display: block !important;
+    }
+
+    .prevMonthDay {
+      visibility: hidden;
+    }
+
+    .flatpickr-day.disabled {
+      color: #dfd2d2 !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_length label {
+      font-weight: normal;
+      text-align: left;
+      white-space: nowrap;
+      position: relative;
+      left: 27px;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+      margin: 0;
+      white-space: nowrap;
+      text-align: right;
+      position: relative;
+      top: 25px;
+    }
+
+    #leftsidebar .select2-container--default .select2-selection--single {
+      background-color: #fff;
+      border: none !important;
+      border-radius: 4px;
+    }
+
+    #leftsidebar .select2-container--default .select2-selection--single .select2-selection__arrow {
+      display: none;
+    }
+
+    .dropdown-list {
+      position: absolute;
+      padding-top: 14px;
+      width: 100%;
+      z-index: 9 !important;
+    }
+
+   .my-class .modal-dialog {
+      max-width: 50%!important;
+      width: 50%!important;
+
+    }
+
+
+    /* .select2-dropdown {
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: -100000px;
+    width: 100%;
+    z-index: 1011;
+}  */
+
+    /* .select-wrapper {
+  display: none;
+} */
+  </style>
+</head>
+
+<body class="light">
+  <app-root></app-root>
+
+  <script src="assets/js/app.min.js"></script>
+  <script src="assets/js/form.min.js"></script>
+  <script src="assets/js/map.min.js"></script>
+  <script src="assets/js/table.min.js"></script>
+
+  <script src="assets/js/bundles//multiselect/js/jquery.multi-select.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+  <script src="assets/js/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+
+
+
+
+
+
+  <!-- Range Slider -->
+  <script src="assets/js/bundles/rangeSlider/js/ion.rangeSlider.js"></script>
+
+  <!-- editor js -->
+  <script type="text/javascript" src="assets/ckeditor/lang/en.js"></script>
+  <script src="assets/js/bundles/ckeditor/ckeditor.js"></script>
+  <!-- <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script> -->
+  <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+  <script src="assets/js/ckeditor/ckeditor.js" type="text/javascript"></script>
+  <script src="assets/js/ckeditor/styles.js" type="text/javascript"></script>
+  <script src="assets/js/ckeditor/config.js" type="text/javascript"></script>
+  <script src="assets/js/ckeditor/lang/en.js" type="text/javascript"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script lang="javascript" src="dist/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="xlsx.full.min.js"></script>
+
+  <script src="//cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js" type="text/javascript"></script>
+
+
+
+  <script src="assets/js/bundles/tinymce/tinymce.min.js"></script>
+
+  <!-- echart -->
+  <script src="assets/js/bundles/echart/echarts.js"></script>
+
+  <!-- data tables -->
+  <script src="assets/js/bundles/export-tables/dataTables.buttons.min.js"></script>
+  <script src="assets/js/bundles/export-tables/buttons.flash.min.js"></script>
+  <script src="assets/js/bundles/export-tables/jszip.min.js"></script>
+  <script src="assets/js/bundles/export-tables/pdfmake.min.js"></script>
+  <script src="assets/js/bundles/export-tables/vfs_fonts.js"></script>
+  <script src="assets/js/bundles/export-tables/buttons.html5.min.js"></script>
+  <script src="assets/js/bundles/export-tables/buttons.print.min.js"></script>
+
+  <script src="assets/js/bundles/lightgallery/dist/js/lightgallery-all.js"></script>
+
+  <!-- Custom Js -->
+  <script src="assets/js/admin.js"></script>
+  <script src="assets/js/chart.min.js"></script>
+
+  <!-- Google Maps API Js -->
+  <script src="https://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+  <script src="/path/to/device-uuid.js" type="text/javascript"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Typescript UI Controls" />
+  <meta name="author" content="Syncfusion" />
+  <link href="styles.css" rel="stylesheet" />
+  <link href="//cdn.syncfusion.com/ej2/ej2-base/styles/material.css" rel="stylesheet" />
+  <link href="//cdn.syncfusion.com/ej2/ej2-inputs/styles/material.css" rel="stylesheet" />
+  <link href="//cdn.syncfusion.com/ej2/ej2-dropdowns/styles/material.css" rel="stylesheet" />
+  <link href="//cdn.syncfusion.com/ej2/ej2-buttons/styles/material.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.38/system.js"></script>
+  <script src="systemjs.config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.1/flatpickr.min.js"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
+
+  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+
+</body>
+
+</html>

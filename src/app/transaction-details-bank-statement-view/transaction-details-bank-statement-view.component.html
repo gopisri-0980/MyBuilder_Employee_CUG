@@ -1,0 +1,457 @@
+<style>
+  .fromdateval {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 11px;
+    color: orangered;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+    /* border-left: 1px solid #8c8c8c; */
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+    /* border-left: 1px solid #8c8c8c; */
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+
+  }
+
+  .searchbtn {
+    width: 200px;
+    font-size: 14px;
+    font-family: 'Poppins';
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  }
+
+  .nodata {
+    position: relative;
+    font-size: 18px;
+    color: #607d8b;
+    /* font-weight: 600; */
+    font-family: 'Poppins';
+    left: 39px;
+    top: 5px;
+  }
+
+  th,
+  td {
+
+    width: 100px;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Transaction details-Bank statement view </h4>
+
+
+
+
+
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Transaction Details Bank Statement View</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="bottom: 10px;margin-top:0px;">
+      <div class="card-body">
+        <form [formGroup]="fg">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b>Project Name :</b></label>
+                <div class="center">
+
+
+                    <angular2-multiselect [data]="project_wise_project" formControlName="Family_status" [settings]="singledd8" 
+              (onSelect)="selectedSIDs($event);"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             (onDeSelect)="onItemDeSelect($event)"
+                                             (onDeSelectAll)="onDeSelectAll($event)"  [(ngModel)]="title6">
+              <c-badge>
+                <ng-template let-item="item">
+                  <label>{{ item.name }}</label>
+                </ng-template>
+              </c-badge>
+              <c-item>
+                <ng-template let-item="item">
+                  <label>{{ item.name }}</label>
+                </ng-template>
+              </c-item>
+            </angular2-multiselect>
+
+                  <!-- <select style="width:100%;" class="form-group" id="projectID" multiple>
+                  </select> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'" ><b>Bank Account Number :</b></label>
+                <div class="center">
+
+                  <angular2-multiselect [data]="Bank_account_number_project" formControlName="bank_account_form" [settings]="singledd9" 
+                  (onSelect)="bank_selectedSIDs($event);"
+                                                 (onSelectAll)="bank_onSelectAll($event)"
+                                                 (onDeSelect)="bank_onItemDeSelect($event)"
+                                                 (onDeSelectAll)="bank_onDeSelectAll($event)"  [(ngModel)]="title7">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.siteBankAccountNumber }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.siteBankAccountNumber }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+
+
+
+                  <!-- <select style="width:100%;" class="form-group" id="Bank_account_number" multiple>
+                  </select> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b>Action :</b></label>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="Actionfield" single>
+                    <option value="select">--Select--</option>
+                    <option value="cleared">Cleared</option>
+                    <option value="uncleared">Uncleared</option>
+                    <option value="showAll">Show All</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            
+
+
+
+          </div>
+
+          <div class="row" style="position: relative;top: 13px;">
+           
+
+            <div class="col-sm-4">
+              <div class="form-line" style="position: relative;top: -12px;">
+                <label style="position: relative;top: 10px;font-family: 'Poppins'" class="required"><b>Clearance From Date:</b></label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+              right: 10px;top: 6px;font-size: 20px;z-index: 9;" (click)="Clearencefromdatefun()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                    style="border: 1px solid #aaa; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="clearencefromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-line" style="position: relative;top: -12px;">
+                <label style="position: relative;top: 10px;font-family: 'Poppins'" class="required"><b>Clearance To Date:</b></label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+              right: 10px;top: 6px;font-size: 20px;z-index: 9;" (click)="Clearencetodatefun()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #aaa; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="ClearencetoDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div style="width:100%;text-align:center;">
+                <button type="button" class="btn-hover color-1 searchbtn" (click)="searchfunction()">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <p *ngIf="fg.touched && fg.invalid" class="fromdateval">Please add a valid from and to date</p>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="card" *ngIf="controller?.length">
+      <div class="card-body">
+        <p class="titileclassproject"> Cleared Transaction : </p>
+        <div class="table-responsive" style="overflow-x:revert!important;">
+          <table id="viewpendingdata" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">Sl No.</th>
+                <th class="center">Project Name</th>
+                <th class="center">Flat No</th>
+                <th class="center">Own Funds or Bank</th>
+                <th class="center">Bank Account Number</th>
+                <th class="center">Transaction date/Clearance date</th>
+                <th class="center">Transactions Particular/Reference no</th>
+                <th class="center"> Narration </th>
+                <th class="center"> Credit Amount</th>
+                <th class="center"> Debit Amount</th>
+                <th class="center">Transaction status in App</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of controller; let i=index" style="cursor: pointer;">
+                <td class="center" (click)="goToDetails(item)">{{i+1}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.flatNo}}</td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.sourceOfFunds}}</td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.siteBankAccountNumber}}</td>
+
+                <td class="center" (click)="goToDetails(item)">
+                
+                  <span *ngIf="item.txClearanceDate != null">{{item.txClearanceDate| date:'dd-MM-yyy '}}</span>
+                  <span *ngIf="item.txClearanceDate == null"> - </span>
+
+                </td>
+
+
+                <td class="center" (click)="goToDetails(item)">{{item.chequeOrReferenceNo}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.narration}}</td>
+                <td class="center" (click)="goToDetails(item)" style="text-align: center;" *ngIf="item.cr == '-'"></td>
+                <td class="center" (click)="goToDetails(item)" style="text-align: center;" *ngIf="item.cr != '-'">{{item.amount}}</td>
+                <td class="center" (click)="goToDetails(item)" style="text-align: center;" *ngIf="item.dr == '-'"></td>
+                <td class="center" (click)="goToDetails(item)" style="text-align: center;" *ngIf="item.dr != '-'">{{item.amount.toLocaleString('en-IN')}}</td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.pendingByLevelWithModule}}</td>
+              </tr>
+
+              
+
+            
+            </tbody>
+            <ng-container>
+              <tr style="background: #fef8f8;">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+               <td></td>
+               <td></td>
+                <td style="color: #9E9E9E;text-align: right;font-weight: bold;
+                position: relative;">Total Amount:</td>
+
+                <td style="text-align: center;"><span id="invoiceamount" style="position: relative;
+                     color: #9E9E9E;font-weight: bold;"></span></td>
+                <td><span id="totalInvoice_Amount_debit" style="position: relative;
+                  color: #9E9E9E;font-weight: bold;"></span></td>
+                
+                <td></td>
+              </tr>
+          
+             </ng-container>
+           
+          </table>
+
+          <!-- <table style="position: relative;  right: 0;top:-63px;">
+            <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+               
+                <th style="color: #9E9E9E;text-align: right;
+                position: relative;">Total Amount:</th>
+
+                <th style="text-align: center;"><span id="invoiceamount" style="position: relative;
+                     color: #9E9E9E;"></span></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </tbody>
+          </table> -->
+
+        </div>
+        <div style="margin-top:30px;"></div>
+      </div>
+    </div>
+
+
+    <div class="card" *ngIf='hideme && controller?.length == 0'>
+      <div class="card-body">
+        <p class="titileclassproject"> Cleared Transaction : </p>
+
+        <p>No Records Found</p>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="controller_data?.length">
+      <div class="card-body">
+        <p class="titileclassproject"> UnCleared Transaction : </p>
+        <div class="table-responsive" style="overflow-x:revert!important;">
+          <table id="viewpendingdata1" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">Sl No.</th>
+                <th class="center">Project Name</th>
+                <th class="center">Flat No</th>
+                <th class="center">Own Funds or Bank</th>
+                <th class="center">Bank Account Number</th>
+                <th class="center">Transaction date/Clearance date</th>
+                <th class="center">Transactions Particular/Reference no</th>
+                <th class="center">Narration</th>
+                <th class="center">Credit Amount</th>
+                <th class="center">Debit Amount</th>
+                <!-- <th class="center">CR</th>
+                <th class="center">CR</th> -->
+                <th class="center">Transaction status in App</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of controller_data; let i=index" style="cursor: pointer;">
+                <td class="center" (click)="goToDetails(item)">{{i+1}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.flatNo}}</td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.sourceOfFunds}}</td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.siteBankAccountNumber}}</td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.txClearanceDate| date:'dd-MM-yyy '}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.chequeOrReferenceNo}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.narration}}</td>
+                <td class="center" (click)="goToDetails(item)" style="text-align: center;" *ngIf="item.cr == '-'"></td>
+                <td class="center" (click)="goToDetails(item)" style="text-align: center;" *ngIf="item.cr != '-'">{{item.amount.toLocaleString('en-IN')}}</td>
+                <td class="center" (click)="goToDetails(item)" style="text-align: center;" *ngIf="item.dr == '-'"></td>
+                <td class="center" (click)="goToDetails(item)" style="text-align: center;" *ngIf="item.dr != '-'">{{item.amount.toLocaleString('en-IN')}}</td>
+
+                
+                <td class="center" (click)="goToDetails(item)">{{item.pendingByLevelWithModule}}</td>
+              </tr>
+            </tbody>
+
+            <ng-container>
+              <tr style="background: #fef8f8;">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+               <td></td>
+               <td></td>
+               <td style="color: #9E9E9E;text-align: right;font-weight: bold;
+               position: relative;"> Total Amount:</td>
+
+               <td style="text-align: center;"><span id="invoiceamount1" style="position: relative;
+                    color: #9E9E9E;font-weight: bold;"></span></td>
+                <td><span id="invoiceamount_debit" style="position: relative;
+                  color: #9E9E9E;font-weight: bold;"></span></td>
+                
+                <td></td>
+              </tr>
+          
+             </ng-container>
+
+
+          </table>
+          <!-- <table style="position: relative;  right: 0;top:-63px;">
+            <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th style="color: #9E9E9E;text-align: right;
+                position: relative;"> Total Amount:</th>
+
+                <th style="text-align: center;"><span id="invoiceamount1" style="position: relative;
+                     color: #9E9E9E;"></span></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </tbody>
+          </table> -->
+
+
+        </div>
+        <div style="margin-top:30px;"></div>
+      </div>
+    </div>
+
+
+
+    <div class="card" *ngIf='hideme && controller_data?.length == 0'>
+      <div class="card-body">
+        <p class="titileclassproject"> UnCleared Transaction : </p>
+        <p>No Records Found</p>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,479 @@
+<style>
+  .fromdateval {
+    font-size: 14px;
+    position: relative;
+    top: 14px;
+    color: orangered;
+  }
+  
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+  .subhead {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: underline;
+    margin-bottom: 10px;
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  /* table tr td {
+  border:solid 1px #000
+}
+
+table th{
+  border:solid 1px #000
+} */
+  .norecordclass {
+    position: relative;
+    left: 0px;
+    font-size: 19px;
+    font-weight: bold;
+    border: 1px solid #9E9E9E;
+    padding: 10px;
+  }
+
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: revert;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+    /* border-left: 1px solid #8c8c8c; */
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+    /* border-left: 1px solid #8c8c8c; */
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Monthly Report</h4>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+
+            <li class="breadcrumb-item active">Monthly Report</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+
+        <form [formGroup]="fg">
+          <div class="row clearfix">
+
+            
+            <div class="col-sm-4">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="position: relative;top: 10px;">Select States:</label>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="StatesID" single>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;">From Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 9999;" (click)="startdatefun2()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY" (keypress)="onlyNumberKey($event)"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate2" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;">To Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 9999;" (click)="endtimefun2()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate2" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+        <!-- <div style="width:100%;margin-left: 200px;">
+          <p *ngIf="fg.touched && fg.invalid" class="fromdateval">Please add a valid from and to date</p>
+
+        </div> -->
+        <div style="width:100%;text-align: center;">
+
+          <div class="form-group">
+            <button type="button" class="btn-hover color-1" (click)="completedTransactions()">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- *ngIf="milestonedemand_table?.length" -->
+    <span id="clearens_note" style="font-size: 16px;display: none;"><span style="font-weight: 600;">Note:</span> We are showing Receipt Cheque, Receipt Online & Waived Off Transactions Only.</span>
+    
+    <div class="card" style="padding:16px;display:none" id="clearens_card">
+      <div style="font-size: initial;font-weight: 600;">Cleared Transactions: Based on clearance date</div>
+     
+
+      <div class="card-body" *ngIf="milestonedemand_table_recieptList?.length">
+        <div class="subhead">Receipt Transactions:</div>
+        <div class="table-responsive">
+          <table id="tablecomplete" class="table table-bordered">
+            <thead>
+              <tr>
+
+                <th class="center"> Group </th>
+                <th class="center">Project Name</th>
+                <th class="center"> Amount</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of milestonedemand_table_recieptList; let i=index" style="cursor: pointer;">
+                <td class="center bold" [ngStyle]="{'border-top':item.flatSaleOwner === '' ? 'hidden' : 'block' }">
+                  {{item.flatSaleOwner}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails(item)" style="text-decoration: underline;">{{item.amount}}</td>
+
+              </tr>
+            </tbody>
+
+
+
+          </table>
+          <table style="position: relative;  right: 0;top:-63px;">
+            <tbody>
+              <tr>
+
+                <th colspan="13" style="text-align: right;width: 500px!important;color: #9E9E9E;
+                position: relative;left: 0px;">Transaction Total Amount:</th>
+                <th colspan="9"><span id="invoiceamount1" style="position: relative;
+                  left: 0px;    color: #9E9E9E;"></span></th>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div><br><br>
+
+      <div class="card-body" *ngIf="milestonedemand_table_paymentList?.length">
+        <div class="subhead">Refund Transactions:</div>
+        <div class="table-responsive">
+          <table id="tablecomplete_1" class="table table-bordered">
+            <thead>
+              <tr>
+
+                <th class="center"> Group </th>
+                <th class="center">Project Name</th>
+                <th class="center"> Amount</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr  style="cursor: pointer;">
+                <td class="center" rowspan="2"(click)="goToDetails(item)">Group</td>
+                <td class="center" (click)="goToDetails(item)">Aspire Amber</td>
+                <td class="center" (click)="goToDetails(item)">2000000</td>
+              
+              </tr>
+              <tr  style="cursor: pointer;">
+               
+                <td class="center" (click)="goToDetails(item)">Nandanam</td>
+                <td class="center" (click)="goToDetails(item)">2000000</td>
+              
+              </tr>
+
+              <tr  style="cursor: pointer;">
+                <td class="center" (click)="goToDetails(item)">Indmax</td>
+                <td class="center" (click)="goToDetails(item)">Olympus</td>
+                <td class="center" (click)="goToDetails(item)">5000000</td>
+              
+              </tr> -->
+              <tr *ngFor="let item of milestonedemand_table_paymentList; let i=index" style="cursor: pointer;">
+                <td class="center bold" [ngStyle]="{'border-top':item.flatSaleOwner === '' ? 'hidden' : 'block' }">
+                  {{item.flatSaleOwner}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails(item)" style="text-decoration: underline;">{{item.amount}}</td>
+
+              </tr>
+            </tbody>
+
+
+
+          </table>
+          <table style="position: relative;  top: -72px;right: 0;">
+            <tbody>
+              <tr>
+
+                <th colspan="13" style="text-align: right;width: 500px!important;color: #9E9E9E;
+                position: relative;left: 0px;">Transaction Total Amount:</th>
+                <th colspan="9"><span id="invoiceamount2" style="position: relative;
+                  left: 0px;    color: #9E9E9E;"></span></th>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="milestonedemand_table_paymentList == 0">
+      <p class="norecordclass">No records found</p>
+    </div>
+
+
+    <div class="card" style="padding:16px" id="clearens_card2">
+      <div style="font-size: initial;font-weight: 600;">Pending transactions: Based on receive date</div>
+      <div class="card-body">
+        <div class="table-responsive" *ngIf="milestonedemand_table2_recieptList?.length">
+          <div class="subhead">Receipt Transactions:</div>
+          <table id="tablecomplete2" class="table table-bordered">
+            <thead>
+              <tr>
+
+                <th class="center"> Group </th>
+                <th class="center">Project Name</th>
+                <th class="center"> Amount</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of milestonedemand_table2_recieptList; let i=index" style="cursor: pointer;">
+                <td class="center bold" [ngStyle]="{'border-top':item.flatSaleOwner === '' ? 'hidden' : 'block' }">
+                  {{item.flatSaleOwner}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails2(item)" style="text-decoration: underline;">{{item.amount}}</td>
+
+              </tr>
+            </tbody>
+
+
+
+          </table>
+          <table style="position: relative;  top: -72px;right: 0;">
+            <tbody>
+              <tr>
+
+                <th colspan="13" style="text-align: right;width: 500px!important;color: #9E9E9E;
+                  position: relative;left: 0px;">Transaction Total Amount:</th>
+                <th colspan="9"><span id="invoiceamount3" style="position: relative;
+                    left: 0px;    color: #9E9E9E;"></span></th>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- <div style="width:100%;text-align: center;">
+
+            <div class="form-group">
+              <button type="button" id ="button2" class="btn-hover color-1" (click)="completedTransactions2()">Load the Data</button>
+            </div>
+          </div> -->
+      </div>
+
+
+      <div class="card-body">
+        <div class="table-responsive" *ngIf="milestonedemand_table2_paymentList?.length">
+          <div class="subhead">Refund Transactions:</div>
+          <table id="tablecomplete2_2" class="table table-bordered">
+            <thead>
+              <tr>
+
+                <th class="center"> Group </th>
+                <th class="center">Project Name</th>
+                <th class="center"> Amount</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of milestonedemand_table2_paymentList; let i=index" style="cursor: pointer;">
+                <td class="center bold" [ngStyle]="{'border-top':item.flatSaleOwner === '' ? 'hidden' : 'block' }">
+                  {{item.flatSaleOwner}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails2(item)" style="text-decoration: underline;">{{item.amount}}</td>
+
+              </tr>
+            </tbody>
+
+
+
+          </table>
+          <table style="position: relative;  top: -72px;right: 0;">
+            <tbody>
+              <tr>
+
+                <th colspan="13" style="text-align: right;width: 500px!important;color: #9E9E9E;
+                  position: relative;left: 0px;">Transaction Total Amount:</th>
+                <th colspan="9"><span id="invoiceamount4" style="position: relative;
+                    left: 0px;    color: #9E9E9E;"></span></th>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div style="width:100%;text-align: center;">
+
+          <div class="form-group">
+            <button type="button" id="button2" class="btn-hover color-1" (click)="completedTransactions2()">Load the
+              Data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div *ngIf="milestonedemand_table2 == 0">
+        <p class="norecordclass">No records found</p>
+      </div> -->
+
+
+    <div class="card" style="padding:16px" id="clearens_card3">
+      <div style="font-size: initial;font-weight: 600;">Suspense Report: Based on receive date</div>
+      <div class="card-body">
+        <div class="table-responsive" *ngIf="milestonedemand_table3?.length">
+          <table id="tablecomplete3" class="table table-bordered">
+            <thead>
+              <tr>
+
+                <th class="center"> Group </th>
+                <th class="center">Project Name</th>
+                <th class="center"> Amount</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of milestonedemand_table3; let i=index" style="cursor: pointer;">
+                <td class="center bold" [ngStyle]="{'border-top':item.flatSaleOwner === '' ? 'hidden' : 'block' }">
+                  {{item.flatSaleOwner}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails3(item)" style="text-decoration: underline;">{{item.amount}}</td>
+
+              </tr>
+            </tbody>
+
+
+
+          </table>
+          <table style="position: relative;  top: -72px;right: 0;">
+            <tbody>
+              <tr>
+
+                <th colspan="13" style="text-align: right;width: 500px!important;color: #9E9E9E;
+                    position: relative;left: 0px;">Transaction Total Amount:</th>
+                <th colspan="9"><span id="invoiceamount5" style="position: relative;
+                      left: 0px;    color: #9E9E9E;"></span></th>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div style="width:100%;text-align: center;">
+
+          <div class="form-group">
+            <button type="button" id="button3" class="btn-hover color-1" (click)="completedTransactions3()">Load the
+              Data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div *ngIf="milestonedemand_table3 == 0">
+          <p class="norecordclass">No records found</p>
+        </div> -->
+
+<div *ngIf = "milestonedemand_table_recieptList !=null"style="text-align: right; margin-right: 44px;font-size: 18px;font-weight: 600;">Grand Total : {{grand_total}}</div> 
+
+  </div>
+
+</section><br>

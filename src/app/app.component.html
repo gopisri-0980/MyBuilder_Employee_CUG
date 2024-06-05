@@ -1,0 +1,594 @@
+<style>
+    .countclass {
+        border: 1px solid #f44336;
+        border-radius: 17px;
+        width: 28px;
+        background: #f44336;
+        color: #FFF !important;
+        position: absolute;
+        font-size: 14px;
+        text-align: center;
+        top: 3px;
+        float: right;
+        right: 35px;
+    }
+
+    .bellspan {
+        position: absolute;
+        right: 101px;
+        color: #FFF;
+        top: 3px;
+        background: #00BCD4;
+        width: 25px;
+        text-align: center;
+        height: 25px;
+        border-radius: 20px;
+    }
+
+    .countcls {
+        position: relative;
+        top: -18px;
+        font-weight: bold;
+    }
+
+    .bellicon {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 21px;
+        right: 105px;
+        color: #e00808;
+    }
+
+    .countcls {
+        position: absolute;
+        right: 31px;
+        top: 4px;
+        background: #8bc34a !important;
+        color: #FFF !important;
+        border: 1px solid #cddc39 !important;
+    }
+
+    .countcls1 {
+        position: absolute;
+        right: 14px;
+        top: 4px;
+        background: #8bc34a !important;
+        color: #FFF !important;
+        border: 1px solid #cddc39 !important;
+    }
+
+    .ticket_countcls {
+        position: relative;
+        right: -29px;
+        top: 8px;
+        background: #8bc34a !important;
+        color: #FFF !important;
+        border: 1px solid #cddc39 !important;
+
+    }
+
+    .sidebar .menu .list .ml-menu li a {
+        padding-left: 30px !important;
+        padding-top: 0px;
+        padding-bottom: 5px;
+    }
+
+    .complaint_countcls {
+        position: absolute;
+        top: -1px;
+        right: 10px;
+        background: #8bc34a !important;
+        color: #FFF !important;
+        border: 1px solid #cddc39 !important;
+    }
+
+    .appointment_countcls {
+
+        position: relative;
+        right: 0;
+        top: 8px;
+        background: #8bc34a !important;
+        color: #FFF !important;
+        border: 1px solid #cddc39 !important;
+
+
+    }
+</style>
+
+
+<div class="page-loader-wrapper" id="loader1">
+    <div class="loader">
+        <div class="m-t-30">
+            <img style="width:50px" class="loading-img-spin" src="assets/images/loader_img.gif" width="20" height="20"
+                alt="admin">
+        </div>
+    </div>
+</div>
+
+
+<div class="page-loader-wrapper" id="loader2">
+    <div class="loader">
+        <div class="m-t-30">
+            <img style="width:50px" class="loading-img-spin" src="assets/images/loader_img.gif" width="20" height="20"
+                alt="admin">
+        </div>
+    </div>
+</div>
+
+<!-- <div class="overlay"></div> -->
+<!-- #END# Overlay For Sidebars -->
+<!-- Search Bar -->
+<div id="main-component" class="main-component">
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="#" onClick="return false;" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="#" onClick="return false;" class="bars"></a>
+                <a class="navbar-brand">
+                    <img style="width:30px" src="assets/images/ams_logo.png" alt="" />
+                    <span class="logo-name">Ams apps</span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="pull-left">
+                    <li>
+                        <a href="#" onClick="return false;" class="sidemenu-collapse">
+                            <i class="material-icons">reorder</i>
+                        </a>
+                    </li>
+
+
+                </ul>
+
+
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- 
+                    <img src="assets/images/bell.png" class="bellicon">
+                    <span class="bellspan">
+                        <dd class="countcls">{{chartcount}}</dd>
+                    </span> -->
+
+                    <!-- Full Screen Button -->
+
+                    <!-- <li>
+                        <select id="ims_select_event">
+                         <option value="select"> Select option</option>
+                        </select>
+                     </li> -->
+
+
+                    <li style="display:none;" id="saket">
+                        <a>
+                            <select style="width: 199px;" class="form-group" id="ims_select_event" single></select>
+                        </a>
+
+
+                    </li>
+
+                    <li class="fullscreen">
+                        <a href="javascript:;" class="fullscreen-btn">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                    </li>
+                    <!-- #END# Full Screen Button -->
+                    <!-- #START# Notifications-->
+                    <!-- <li class="dropdown">
+                        <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
+                            role="button">
+                            <i class="far fa-bell"></i>
+                            <span class="label-count bg-orange"></span>
+                        </a>
+                    </li> -->
+                    <!-- #END# Notifications-->
+                    <!-- #END# Tasks -->
+
+
+
+
+                    <li>
+                        <a href="#" onClick="return false;" class="js-right-sidebar" data-close="true">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" onClick="return false;" (click)="logout()">
+                            <i class="fas fa-power-off" style="position: relative;right: 17px;"></i>
+                            <span style="position: absolute;right: 19px;
+                             top: 31px;font-size: 10px; color: #03a9f4;">Logout</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="sidebar-user-panel">
+                        <div class="user-panel">
+                            <div class=" image">
+                                <img src="assets/images/DeafaultUserImg.jpg" class="img-circle user-img-circle"
+                                    alt="User Image" />
+                            </div>
+                        </div>
+                        <div class="profile-usertitle">
+                            <div class="sidebar-userpic-name">{{deptNamee}}</div>
+                            <div class="profile-usertitle-job ">{{desigNamee}}</div>
+                        </div>
+
+                        <div id="sidemenuDiv" style="width:90%;
+                        margin-left:5%;margin-top:10px;">
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Search Module :</label>
+                                    <select style="width:100%;border: 1px solid #aaa!important;" class="form-group"
+                                        id="searchId" single></select>
+                                </div>
+                            </div>
+
+                            <div style="text-align:center;font-weight:600">(OR)</div>
+                        </div><br>
+
+                    </li>
+
+                    <!-- <li routerLinkActive="active" routerLink="/Add_Customer">
+                        <a>
+                            <i class="far fa-calendar"></i>
+                            <span>Add Customer</span>
+                        </a>
+                    </li>   -->
+
+
+                    <li routerLinkActive="active" *ngFor="let item of menu_array.departments[0].loginModule">
+                        <a href="#" onClick="return false;" class="menu-toggle">
+                            <i class="fas fa-mail-bulk"></i>
+                            <span>{{item.moduleName}}</span>
+                            <!-- <span class="countclass" *ngIf="item.moduleName == 'Inbox'">(click)="tempclick($event)"
+                                {{MsgReadCount}}
+                            </span> -->
+
+                            <!-- <span *ngIf="number && item.moduleName == 'Inbox'"
+                                class="badge badge-notify countcls">{{number.text}}
+                            </span>
+
+                            <span *ngIf="Ticketing_Module && item.moduleName == 'Ticketing'"
+                                class="badge badge-notify countcls">{{Ticketing_Module.text}}
+                            </span>
+
+
+                            <span *ngIf="Project_Module && item.moduleName == 'Project Notifications'"
+                                class="badge badge-notify countcls1">{{Project_Module.text}}
+                            </span>
+
+
+                            <span *ngIf="Appointments_Module && item.moduleName == 'Appointments'"
+                                class="badge badge-notify countcls">{{Appointments_Module.text}}
+                            </span> -->
+
+
+                        </a>
+                        <ul class="ml-menu">
+                            <li routerLink="{{item2.pageLink}}" *ngFor="let item2 of item.loginSubModules">
+                                <a id="{{item2.pageLink}}" class="myactiveclass"
+                                    (click)="tempclick($event)">{{item2.subModuleName}}
+
+                                    <!-- <span
+                                        *ngIf="chart_number && item2.subModuleName == 'View My Tickets' && chart_number != undefined"
+                                        class="badge badge-notify ticket_countcls">{{chart_number.text}}
+                                    </span>
+
+                                    <span
+                                        *ngIf="complaint_number && item2.subModuleName == 'View My Complaints' && complaint_number != undefined"
+                                        class="badge badge-notify complaint_countcls">{{complaint_number.text}}
+                                    </span>
+
+                                    <span
+                                        *ngIf="appointment_number && item2.subModuleName == 'View My Appointments' && appointment_number != undefined"
+                                        class="badge badge-notify appointment_countcls">{{appointment_number.text}}
+                                    </span>
+
+
+                                    <span
+                                        *ngIf="item2.subModuleName == 'Escalation Tickets' && Escalation_Tickets != undefined"
+                                        class="badge badge-notify appointment_countcls">{{Escalation_Tickets.text}}
+                                    </span>
+
+                                    <span
+                                        *ngIf="item2.subModuleName == 'View Notifications For Approvals' && View_Notifications_For_Approvals != undefined"
+                                        class="badge badge-notify appointment_countcls">{{View_Notifications_For_Approvals.text}}
+                                    </span> -->
+
+
+
+                                </a>
+
+
+                            </li>
+
+
+                        </ul>
+
+
+                    </li>
+                      <!-- <li routerLinkActive="active" routerLink="/update_milestone_due_dates">
+                        <a>
+                            <i class="far fa-calendar"></i>
+                            <span> update due dates</span>
+                        </a>
+                    </li>    -->
+
+                    <!-- <li routerLinkActive="active" routerLink="/crmmodule/lead-creation">
+                            <a>
+                                <i class="far fa-calendar"></i>
+                                <span>Lead Creation</span>
+                            </a>
+                        </li>
+
+                        <li routerLinkActive="active" routerLink="/lead-creation-list">
+                            <a>
+                                <i class="far fa-calendar"></i>
+                                <span>Lead List</span>
+                            </a>
+                        </li>
+
+                        <li routerLinkActive="active" routerLink="/update-lead-list">
+                            <a>
+                                <i class="far fa-calendar"></i>
+                                <span>Update Lead List</span>
+                            </a>
+                        </li> -->
+
+                    <!-- <li routerLinkActive="active" routerLink="/car-parking-creation">
+                            <a>
+                                <i class="far fa-calendar"></i>
+                                <span>Car parking</span>
+                            </a>
+                        </li>
+
+                        <li routerLinkActive="active" routerLink="/car-parking-view">
+                            <a>
+                                <i class="far fa-calendar"></i>
+                                <span>View Car Parking</span>
+                            </a>
+                        </li>   -->
+
+                    <!-- <li routerLinkActive="active" routerLink="/Register-and-unregister-list">
+                            <a>
+                                <i class="far fa-calendar"></i>
+                                <span>Register And Unregister List</span>
+                            </a>
+                        </li>  -->
+
+
+                    <!-- <li routerLinkActive="active" (click)="logout()">
+                        <a>
+                            <i class="far fa-calendar"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li> -->
+
+                </ul>
+            </div>
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <!-- <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation">
+                    <a href="#skins" data-toggle="tab" class="active">SKINS</a>
+                </li>
+                <li role="presentation">
+                    <a href="#settings" data-toggle="tab">SETTINGS</a>
+                </li>
+            </ul> -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane in active in active stretchLeft" id="skins">
+                    <div class="demo-skin">
+                        <!-- <div class="rightSetting">
+                            <p>GENERAL SETTINGS</p>
+                            <ul class="setting-list list-unstyled m-t-20">
+                                <li>
+                                    <div class="form-check">
+                                        <div class="form-check m-l-10">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="" checked> Save
+                                                History
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <div class="form-check m-l-10">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="" checked> Show
+                                                Status
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <div class="form-check m-l-10">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="" checked> Auto
+                                                Submit Issue
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <div class="form-check m-l-10">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="" checked> Show
+                                                Status To All
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> -->
+                        <div class="rightSetting">
+                            <p>SIDEBAR MENU COLORS</p>
+                            <button type="button"
+                                class="btn btn-sidebar-light btn-border-radius p-l-20 p-r-20">Light</button>
+                            <button type="button"
+                                class="btn btn-sidebar-dark btn-default btn-border-radius p-l-20 p-r-20">Dark</button>
+                        </div>
+                        <div class="rightSetting">
+                            <p>THEME COLORS</p>
+                            <button type="button"
+                                class="btn btn-theme-light btn-border-radius p-l-20 p-r-20">Light</button>
+                            <button type="button"
+                                class="btn btn-theme-dark btn-default btn-border-radius p-l-20 p-r-20">Dark</button>
+                        </div>
+                        <div class="rightSetting">
+                            <p>SKINS</p>
+                            <ul class="demo-choose-skin choose-theme list-unstyled">
+                                <li data-theme="black" class="actived">
+                                    <div class="black-theme"></div>
+                                </li>
+                                <li data-theme="white">
+                                    <div class="white-theme white-theme-border"></div>
+                                </li>
+                                <li data-theme="purple">
+                                    <div class="purple-theme"></div>
+                                </li>
+                                <li data-theme="blue">
+                                    <div class="blue-theme"></div>
+                                </li>
+                                <li data-theme="cyan">
+                                    <div class="cyan-theme"></div>
+                                </li>
+                                <li data-theme="green">
+                                    <div class="green-theme"></div>
+                                </li>
+                                <li data-theme="orange">
+                                    <div class="orange-theme"></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <div class="rightSetting">
+                            <p>Disk Space</p>
+                            <div class="sidebar-progress">
+                                <div class="progress m-t-20">
+                                    <div class="progress-bar l-bg-cyan shadow-style width-per-45" role="progressbar"
+                                        aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="progress-description">
+                                    <small>26% remaining</small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="rightSetting">
+                            <p>Server Load</p>
+                            <div class="sidebar-progress">
+                                <div class="progress m-t-20">
+                                    <div class="progress-bar l-bg-orange shadow-style width-per-63" role="progressbar"
+                                        aria-valuenow="63" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="progress-description">
+                                    <small>Highly Loaded</small>
+                                </span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- <div role="tabpanel" class="tab-pane stretchRight" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label>
+                                        <input type="checkbox" checked>
+                                        <span class="lever switch-col-green"></span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label>
+                                        <input type="checkbox">
+                                        <span class="lever switch-col-blue"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label>
+                                        <input type="checkbox" checked>
+                                        <span class="lever switch-col-purple"></span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label>
+                                        <input type="checkbox" checked>
+                                        <span class="lever switch-col-cyan"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label>
+                                        <input type="checkbox" checked>
+                                        <span class="lever switch-col-red"></span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label>
+                                        <input type="checkbox">
+                                        <span class="lever switch-col-lime"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,385 @@
+<style>
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+
+  }
+
+  .norecordclass {
+    position: relative;
+    left: 0px;
+    font-size: 19px;
+    font-weight: bold;
+    border: 1px solid #9E9E9E;
+    padding: 10px;
+    border-radius: 4px;
+  }
+</style>
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Demand Note</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>View Demand Note</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+
+
+
+
+
+          <div class="row clearfix">
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p>
+                  <b>Select Project:</b>
+                </p>
+                <select style="width:100%" class="form-group states" id="projectID" single>
+                  <option value="select">--Select--</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p>
+                  <b>Select Block:</b>
+                </p>
+                <select style="width:100%" class="form-group states" id="BlockId" single>
+
+                </select>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p>
+                  <b>Select Flat:</b>
+                </p>
+                <select style="width:100%" class="form-group states" id="FlatId" single>
+
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p>
+                  <b>Select Milestone:</b>
+                </p>
+                <select style="width:100%" class="form-group states" id="milestonesId" single>
+
+                </select>
+
+              </div>
+            </div>
+
+
+          </div><br>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group" style="position: relative; top: 7px;">
+                <label><b>Demand Due Percentage:</b></label>
+                <div class="form-line">
+                  <input id="demand_due_percentage" type="number" class="form-control"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;"
+                    placeholder="Percentage">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group" style="position: relative; top: 7px;">
+                <label><b>Demand Due Days:</b></label>
+                <div class="form-line">
+                  <input id="demand_due_days" type="number" class="form-control"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;"
+                    placeholder="Days">
+                </div>
+              </div>
+
+            </div>
+            <div class="fistdaterow col-sm-3">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold">Demand From Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 999;" (click)="startdatefun()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="fistdaterow col-sm-3">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold">Demand To Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 999;" (click)="endtimefun()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+
+          
+
+          </div>
+          <div class="row">
+          
+            <div class="seconddaterow col-sm-3">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold">Demand Due From Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 999;" (click)="startdatefun2()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px;margin-left:2px;"
+                    class=" form-control" id="fromDate2" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="seconddaterow col-sm-3">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold">Demand Due To Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 999;" (click)="endtimefun2()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate2" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+
+          
+
+          </div>
+          <br>
+          <div style="text-align:center;">
+            <button type="button" class="btn-hover color-1" (click)="demandNotes()">Search</button>
+          </div>
+
+
+
+
+
+
+        </div>
+      </div>
+
+
+
+      <div class="card" *ngIf="showhidedata">
+        <div class="card-body">
+          <div class="table-responsive">
+
+
+            <table id="tableExport" class="table table-bordered">
+              <thead>
+                <tr>
+                  <!-- <th class="center">S.NO</th>  -->
+                  <th class="center">S.No</th>
+                  <th class="center">Raised Date</th>
+                  <th class="center">Due Date</th>
+                  <th class="center">Due amount</th>
+                  <th class="center">Booking Date</th>
+                  <th class="center">Agreement Date</th>
+                  <th class="center">Demand Note No</th>
+                  <th class="center">Customer Name</th>
+                  <th class="center">Demand Amount</th>
+                  <th class="center">Flat No</th>
+                  <th class="center">Milestone Name</th>
+                  <th class="center">Paid Amount</th>
+                  <!-- <th class="center">Due Date</th>          
+          <th class="center">Status</th> -->
+
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of milestonedemand_table; let i=index">
+                  <!-- <td class="center">{{i+1}}</td> -->
+                  <td class="center">{{i+1}}</td>
+                  <td class="center">
+                    <!-- <span *ngIf="item.demandNoteDate != null" style="display: none;">{{item.demandNoteDate}}</span> -->
+                    <span *ngIf="item.demandNoteDate != null">{{item.demandNoteDate| date : 'dd/MM/yyyy'}}</span>
+                    <span *ngIf="item.demandNoteDate == null"> - </span>
+                  </td>
+
+                  <td class="center">
+                    <!-- <span *ngIf="item.dueDate != null" style="display: none;">{{item.dueDate}}</span> -->
+                    <span *ngIf="item.dueDate != null">{{item.dueDate| date : 'dd/MM/yyyy'}}</span>
+                    <span *ngIf="item.dueDate == null"> - </span>
+
+                  </td>
+                  <td class="center" *ngIf="item.mileStoneBalanceAmount != null">{{item.mileStoneBalanceAmount.toLocaleString('en-IN')}}</td>
+                  <td class="center" *ngIf="item.mileStoneBalanceAmount == null">-</td>
+                  <td class="center">
+
+                    <!-- <span *ngIf="item.bookingDate != null" style="display: none;">{{item.bookingDate}}</span> -->
+                    <span *ngIf="item.bookingDate != null">{{item.bookingDate| date : 'dd/MM/yyyy'}}</span>
+                    <span *ngIf="item.bookingDate == null"> - </span>
+
+                  </td>
+                  <td class="center">
+
+                    <!-- <span *ngIf="item.agreementDate != null" style="display: none;">{{item.agreementDate}}</span> -->
+                    <span *ngIf="item.agreementDate != null">{{item.agreementDate| date : 'dd/MM/yyyy'}}</span>
+                    <span *ngIf="item.agreementDate == null"> - </span>
+
+                  </td>
+                  <td class="center" style="color:blue;text-decoration: underline;"
+                    (click)="demandnoteView(item.documentLocation)">{{item.demandNoteNo}}</td>
+                  <td class="center">{{item.custName}}</td>
+                  <td class="center" *ngIf="item.mileStoneTotalAmount == null">-</td>
+                  <td class="center" *ngIf="item.mileStoneTotalAmount != null">{{item.mileStoneTotalAmount.toLocaleString('en-IN')}}</td>
+                  <td class="center">{{item.flatNo}}</td>
+                  <td class="center">{{item.milestoneName}}</td>
+
+                  <td class="center">-</td>
+                  <!-- <td class="center" >{{item.dueDate| date:'yyyy-mm-dd'}}</td>
+          <td class="center" >{{item.status}}</td>                   -->
+
+                </tr>
+              </tbody>
+
+              <ng-container *ngIf="milestonedemand_table.length != 0">
+                <tr style="background: #fbf5f5;">
+                  <td></td>
+                  <td></td>
+
+                  <td style="color: #9E9E9E;"><b>Total Due Amount:</b></td>
+                  <td class="center"><b><span id="totaldueamount" style="color: #9E9E9E;"></span></b> </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td style="color: #9E9E9E;"><b>Total Amount:</b></td>
+
+                  <td style="color: #9E9E9E;"><b><span id="totalamount"></span></b> </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </ng-container>
+
+            </table>
+
+
+
+            <!-- <table style="position: relative; top: -72px; right: 0;">
+            <tbody>
+              <tr>
+
+                <th colspan="13" style="text-align: right;width: 500px!important;color: #9E9E9E;
+                position: relative;left: 0px;">Total Due Amount:</th>
+                <th colspan="9"><span id="totaldueamount" style="position: relative;
+                  left: 0px;    color: #9E9E9E;"></span></th>
+
+              </tr>
+            </tbody>
+          </table> -->
+
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+      <!-- <div *ngIf="hideme" style="position: relative;
+      bottom: 10px;">
+        <p class="norecordclass">No records found</p>
+      </div> -->
+    </div>
+  </div>
+</section>

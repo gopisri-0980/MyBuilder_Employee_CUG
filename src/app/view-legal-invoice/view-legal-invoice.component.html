@@ -1,0 +1,335 @@
+<style>
+  .subdivcls {
+    width: 50%;
+    margin-left: 14px;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    position: relative;
+    top: -19px;
+    left: 16px;
+
+  }
+
+  .badge {
+    padding: 5px 8px;
+    line-height: 12px;
+    border: 1px solid;
+    font-weight: 400;
+    font-size: 13px;
+    color: #f44336 !important;
+  }
+
+  .labelclass {
+    font-weight: bold;
+  }
+
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black !important;
+    border-top: 1px solid black !important;
+    border-left: 1px solid black !important;
+    border-right: 1px solid black !important;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+
+  .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+  }
+
+
+  .norecordclass {
+    position: relative;
+    left: 0px;
+    font-size: 19px;
+    font-weight: bold;
+    border: 1px solid #9E9E9E;
+    padding: 10px;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Invoices</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active">View Invoices</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="fg">
+          <div class="row">
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="labelclass">Select Project:</label>
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="labelclass">Select Block:</label>
+                <select style="width:100%;" class="form-group" id="BlockId">
+                </select>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="labelclass">Select Floor:</label>
+                <select style="width:100%;" class="form-group" id="floorSelection">
+                </select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="labelclass">Select Flat:</label>
+                <select style="width:100%;" class="form-group" id="flatSelection">
+                </select>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3" style="margin-top: -13px">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold;">Start Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+              right: 19px;top: 7px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3" style="margin-top: -13px">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold;">End Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+              right: 19px;top: 7px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="labelclass">Invoice Type:</label>
+                <select style="width:100%;" class="form-group" id="invoice_type">
+                  <option value="select">Select</option>
+                  <option value="35" *ngIf="deptid == 995 || deptid == 988 || deptid == 997 || deptid == 993">Legal
+                    Invoice</option>
+                  <option value="34" *ngIf="deptid == 994 || deptid == 988 || deptid == 997 || deptid == 993 ||  deptid == 995">
+                    Modification Invoice</option>
+
+                    <option value="150" *ngIf="deptid == 994 || deptid == 988 || deptid == 997 || deptid == 993 || deptid == 995">
+                      Car Parking Invoice</option>
+
+                      <option value="152" *ngIf="deptid == 994 || deptid == 988 || deptid == 997 || deptid == 993 || deptid == 995">
+                        Assignment Transfer Fee Invoice</option>
+
+                </select>
+              </div>
+            </div>
+
+
+            <p style="width: 100%;text-align: center;" *ngIf="fg.touched && fg.invalid"> <span class="fromtoclass">To
+                Date should be greater than or equal to
+                From Date </span></p>
+
+          </div>
+        </form>
+
+        <div class="row clearfix">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4 text-center">
+            <button type="submit" class="btn-hover color-1" (click)="getDetails()">Submit</button>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div style="width:100%;text-align:center;" *ngIf="loaderhideme">
+      <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+    </div>
+
+    <div class="card" *ngIf="invoicedatatable?.length">
+      <div class="card-body">
+
+        <h3>View Invoices Details</h3>
+
+        <div class="table-responsive">
+          <table id="tableExport"
+            class="viewinvoice display table table-hover table-checkable table-striped order-column width-per-100">
+            <thead>
+              <tr class="center">
+                <th class="center" style="font-weight:bolder"><b>S.No</b></th>
+                <th class="center" style="font-weight:bolder"><b>Project Name</b></th>
+                <th class="center" style="font-weight:bolder"><b>Customer Name</b></th>
+                <th class="center" style="font-weight:bolder"><b>Flat No</b></th>
+                <th class="center" style="font-weight:bolder"><b>Invoice Number</b></th>
+                <th class="center" style="font-weight:bolder"><b>Invoice Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Paid Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Due amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Invoice Type</b></th>
+
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of invoicedatatable; let i = index;" class="customersList" style="cursor:pointer;">
+                <td class="center">{{i + 1}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center">{{item.customerName}}</td>
+                <td class="center">{{item.flatNo}}</td>
+                <td class="center" (click)="opendocument(item)">
+                  <div class="badge">{{item.finBokAccInvoiceNo}}</div>
+                </td>
+                <td class="center">{{item.payAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.paidAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.balanceAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.metadataDesc.toLocaleString('en-IN')}}</td>
+
+
+
+              </tr>
+
+            </tbody>
+
+            <ng-container>
+              <tr *ngIf="invoicedatatable.length != 0" style="background: rgb(212 202 202 / 14%);font-weight:800">
+                <td class="center" colspan="5" style="text-align: right; width: 53%;color: #9E9E9E;">Grand Total :</td>
+                <td class="center"> <span id="invoiceamount" style="color: #9E9E9E;position: relative;left: 9px;"></span></td>
+                <td class="center"><span id="payedamount" style="color: #9E9E9E;position: relative;left: 9px;"></span></td>
+                <td class="center"><span id="dueamount" style="color: #9E9E9E;position: relative;left: 9px;"></span></td>
+                <td class="center"></td>
+              </tr>
+            </ng-container>
+
+          </table>
+
+          
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div *ngIf="hideme" style="position: relative;
+    bottom: 10px;">
+      <p class="norecordclass">No records found</p>
+    </div>
+
+
+
+  </div>
+</section>

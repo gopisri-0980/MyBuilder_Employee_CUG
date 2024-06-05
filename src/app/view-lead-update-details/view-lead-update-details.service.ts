@@ -1,0 +1,109 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { promise } from 'protractor';
+import { CommonComponent } from '../common/common.component';
+import 'rxjs/add/operator/map'
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { DeclareFunctionStmt } from '@angular/compiler';
+declare const $: any;
+declare const swal: any;
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ViewLeadUpdateDetailsService {
+
+  constructor(private _httpClient: HttpClient, private cmn: CommonComponent) {
+
+  }
+
+
+  getlist_viewDetails(siteids , bookingFormId , EOIdetailsid): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const body = {
+        "sessionKey": "" + sessionStorage.getItem("login_sessionkey"),
+        "siteId":siteids,
+        "bookingFormId":bookingFormId,
+        "customerLoanEOIDetailsId":EOIdetailsid,
+        "requestUrl": "LeadDetailsPage"
+      }
+      let url = this.cmn.commonUrl + "loan/loadLoanAppliedLeadDetailsById.spring";
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+
+
+      let options = new RequestOptions({ headers: headers });
+      this._httpClient.post(url, body).subscribe(r => resolve(r), reject);
+    }).catch(() => {
+      swal('Session expired,<br/> Please login and try again.', 'Alert!', { enableHtml: true });
+    });
+  }
+
+  getupdate_status_viewDetails(siteids , bookingFormId , EOIdetailsid , statusid): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const body = {
+        "sessionKey": "" + sessionStorage.getItem("login_sessionkey"),
+        "siteId":siteids,
+        "bookingFormId":bookingFormId,
+        "customerLoanEOIDetailsId":EOIdetailsid,
+        "bankerLeadViewStatusId":statusid,
+        "requestUrl": "UpdateLeadDetails"
+      }
+    
+      console.log(body);
+      let url = this.cmn.commonUrl + "loan/updateBankerLeadSeenStatus.spring";
+      console.log(url);
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+
+      let options = new RequestOptions({ headers: headers });
+      this._httpClient.post(url, body).subscribe(r => resolve(r), reject);
+    }).catch(() => {
+      swal('Session expired,<br/> Please login and try again.', 'Alert!', { enableHtml: true });
+    });
+  }
+
+
+  getfinall_submit_fun(siteids ,siteName , flatNo , bookingFormId , EOIdetailsid , statusid , 
+    bankerviewstatusname,lead_statusid,lead_Status , previousBankerComments ,bankerComment ,banklistid ,bankname): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const body = {
+        "sessionKey": "" + sessionStorage.getItem("login_sessionkey"),
+        "siteId": siteids,
+        "siteName": siteName,
+        "flatNo": flatNo,
+        "bookingFormId": bookingFormId,
+        "customerLoanEOIDetailsId": EOIdetailsid,
+        "bankerLeadViewStatusId": statusid,
+        "bankerLeadViewStatus": bankerviewstatusname,
+        "leadStatusId": lead_statusid,
+        "leadStatus": lead_Status,
+        "previousBankerComments": previousBankerComments,
+        "bankerComment": bankerComment,
+        "bankerListId": banklistid,
+        "bankerName": bankname,
+        "requestUrl": "LeadDetailsPage"
+      }
+
+      console.log(JSON.stringify(body));
+  
+      let url = this.cmn.commonUrl + "loan/updateApplyLoanLeadDetails.spring";
+      console.log(url);
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+
+      let options = new RequestOptions({ headers: headers });
+      this._httpClient.post(url, body).subscribe(r => resolve(r), reject);
+    }).catch(() => {
+      swal('Session expired,<br/> Please login and try again.', 'Alert!', { enableHtml: true });
+    });
+  }
+
+
+
+}

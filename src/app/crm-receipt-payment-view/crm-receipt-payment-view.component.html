@@ -1,0 +1,439 @@
+<style>
+  .rowtitlecls {
+    border: 1px solid #f0ecec;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-left: 0%;
+    top: -40px;
+
+  }
+
+  .sas {
+    position: relative;
+    top: 7px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #4caf50;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Payment Cheque</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+
+
+            <li class="breadcrumb-item active" style="cursor: pointer;" (click)="backfun()"> View Completed Transactions
+            </li>
+
+            <li class="breadcrumb-item active">Payment Cheque</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>Transaction Type:</label>
+              <select disabled style="width:100%" class="form-group" id="transaction_type" single></select>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label> Payment For:</label>
+              <select disabled style="width:100%" class="form-group" id="Paymentfor" single></select>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>Cancel Reason:</label>
+              <textarea disabled
+                style="border: 1px solid #4d474785; padding: 10px; border-radius:10px;    text-transform: lowercase!important;"
+                id="CancelreasonId" class="materialize-textarea" data-length="120"></textarea>
+            </div>
+          </div>
+
+
+          <div class="col-sm-3" *ngIf="docListArray?.length">
+            <div class="form-group">
+              <label>Attached Files:</label>
+              <li *ngFor="let item of docListArray">
+                <a (click)="viewFiles(item.documentLocation)"
+                  style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+              </li>
+            </div>
+          </div>
+
+
+
+
+
+
+        </div><br>
+
+        <div class="rowtitlecls" style="position: relative;">
+
+          <div class="row clearfix">
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Cheque Number:</label>
+                <input type="text" (keypress)="keyPress($event)" maxlength=8
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ChequeNumber">
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Cheque Date:</label>
+                <input type="date" value="{{chequeDate| date:'yyyy-MM-dd'}}"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class="form-control" id="ChequeDate">
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Cheque Amount:</label>
+                <input type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ChequeAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Customer Bank Name:</label>
+                <select style="width:100%" class="form-group" id="bank_type" single></select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required"> Bank A/C Number:</label>
+                <select disabled style="width:100%" class="form-group" id="companybankAcId" single disabled></select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required"> Project:</label>
+                <select disabled style="width:100%" class="form-group" id="ProjectId" single></select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label> Block:</label>
+                <select disabled style="width:100%" class="form-group" id="BlockId" single disabled></select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required"> Flat:</label>
+                <select disabled style="width:100%" class="form-group" id="FaltId" single disabled></select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div id="custdet_div" style="width:100%;border:solid 1px #000;height: 40px;padding: 10px;
+          border-radius:10px;display:none;position: relative;top: -29px;">
+          <div style="float:left; width:50%"><b>Customer Name:</b> <span id="custname" style="font-weight: 900;"></span>
+          </div>
+          <div style="float:left;width:20%">Pending Amount:<span id="pendingamnt" style="font-weight: 900;"></span>
+          </div>
+
+        </div><br>
+
+
+        <div id="PaymentSetOffDiv" style="border:solid 1px #000;padding: 15px;border-radius:10px;position: relative;
+        top: -34px;">
+          <div class="row clearfix">
+            <div class="col-sm-2">
+              <div class="form-line"> Principal Amount:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="PrincipalAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Corpus Fund:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="CorpusFund" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Maintenance Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="MaintinaceCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Flat Khata Bifurcation:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="FlatKhataBifurcation" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Interest:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="InterstAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line"> Cancellation Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="CancelationCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row clearfix">
+
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Modification Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ModificationCharges" (keyup)="modificationInvoice($event)"
+                  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line"> Legal Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="LeagalCharges" (keyup)="legalInvoice($event)" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Refundable Advance:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="refunableCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+          </div>
+          <div class="row clearfix">
+            <div class="col-sm-2">
+              <div class="form-line"> Modification Invoice:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line center">
+
+                <p class="sas" *ngIf="modificationInvoiceNumber" (click)="modificationInvoiceNumberfun()">
+                  {{modificationInvoiceNumber}}</p>
+                <p class="sas1" *ngIf="!modificationInvoiceNumber"> - </p>
+
+
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">Legal Invoice:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line center">
+
+                <p class="sas" *ngIf="legalChargeInvoiceNumber" (click)="legalChargeInvoiceNumberfun()">
+                  {{legalChargeInvoiceNumber}}</p>
+                <p class="sas" *ngIf="!legalChargeInvoiceNumber"> - </p>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row" style="position: relative;top: 14px;">
+            <div class="col-sm-2">
+              <div class="form-line"> Car Parking Cost:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="carparkingcost" (keyup)="carparkingInvoice($event)"
+                  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line">Car Parking Invoice: </div>
+            </div>
+            <div class="col-sm-2">
+              <p class="sas" *ngIf="carparkingInvoiceID" (click)="carparkingInvoiceNumberfun()">
+                {{carparkingInvoiceID}}</p>
+              <p class="sas" *ngIf="!carparkingInvoiceID"> - </p>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Registration And Mutation Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Registration_and_Mutation_Charges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row" style="position: relative;top: 12px;">
+            <div class="col-sm-2">
+              <div class="form-line">Non-refundable Caution Deposit:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Non_refundable_Caution_Deposit"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Electricity Deposit:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Electricity_Deposit"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+          </div>
+
+
+
+        </div><br>
+        <div class="row clearfix rowtitlecls" style="position: relative;
+        top: -34px;">
+
+          <div class="col-sm-4">
+            <label>Previous Comments:</label>
+            <div
+              style="border: 1px solid #4d474785; border-radius:5px;height: auto;padding:10px;text-transform: lowercase!important;">
+              <div *ngFor="let item of previousCRMComments">
+                <label>{{item.empName}}:</label>
+                <p>{{item.comments}}</p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Customer Comments:</label>
+            <textarea disabled
+              style="border: 1px solid #4d474785; border-radius:5px;height: auto;padding:10px;text-transform: lowercase!important;"
+              id="CustomerCommentsId" class="materialize-textarea">{{customerComments}}</textarea>
+          </div>
+
+          <div class="col-sm-4" style="margin-top:5px;">
+            <label>Comments:</label>
+            <textarea style="border-radius: 4px;height: auto;" id="CrmCommentsId"></textarea>
+          </div>
+
+
+
+
+        </div>
+
+
+
+        <div *ngIf="transactionStatusNameval == 'Transaction Completed'" style="position: relative;">
+          <label style="position: relative;top: 15px;" *ngIf="documentLocation?.length"><b>Attachment File :</b></label>
+          <div *ngFor="let p of documentLocation">
+            <img src="assets/images/file1.png" (click)="attachmentlink(p.documentLocation)"
+              style=" width: 90px; margin-top: 18px;">
+          </div>
+        </div>
+
+        <div style="text-align:center;" *ngIf="paymentchequebutton_hide_show">
+          <button type="button" class="btn-hover color-1" (click)="CRMPaymentChequeSubmit()">Submit</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container" style="text-align:center;"
+      *ngIf="transactionStatusNameval == 'Transaction Completed' && deptid == 993">
+      <button type="button" class="btn-hover color-1" (click)="Deletelistfun()">Delete</button>
+    </div>
+
+
+  </div>
+
+</section>

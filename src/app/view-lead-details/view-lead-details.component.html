@@ -1,0 +1,247 @@
+<head>
+  <style>
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      border-radius: 4px;
+      margin-right: 2px;
+      opacity: 0.9;
+      filter: invert(0.8);
+      position: absolute;
+      right: 35px;
+    }
+
+    ::ng-deep .my-class .modal-dialog {
+      max-width: 30%;
+      width: 30%;
+
+    }
+
+    .fromdateval {
+      width: 100%;
+      text-align: center;
+      position: relative;
+      top: 11px;
+      color: orangered;
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    
+    .nodata {
+      position: relative;
+      font-size: 18px;
+      color: #607d8b;
+      /* font-weight: 600; */
+      font-family: 'Poppins';
+      left: 39px;
+      top: 5px;
+    }
+
+
+  </style>
+</head>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Lead Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a (click)="homeClick()">
+                <i class="fas fa-home" style="cursor:pointer"></i>
+                Apply Loan
+              </a>
+            </li>
+            <li class="breadcrumb-item active"> View Lead Details</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card" style="position: relative;top: -16px;">
+      <div class="card-body">
+        <div class="maindivclass">
+          <form [formGroup]="fg">
+            <div class="row clearfix">
+
+
+
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <label style="font-family: 'Poppins'"><b>Select Project :</b></label>
+                  <div class="center">
+                    <select style="width:100%;" class="form-group" id="project_names" single>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div id="flatsID" class="col-sm-3">
+                <div class="form-line">
+                  <p class="fieldHeaders">
+                    <label style="font-weight: bold;font-family: 'Poppins'"><b>Select Flat No :</b></label>
+                  </p>
+                  <div class="center" style="position: relative;top: -10px;">
+                    <select style="width:100%;" class="form-group" id="flatSelection">
+
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <label style="font-family: 'Poppins'"><b>Select Customer Name :</b></label>
+                  <div class="center">
+                    <select style="width:100%;" class="form-group" id="Customer_name">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <label style="font-family: 'Poppins'"><b>Select Bank Name :</b></label>
+                  <div class="center">
+                    <select style="width:100%;" class="form-group" id="Bank_name">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+            </div>
+
+            <div class="row" style="position: relative;top: 7px;">
+
+              <div class="col-sm-3">
+                <div class="form-line" style="position: relative;top: 9px;">
+                  <label style=" font-family: 'Poppins'"><b>Lead Id :</b></label>
+                  <div class="center">
+                    <input type="number"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;"
+                      class=" form-control" id="LeadID" placeholder="Enter Lead Id">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <label style="position: relative;top: 10px;"><b>Leads From Date :</b></label>
+                  <div class="center" style="position: relative;top: 9px;">
+
+                    <span class="material-icons" style="position: absolute;
+                    right: 12px;top: 7px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+
+                    <input type="date" placeholder="Select Date"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                      class=" form-control" id="fromDate" formControlName="from">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-line">
+                  <label style="position: relative;top: 10px;"><b>Leads To Date :</b></label>
+                  <div class="center" style="position: relative;top: 9px;">
+                    <span class="material-icons" style="position: absolute;
+                    right: 12px;top: 7px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+
+                    <input type="date" placeholder="Select Date"
+                      style="border: 1px solid #6d6c6c85; text-align: center;border-radius:5px;height:30px"
+                      class=" form-control" id="toDate" formControlName="to">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-3">
+                <div style="width:100%;text-align:center;position: relative;top: 11px;">
+                  <button type="button" class="btn-hover color-1" style="width: 200px;font-size: 16px;"
+                    (click)="searchfunction()">Submit</button>
+
+                  <!-- <button type="button" class="btn-hover color-1" style="width: 200px;font-size: 15px;
+                    font-family: 'Poppins';" (click)="ClearAll()">Clear All</button> -->
+                </div>
+              </div>
+            </div>
+
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromdateval">Please add a valid from and to date</p>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="Tablecontroller?.length">
+      <div class="card-body">
+
+        <h4 *ngIf="notbutton">Note : By default system will show unread lead only</h4>
+
+        <div class="table-responsive">
+          <table id="tableExport"
+            class="display table table-hover table-checkable order-column width-per-100 table-bordered"
+            style="margin-top: 80px;">
+            <thead>
+              <tr>
+                <th class="center">S.NO</th>
+                <th class="center">Project Name</th>
+                <th class="center">Lead Id</th>
+                <th class="center">Customer Name</th>
+                <th class="center">Flat No</th>
+                <th class="center">Bank Name</th>
+                <th class="center">View Status</th>
+                <th class="center">Lead Status</th>
+                <th class="center">Lead Date</th>
+                <th class="center">Flat Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let item of Tablecontroller; let i=index" (click)="view_details_updatefun(item , i)">
+                <td class="center">{{i+1}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center">{{item.customerLoanEOIDetailsId}}</td>
+                <td class="center">{{item.customerName}}</td>
+                <td class="center">{{item.flatNo}}</td>
+                <td class="center">{{item.bankerName}}</td>
+                <td class="center">{{item.bankerLeadViewStatus}}</td>
+                <td class="center">{{item.leadStatus}}</td>
+                <td class="center">{{item.createdDate | date:'dd-MM-yyyy'}}</td>
+                <td class="center">{{item.flatCost}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+   
+
+    <div class="card" *ngIf="Tablecontroller.length == 0">
+      <div class="card-body">
+        <div>
+          <p class="nodata">No Records Found</p>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</section>

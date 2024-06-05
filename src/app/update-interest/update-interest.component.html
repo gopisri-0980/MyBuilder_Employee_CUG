@@ -1,0 +1,117 @@
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Rate of Interest</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active">Rate of Interest</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row clearfix">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>*Select Project:</b>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="projectID" multiple>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div><br>
+
+
+        <!-- Table code start -->
+      
+    </div>
+    <form enctype="multipart/form-data" id="totalTableID" style="display: none;height: 400px;overflow: scroll;">
+      <table class="table table-bordered" id="tbl_posts">
+        <thead>
+          <tr>
+            <th class="tableHeaderClass">S.No</th>
+            <th class="tableHeaderClass">Start Date</th>
+            <th class="tableHeaderClass">End Date</th>
+            <th class="tableHeaderClass">SBI MCLR + (2%)</th>
+            <th class="tableHeaderClass">Updated By</th>
+            <th class="tableHeaderClass" colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody id="tbl_posts_body">
+          <tr class="tabletrClass" *ngFor="let item of milestoneArray ; let i = index ; trackBy:customTrackBy"
+            id="{{'rec-' + i}}">
+            <td>
+              <p style="padding: 9px; border: 1px solid #4d474785;text-align:center;">{{i+1}}</p>
+            </td>
+            <td class="tdDateClass">
+              <input type="date" style="border: 1px solid #4d474785; text-align: center;" class="form-control"
+                placeholder="Please choose date" name="{{'startDate'+i}}" id="{{'startDate'+i}}"
+                value="{{item.startDate | date:'yyyy-MM-dd'}}">
+            </td>
+
+            <td class="tdDateClass">
+              <input type="date" style="border: 1px solid #4d474785; text-align: center;" class="form-control"
+                placeholder="Please choose date" name="{{'endDate'+i}}" id="{{'endDate'+i}}"
+                value="{{item.endDate | date:'yyyy-MM-dd'}}">
+            </td>
+            <td>
+              <input (keypress)="keyPress($event)" type="text" autocomplete="off" maxlength="5"
+                style="border: 1px solid #4d474785; text-align: center;" placeholder="Enter percentage"
+                name="{{'rate'+i}}" id="{{'rate'+i}}" value="{{item.percentageValue}}" (paste)="pasteEvent($event)">
+            </td>
+            <td class="tdDateClass">
+              <!-- <input disabled type="text" style="border: 1px solid #4d474785; text-align: center;" class="form-control"
+               
+                value="{{item.employeeName}}"> -->
+                {{item.employeeName}}
+            </td>
+            <td class="addDeleteRowClass">
+              <a *ngIf="i==(milestoneArray.length)-1" (click)="addRecord(i)" class="btn btn-xs add-record"
+                data-id="0"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+
+                <!-- <a id="{{'delete'+i}}" (click)="deleteMilestone(i,item)" class="btn btn-xs delete-record"
+               data-id="0"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+            </td>
+
+            <!-- <td class="addDeleteRowClass">
+              <button style="width: 40%;" type="button" *ngIf="i==(milestoneArray.length)-1" (click)="addRecord(i)" class="btn-hover color-1">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            </td>
+            <td class="addDeleteRowClass">
+              <button id="{{'delete'+i}}" style="width: 40%;" type="button" (click)="deleteMilestone(i,item)" class="btn-hover color-1">
+                <i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td> -->
+
+            <input id="{{'dummyinput' + i}}" style="display:none;"
+              value="{{item.startDate +','+ item.endDate +','+ item.percentageId +','+ item.percentageValue}}">
+
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+    <div id="submitButtonID" style="display: none;" class="col-md-11 center-block text-center m-t-30">
+      <button type="button" class="btn-hover color-1" (click)="updateInterestRates()">Submit</button>
+    </div>
+
+  </div>
+  </div>
+
+</section><br>

@@ -1,0 +1,134 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">MPR view report</h4>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-1">
+              <a (click)="homeClick()">
+                <i class="fas fa-home" style="cursor:pointer" ></i>View MPR</a>
+            </li>
+
+
+            <li class="breadcrumb-item bcrumb-1">
+              <a> MPR view report</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+
+          <div style="width: 90%;margin-left: 2%;">
+            <div class="row sas">
+              <div class="col-sm-2"> Project Name </div>
+              <div class="col-sm-1">:</div>
+              <div class="col-sm-9" style="color: #59bf70 !important;"> {{controller.typeName}} </div>
+            </div>
+
+            <div class="row sas">
+              <div class="col-sm-2"> MPR Name </div>
+              <div class="col-sm-1">:</div>
+              <div class="col-sm-9" style="color: #59bf70 !important;"> {{controller.mprName}} </div>
+            </div>
+
+            <div class="row sas">
+              <div class="col-sm-2"> Uploaded Date </div>
+              <div class="col-sm-1">:</div>
+              <div class="col-sm-9" style="color: #59bf70 !important;"> {{controller.createdDate | date:'dd-MM-yyyy'}} </div>
+            </div>
+
+            
+
+
+          </div>
+
+            <div style="background: #fdfdfd;padding: 24px;
+            position: relative;top: 30px; border-radius: 10px;">
+              <!-- <div class="row sas">
+                <div class="col-sm-5"> Notification Target Count </div>
+                <div class="col-sm-1">:</div>
+                <div class="col-sm-5" style="color: #59bf70 !important;"> {{recievedCount.numOfFlatsToBeSent}} </div>
+              </div> -->
+
+              <div class="row sas">
+                <div class="col-sm-5"> Total Active flats at the time of MPR Publish </div>
+                <div class="col-sm-1">:</div>
+                <div class="col-sm-5" style="color: #59bf70 !important;"> {{recievedCount.totalFlatCount}} </div>
+              </div>
+
+              <div class="row sas">
+                <div class="col-sm-5"> Total MPR Viewed flats </div>
+                <div class="col-sm-1">:</div>
+                <div class="col-sm-5" style="color: #59bf70 !important;"> {{recievedCount.viewCount}} </div>
+              </div>
+
+
+              <!-- <div class="row sas">
+                <div class="col-sm-5"> Total number of non-customers view count </div>
+                <div class="col-sm-1">:</div>
+                <div class="col-sm-5" style="color: #59bf70 !important;"> {{recievedCount.noncustviewcount}} </div>
+              </div>
+  
+              <div class="row sas">
+                <div class="col-sm-5"> Total number of non-customers sent count </div>
+                <div class="col-sm-1">:</div>
+                <div class="col-sm-5" style="color: #59bf70 !important;"> {{recievedCount.numofsentNoncustdevicescount}} </div>
+              </div> -->
+
+
+            </div>
+
+          
+
+         
+
+
+
+
+          
+
+          <div class="table-responsive" id="milestone_blocks_tables" style="margin-top:60px;">
+            <span style="font-weight: bold;font-size: 14px;"> Note :  Accurate  report  values are showing from DEC MPR.</span><br><br>
+            <table id="mpr_view" class="display table table-bordered">
+              <thead>
+                <tr>
+                  <th class="center">S.No</th>
+                  <th class="center">Flat No</th>
+                  <th class="center">Customer Name</th>
+                  <th class="center">Delivered Status</th>
+                  <th class="center">Delivered Time</th>
+                  <th class="center">view Status</th>
+                  <th class="center">view Time</th>
+                  <th class="center">OS Type (Android / IOS)</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of controllerdata; let i=index" style="cursor: pointer;">
+                  <td class="center">{{i+1}}</td>
+                  <td class="center">{{item.flatNo}} <span *ngIf="item.flatNo ==  null"> - </span></td>
+                  <td class="center">{{item.customerName}} <span *ngIf="item.customerName == null"> - </span></td>
+                  <td class="center">{{item.deliveredStatus}} <span *ngIf="item.deliveredStatus == null"> - </span></td>
+                  <td class="center">{{item.deliveredTime | date:'MMM d, y,h:mm a'}} <span *ngIf="item.deliveredTime == null"> - </span></td>
+                  <td class="center">{{item.viewStatus}} <span *ngIf="item.viewStatus == ''"> - </span></td>
+                  <td class="center">{{item.viewedTime | date:'MMM d, y,h:mm a'}} <span *ngIf="item.viewedTime == null"> - </span></td>
+                  <td class="center">{{item.osType}} <span *ngIf="item.osType == null"> - </span> </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

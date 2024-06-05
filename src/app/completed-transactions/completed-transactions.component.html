@@ -1,0 +1,528 @@
+<style>
+  .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+
+    height: 71px !important;
+  }
+
+  .fromdateval {
+    font-size: 14px;
+    position: relative;
+    top: 14px;
+    color: orangered;
+  }
+
+  .norecordclass {
+    position: relative;
+    left: 0px;
+    font-size: 19px;
+    font-weight: bold;
+    border: 1px solid #9E9E9E;
+    padding: 10px;
+  }
+
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: revert;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+    /* border-left: 1px solid #8c8c8c; */
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+    /* border-left: 1px solid #8c8c8c; */
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title" *ngIf="view_clreared_transaction_data == null">View Completed Transactions</h4>
+
+              <h4 class="page-title" *ngIf="view_clreared_transaction_data != null">Cleared Transaction Report</h4>
+
+            </li>
+
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+
+            <li class="breadcrumb-item active" (click)="ctreport()" *ngIf="view_clreared_transaction_data != null">
+              Cleared Transaction Report</li>
+            <li class="breadcrumb-item active" *ngIf="view_clreared_transaction_data == null">Completed Transactions
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+        <form [formGroup]="fg">
+          <div class="row clearfix">
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="position: relative;top: 10px;font-weight: bold;">Select Project:</label>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="projectID" multiple>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div id="blocksID" class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Block:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                  
+                </select>
+              </div>
+            </div>
+          </div> -->
+
+
+
+            <div id="flatsID" class="col-sm-3">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="position: relative;top: 10px;font-weight: bold;">Select Flat:</label>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="flatSelection">
+                    <!-- <option value="--Select--">--Select--</option> id="hideflat"-->
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="position: relative;top: 10px;font-weight: bold;">Setoff Type:</label>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="setoffID" single>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div id="blocksID" class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Block:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                  
+                </select>
+              </div>
+            </div>
+          </div> -->
+
+
+
+            <div id="flatsID" class="col-sm-3">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="position: relative;top: 10px;font-weight: bold;">Transaction Type:</label>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="transactiontypeId">
+                    <!-- <option value="--Select--">--Select--</option> id="hideflat"-->
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+
+        <form [formGroup]="fg">
+          <div class="row clearfix">
+            <div class="fistdaterow col-sm-3">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold">Last Approved From Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 999;" (click)="startdatefun()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="fistdaterow col-sm-3">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold">Last Approved To Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 999;" (click)="endtimefun()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="seconddaterow col-sm-3">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold">Clearance From Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 999;" (click)="startdatefun2()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px;margin-left:2px;"
+                    class=" form-control" id="fromDate2" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="seconddaterow col-sm-3">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold">Clearance To Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+                right: 19px;top: 7px;font-size: 20px;z-index: 999;" (click)="endtimefun2()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate2" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+        </form>
+
+        <div class="row clearfix">
+
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="position: relative;top: 10px;font-weight: bold;">Booking Status:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="bookingstatusID" multiple>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3" style="position: relative;top: 16px;">
+            <div class="form-line">
+              <label style="font-family: 'Poppins'"><b>Transaction mode</b></label>
+              <select style="width:100%" class="form-group" id="transaction_mode" single></select>
+            </div>
+          </div>
+
+          <div class="col-sm-3" style="position: relative;top: 16px;">
+            <div class="form-group">
+              <label class="required">Receipt against to : </label>
+              <div class="form-line">
+                <select style="width:100%" class="form-group" id="receiptagainst" single>
+                  <option value="select">Select</option>
+                  <option value="Land owner cost">Land owner cost</option>
+                  <option value="Amenities cost">Amenities cost</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- <div style="width:100%;margin-left: 200px;">
+          <p *ngIf="fg.touched && fg.invalid" class="fromdateval">Please add a valid from and to date</p>
+
+        </div> -->
+        <div style="width:100%;text-align: center;">
+
+          <div class="form-group">
+            <button type="button" class="btn-hover color-1"
+              (click)="search_completedTransactions('search')">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="milestonedemand_table?.length">
+      <div class="card-body">
+
+        <!-- <p style="position: relative;top: -4px;font-size: 14px;color: #607d8b;
+        font-weight: 600;">Note : <span>Both Active & Inactive flat data will be displayed.</span></p> -->
+
+
+        <div class="table-responsive">
+          <table id="tablecomplete" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">S.No</th>
+                <th class="center"  *ngIf="milestonedemand_table?.length && deptId == 988 && roleId == 15 || milestonedemand_table?.length && deptId == 993 && roleId == 8"> <input type="checkbox"  [checked]="viewselected" style="width:20px;height:20px;" (change)="allNonTrades($event)"> Select All
+
+                  </th>
+                <th class="center"> SalesForce Booking ID </th>
+                <th class="center"> SalesForce TRN ID </th>
+                <th class="center">Project Name</th>
+                <th class="center"> Project Account Number</th>
+                <th class="center">Customer Name</th>
+                <th class="center">Flat No</th>
+                <th class="center">Transaction Type</th>
+                <th class="center"> Receipt Type </th>
+                <th class="center">Transaction Mode</th>
+                <th class="center">Challan/Cheque/Reference No</th>
+                <th class="center"> Received Date</th>
+                <th class="center">Challan/Online/Cheque Date</th>
+                <th class="center"> Deposit Date </th>
+                <th class="center"> Clearance Date </th>
+
+                <th class="center">Transaction Amount</th>
+                <th class="center">Approval Req Receive Date</th>
+                <th class="center"> Bank Name</th>
+                <th class="center"> Receipt Stage</th>
+                <th class="center"> Source of Funds</th>
+                <th class="center">Last approved date</th>
+                <th class="center"> Bounce Date</th>
+                <th class="center"> Bounce Reason</th>
+                <th class="center">Transaction Id</th>
+                <th class="center">Flat Booking Status</th>
+                <th class="center">BSR code</th>
+                <th class="center">ACK No</th>
+                <th class="center">Challan Reflection Date</th>
+                <th class="center">Receipt Against To</th>
+
+                <th>Attachments</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of milestonedemand_table; let i=index" style="cursor: pointer;">
+                <td class="center" (click)="goToDetails(item)">{{i+1}}</td>
+
+                <td class="center"  *ngIf="milestonedemand_table?.length && deptId == 988 && roleId == 15 || milestonedemand_table?.length && deptId == 993 && roleId == 8">
+                  <input type="checkbox" style="width:20px;height:20px;" class="checlist"
+                    value="{{item.salesforceBookingId}}" [checked]="item.checked" [(ngModel)]="item.checked"
+                    (change)="isAllSelected(item , i , $event)">
+                </td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.salesforceBookingId}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.salesforceTransactionId}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.siteBankAccountNumber}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.customerName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.flatNo}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.transactionTypeName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.transactionPaymentSetOff}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.transactionModeName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.chequeOrReferenceNo}}</td>
+
+                <td class="center" (click)="goToDetails(item)">
+
+                  <!-- <span *ngIf="item.chequeOrOnlineDate != null" style="display: none;">{{item.chequeOrOnlineDate}}</span> -->
+                  <span *ngIf="item.chequeOrOnlineDate != null">{{item.chequeOrOnlineDate| date:'dd-MM-yyy '}}</span>
+                  <span *ngIf="item.chequeOrOnlineDate == null"> - </span>
+
+                </td>
+                <td class="center" (click)="goToDetails(item)">
+
+                  <!-- <span *ngIf="item.transactionDate != null" style="display: none;">{{item.transactionDate}}</span> -->
+                  <span *ngIf="item.transactionDate != null">{{item.transactionDate| date:'dd-MM-yyy '}}</span>
+                  <span *ngIf="item.transactionDate == null"> - </span>
+
+                </td>
+                <td class="center" (click)="goToDetails(item)">
+
+                  <!-- <span *ngIf="item.chequeDepositedDate != null" style="display: none;">{{item.chequeDepositedDate}}</span> -->
+                  <span *ngIf="item.chequeDepositedDate != null">{{item.chequeDepositedDate| date:'dd-MM-yyy '}}</span>
+                  <span *ngIf="item.chequeDepositedDate == null"> - </span>
+
+
+
+                </td>
+                <td class="center" (click)="goToDetails(item)">
+
+                  <!-- <span *ngIf="item.chequeClearanceDate != null" style="display: none;">{{item.chequeClearanceDate}}</span> -->
+                  <span *ngIf="item.chequeClearanceDate != null">{{item.chequeClearanceDate| date:'dd-MM-yyy '}}</span>
+                  <span *ngIf="item.chequeClearanceDate == null"> - </span>
+
+                </td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.transactionAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">
+
+
+                  <!-- <span *ngIf="item.lastApprovedDate != null" style="display: none;">{{item.lastApprovedDate}}</span> -->
+                  <span *ngIf="item.lastApprovedDate != null">{{item.lastApprovedDate| date:'dd-MM-yyy h:mm a'}}</span>
+                  <span *ngIf="item.lastApprovedDate == null"> - </span>
+
+
+
+                </td>
+                <td class="center" (click)="goToDetails(item)">{{item.bankName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.receiptStage}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.sourceOfFunds}}</td>
+
+
+                <td class="center" (click)="goToDetails(item)">
+
+                  <!-- <span *ngIf="item.transactionClosedDate != null" style="display: none;">{{item.transactionClosedDate}}</span> -->
+                  <span *ngIf="item.transactionClosedDate != null">{{item.transactionClosedDate|date:'dd-MM-yyy h:mm
+                    a'}}</span>
+                  <span *ngIf="item.transactionClosedDate == null"> - </span>
+
+
+
+                </td>
+                <td class="center" (click)="goToDetails(item)">
+
+                  <!-- <span *ngIf="item.chequeBounceDate != null" style="display: none;">{{item.chequeBounceDate}}</span> -->
+                  <span *ngIf="item.chequeBounceDate != null">{{item.chequeBounceDate|date:'dd-MM-yyy '}}</span>
+                  <span *ngIf="item.chequeBounceDate == null"> - </span>
+
+                </td>
+                <td class="center" (click)="goToDetails(item)">{{item.chequeBounceComment}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.finTransactionNo}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.flatBookingStatusName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.bsrCode}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.ackNo}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.challanReflectionDate|date:'dd-MM-yyy '}}</td>
+                <td class="center">{{item.receiptAgainstTo}}</td>
+                <!-- <td class="center" >{{528422400000| date:'yyyy-MM-dd'}}</td>                         -->
+                <td class="center" style="text-decoration: underline;">
+                  <span *ngFor="let linklocns of item.transactionReceipts;">
+                    <img style="width:20px;height:20px;;margin-left:3px" src="assets/images/file1.png"
+                      (click)="attachmentlink(linklocns.location)"></span>
+                </td>
+              </tr>
+            </tbody>
+
+            <!-- <tfoot>
+              <tr>
+                
+                <th colspan="13" style="text-align: right;width: 1249.06px;
+                position: relative;left: 32px;">Transaction Total Amount:</th>
+                <th colspan="9"><span id="invoiceamount" style="position: relative;
+                  left: 45px;"></span></th>
+               
+              </tr>
+            </tfoot> -->
+
+          </table>
+
+          <table style="position: relative; top: -72px; right: 0;">
+            <tbody>
+              <tr>
+
+                <th colspan="13" style="text-align: right;width: 500px!important;color: #9E9E9E;
+                position: relative;left: 0px;">Transaction Total Amount:</th>
+                <th colspan="9"><span id="invoiceamount" style="position: relative;
+                  left: 0px;    color: #9E9E9E;"></span></th>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="milestonedemand_table == 0">
+      <p class="norecordclass">No records found</p>
+    </div>
+
+
+
+    <div style="width: 100%;text-align: center;" 
+    *ngIf="milestonedemand_table?.length && deptId == 988 && roleId == 15 || milestonedemand_table?.length && deptId == 993 && roleId == 8"
+    
+    >
+      <button type="button" class="btn-hover color-1" (click)="data_multi_rows_delete_fun()">Delete</button>
+
+    </div>
+
+
+
+  </div>
+
+</section><br>

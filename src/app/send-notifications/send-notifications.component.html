@@ -1,0 +1,783 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<style>
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+
+  }
+
+  .notecls {
+    width: 96%;
+    margin-left: 0%;
+    font-size: 14px;
+    font-family: 'Poppins';
+    color: rgb(0 0 0 / 87%);
+    position: relative;
+    top: 16px;
+    font-weight: 600;
+  }
+
+  html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font: 16px/1.3 "Roboto", sans-serif;
+        background: linear-gradient(45deg,
+                hsl(39, 100%, 60%, 0.4),
+                hsl(300, 100%, 60%, 0.3));
+    }
+
+    .container {
+
+        display: grid;
+        place-content: center;
+        max-width: 60rem;
+        margin-inline: auto;
+    }
+
+    .address-book {
+        --row-block: 4rem;
+        --list-block: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        --block-size: 33.5rem;
+        --inline-size: 17.5rem;
+        width: var(--inline-size);
+        height: var(--block-size);
+        background: var(--light-400);
+        overflow: hidden;
+        position: relative;
+        border-radius: 2.25rem;
+        box-shadow: 0 0.25em 0.5em #0003, 0 0.6em 0.96em #0003,
+            0 1.4em 1.2em -0.125em #0003;
+    }
+
+
+
+    .main--header,
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #5f5656;
+        height: var(--row-block);
+        color: #FFF;
+    }
+
+    .main--title,
+    .footer--title {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: var(--light-400);
+    }
+
+    .navigation::-webkit-scrollbar {
+        display: none;
+    }
+
+    .navigation {
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scroll-snap-type: y proximity;
+        scroll-snap-stop: always;
+        height: 100%;
+        gap: 0.25rem;
+        scrollbar-width: none;
+        background: #f5ebeb;
+        border-inline: 0.25em solid var(--dark-200);
+    }
+
+    .navigation__content--flow {
+        /* A bit different layout if flex enabled  */
+        /* /* display: flex; */
+        scroll-snap-align: start;
+    }
+
+
+    .notificationcls {
+        background: #FFF;
+        width: 96%;
+        height: 100px;
+        margin-top: 50%;
+        margin-left: 2%;
+        border-radius: 5px;
+        opacity: 0.4;
+    }
+
+    .notificationcls1 {
+        width: 96%;
+        margin-left: 2%;
+        position: absolute;
+        top: 34%;
+        left: 16px;
+        color: #FFF;
+    }
+
+    .card_notification_list {
+        background: #fff;
+        border-radius: 2px;
+        display: inline-block;
+        height: 100px;
+        margin: 1rem;
+        position: relative;
+        width: 96%;
+        margin-left: 2%;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    }
+
+    .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+  }
+
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Send Notification</h4>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-1">
+                  <a>
+                    <i class="fas fa-home"></i> Home</a>
+                </li> -->
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Project Notifications</a>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-2">
+                  <a href="#" onClick="return false;">Project Notifications</a>
+                </li> -->
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Send Notification</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p>
+                <b>Select Project:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="projectID" single>
+                <option value="select">--Select--</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p>
+                <b>Select Block:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="BlockId" multiple disabled>
+                <!-- <option value="1">Block 1</option>
+                  <option value="2">Block 2</option>
+                  <option value="3">Block 3</option>
+                  <option value="4">Block 4</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p>
+                <b>Select Floor:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="FloorId" multiple disabled>
+                <!-- <option value="1">Floor 1</option>
+                  <option value="2">Floor 2</option>
+                  <option value="3">Floor 3</option>  
+                  <option value="4">Floor 4</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p>
+                <b>Series:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="seriesId" multiple disabled>
+                <!-- <option value="select">--Select--</option>
+                <option value="select">01</option>
+                <option value="select">02</option>
+                <option value="select">03</option> -->
+              </select>
+
+            </div>
+          </div>
+
+        </div><br>
+
+        <div class="row clearfix">
+
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p>
+                <b>SBUA:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="SBUAId" multiple disabled>
+                <!-- <option value="select">--Select--</option>
+                <option value="select">1283</option>
+                <option value="select">1284</option>
+                <option value="select">1285</option>  -->
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p>
+                <b>Facing:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="FacingId" multiple disabled>
+                <!-- <option value="select">--Select--</option>
+                <option value="select">East</option>
+                <option value="select">West</option>
+                <option value="select">North</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p>
+                <b>Type:</b>
+              </p>
+              <select style="width:100%;" class="form-group states" id="typeId" multiple disabled>
+                <!-- <option value="select">--Select--</option>
+                <option value="select">1 BHK</option>
+                <option value="select">2 BHK</option>
+                <option value="select">3 BHK</option> -->
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p>
+                <b>Select Flat:</b>
+              </p>
+              <select style="width:100%;" class="form-group states" id="FlatId" multiple disabled>
+                <!-- <option value="1">Flat 1</option>
+                  <option value="2">Flat 2</option>
+                  <option value="3">Flat 3</option>
+                  <option value="4">Flat 4</option> -->
+              </select>
+            </div>
+          </div>
+        </div><br>
+        <span *ngIf="datesrelatedflatesstatus">
+          <div class="row clearfix">
+            <div class="col-sm-5" style="font-weight: 600;"></div>
+            <div class="col-sm-2" style="font-weight: 600;">(OR)</div>
+            <div class="col-sm-5" style="font-weight: 600;"></div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-sm-3" style="margin-top: -13px">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;">Booking From Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+
+                  <span class="material-icons" style="position: absolute;
+              right: 19px;top: 7px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3" style="margin-top: -13px">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;">Booking To Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+              right: 19px;top: 7px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <!-- <p style="width: 100%;text-align: center;" *ngIf="fg.touched && fg.invalid"> <span  class="fromtoclass">To Date should be greater than or equal to
+            From Date </span></p> -->
+            <!-- <div class="col-sm-3" style="margin-top: -13px">
+              <button (click)="okSubmission()">ok</button>
+            </div> -->
+            <div class="col-sm-3" *ngIf="this.fltsCount !=0" style="margin-top: 28px">
+              <span style="font-weight: 600; text-decoration: underline;"
+                (click)="forModelpopupclick_count()">{{fltsCount}} flat(s) selected</span>
+            </div>
+
+          </div><br>
+        </span>
+        <div class="row clearfix">
+
+          <div class="col-sm-12">
+
+            <div class="form-line">
+              <p>
+                <b>Select Device:</b>
+              </p>
+              <select style="width:50%" id="deviceID" single>
+                <option value="select">--Select Device--</option>
+                <option value="All">All</option>
+                <option value="Android">Android</option>
+                <option value="iOS">iOS</option>
+              </select>
+            </div>
+
+          </div>
+        </div><br>
+        <div class="row clearfix">
+          <div class="input-field col-sm-12">
+            <input type="text" id="title_id" class="form-control" maxlength="150" autocomplete="off">
+            <label for="title_id" style="margin-left: 10px;">Title:</label>
+          </div>
+
+
+          <!-- <div class="col-sm-12">
+        <div class="input-field col-sm-12">
+                    <input type="text" id="notification_id" class="form-control" >
+                    <label  for="notification_id" style="margin-left: 10px;">Notification:</label>
+    </div>
+    </div> -->
+          <div class="input-field col-sm-12">
+            <input type="text" id="notification_id" class="form-control" maxlength="300" autocomplete="off">
+            <label for="notification_id" style="margin-left: 10px;">Notification Text:</label>
+          </div>
+
+          <!-- <div style="position: relative;left: 1183px;top: -46px;"><i 
+        (click)="toggled = !toggled"
+        [(emojiPickerIf)]="toggled"
+        [emojiPickerDirection]="'bottom' || 'top' || 'left' || 'right'"
+        (emojiPickerSelect)="handleSelection($event)">😄</i></div> -->
+        </div> <br>
+
+        <!-- <div class="row clearfix">
+                  <div class="col-sm-12">
+                      <div class="input-field col-sm-12">
+                          <textarea id="discription_val" class="materialize-textarea" data-length="120"></textarea>
+                          <label for="discription_val">Notification Description:</label>
+                      </div>
+                  </div>
+          </div> -->
+
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card" style="border:0">
+
+
+
+              <div class="header replayheader">
+                <h2>
+                  <strong>Notification Description:</strong>
+                </h2>
+
+                <p class="notecls"> <span style="color: #f44336;font-weight: 600;">Note :</span> For a better view of
+                  Tables and its data, Please add the tables which has
+                  borders and also data with shorter table, If longer tables it is suggested to use attachments.
+                </p>
+
+              </div>
+              <div class="body" id="ckeditorMainDiv">
+                <div id="CKEditiorDiv">
+                  <textarea id="ckeditor">
+                    </textarea>
+                </div>
+                <p class="text-danger ckeditorerrormessage" id="ckeditorError">{{ckeditorError}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="header">
+              <!-- <h3><strong>Booking</strong> Form</h3><br> -->
+              <div class="row clearfix">
+                <!-- <div class="col-sm-3"></div> -->
+                <!-- <div id="driveIconDiv" class="col-sm-1" style="text-align: right;">
+                  <img style="cursor: pointer; height:40px; margin-top:13px;" src="assets/images/Google-Drive-icon.png"
+                             (click)="showDriveImageField()" />
+                </div> -->
+                <div class="col-sm-12">
+
+                  <form action="#">
+
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                        <input type="file" id="imgfile" accept="image/x-png,image/gif,image/jpeg"
+                          (change)="handleFileSelect($event)">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input id="imagefilee" class="file-path validate" type="text"
+                          placeholder="Upload notification image">
+                      </div>
+                    </div>
+                  </form>
+
+
+                  <div class="row clearfix" id="imageLinkField" style="display: none;">
+                    <div class="col-sm-8" style="padding-left: 32px;">
+                      <div class="form-line">
+                        <label style="font-weight: bold;">Please copy the google drive image link here:</label>
+                        <textarea style="border-radius: 4px; height: 52px; padding: 5px;" maxlength="500"
+                          id="driveImageLinkField" data-length="120"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <img id="myImg" src="#"  style="width:350;height:100px;display:none" /> -->
+                  <div class="image-area" style="display:none;width:200px;height:200px">
+                    <img id="myImg" src="#" style="width:200px;height:200px;display:none" />
+                    <span class="remove-image" href="#" style="display: inline;" (click)="delete_image()">&#215;</span>
+                    <!-- <img src="https://blog.codepen.io/wp-content/uploads/2012/06/White-Large.png"  alt="Preview"> -->
+                    <!-- <a class="remove-image" href="#" style="display: inline;">&#215;</a> -->
+                  </div>
+                </div>
+                <!-- <div id="driveIconFileDiv" class="col-sm-1" style="text-align: right;">
+                    <img style="cursor: pointer; height:40px; margin-top:13px;" src="assets/images/Google-Drive-icon.png"
+                               (click)="showDriveFileField()" />
+                  </div> -->
+                <div class="col-sm-12">
+
+                  <form action="#">
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                        <input type="file" id="files" accept=".pdf,.xlsx,.xls,.docx"
+                          (change)="handle_FileSelect($event)">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input id="filee" class="file-path validate" type="text" placeholder="Upload File">
+                      </div>
+                    </div>
+                    <div id="myfilebinding" class="remove-image2" href="#" (click)="delete_file()">&#215;</div>
+                  </form>
+
+                  <!-- <div class="row clearfix" id="fileLinkField" style="display: none;">
+                  <div class="col-sm-8" style="padding-left: 32px;">
+                    <div class="form-line">
+                    <label style="font-weight: bold;">Please copy the google drive file link here:</label>
+                      <textarea style="border-radius: 4px; height: 52px; padding: 5px;" maxlength="500" id="driveFileLinkField" data-length="120"></textarea>
+                    </div>
+                  </div>
+                </div> -->
+
+                  <div class="row clearfix" style="text-align:center">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-2" style="font-weight: 600;">(OR)</div>
+                    <div class="col-sm-5"></div>
+
+                  </div><br>
+                  <div class="row clearfix" id="imglinkiddiv">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-2">
+                      <!-- <div class="form-line" style="font-weight: bold;">File Path*:</div> -->
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="row clearfix">
+                        <div class="col-sm-8" style="padding-left: 32px;">
+                          <div class="form-line">
+                            <label style="font-weight: bold;">Note: Above 10 MB file please paste link below:</label>
+                            <textarea style="border-radius: 4px; height: 42px; padding: 5px;" maxlength="500"
+                              id="driveFileLinkField" data-length="120" (blur)="valid()"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                </div>
+
+                <!-- The Modal -->
+                <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <img src="#" class="imagepreview" style="width: 100%;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- </div> -->
+                <!-- <div class="col-sm-3"></div> -->
+              </div>
+              <div style="text-align:center;">
+                <button type="button" class="btn-hover color-1" (click)="filesubmit()">Send</button>
+                <button type="button" class="btn-hover color-1"
+                (click)="Previewfun(content3)">Preview</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="flatsmodelId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Flat List</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <div class="card">
+                <div style="width:100%;float:left">
+                  <div *ngFor="let roleObj1 of fltsList" style="width:33.33%;float:left;padding: 10px;">
+                    <input type="checkbox" id={{roleObj1.flatId}}
+                      (change)="onChange($event,$event.target.checked, roleObj1)" checked
+                      style="width:20px;height:20px;float: left;" />
+                    <div style="margin-left: 10px;float: left;">{{roleObj1.flatNo}}</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #content3 let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Send Notification : </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+          <div class="col-sm-4">
+              <div class="container">
+                  <article class="address-book">
+                      <header class="main--header">
+                          <h2 class="title main--title">Project Updates</h2>
+                      </header>
+                      <nav class="navigation" style="background-image: url(assets/images/notification.jpg);
+                      background-size: 100% 100%;">
+                          <div class="notificationcls" style="background: #607d8b!important;">
+
+                          </div>
+                          <div class="notificationcls1">
+                              <small> Ams apps
+                                  {{dateandtime}}</small>
+                              <p style="position: relative;
+                              top: -29px;" class="my__textoverflow">{{main_notification_title}}</p>
+                          </div>
+                      </nav>
+                      <footer class="footer">
+                          <h2 class="title footer--title"></h2>
+                      </footer>
+                  </article>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="container">
+                  <article class="address-book">
+                      <header class="main--header">
+                          <h2 class="title main--title"><i class="fa fa-bars" style="font-size: 13px;
+                              color: #FFF;
+                              position: relative;
+                              left: -12px;
+                              top: -2px;"></i> Project Updates</h2>
+                      </header>
+                      <nav class="navigation">
+                          <div class="card_notification_list">
+
+                              <div class="row">
+                                  <div class="col-sm-4">
+
+                                      <img id="myImg_view" src="#"
+                                          style="position: relative;top: 7px;width: 96%; margin-left: 2%;width:50px;" />
+
+
+
+                                  </div>
+                                  <div class="col-sm-8">
+
+                                      <p style="position: relative;
+                                      top:0px;
+                                      color: #000;
+                                      font-size: 10px;
+                                      left: -12px;
+                                      font-weight: 600;width: 149px!important;" class="my__textoverflow">
+                                          {{main_notification_title}}</p>
+
+                                      <p style="position: relative;
+                                      top: -58px;
+                                      color: #000;
+                                      font-size: 9px;
+                                      left: -12px;
+                                      font-weight: 600;
+                                      width: 100px!important;" class="my__textoverflow"
+                                          [innerHTML]="truncateHTML(main_notification_dec)">..</p>
+                                      <small style="color: #000; position: relative;
+                                       top: -110px;">
+                                          {{dateString}}</small>
+
+                                      <small style="position: absolute;
+                                      top: 57px;right: 0;"><i class='fas fa-arrow-right' style='font-size: 15px;
+                                              color: red;position: absolute;right: 29px;'></i></small>
+                                  </div>
+                              </div>
+
+
+
+                          </div>
+
+                      </nav>
+                      <footer class="footer">
+                          <h2 class="title footer--title"></h2>
+                      </footer>
+                  </article>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="container">
+                  <article class="address-book">
+                      <header class="main--header">
+                          <h2 class="title main--title"> <i class="fa fa-bars" style="font-size: 13px;
+                              color: #FFF;
+                              position: relative;
+                              left: -12px;
+                              top: -2px;"></i>Project Updates</h2>
+                      </header>
+                      <nav class="navigation">
+
+                          <p style="position: relative;
+                          top: 0px;
+                          color: #000;
+                          font-size: 14px;
+                          left: 16px;
+                          font-weight: 600;" class="my__textoverflow">{{main_notification_title}}</p>
+
+
+                          <p style="position: relative;
+                          top: -44px;
+                          color: #000;
+                          font-size: 9px;
+                          left: 17px;
+                          font-weight: 600;
+                          width: 171px!important;" class="my__textoverflow" [innerHTML]="truncateHTML(main_notification_dec)">..
+                          </p>
+
+
+                          <img id="myImg_view1" src="#" style="position: relative;
+                              top: -43px;
+                              width: 90%;
+                              height: 150px;
+                              margin-left: 5%;" />
+
+
+                          <div style="width:100%;text-align: center;">
+                              <button type="button" class="btn btn-info" style="    background-color: #e91e63 !important;
+                              color: #fff !important;box-shadow: none;
+  border-radius: 5px;
+  position: relative;
+  top: -31px;">VIEW ATTACHMENT</button>
+                          </div>
+                      </nav>
+                      <footer class="footer">
+                          <h2 class="title footer--title"></h2>
+                      </footer>
+                  </article>
+              </div>
+          </div>
+      </div>
+
+
+  </div>
+
+</ng-template>

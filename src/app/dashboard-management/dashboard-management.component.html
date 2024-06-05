@@ -1,0 +1,100 @@
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">DASHBOARD MANAGEMENT</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Dashboard Management</a>
+            </li>
+         
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+      <div class="row clearfix" style="padding: 10px;">
+         <div class="col-sm-2"></div> 
+        <div class="col-sm-2">
+          <label class="form-line" style="font-weight: bold;"> From Date:</label>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-line">
+            <input type="date" style="border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control"  id="fromDate">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <label class="form-line" style="font-weight: bold;"> To Date:</label>
+        </div>
+       
+        <div class="col-sm-2">
+          <div class="form-line">
+            <input type="date" style="border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control"  id="toDate">
+          </div>
+        </div>
+        <div class="col-sm-2"></div> 
+      </div>
+     
+      <div class="row clearfix" style="padding: 10px;">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 center">
+          <button type="button" style="margin-top: 1px;" class="btn-hover color-1" (click)="completedTransactions()">Search</button>
+      </div>
+      <div class="col-sm-4"></div>
+      </div>
+
+    <div class="table-responsive" id="milestone_blocks_tables">
+        
+      
+      <table id="tableExportvthdates" class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+        <thead>
+          <tr>
+         
+              <!-- <th class="center">S.No</th>  -->
+            <th class="center">Project Name</th> 
+            <th class="center">No. Of Tickets</th>  
+            <th class="center">Open Tickets</th>           
+            <th class="center">In Progress</th>        
+            <th class="center">ReOpen</th>   
+            <th class="center">Close</th>          
+            
+        
+          </tr>
+        </thead>
+        <tbody>
+        
+         
+          <tr *ngFor="let item of projectwise_site_count; let i=index" style="cursor: pointer;" (click)="goToDetails(item)">
+              <!-- <td class="center" >{{i+1}}</td> -->
+            <td class="center" >{{item.projects}}</td>
+            <td class="center" >{{item.noofTickets}}</td>
+            <td class="center" >{{item.openTickets}}</td>
+            <td class="center" >{{item.Inprogress}}</td>
+            <td class="center" >{{item.Reopen}}</td>
+            <td class="center" >{{item.Close}}</td>
+          </tr>
+          
+    
+        </tbody>
+      </table>
+
+     
+   
+    </div>
+  </div>
+</div>
+
+    
+ </div>
+
+</section><br>
+
+

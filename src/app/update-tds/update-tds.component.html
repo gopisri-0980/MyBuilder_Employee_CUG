@@ -1,0 +1,110 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">CRM</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Update TDS</a>
+            </li>
+         
+          </ul>
+        </div>
+      </div>
+
+      <div class="row clearfix">
+
+        <div class="col-sm-4">
+          <div class="form-line">
+            <p> 
+              <b >Select Project:</b>
+            </p>
+            <select style="width:100%" class="form-group states center" id="projectID" single >
+              <option value="select">--Select--</option>
+            </select>
+         
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-line">
+            <p>
+              <b >Select Block:</b>
+            </p>
+            <select style="width:100%" class="form-group states center" id="BlockId" single disabled>
+             
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-line">
+            <p>
+              <b >Select Flat:</b>
+            </p>
+            <select style="width:100%" class="form-group states center" id="FlatId" single disabled></select>
+          </div>
+        </div>
+
+      </div><br>
+      
+      <div style="text-align:center;">
+        <button type="button" class="btn-hover color-1" (click)="upadtaDts()">Search</button>
+      </div>
+
+      <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-top:60px" id="milestone_blocks_tables">
+        <ul>
+            <li>
+      
+      <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+        <thead>
+          <tr>
+            <th class="center" style="font-size: small;">S.NO</th> 
+            <th class="center" style="font-size: small;">ID</th> 
+            <th class="center" style="font-size: small;">Milestones</th> 
+            <th class="center" style="font-size: small;">Paid By</th>           
+            <th class="center" style="font-size: small;">Amount</th>        
+            <th class="center" style="font-size: small;">Status</th>   
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="mistonetrclss" *ngFor="let item of milestonedemand_table; let i=index" id="{{'tablerowdata'+(i+1)}}">
+            <td class="center">{{i + 1}}</td>
+            <td  class="center"  id="{{'finId'+(i+1)}}">{{item.finBookingFormTdsDtlsId}}</td>
+            <td class="center"  id="{{'milestoneName'+(i+1)}}">{{item.milestoneName}}</td>
+            <!-- <td class="center"  id="{{'submitedByName'+(i+1)}}">{{item.submitedByName}}</td> -->
+            <td class="center">
+              <select  id="{{'submittedBy'+(i+1)}}" placeholder = "--select--"  style="display:block" value="{{item.submitedByName}}">
+                <!-- <option value="null">--Select--</option> -->
+                <option value="amsapps" style="height:30px!important;padding: 50px!important;">Sumadhura</option>
+                <option value="Customer">Customer</option>
+              </select>            
+            </td>
+            <td class="center"  id="{{'mileStoneTotalAmount'+(i+1)}}">{{item.mileStoneTdsAmount.toLocaleString('en-IN')}}</td>
+            <td class="center">
+              <select  id="{{'statustype'+(i+1)}}" class="form-group "  style="display:block" value="{{item.tdsStatusName}}">
+                <option value="Received">Received</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </td>
+          </tr> 
+        </tbody>
+      </table>
+    </li>
+  </ul>
+    </div>
+    <div style="text-align:center; display:none" id="milestonsubmitBtn">
+      <button type="button" class="btn-hover color-1" (click)="milestonessubmission()">Submit</button>
+    </div>
+    </div>
+    
+
+    
+ </div>
+
+</section>
+
+

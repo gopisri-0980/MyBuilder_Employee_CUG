@@ -1,0 +1,428 @@
+<style>
+  .my-class1 {
+    background: rgb(243 222 222);
+    color: #666;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .my-class2{
+    background: #FFF;
+    color: #000;
+  }
+
+
+  .table tbody tr td,
+  .table tbody tr th {
+    padding: 14px !important;
+  }
+
+  .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+  }
+
+  .fromtoclass {
+    position: relative;
+    left: 38px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+
+    font-weight: 600;
+    font-family: 'Poppins';
+    background-color: #FFF;
+  }
+
+  .ng-autocomplete {
+    width: auto !important;
+  }
+
+  .norecordclass {
+    position: relative;
+    left: 0px;
+    font-size: 19px;
+    font-weight: bold;
+    border: 1px solid #9E9E9E;
+    padding: 10px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Inbox</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i> Start a Chat</a>
+            </li>
+            <!-- <li class="breadcrumb-item active">Start a Chat</li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">*Select Project:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="blocksID" class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Block:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="floorsID" class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Floor:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="floorSelection">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="flatsID" class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">*Select Flat:</label>
+              </p>
+              <div class="center" style="position: relative;top: -10px;">
+                <select style="width:100%;" class="form-group" id="flatSelection">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div><br>
+        <form [formGroup]="fg">
+          <div class="row">
+
+            <div class="col-sm-3">
+              <div class="form-line">
+                <label style="font-weight: bold;">Customer Name :</label>
+                <div class="center">
+                  <select style="width:100%;height: 41px!important" id="customerID">
+                    <option value="select">--Select--</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-3">
+              <label style="font-weight: bold;">Subject wise search:</label>
+              <div class="form-line">
+                <input id="subject_wise_search" type="text" class="form-control" 
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height: 30px;">
+              </div>
+            </div>
+
+
+
+
+            <!-- <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-weight: bold;">From Date:</label>
+              <div class="center">
+                <input type="date" placeholder="Select Date" autocomplete="off"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                  class="datepicker" id="fromDate">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-weight: bold;">To Date:</label>
+              <div class="center">
+                <input type="date" placeholder="Select Date" autocomplete="off"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                  class="datepicker" id="toDate">
+              </div>
+            </div>
+          </div> -->
+
+            <div class="col-sm-3">
+              <div class="form-line">
+                <label style="font-weight: bold;">From Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-line">
+                <label style="font-weight: bold;">To Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+              <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">To Date should be greater than or equal to From
+                Date</p>
+
+            </div>
+
+          </div>
+
+          <div class="row" *ngIf="deptid == 988 || deptid == 989">
+            <div class="col-sm-3">
+              <label style="font-weight: bold;">Employee Name :</label>
+              <div class="ng-autocomplete">
+                <form [formGroup]="autocompleteform">
+
+
+                  <ng-autocomplete [data]="countries" [searchKeyword]="keyword" placeHolder="Enter the employee name"
+                    (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                    (inputFocused)='onFocused($event)' (inputCleared)="onClearSearch($event)"
+                    historyIdentifier="countries" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"
+                    #auto formControlName="employeename">
+                  </ng-autocomplete>
+                  <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                  </ng-template>
+
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                  </ng-template>
+
+                </form>
+
+              </div>
+
+              <!-- <div class="form-line">
+                <input type="text" style="border: 1px solid #4d474785; text-align: center;border-radius:10px;"
+                  class="form-control autocomplete" id="customername" (blur)="customerDetails($event)">
+              </div> -->
+            </div>
+          </div>
+
+
+
+          <div class="row clearfix">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4 text-center">
+              <button type="submit" class="btn-hover color-1" (click)="getCustomerLedger()">Submit</button>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+        </form>
+        <div class="table-responsive">
+          <button type="button" class="btn-hover color-1" style="width: 240px;
+            position: relative;top: -19px;" (click)="startnewchart()">START NEW CHAT</button>
+
+          <button type="button" class="btn-hover color-1" style="width: 240px;
+            position: relative;top: -19px;" (click)="SendBultchartsfun(content)">SEND BULK CHATS</button>
+
+        </div>
+
+        <div style="width:100%;text-align:center;" *ngIf="loaderhideme">
+          <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+        </div>
+
+        <div class="table-responsive" *ngIf="ledgerData?.length">
+          <table id="tableExport" class="table table-bordered table-sm">
+            <thead>
+              <tr class="center">
+                <th>S.No</th>
+
+                <th>Created Date</th>
+
+                <th>Project Name</th>
+                <!-- <th>Chat Number</th> -->
+                <th>Flat Number</th>
+                <th>Employee Name</th>
+                <th>Customer Name</th>
+                <!-- <th>Block Number</th> -->
+                <th>Subject</th>
+                <!-- <th>Status</th> -->
+
+                <!-- <th>Last Chatted Date</th> -->
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngIf="ledgerData.length == 0">
+                <td class="center" colspan="8" id="noData"> No Data Available</td>
+              </tr>
+
+              <tr *ngFor="let item of ledgerData; let i = index;" class="customersList"
+                (click)="viewallcustomers(item , i)" style="background: rgb(243 222 222);
+                color: #666;font-size: 15px;font-weight: 500;">
+                <td style="text-align: center;">{{i + 1}}</td>
+
+                <td style="text-align: center;">
+                  <span *ngIf="item.createdDate != null" style="display: none;">{{item.createdDate}}</span>
+                  <span *ngIf="item.createdDate != null">{{item.createdDate| date : 'dd/MM/yyyy'}}</span>
+                  <span *ngIf="item.createdDate == null"> - </span>
+                </td>
+
+                <td style="text-align: center;">{{item.siteName}}</td>
+                <!-- <td style="text-align: center;">{{item.messengerId}}</td> -->
+                <td style="text-align: center;">{{item.flatName}}</td>
+                <td style="text-align: center;">{{item.employeeName}}</td>
+                <td style="text-align: center;">{{item.customerName}}</td>
+                <!-- <td>{{item.blockName}}</td> -->
+                <td style="text-align: center;"> <span class="my__textoverflow">{{item.subject}}</span></td>
+                <!-- <td>{{item.messengerStatus}}</td> -->
+
+                <!-- <td>{{item.lastChattedDate| date:'yyyy-MM-dd'}}</td> -->
+
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+
+        <div class="table-responsive" *ngIf="ledgerData1?.length">
+          <table id="tableExport1" class="table table-bordered table-sm">
+            <thead>
+              <tr class="center">
+                <th>S.No</th>
+                <th>Created Date</th>
+                <th>Project Name</th>
+                <!-- <th>Chat Number</th> -->
+                <th>Flat Number</th>
+                <th>Employee Name</th>
+                <th>Customer Name</th>
+                <!-- <th>Block Number</th> -->
+                <th>Subject</th>
+                <!-- <th>Status</th> -->
+
+                <!-- <th>Last Chatted Date</th> -->
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngIf="ledgerData1.length == 0">
+                <td class="center" colspan="8" id="noData"> No Data Available</td>
+              </tr>
+              <ng-container *ngFor="let item of ledgerData1; let i = index;">
+
+
+                <tr class="customersList" (click)="viewallcustomers(item , i)"
+                  [ngClass]="(item.viewDetails != 'VIEWED')?'my-class1':'my-class2'">
+                  <td style="text-align: center;">{{i + 1}}</td>
+
+                  <td style="text-align: center;">{{item.createdDate| date:'yyyy-MM-dd'}}</td>
+
+                  <td style="text-align: center;">{{item.siteName}}</td>
+                  <!-- <td style="text-align: center;">{{item.messengerId}}</td> -->
+                  <td style="text-align: center;">{{item.flatName}}</td>
+                  <td style="text-align: center;">{{item.employeeName}}</td>
+                  <td style="text-align: center;">{{item.customerName}}</td>
+                  <!-- <td>{{item.blockName}}</td> -->
+                  <td style="text-align: center;"> <span class="my__textoverflow">{{item.subject}}</span></td>
+                  <!-- <td>{{item.messengerStatus}}</td> -->
+
+                  <!-- <td>{{item.lastChattedDate| date:'yyyy-MM-dd'}}</td> -->
+
+                </tr>
+              </ng-container>
+            </tbody>
+
+          </table>
+        </div>
+
+
+
+        <!-- <div *ngIf="norecordsfound">
+          <p class="norecordclass">No records found</p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ------------------------------bulk charts start--------------------------------- -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Send Bulk Chats </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="border: 1px solid #dde4e7;
+  padding: 30px;border-radius: 10px;">
+    <div class="row">
+      <div class="col-sm-3">
+        <label style="position: relative;
+        top: 27px;text-align: right;"><b>Attached File :</b></label>
+      </div>
+      <div class="col-sm-9">
+
+        <form [formGroup]="uploadtdsform">
+          <div class="file-field input-field">
+            <div class="btn">
+              <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+              <input accept=".xls,.xlsx" type="file" id="files" (change)="handleFileSelect($event)"
+                formControlName="filruploadinput" [ngClass]="{ 'is-invalid': submitted && f.filruploadinput.errors }">
+            </div>
+
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Upload file">
+            </div>
+
+
+          </div>
+          <div *ngIf="submitted && f.filruploadinput.errors" class="errorsmsg">
+            <div *ngIf="f.filruploadinput.errors.required" style="color: #f44336;
+            font-size: 12px;font-weight: 600;"> * Please import your file.
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <ul style="position: relative;display: flex;top: 12px;">
+      <li> <button class="btn-hover color-1" (click)="filesubmit()">SEND</button> </li>
+      <li> <button class="btn-hover color-1" (click)="resetfun()">RESET</button> </li>
+    </ul>
+  </div>
+</ng-template>
+
+
+<!-- ------------------------------bulk charts end--------------------------------- -->

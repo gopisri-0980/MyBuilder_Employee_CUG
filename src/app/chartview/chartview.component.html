@@ -1,0 +1,828 @@
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  
+<style>
+    .sas {
+        width: 240px;
+        position: relative;
+        top: 0px;
+        margin-left: 27px;
+        color: #FFF
+    }
+
+    .basic-container {
+        padding: 30px;
+    }
+
+    .mat-snack-bar-container.pizza-party {
+        color: hotpink;
+    }
+
+    .mat-snack-bar-container .flex {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+    }
+
+    ::-webkit-file-upload-button {
+        cursor: pointer;
+    }
+
+    .filepathcls {
+        position: relative;
+        top: 35px;
+        left: 14px;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .select2-container .select2-selection--single {
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        height: 40px !important;
+    }
+
+    .card {
+        position: relative;
+        /* top: -17px; */
+    }
+
+    .mainimg {
+        text-align: left;
+        position: relative;
+        bottom: 8px;
+        left: 66px;
+        width: 100px;
+        display: contents;
+
+    }
+
+    .customerdata {
+        position: relative !important;
+        background: #f1e29d !important;
+        color: #607D8B;
+    }
+
+    .ccdata {
+        position: relative !important;
+        background: #b0ebb2 !important;
+        color: #607D8B;
+    }
+
+    .jumbotron {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+        background-color: rgba(0, 0, 0, 0.54);
+        border-radius: .3rem;
+        color: #FFF;
+        height: 100px;
+    }
+
+    .bootstrap-select .dropdown-toggle {
+        display: block !important;
+    }
+
+    .submiticon {
+        position: absolute;
+        right: 54px;
+        bottom: 33px;
+        font-size: 36px;
+    }
+
+    .maindiv {
+        width: 100%;
+        margin-left: 0%;
+        margin-right: 0%;
+        position: relative;
+        top: 27px;
+    }
+
+    textarea {
+        border-color: #bbb;
+        font-size: 17px;
+        position: relative;
+        top: 0px;
+        border-radius: 5px;
+    }
+
+    textarea:focus,
+    input:focus {
+        outline: 0 !important;
+    }
+
+    *:focus {
+        outline: 0 !important;
+    }
+
+    ::placeholder {
+        color: #000
+    }
+
+    .maindivclass {
+        width: 100%;
+
+        height: 100%;
+        background: #fafafb;
+
+        overflow-y: scroll;
+        border-radius: 0px;
+        /* border: 1px solid #eee; */
+        margin-left: 0%;
+        margin-right: 0%;
+        overflow-y: scroll;
+    }
+
+    .chartbottomcls {
+        position: absolute;
+        bottom: -10px;
+        right: 8px;
+
+        text-indent: 5px;
+    }
+
+    .chatimg {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 100px;
+        padding: 6px;
+        position: relative;
+        top: 10px;
+        left: 8px;
+    }
+
+    .charthead {
+        position: relative;
+        top: -16px;
+        left: 66px;
+
+        text-transform: inherit;
+        width: 78%;
+        text-align: justify;
+        color: #000;
+
+    }
+
+    .subdivcls {
+        width: 100%;
+        background: #E3E4FA;
+        position: relative;
+        top: 9px;
+        left: 0px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        border-bottom-left-radius: 2px;
+        border-top-right-radius: 2px;
+        font-size: 14px;
+
+    }
+
+    h5 {
+        font-size: 18px;
+        font-weight: 500;
+        font-family: sans-serif;
+        position: relative;
+        top: 14px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid #EEE;
+        text-align: center;
+    }
+
+    .service {
+        border: 1px solid #EEE;
+    }
+
+    .item {
+        width: 30%;
+    }
+
+    .nonitem {
+
+        width: 10%;
+    }
+
+    .tabletitle {
+
+        color: #000;
+    }
+
+    .my-class1 {
+        color: blue !important;
+    }
+
+    .my-class2 {
+        color: #d0ad45 !important;
+    }
+
+    .select2-selection--multiple {
+        overflow: hidden !important;
+        height: auto !important;
+    }
+
+    #table {
+        margin-left: 3%;
+        width: 94%;
+    }
+
+    .subjectlabel {
+        font-weight: bold;
+        margin-top: 14px;
+        position: relative;
+        top: 5px;
+        left: 17px;
+        font-family: 'Poppins';
+        font-size: 17px;
+        text-transform: inherit;
+        letter-spacing: 1px;
+    }
+
+    .trashicon {
+        position: relative;
+        left: 51px;
+        color: #2196F3;
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 23px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .customernamecls {
+        color: #F44336;
+        font-weight: 600;
+        font-size: 12px;
+
+    }
+
+    .table thead th,
+    .table th {
+        font-weight: 500;
+        background: #3587d8;
+        color: #FFF;
+    }
+
+    .maindivmoduleclass {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        width: 100%;
+
+
+    }
+
+    .submoduleclass {
+        padding: 19px;
+    }
+
+
+    .aYF {
+        width: 100%;
+        background: #9E9E9E;
+        padding: 15px;
+        color: #0f0401;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+
+    .loadercls {
+        position: relative;
+        left: 8px;
+        font-size: 12px;
+        width: 20px;
+        height: 20px;
+        top: 2px;
+    }
+
+    .notecls {
+        width: 96%;
+        margin-left: 2%;
+        font-size: 14px;
+        font-family: 'Poppins';
+        color: rgb(0 0 0 / 87%);
+        font-weight: 600;
+    }
+</style>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row" *ngIf="brundcumb_Click != 'true'">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Inbox</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1" *ngIf="titlediv == 'View chat all'">
+                            <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeiconfun()"></i> <span
+                                    (click)="homeClick1()" style="cursor:pointer;">View All
+                                    Chats</span> </a>
+                        </li>
+
+                        <li class="breadcrumb-item bcrumb-1" *ngIf="titlediv == 'StartAChart'">
+                            <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeiconfun()"></i> <span
+                                    (click)="homeClick()" style="cursor:pointer;">Start a
+                                    Chat</span> </a>
+                        </li>
+
+                        <li class="breadcrumb-item active">Chat View</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span *ngFor="let p of bindingdata">
+                    <h5><b>Customer Name</b> : <b style="color: #9E9E9E;">{{p.customerName}}</b></h5>
+                    <h5><b>Flat Number</b> : <b style="color: #9E9E9E;">{{p.flatName}}</b></h5>
+                </span>
+                <span *ngFor="let p of controller">
+                    <h5><b>Customer Name</b> : <b style="color: #9E9E9E;">{{p.customerName}}</b></h5>
+                    <h5><b>Flat Number</b> : <b style="color: #9E9E9E;">{{p.flatName}}</b></h5>
+                </span>
+            </div>
+            <div class="col-sm-3">
+                <!-- <button id="unreadid" type="button" class="btn-hover color-1"
+                    style="width:200px;" (click)="unreadFun()">Mark as unread</button> -->
+
+                <button type="button" id="unreadid" class="btn-hover " style="width: 200px;background: var(--info);"
+                    [disabled]="loading" (click)="unreadFun()"
+                    *ngIf="messengerConversationId != null && resp.editable == true">
+                    <i class="fas fa-user-astronaut" style="font-size: 17px;"></i> &nbsp; Mark as unread
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+                </button>
+
+
+            </div>
+
+            <div class="col-sm-3">
+                <mat-paginator [length]="startacharttotalrowsdata.length" [pageSize]="1" [pageIndex]="pageIndex"
+                    (page)="getServerData($event)" *ngIf="this.customerviewDetails_temp != null">
+                </mat-paginator>
+
+            </div>
+        </div>
+
+
+
+
+
+        <!-- <div id="table" *ngIf="bindingdata !== null">
+                    <table *ngFor="let p of bindingdata">
+                       
+                        <tr class="tabletitle">
+                            <td class="item nonitem">
+                                <h5><b>Customer Name</b> : <b style="color: #9E9E9E;">{{p.customerName}}</b></h5><br>
+                                <h5><b>Flat Number</b> : <b style="color: #9E9E9E;">{{p.flatName}}</b></h5>
+                                    </td>
+                            <td class="subtotal nonitem">
+                                <button type="button" class="btn-hover color-1" style="width: 240px;
+                                position: relative;top:0px;margin-left: 27px;" (click)="unreadFun()">Unread</button>                            </td>
+                        </tr>
+                    </table>
+                </div> -->
+
+        <!-- <div id="table" *ngIf="controller !== null">
+                    <table *ngFor="let p of controller">
+                        <tr class="tabletitle">
+                            <td class="item nonitem">
+                                <h5><b>Customer Name</b> : <b style="color: #9E9E9E;">{{p.customerName}}</b></h5>
+                            </td>
+                            <td class="subtotal nonitem">
+                                <h5><b>Flat Number</b> : <b style="color: #9E9E9E;">{{p.flatName}}</b></h5>
+                            </td>
+                        </tr>
+                    </table>
+                </div> -->
+
+
+
+        <div>
+
+
+
+
+
+            <div class="card" style="margin-top:20px;">
+                <div class="card-body">
+
+                    <div class="maindivmoduleclass">
+                        <div class="aYF">Message View
+
+                        </div>
+                        <div class="submoduleclass">
+                            <div>
+
+                                <div class="form-group" style="width: 98%;
+                                margin-left: 2%;">
+                                    <label class="subjectlabel"> Recipients (cc):</label>
+                                    <select class="form-group" id="ccprojectID" [disabled]="isDisabled"
+                                        multiple="multiple"
+                                        style="box-sizing: border-box!important;list-style: none!important;width:98%;
+                                    margin: 0!important;padding: 0 5px!important;overflow-y: auto!important;height: auto!important;">
+                                    </select>
+                                </div>
+                                <div class="container" style="max-width: 100%!important">
+
+                                    <label class="subjectlabel">Subject:</label>
+                                    <textarea style="border: 1px solid #d9d1d1!important;
+                                width: 100%;
+                                margin-left: 0%;
+                                margin-right: 0%;
+                                height: 100px;
+                                border-radius: 5px;" cols="10" rows="10" id="subjectid" value="{{subject}}"
+                                        [disabled]="isDisabled"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="maindivclass" style="height:500px;padding:10px;overflow-y: auto;overscroll-behavior-y: none;width:98%;
+                            margin-left:1%;margin-right:1%;margin-top: 10px;" *ngIf="charthideme">
+                                <div *ngFor="let p of items">
+                                    <div class="subdivcls" *ngIf="p.chartType == 'MESSEGE_OWNER'">
+                                        <img (click)="fileClick(p.imgsrc)" src="{{p.imgsrc}}" class="chatimg">
+                                        <p class="charthead" style="text-align:justify;text-justify:inter-word;"
+                                            [innerHTML]="p.text">
+                                        </p>
+
+                                        <p class="chartbottomcls"><span style="
+                                        color: #F44336;
+                                        font-weight: 600;
+                                        font-size: 12px;
+                                    ">{{p.createdByName}}</span> &nbsp;
+                                            {{p.date | date:'dd-MM-yyyy'}} <span
+                                                [ngClass]="(p.viewStatus=='85')?'my-class1':'my-class2'">{{p.status}}</span>
+
+                                        </p>
+                                        <div *ngIf="p.fileimg?.length"
+                                            style="width: 90%;position: relative;margin-left: 5%;">
+                                            <ul style="display: inline-flex;
+                                            width: 100%;
+                                            position: relative;margin-bottom: 49px;overflow: auto;">
+                                                <li *ngFor="let q of p.fileimg" style="position: relative;
+                                                width: 240px;
+                                                height: 150px;
+                                                text-align: center;margin-left:20px;">
+                                                    <div
+                                                        *ngIf="q.Extension !== 'docx' && q.Extension !== 'exe' && q.Extension !== 'N/A' 
+                                                    && q.Extension !== 'pdf' &&  q.Extension !== 'PDF' && q.Extension !== 'mp4' && q.Extension !== 'txt'  && q.Extension !== 'jpeg'
+                                                     && q.Extension !== 'gif' && q.Extension !== 'doc' && q.Extension !== 'zip' && q.Extension !== 'xls' && q.Extension !== 'dwg' && q.Extension !== 'xlsx'">
+
+                                                        <p><img (click)="fileClick(q.imgurl)" src="{{q.imgurl}}"
+                                                                style="width:100px;height:100px;cursor:pointer;"></p>
+                                                        <p> <span>{{q.filename}}</span></p>
+                                                    </div>
+
+                                                    <div
+                                                        *ngIf="q.Extension == 'docx' || q.Extension == 'exe' || q.Extension == 'N/A' || q.Extension == 'pdf' || q.Extension == 'PDF' || q.Extension == 'mp4' || q.Extension == 'txt'
+                                                    || q.Extension == 'jpeg' || q.Extension == 'gif' || q.Extension == 'doc' || q.Extension == 'zip' || q.Extension == 'xls' || q.Extension == 'dwg' || q.Extension == 'xlsx'">
+
+                                                        <p> <a (click)="fileClick(q.imgurl)"> <img
+                                                                    src="assets/images/file1.png"
+                                                                    style="width:100px;height:100px;cursor:pointer;">
+                                                            </a></p>
+                                                        <p><span>{{q.filename}}</span>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="subdivcls customerdata" *ngIf="p.chartType == 'CUSTOMER'">
+                                        <img (click)="fileClick(q.imgsrc)" src="{{p.imgsrc}}" class="chatimg">
+                                        <p class="charthead" [innerHTML]="p.text" style="white-space: pre-wrap;"></p>
+                                        <br>
+                                        <p class="chartbottomcls"> <span
+                                                class="customernamecls">{{p.createdByName}}</span>
+                                            &nbsp; {{p.date | date:'dd-MM-yyyy'}}
+                                            <!-- <span [ngClass]="(p.viewStatus=='85')?'my-class1':'my-class2'">{{p.status}}</span> -->
+                                        </p>
+                                        <div *ngIf="p.fileimg?.length" style="width: 90%;position: relative;margin-left: 5%;padding: 5px;
+                                    top: -37px;">
+
+
+
+
+
+
+
+
+                                            <ul style="display: inline-flex;
+width: 100%;
+position: relative;margin-bottom: 49px;overflow: auto;">
+                                                <li *ngFor="let q of p.fileimg" style="position: relative;
+    width: 240px;
+    height: 150px;
+    text-align: center;margin-left:20px;">
+                                                    <div
+                                                        *ngIf="q.Extension !== 'docx' && q.Extension !== 'exe' && q.Extension !== 'N/A' 
+        && q.Extension !== 'pdf' &&  q.Extension !== 'PDF' && q.Extension !== 'mp4' && q.Extension !== 'txt'  && q.Extension !== 'jpeg'
+         && q.Extension !== 'gif' && q.Extension !== 'doc' && q.Extension !== 'zip' && q.Extension !== 'xls' && q.Extension !== 'dwg' && q.Extension !== 'xlsx'">
+
+                                                        <p><img (click)="fileClick(q.imgurl)" src="{{q.imgurl}}"
+                                                                style="width:100px;height:100px;cursor:pointer;"></p>
+                                                        <p> <span>{{q.filename}}</span></p>
+                                                    </div>
+
+                                                    <div
+                                                        *ngIf="q.Extension == 'docx' || q.Extension == 'exe' || q.Extension == 'N/A' || q.Extension == 'pdf' || q.Extension == 'PDF' || q.Extension == 'mp4' || q.Extension == 'txt'
+        || q.Extension == 'jpeg' || q.Extension == 'gif' || q.Extension == 'doc' || q.Extension == 'zip' || q.Extension == 'xls' || q.Extension == 'dwg' || q.Extension == 'xlsx'">
+
+                                                        <p> <a (click)="fileClick(q.imgurl)"> <img
+                                                                    src="assets/images/file1.png"
+                                                                    style="width:100px;height:100px;cursor:pointer;">
+                                                            </a></p>
+                                                        <p><span>{{q.filename}}</span>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="subdivcls ccdata" *ngIf="p.chartType == 'cc'">
+                                        <img (click)="fileClick(p.imgsrc)" src="{{p.imgsrc}}" class="chatimg">
+                                        <p class="charthead" [innerHTML]="p.text"></p><br>
+                                        <p class="chartbottomcls">
+                                            <span style="
+                                       color: #F44336;
+                                        
+                                       
+                                        font-size: 13px;
+                                       
+                                    ">{{p.createdByName}}</span>
+                                            &nbsp; {{p.date | date:'dd-MM-yyyy'}}
+                                            <span
+                                                [ngClass]="(p.viewStatus=='85')?'my-class1':'my-class2'">{{p.status}}</span>
+                                        </p>
+                                        <div *ngIf="p.fileimg?.length" style="width: 90%;position: relative;margin-left: 5%;padding: 5px;
+                                    top: -37px;">
+
+
+
+                                            <ul style="display: inline-flex;
+width: 100%;
+position: relative;margin-bottom: 49px;overflow: auto;">
+                                                <li *ngFor="let q of p.fileimg" style="position: relative;
+    width: 240px;
+    height: 150px;
+    text-align: center;margin-left:20px;">
+                                                    <div
+                                                        *ngIf="q.Extension !== 'docx' && q.Extension !== 'exe' && q.Extension !== 'N/A' 
+        && q.Extension !== 'pdf' &&  q.Extension !== 'PDF' && q.Extension !== 'mp4' && q.Extension !== 'txt'  && q.Extension !== 'jpeg'
+         && q.Extension !== 'gif' && q.Extension !== 'doc' && q.Extension !== 'zip' && q.Extension !== 'xls' && q.Extension !== 'dwg' && q.Extension !== 'xlsx'">
+
+                                                        <p><img (click)="fileClick(q.imgurl)" src="{{q.imgurl}}"
+                                                                style="width:100px;height:100px;cursor:pointer;"></p>
+                                                        <p> <span>{{q.filename}}</span></p>
+                                                    </div>
+
+                                                    <div
+                                                        *ngIf="q.Extension == 'docx' || q.Extension == 'exe' || q.Extension == 'N/A' || q.Extension == 'pdf' || q.Extension == 'PDF' || q.Extension == 'mp4' || q.Extension == 'txt'
+        || q.Extension == 'jpeg' || q.Extension == 'gif' || q.Extension == 'doc' || q.Extension == 'zip' || q.Extension == 'xls' || q.Extension == 'dwg' || q.Extension == 'xlsx'">
+
+                                                        <p> <a (click)="fileClick(q.imgurl)"> <img
+                                                                    src="assets/images/file1.png"
+                                                                    style="width:100px;height:100px;cursor:pointer;">
+                                                            </a></p>
+                                                        <p><span>{{q.filename}}</span>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="hideEditable">
+
+
+                                <div class="maindiv">
+                                    <div>
+                                        <div style="width: 100%;
+                           position: relative;top: -30px;">
+
+
+                                            <div style="width: 100%;
+                                        padding: 10px;position: relative;top: 7px;">
+
+
+                                                <div style="width: 100%;
+                                                padding: 10px;position: relative;top: 7px;">
+
+
+
+                                                    <label class="subjectlabel">Description:</label>
+
+                                                    <p class="notecls"> <span
+                                                            style="color: #f44336;font-weight: 600;">Note :</span> For a
+                                                        better view of Tables and its data, Please add the tables which
+                                                        has
+                                                        borders and also data with shorter table, If longer tables it
+                                                        is suggested to use attachments.
+                                                    </p>
+
+                                                    <div class="body" id="ckeditorMainDiv">
+                                                        <div id="CKEditiorDiv">
+                                                            <textarea id="chatid">
+                                                              </textarea>
+                                                        </div>
+                                                        <p class="text-danger ckeditorerrormessage" id="ckeditorError">
+                                                            {{ckeditorError}}</p>
+                                                    </div>
+
+                                                    <!-- <div *ngIf="mainpopup" style="background-color: #000;width:300px;float:left;padding:10px;font-weight: 600;z-index: inherit; border-radius: 10px;" > 
+                                                        <div style="float:left;width:50%;color: #d9d1d1;">Message sent</div>
+                                                        <div style="float:left;width:30%;color: #d9d1d1;" (click)="popclose()">Undo</div>
+                                                                                                              </div> -->
+
+
+
+                                                    <!-- <textarea placeholder="Type a message ..." cols="10" rows="10"
+                                                            id="chatid" style="height:200px;width:100%;"></textarea> -->
+                                                </div>
+                                                <!-- <div class="body" id="ckeditorMainDiv">
+                                                    <div id="CKEditiorDiv">
+                                                      <textarea id="chatid" >
+                                                      </textarea>
+                                                    </div>
+                                                    <p class="text-danger ckeditorerrormessage" id="ckeditorError">{{ckeditorError}}</p>
+                                                  </div> -->
+                                                <!-- <textarea placeholder="Type a message ..." cols="10" rows="10"
+                                                    id="chatid" style="height:200px;width:100%;"></textarea> -->
+                                            </div>
+
+                                            <!-- <div id="CKEditiorDiv">
+                                            <textarea id="ckeditor" (change)="textChanged($event)">
+                                              </textarea>
+                                        </div> -->
+                                            <!-- <p class="text-danger ckeditorerrormessage" id="ckeditorError">{{ckeditorError}}
+                                        </p> -->
+
+                                            <!-- <angular-editor [(ngModel)]="htmlContent" [config]="config1" id="chatid"
+                                            (keyup)="onKey($event)"></angular-editor> -->
+                                        </div>
+
+
+                                        <div style="position: relative;
+                                    top: -44px;">
+                                            <label><span style="position: relative;
+                                            top: 33px;
+                                            left: 13px;
+                                            font-weight: 600;">Attach File :</span></label>
+                                            <input type="file" id="fileInputId" multiple="multiple"
+                                                accept="image/x-png,image/gif,image/jpeg,application/pdf,application/vnd.ms-excel"
+                                                (change)="handle_FileSelect($event)"
+                                                style="position: relative;top: 35px;left: 76px;color: rgb(0, 0, 0); cursor:pointer;">
+                                        </div><br><br>
+                                        <!-- ,image/jpeg,application/pdf,application/vnd.ms-excel -->
+                                        <div class="row clearfix" style="text-align: center;
+                                    position: relative;
+                                    top: -29px;" *ngIf="ortitle">
+                                            <div class="col-sm-5"></div>
+                                            <div class="col-sm-2" style="font-weight: 600;">(OR)</div>
+                                            <div class="col-sm-5"></div>
+
+                                        </div><br>
+
+
+                                    </div>
+                                </div>
+                                <div class="container" style="position: relative;
+                display: inline-flex;margin-top: 20px;overflow-x: auto;">
+                                    <div *ngFor='let url of urls; let i = index;'
+                                        style="margin-left: 20px;min-width: 20%;">
+                                        <span
+                                            *ngIf="url.Type == 'jpg' || url.Type =='png' || url.Type == 'svg' || url.Type == 'jpeg'">
+                                            <img [src]="url.upload" height="150" width="150"
+                                                (click)="fileClickfun(url.upload , url.Type)" style="cursor:pointer;">
+                                            <br />
+                                            <img src="assets/images/trash.jpg" class="trashicon"
+                                                (click)="Deleteimage(i)" style="cursor:pointer;">
+                                        </span>
+                                        <span
+                                            *ngIf="url.Type == 'docx' || url.Type =='exe' || url.Type == 'N/A' || url.Type == 'pdf' ||  url.Type == 'xlsx' ||
+                            url.Type == 'mp4' || url.Type == 'txt' || url.Type == 'gif' || url.Type == 'doc' || url.Type == 'doc' || url.Type == 'zip' || url.Type == 'xls' || url.Type == 'dwg' ">
+                                            <img src="assets/images/file1.png" height="150" width="150"
+                                                (click)="fileClickfun(url.upload , url.Type)" style="cursor:pointer;">
+                                            <br />
+                                            <img src="assets/images/trash.jpg" class="trashicon"
+                                                (click)="Deleteimage(i)" style="cursor:pointer;">
+                                        </span>
+
+                                        <p style="position: relative;
+                        text-align: center;">{{url.Name}}</p>
+                                    </div>
+                                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog"
+                                        aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="text-align: center;">
+                                                    <button type="button" class="close" data-dismiss="modal"><span
+                                                            aria-hidden="true">&times;</span><span
+                                                            class="sr-only">Close</span></button>
+
+                                                    <object style="width:100%!important;" height="500"
+                                                        [attr.data]="fileName" type={{filetypeurlsplit1}}
+                                                        *ngIf="filesplitdata !== 'image' &&  filetypeurlsplit1 == 'application/pdf'"></object>
+
+
+                                                    <img [src]="imgsrc" height="450" style="width:auto"
+                                                        *ngIf="filesplitdata == 'image'">
+
+                                                    <a [href]="fileUrl" download="file.txt"
+                                                        *ngIf="this.filetypeurlsplit1 == 'text/plain'"
+                                                        style="font-size: 20px;">Download
+                                                        file</a>
+
+                                                    <a [href]="fileUrl" download="file.docx"
+                                                        *ngIf="this.filetypeurlsplit1 == 'application/octet-stream' && extensiontype == 'docx'"
+                                                        style="font-size: 20px;">Download file</a>
+
+                                                    <a [href]="fileUrl" download="file.doc"
+                                                        *ngIf=" this.filetypeurlsplit1 == 'application/octet-stream' && extensiontype == 'doc'"
+                                                        style="font-size: 20px;">Download file</a>
+
+                                                    <a [href]="fileUrl" download="file.xlsx"
+                                                        *ngIf=" this.filetypeurlsplit1 == 'application/octet-stream' && extensiontype == 'xlsx'"
+                                                        style="font-size: 20px;">Download file</a>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix" id="imageLinkField" style="position: relative;
+                            top: -18px;">
+                                    <div class="col-sm-2"> <span class="filepathcls">File Path :</span> </div>
+                                    <div class="col-sm-10">
+                                        <div class="form-line">
+                                            <label style="font-weight: bold;">Note: Above 20 MB file please paste link
+                                                below:</label>
+                                            <textarea style="border-radius: 4px; height: 52px; padding: 5px;"
+                                                maxlength="500" id="driveImageLinkField" data-length="120"
+                                                (blur)="valid()"></textarea>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <!-- <button *ngIf="brundcumb_Click != 'true'" type="button" class="btn-hover color-1"
+                                        style="width: 240px;
+                                position: relative;top:0px;margin-left: 27px;" (click)="submitfun()">Send</button> -->
+
+                                    <button mat-button *ngIf="brundcumb_Click != 'true'" type="button"
+                                        class="btn-hover color-1 sas"
+                                        (click)="ActionConfirmation('Message sent ...',somefunction, data)"
+                                        aria-label="Show an example snack-bar">
+                                        Send
+                                    </button>
+
+                                </div>
+
+
+                                <!--                                   
+                                  <button mat-button (click)="Confirmation('Successfully Saved')" aria-label="Show an example snack-bar">
+                                    Confirm
+                                  </button> -->
+
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>

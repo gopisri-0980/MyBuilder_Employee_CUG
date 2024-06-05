@@ -1,0 +1,147 @@
+<style>
+  .radiocls {
+    position: relative;
+    top: -8px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  [type="radio"]:not(:checked),
+  [type="radio"]:checked {
+    opacity: 1 !important;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -6px;
+  }
+
+  .radioclass {
+    border: 1px solid #e3d2d2;
+    border-radius: 5px;
+    width: 100%;
+    margin-left: 0%;
+    padding: 7px;
+    background: linear-gradient(105deg, rgba(255, 190, 0, 0), #8fd8ee);
+    position: relative;
+    top: 11px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Escalation Ticket Master </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Escalation Ticket Master </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="maindivclass">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <p class="titileclassproject" style="font-family: 'Poppins';"> Escalation Ticket Master : </p>
+                <hr>
+                <label class="labelcls">Select Project :</label>
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid #e3d2d2;border-radius: 5px;width: 100%;position: relative;
+          top: -5px;margin-left: 0%;padding: 7px;background: linear-gradient(105deg, rgba(255, 190, 0, 0), #8fd8ee)">
+            <div class="row" style="position: relative!important;top: 10px!important;">
+              <div class="col-sm-3" style="position: relative;
+          top: -7px;font-size: 14px;font-weight: 600;">Ticket Level :</div>
+              <div class="col-sm-4 radio" *ngFor="let p of radio_Controller">
+                <input [id]="p.id" name="radio" type="radio" (change)="handleChange($event,p)">
+                <label [for]="p.id" class="radio-label radiocls"> &nbsp;{{p.Name}}</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row" style="margin-top: 10px;">
+            <div class="col-sm-12">
+              <div class="form-group">
+
+                <label class="labelcls">Select Ticket Type :</label>
+                <select style="width:100%;" class="form-group" id="ticket_type" single>
+                  <option value="select">--Select--</option>
+                  <option value="Crm_technical">CRM Technical</option>
+                  <option value="Crm_financial">CRM Financial</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered" style="width: 70%;
+          margin-left: 15%; position: relative;">
+            <thead >
+              <tr>
+                <th>SNo.</th>
+                <th>Escalation Level</th>
+                <th>Employee Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let dynamic of dynamicArray; let i = index;">
+                <td style="text-align:center;width:50px;">{{i+1}}</td>
+                <td>
+                  <div class="form-group">
+                    <select style="width:100%;" class="form-group" id="{{'Escalation_Level'+i}}"
+                      [(ngModel)]="dynamicArray[i].title1" single>
+                      <option value="select">--Select--</option>
+                      <option *ngFor="let p of EscalationLevel" [value]="p.levelId">{{p.levelName}}</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <select style="width:100%;" class="form-group" id="{{'Employee_Name'+i}}"
+                      [(ngModel)]="dynamicArray[i].title2" single>
+                      <option value="select">--Select--</option>
+                      <option *ngFor="let item of Employee_Names" [value]="item.empId">{{item.empName}}</option>
+                    </select>
+                  </div>
+                </td>
+
+                <td>
+                  <i class="fa fa-plus fa-2x" (click)="addRow(i)" style="font-size: 20px;
+                  border: 1px solid #00bcd4;border-radius: 100px;padding: 7px;color: #3f51b5;"></i> &nbsp;&nbsp;
+                  <i class="fa fa-trash fa-2x" (click)="deleteRow(i)" style="font-size: 20px;
+                  border: 1px solid #00bcd4;border-radius: 100px;padding: 7px;color: #3f51b5;"></i>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div style="width: 100%;text-align: center;margin-top:10px">
+          <button type="button" class="btn-hover color-1" (click)="submitfunction()">SUBMIT</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

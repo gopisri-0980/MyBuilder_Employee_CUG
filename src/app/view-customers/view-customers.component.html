@@ -1,0 +1,505 @@
+<style>
+    .nodata {
+        position: relative;
+        font-size: 18px;
+        color: #607d8b;
+        /* font-weight: 600; */
+        font-family: 'Poppins';
+        left: 39px;
+        top: 5px;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        border-radius: 4px;
+        margin-right: 2px;
+        opacity: 0.9;
+        filter: invert(0.8);
+        position: absolute;
+        right: 35px;
+    }
+
+    ::ng-deep .my-class .modal-dialog {
+        max-width: 30%;
+        width: 30%;
+
+    }
+
+    input[type="date"]::-webkit-datetime-edit,
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button {
+        color: #fff;
+        position: relative;
+    }
+
+    input[type="date"]::-webkit-datetime-edit-year-field {
+        position: absolute !important;
+
+        padding: 2px;
+        color: #000;
+        left: 70px;
+
+    }
+
+    input[type="date"]::-webkit-datetime-edit-month-field {
+        position: absolute !important;
+
+        padding: 2px;
+        color: #000;
+        left: 33px;
+        content: "-";
+    }
+
+    input[type="date"]::-webkit-datetime-edit-day-field {
+        position: absolute !important;
+        color: #000;
+        padding: 2px;
+        left: 4px;
+
+    }
+
+    .subheadercls {
+        font-size: 15px;
+        position: relative;
+        top: 26px;
+        left: 0;
+        font-weight: 500;
+        color: #607D8B;
+    }
+</style>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">View All Customers</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a>
+                                <i class="fas fa-home" (click)="homeClick()"></i>View Customers</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">View All Customers</a>
+                        </li>
+                        <!-- <li class="breadcrumb-item bcrumb-2">Customer Details</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Basic Examples -->
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card" style="border: solid #bbb 0.5px;height: 260px;">
+                    <div class="body">
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-line">
+                                    <p class="fieldHeaders">
+                                        <label style="font-weight: bold;" class="required">Select Project:</label>
+                                    </p>
+                                    <div class="center" style="position: relative;top: -10px;">
+                                        <select style="width:100%;" class="form-group" id="projectID" single>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label style="font-weight: bold;">Block Name:</label>
+
+                                    <angular2-multiselect [data]="controller_blocks_list" [settings]="singledd2"
+                                        (onSelect)="block_selectedSIDs($event);"
+                                        (onSelectAll)="block_onSelectAll($event)"
+                                        (onDeSelect)="block_onItemDeSelect($event)"
+                                        (onDeSelectAll)="block_onDeSelectAll($event)" [(ngModel)]="block_list_name">
+                                        <c-badge>
+                                            <ng-template let-item="item">
+                                                <label>{{ item.name }}</label>
+                                            </ng-template>
+                                        </c-badge>
+                                        <c-item>
+                                            <ng-template let-item="item">
+                                                <label>{{ item.name }}</label>
+                                            </ng-template>
+                                        </c-item>
+                                    </angular2-multiselect>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label style="font-weight: bold;">Sale Owner:</label>
+                                    <angular2-multiselect [data]="controller_saleowner_list" [settings]="singledd5"
+                                        (onSelect)="salesowner_selectedSIDs($event);"
+                                        (onSelectAll)="salesowner_onSelectAll($event)"
+                                        (onDeSelect)="salesowner_onItemDeSelect($event)"
+                                        (onDeSelectAll)="salesowner_onDeSelectAll($event)"
+                                        [(ngModel)]="salesowner_list_name">
+                                        <c-badge>
+                                            <ng-template let-item="item">
+                                                <label>{{ item.flatSaleOwner }}</label>
+                                            </ng-template>
+                                        </c-badge>
+                                        <c-item>
+                                            <ng-template let-item="item">
+                                                <label>{{ item.flatSaleOwner }}</label>
+                                            </ng-template>
+                                        </c-item>
+                                    </angular2-multiselect>
+                                </div>
+                            </div>
+
+                            
+
+                            
+                        </div>
+
+                        <div class="row" style="position: relative;top: -43px;">
+                            <div class="col-sm-4">
+                                <div class="form-line">
+                                    <p class="fieldHeaders">
+                                        <label style="font-weight: bold;">Select Status:</label>
+                                    </p>
+                                    <div class="center">
+                                        <select style="width:100%;" class="form-group" id="statusID" single>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-line">
+                                    <label style="position: relative;top: 10px;"><b>Booking From Date:</b></label>
+                                    <div class="center" style="position: relative;top: 9px;">
+
+                                        <span class="material-icons"
+                                            style="position: absolute;right: 19px;top: 7px;font-size: 20px;z-index: 1;"
+                                            (click)="startdatefun()">cancel
+                                        </span>
+
+                                        <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                                        <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+
+                                        <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                                            style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                                            class=" form-control" id="fromDate" [max]="getToday()">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-line">
+                                    <label style="position: relative;top: 10px;"><b>Booking To Date:</b></label>
+                                    <div class="center" style="position: relative;top: 9px;">
+                                        <span class="material-icons"
+                                            style="position: absolute;right: 19px;top: 7px;font-size: 20px;z-index: 1;"
+                                            (click)="endtimefun()">cancel
+                                        </span>
+
+                                        <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+                                        <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+                                        <input type="date" placeholder="Select Date"
+                                            style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                                            class=" form-control" id="toDate" [max]="getToday()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix" style="position: relative;top: -54px;">
+                            <div class="col-sm-3" style="margin-top:12px"></div>
+                            <div id="blocksID" class="col-sm-3" style="margin-top:12px">
+
+                                <div style="text-align:center;">
+                                    <button style="width: 235px!important;" type="button" class="btn-hover color-1"
+                                        (click)="viewcustomerData()">View All Customers Data</button>
+                                </div>
+
+
+                            </div>
+                            <div id="blocksID" class="col-sm-3" style="margin-top:12px">
+
+                                <div style="text-align:center;">
+                                    <button style="width: 235px!important;" type="button" class="btn-hover color-1"
+                                        (click)="downloadDetails()" *ngIf="buttonVisible">Download Flat and Payment
+                                        details</button>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-3" style="margin-top:12px"></div>
+                        </div>
+
+
+                      
+
+
+                    </div>
+                </div>
+
+
+                <div class="card" *ngIf="closingBalanceData.length == 0 && tabledata.length == 0">
+                    <div class="card-body">
+                        <div>
+                            <p class="nodata">No data found</p>
+                        </div>
+                    </div>
+                </div>
+
+
+             
+
+
+                <div class="card" *ngIf="closingBalanceData?.length" id="downloaddiv" style="display:none;">
+                    <div class="card-body">
+
+                        <div *ngIf="closingBalanceData?.length || tabledata?.length"
+                        style="position: relative;top: -40px;">
+                        <div>
+                            <div style="background-color: transparent;border:none">
+                                <h4 class="subheadercls"><b>Note:</b> We are showing active flats by default
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="table-responsive"  >
+                            <table id="tabledownload" class="table table-bordered" style="width:100%">
+                                <thead>
+                                    <tr class="center">
+                                        <th>S.No</th>
+                                        <th>Project</th>
+                                        <th>Wing / Block</th>
+                                        <th>Flat No</th>
+                                        <th>Customer Name</th>
+
+                                        <th>Pan No</th>
+                                        <th> Aadhar Number</th>
+                                        <th>Status</th>
+                                        <th>Owner Name</th>
+
+                                        <th>Booking Date</th>
+                                        <th>Agreement Date</th>
+                                        <th>Handing Over Date</th>
+                                        <th>Sale Deed Date</th>
+                                        <th>Registration Date</th>
+                                        <th>SBUA</th>
+                                        <th>Basic Flat Cost</th>
+                                        <th>Amenities Flat Cost</th>
+                                        <th>Total Cost</th>
+                                        <th>Total Amount Paid</th>
+                                        <th>Total Pending Amount As Per Work Completion</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of closingBalanceData; let i = index;" class="customersList">
+                                        <td class="center">{{i + 1}}</td>
+                                        <td class="center">{{item.siteName}}</td>
+                                        <td class="center">{{item.blockName}}</td>
+                                        <td class="center">{{item.flatNo}}</td>
+                                        <td class="center">{{item.custName}}</td>
+
+                                        <td class="center">{{item.pancard}}</td>
+                                        <td class="center">{{item.aadharNumber}}</td>
+                                        <td class="center">{{item.statusName}}</td>
+
+                                        <th class="center"> {{item.flatSaleOwner}} </th>
+
+                                        <td class="center">
+                                            <!-- <span *ngIf="item.bookingDate != null" style="display: none;">{{item.bookingDate}}</span> -->
+                                            <span *ngIf="item.bookingDate != null">{{item.bookingDate }}</span>
+                                            <span *ngIf="item.bookingDate == null||item.bookingDate == ''"> - </span>
+
+                                        </td>
+                                        <td class="center">
+
+                                            <!-- <span *ngIf="item.agreementDate != null" style="display: none;">{{item.agreementDate}}</span> -->
+                                            <span *ngIf="item.agreementDate != null">{{item.agreementDate}}</span>
+                                            <span *ngIf="item.agreementDate == null ||item.agreementDate == ''"> -
+                                            </span>
+
+                                        </td>
+
+                                        <td class="center">
+
+                                            <!-- <span *ngIf="item.handingOverDate != null" style="display: none;">{{item.handingOverDate}}</span> -->
+                                            <span *ngIf="item.handingOverDate != null">{{item.handingOverDate}}</span>
+                                            <span *ngIf="item.handingOverDate == null ||item.handingOverDate == ''"> -
+                                            </span>
+
+                                        </td>
+                                        <td class="center">
+
+                                            <!-- <span *ngIf="item.saleDeedDate != null" style="display: none;">{{item.saleDeedDate}}</span> -->
+                                            <span *ngIf="item.saleDeedDate != null">{{item.saleDeedDate}}</span>
+                                            <span *ngIf="item.saleDeedDate == null ||item.saleDeedDate == ''"> - </span>
+
+
+                                        </td>
+                                        <td class="center">
+                                            <!--                                             
+                                            <span *ngIf="item.registrationDate != null" style="display: none;">{{item.registrationDate}}</span> -->
+                                            <span *ngIf="item.registrationDate != null">{{item.registrationDate}}</span>
+                                            <span *ngIf="item.registrationDate == null ||item.registrationDate == ''"> -
+                                            </span>
+
+
+
+                                        </td>
+                                        <td>{{item.sbua}}</td>
+                                        <td class="center">{{item.basicFlatCost.toLocaleString('en-IN')}}</td>
+                                        <td class="center">{{item.amenitiesFlatCost.toLocaleString('en-IN')}}</td>
+                                        <td class="center"> <span
+                                                *ngIf="item.totalAgreementCost != null">{{item.totalAgreementCost.toLocaleString('en-IN')}}
+                                            </span>
+                                        </td>
+                                        <td class="center">{{item.totalAmountPaid.toLocaleString('en-IN')}}</td>
+                                        <td class="center">
+                                            {{item.TotalPendingAmountAsPerWorkCompletion.toLocaleString('en-IN')}}</td>
+
+
+
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card" *ngIf="tabledata?.length" id="prevdiv" style="display:none;">
+                    <div class="card-body">
+
+                        <div *ngIf="closingBalanceData?.length || tabledata?.length"
+                        style="position: relative;top: -27px;">
+                        <div>
+                            <div style="background-color: transparent;border:none">
+                                <h4 class="subheadercls"><b>Note:</b> We are showing active flats by default
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="table-responsive"  >
+                            <table id="tableExport" class="table table-bordered" style="width:100%">
+                                <thead>
+                                    <tr class="center">
+                                        <th>S.No</th>
+                                        <th>Project</th>
+                                        <th>Wing / Block</th>
+                                        <th>Unit</th>
+                                        <th>Applicant Name</th>
+                                        <th *ngIf="columnVisible">Pan No</th>
+                                        <th *ngIf="columnVisible"> Aadhar Number</th>
+                                        <th>Status</th>
+                                        <th>Owner Name</th>
+                                        <th> Booking Date </th>
+                                        <th>Agreement Date</th>
+                                        <th>Handing Over Date</th>
+                                        <th>Registration Date</th>
+                                        <th *ngIf="columnVisible"> Total cost(Incl GST)</th>
+                                        <th *ngIf="columnVisible">Email</th>
+                                        <th *ngIf="columnVisible">Mobile Number</th>
+                                        <th>SBUA</th>
+                                        <th>BHKS</th>
+                                        <th>Lead Id</th>
+                                        <th>App Status</th>
+                                        <th>Last Login Time </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of tabledata; let i = index;"
+                                        (click)="getApproveCustomer(item)" class="customersList">
+                                        <td class="center">{{i + 1}}</td>
+                                        <td class="center">{{item.siteName}}</td>
+                                        <td class="center">{{item.blockName}}</td>
+                                        <td class="center">{{item.flatNo}}</td>
+                                        <td class="center">{{item.customerName}}</td>
+
+                                        <td class="center" *ngIf="columnVisible">{{item.pancard}}</td>
+                                        <td class="center" *ngIf="columnVisible">{{item.aadharNumber}}</td>
+                                        <td class="center">{{item.statusName}}</td>
+                                        <th class="center"> {{item.flatSaleOwner}} </th>
+                                        <td class="center">
+
+                                            <!-- <span *ngIf="item.bookingDate != null" style="display: none;">{{item.bookingDate}}</span> -->
+                                            <span *ngIf="item.bookingDate != null">{{item.bookingDate| date :
+                                                'dd-MM-yyyy'}}</span>
+                                            <span *ngIf="item.bookingDate == null"> - </span>
+
+
+
+                                        </td>
+                                        <td class="center">
+
+                                            <!-- <span *ngIf="item.agreementDate != null" style="display: none;">{{item.agreementDate}}</span> -->
+                                            <span *ngIf="item.agreementDate != null">{{item.agreementDate| date :
+                                                'dd-MM-yyyy'}}</span>
+                                            <span *ngIf="item.agreementDate == null"> - </span>
+
+                                        </td>
+                                        <td class="center">
+
+                                            <!-- <span *ngIf="item.handingOverDate != null" style="display: none;">{{item.handingOverDate}}</span> -->
+                                            <span *ngIf="item.handingOverDate != null">{{item.handingOverDate| date :
+                                                'dd-MM-yyyy'}}</span>
+                                            <span *ngIf="item.handingOverDate == null"> - </span>
+
+                                        </td>
+
+                                        <td class="center">
+
+                                            <!-- <span *ngIf="item.registrationDate != null" style="display: none;">{{item.registrationDate}}</span> -->
+                                            <span *ngIf="item.registrationDate != null">{{item.registrationDate| date :
+                                                'dd-MM-yyyy'}}</span>
+                                            <span *ngIf="item.registrationDate == null"> - </span>
+
+                                        </td>
+
+                                        <td class="center" *ngIf="columnVisible"> <span
+                                                *ngIf="item.totalAgreementCost != null">{{item.totalAgreementCost.toLocaleString('en-IN')}}
+                                            </span>
+                                        </td>
+
+                                        <td class="center" *ngIf="columnVisible">{{item.customerEmail}}</td>
+                                        <td class="center" *ngIf="columnVisible">{{item.contactNumber}}</td>
+                                        <td class="center">{{item.sbua}}</td>
+                                        <td class="center">{{item.bhk}}</td>
+                                        <td class="center">{{item.salesTeamLeadId}}</td>
+                                        <td class="center">{{item.appStatus}}</td>
+                                        <td class="center">
+
+                                            <!-- <span *ngIf="item.lastLoginTime != null" style="display: none;">{{item.lastLoginTime}}</span> -->
+                                            <span *ngIf="item.lastLoginTime != null">{{item.lastLoginTime| date
+                                                :'dd-MM-yyyy'}}</span>
+                                            <span *ngIf="item.lastLoginTime == null"> - </span>
+
+
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- #END# Basic Examples -->
+
+    </div>
+</section>

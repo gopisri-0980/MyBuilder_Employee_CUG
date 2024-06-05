@@ -1,0 +1,378 @@
+<style>
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  #selectflats {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 5px;
+  }
+
+  .pclose {
+    position: relative;
+    top: 5px;
+    font-size: 12px;
+    background: #000;
+    padding: 6px;
+    color: #FFF;
+    font-family: 'Poppins';
+    font-weight: 100;
+    text-shadow: none;
+    border-radius: 13px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Demand Note</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active">Generate Demand Note</li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+
+            <div class="form-line">
+              <p>
+                <b>Select Project*:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="projectID" single>
+                <option value="select">--Select--</option>
+
+              </select>
+            </div>
+
+          </div>
+          <div class="col-sm-3"></div>
+        </div><br>
+
+
+       
+          <div  class="row clearfix" id="blockslinksid" style="display: none;" >
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <b>Select Payment Schedule Name*:</b>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="blocktypeID" single >
+                    <option value="select">--Select--</option>
+                    
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3"></div>
+          <br>
+          <!-- <div class="col-sm-3" *ngFor="let item of Blocklinks;let i=index;"
+            (click)="blocksClickEvent(item.mileStoneAliasName+'$'+item.finMilestoneClassifidesId+'$'+item.siteId+'$'+item.siteName)"
+            style="margin-top:10px;height: 50px; overflow-y: auto;overscroll-behavior-y: none">
+
+            <a [class.selectedname]="item.mileStoneAliasName == milestoneAlias" class="anchor" href="#"
+              style="text-decoration: underline; pointer-events: none;">{{item.mileStoneAliasName}}</a><br><br>
+          </div> -->
+        </div>
+
+         <!-- <div id="milestonediv" class="row clearfix" style="display:none" >
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>*Select Milestone Type:</b>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="milestonetypeID" single disabled>
+                  <option value="select">--Select--</option>
+                  <option value=181>Regular</option>
+                  <option value=182>Customized</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div><br>  -->
+        <div id="interestDiv" style="margin-top:20px"><input type="checkbox" value=""
+            style="width:20px;height:20px;float:left" class="checlist1">
+          <div style="float:left;margin-left:2px;"> &nbsp; Interest</div>
+        </div>
+
+        <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-top:60px"
+          id="milestone_blocks_tables">
+          <ul>
+            <li>
+
+              <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+                <thead>
+                  <tr>
+                    <!-- <th class="center">S.NO</th>  -->
+                    <th class="center">Action</th>
+                    <th class="center">Complete Date</th>
+                    <th class="center">Milestone</th>
+                    <th class="center">Due Amount %</th>
+                    <th class="center">Demand Note Date</th>
+                    <!-- <th class="center">Demand Note Date</th>        -->
+                    <th class="center">Due Date</th>
+                    <th class="center">Status</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of milestonedemand_details; let i=index">
+                    <!-- <td class="center">{{i+1}}</td> -->
+                    <td class="center"><input type="checkbox" id="{{'tablerowdata'+(i+1)}}"
+                        value="{{item.mileStoneNo+'#'+item.percentagesId+'#'+item.finMilestoneClassifidesId+'#'+item.projectMilestoneId+'#'+item.milestoneDate+'#'+item.milestoneName+'#'+item.mileStonePercentage+'#'+item.mileStoneDueDate+'#'+item.statusName}}"
+                        style="width:20px;height:20px;" class="checlist"></td>
+                    <td class="center"><input type="date" id="{{'completedateselection'+(i+1)}}"
+                        value="{{item.milestoneDate | date:'yyyy-MM-dd'}}" class="completedate"></td>
+                    <td class="center">{{item.milestoneName}}</td>
+                    <td class="center">{{item.mileStonePercentage}}</td>
+                    <td class="center"><input type="date" class="demandnotedateclass" id="{{'demand_note_date'+(i+1)}}"
+                        value="{{item.masterDemandNotedate | date:'yyyy-MM-dd'}}" class="completedate"></td>
+                    <!-- <td class="center" ><input type="text" id="{{'demandnotedateselection'+(i+1)}}" value=""></td> -->
+                    <td class="center"><input type="date" id="{{'duedateselection'+(i+1)}}"
+                        value="{{item.mileStoneDueDate | date:'yyyy-MM-dd'}}" class="duedate"></td>
+                    <td class="center">{{item.statusName}}</td>
+
+                  </tr>
+
+
+                </tbody>
+              </table>
+            </li>
+          </ul>
+        </div><br>
+        <!-- <div class="row clearfix" id="demandnotedatediv" style="display:none;">
+          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+            <label for="leave_start_date">Demand Note Date</label>
+          </div> -->
+        <!-- <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+            <div class="form-group">
+              <div class="form-line">
+                <input type="text" class="datepicker form-control" placeholder="Please choose Start date"
+                  id="demand_note_date">
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="row clearfix">
+
+          <div class="col-sm-2" style="margin-top:20px" id="allblockdiv">
+            <div id="" style="margin-top:20px"><input type="checkbox" value="" style="width:20px;height:20px;float:left"
+                id="all_blocksId">
+              <div style="float:left;margin-left:2px;">All Blocks</div>
+            </div>
+          </div>
+
+          <div class="col-sm-2" id="blockwisediv" style="margin-top:20px">
+            <div id="" style="margin-top:20px"><input type="checkbox" value="" style="width:20px;height:20px;float:left"
+                id="Blockwise_Id">
+              <div style="float:left;margin-left:2px;">Block Wise</div>
+            </div>
+          </div>
+
+          <div class="col-sm-2" id="Faltwisediv" style="margin-top:20px">
+            <div id="" style="margin-top:20px"><input type="checkbox" value="" style="width:20px;height:20px;float:left" [(ngModel)]="selectAllFlatsCheckbox"
+                id="flatwise_Id"   (click)=" openFlatWisePopup()">
+              <div style="float:left;margin-left:2px;">Flat Wise</div>
+            </div>
+
+
+            <ng-template #content_title let-modal>
+              <div class="modal-header" style="background: #03a9f4; color: #FFF;border-top-left-radius: 15px;
+  border-top-right-radius: 15px;">
+                <h4 class="modal-title" id="modal-basic-title"> <b>Flats:</b>
+                </h4>
+                <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click') ;resetCheckboxSelection()">
+                  <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+                </button> -->
+                <button type="button" class="close" aria-label="Close"
+                (click)="modal.dismiss('Cross click');resetCheckboxSelection()">
+                <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+              </button>
+              </div>
+              <div class="modal-body" style="border: 1px solid #ede3e3;">
+                <form>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <label style="color: #03a9f4;">
+                          <input type="checkbox" name="allTrades" [value]="trade" id="selectflats"
+                            (change)="selectAllFlats($event)" [checked]="viewselectedFlats"> Select All
+                          Flats
+                        </label>
+                      </div>
+                    </div>
+                    <hr style="position: relative;top: -15px;">
+                    <ng-container>
+                      <div class="row">
+                        <div class="col-sm-4" *ngFor="let trd of flatwiseselect; let i = index">
+                          <label>
+                            <input type="checkbox" id="selectflats" name="trades" [checked]="trd.checked"
+                              (change)="changeTradesByCategoryflat($event , i , trd)">
+                            &nbsp;&nbsp;{{trd.flatNo}}
+                          </label>&nbsp;
+                        </div>
+                      </div>
+
+                    </ng-container>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-info" style="width:80px; "
+                  (click)="Selectflatsfun()">Submit</button>
+              </div>
+            </ng-template>
+          </div>
+
+
+          <div class="col-sm-2" id="sale_owner_div" style="margin-top:20px">
+            <div style="margin-top:20px"><input type="checkbox" value="" style="width:20px;height:20px;float:left"
+                id="sale_owner">
+              <div style="float:left;margin-left:2px;">Sale owner</div>
+            </div>
+          </div>
+          <div class="col-sm-2" id="scheme_wise_div" style="margin-top:20px">
+            <div style="margin-top:20px"><input type="checkbox" value="" style="width:20px;height:20px;float:left"
+                id="scheme_wise">
+              <div style="float:left;margin-left:2px;">Scheme Wise</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row clearfix">
+
+          <div class="col-sm-4" style="margin-top:20px">
+
+            <div class="form-line" id="milestone_blocks">
+              <p>
+                <b>Blocks:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="BlockId" multiple>
+
+
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row" *ngIf="hideme_name">
+          <div class="col-sm-4">
+            <form [formGroup]="userForm">
+              <div class="form-group">
+                <label>Flat sale owner :</label>
+                <angular2-multiselect [data]="employee_list" [settings]="singledd1" [(ngModel)]="employee_name"
+                  (onSelect)="emp_selectedSIDs($event);" (onSelectAll)="emp_onSelectAll($event)"
+                  (onDeSelect)="emp_onItemDeSelect($event)" (onDeSelectAll)="emp_onDeSelectAll($event)"
+                  formControlName="project_wise_form">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.flatSaleOwner }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.flatSaleOwner }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </form>
+
+          </div>
+        </div>
+        <div class="row" *ngIf="hideme_name_scheme_wise">
+          <div class="col-sm-4">
+            <form [formGroup]="userForm_scheme">
+              <div class="form-group">
+                <label>Flat scheme wise :</label>
+                <angular2-multiselect [data]="scheme_list" [settings]="singledd2" [(ngModel)]="scheme_name"
+                  (onSelect)="scheme_selectedSIDs($event);" (onSelectAll)="scheme_onSelectAll($event)"
+                  (onDeSelect)="scheme_onItemDeSelect($event)" (onDeSelectAll)="scheme_onDeSelectAll($event)"
+                  formControlName="project_wise_form2">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.finSchemeName }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.finSchemeName }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </form>
+
+          </div>
+        </div>
+        <!-- <div class="row clearfix">
+          <div class="col-sm-4" id="milestone_flat" style="margin-top:20px">
+
+            <div class="form-line">
+              <p>
+                <b>Flats:</b>
+              </p>
+              <select style="width:100%;" class="form-group states" id="FlatId" multiple>
+
+
+              </select>
+            </div>
+
+          </div>
+
+        </div> -->
+
+
+
+        <div style="text-align:center;">
+          <button type="button" style="width:200px;" class="btn-hover color-1" (click)="send_to_Customer()">Generate
+            Demand Note</button>
+          <button type="button" style="width:200px;" class="btn-hover color-1" (click)="Save()">Preview & Save</button>
+        </div>
+
+
+        <br><br>
+        <br><br>
+
+        <br><br>
+        <br><br>
+
+
+        <br><br>
+        <br><br>
+
+      </div>
+    </div>
+  </div>
+
+</section>

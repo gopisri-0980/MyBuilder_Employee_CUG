@@ -1,0 +1,141 @@
+<head>
+  <style>
+    .documentnamecls {
+      white-space: nowrap;
+      width: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+    }
+
+
+  </style>
+</head>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">NOC Report</h4>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-1">
+              <a >
+                <i class="fas fa-home" style="cursor:pointer" (click)="dashboardfun()"></i> NOC Report</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="card">
+        <div class="card-body">
+          <div class="row clearfix">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="font-weight: bold;">Select Project:</label>
+                </p>
+                <div class="center" style="position: relative; top: -11px;">
+                  <select style="width:100%;" class="form-group" id="projectID" single>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div id="flatsID" class="col-sm-4">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="font-weight: bold;">Select Flat:</label>
+                </p>
+                <div class="center" style="position: relative;top: -10px;">
+                  <select style="width:100%;" class="form-group" id="flatSelection">
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+            <div id="flatsID" class="col-sm-4">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="font-weight: bold;">Show:</label>
+                </p>
+                <div class="center" style="position: relative;top: -10px;">
+                  <select style="width:100%;" class="form-group" id="showSelection">
+                    <option value="select">--Select--</option>
+                    <option value="All">ALL</option>
+                    <option value="NOCGeneratedFlats">NOC Generated Flats</option>
+                    <option value="NOCPendingFlats">NOC Pending Flats</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div style="width:100%;text-align: center;"> <button type="button" style="margin-top: 1px;position: relative;
+            top: 16px;" class="btn-hover color-1" (click)="searchFun()">Search</button></div>
+        </div>
+      </div>
+
+
+
+      <div class="card" *ngIf="controller?.length">
+        <div class="card-body">
+
+          <div class="table-responsive">
+            <table id="tableExport" class="table table-bordered table-sm">
+              <thead>
+                <tr class="center">
+                  <th>S.No</th>
+                  <th>Project Name</th>
+                  <th>Flat No</th>
+                  <th>Customer Name</th>
+                  <th>Is Noc generated</th>
+                  <th>Documents</th>
+                </tr>
+              </thead>
+              <tbody>
+
+
+
+                <tr *ngFor="let item of controller; let i = index;">
+                  <td style="text-align: center;">{{i + 1}}</td>
+                  <td style="text-align: center;">{{item.siteName}}</td>
+                  <td style="text-align: center;">{{item.flatName}}</td>
+                  <td style="text-align: center;">{{item.custName}}</td>
+                  <td style="text-align: center;">{{item.isNocGenerated}}</td>
+                  <td style="text-align: center;">
+                    <div style="display: inline-flex;padding: 10px;position: relative;
+                    top: -11px;margin-top: 28px;" *ngFor="let p of item.nocDocUrls">
+                      <img src="assets/images/pdficon.png" style="width:20px;height: 20px;"
+                        (click)="attachmentlink(p.nocURLLocation)"> <br>
+                      <span class="documentnamecls" style="position: relative;top: 28px;
+                      left: -22px;"  ngbPopover= {{p.docName}}>{{p.docName}}
+                      
+                      </span>
+
+                  
+                    </div>
+
+
+                  </td>
+
+
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>

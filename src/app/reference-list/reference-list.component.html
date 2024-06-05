@@ -1,0 +1,113 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Reference List</h4>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">View Reference Details</a>
+            </li> -->
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>References</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>View Reference List</a>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card heightcls" >
+      <div class="card-body">
+        <span *ngFor="let data of viewData">
+          <div class="row">
+            <div class="col-md-2 text-center">
+              <img *ngIf="data.customerImg" alt="Generic placeholder image" class="m-r-15 imgStyles" alt="Customer Image" src="{{data.customerImg}}"
+                width="60">
+               <img *ngIf="!data.customerImg" alt="Generic placeholder image" class="m-r-15 imgStyles" alt="Customer Image" src="assets/images/customerimage.png"
+                width="60">
+                <p>{{data.customerName}}</p>
+            </div>
+            <div class="col-md-7">
+              <div class="row" style="margin-top: 2%;">
+                <div class="col-md-6 text-center">
+                  <div class="row">
+                    <div class="col-md-6 padding1per datalable textalign">
+                        Reference Id
+                    </div>
+                    <div class="col-md-6 padding1per textalign font-16">
+                      {{data.refrenceId}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 text-center">
+                  <div class="row">
+                    <div class="col-md-6 padding1per datalable textalign">
+                        Referee Name
+                    </div>
+                    <div class="col-md-6 padding1per textalign font-16">
+                      {{data.referrerName}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 text-center">
+                  <div class="row">
+                    <div class="col-md-6 padding1per datalable textalign">
+                      Customer Name
+                    </div>
+                    <div class="col-md-6 padding1per textalign font-16">
+                      {{data.customerName}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 text-center">
+                  <div class="row">
+                    <div class="col-md-6 padding1per datalable textalign">
+                      Customer Flat No
+                    </div>
+                    <div class="col-md-6 padding1per textalign font-16">
+                      <!-- {{data.customerFlatNo}} -->
+                      {{data.customerSiteShortName+"-"+data.customerFlatNo}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 text-center">
+                  <div class="row">
+                    <div class="col-md-6 padding1per datalable textalign">
+                      Employee Name
+                    </div>
+                    <div class="col-md-6 padding1per textalign font-16">
+                      <!-- {{data.customerFlatNo}} -->
+                      {{data.employeeName}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 text-center">
+              <!-- <img *ngIf="data.referrerImg" alt="Generic placeholder image" class="m-r-15 imgStyles" alt="user_image" [src]="data.referrerImg"
+                width="60"> -->
+                <img alt="Generic placeholder image" class="m-r-15 imgStyles" alt="user_image" src="assets/images/customerimage.png"
+                width="60">
+                <p>{{data.referrerName}}</p>
+            </div>
+            <div class="col-md-1 textalign searchdata" (click)="viewReferenceData(data)">
+              <i class="fa fa-arrow-right forwordIcon" style="margin-top:45%;"></i>
+            </div>
+          </div>
+          <hr>
+        </span>
+        <p class="text-center nodata" *ngIf="viewData == 0">No Data Available</p>
+      </div>
+    </div>
+  </div>
+</section>

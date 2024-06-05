@@ -1,0 +1,230 @@
+<style>
+  .sas {
+    white-space: pre-wrap;
+    word-break: break-word
+  }
+
+  .editcls {
+    position: relative;
+    left: -4px;
+    border-radius: 13px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    padding: 4px;
+  }
+
+  .deletecls {
+    position: relative;
+    left: 5px;
+    border-radius: 13px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    padding: 4px;
+  }
+
+  .nodata {
+    position: relative;
+    font-size: 18px;
+    color: #607d8b;
+    /* font-weight: 600; */
+    font-family: 'Poppins';
+    left: 39px;
+    top: 5px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View  Bank Account Details </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer" (click)="homeClick()"></i> View  Bank Account Details 
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row clearfix" style="position: relative;top: -10px;">
+        <div class="col-sm-3">
+          <div class="form-line">
+            <label style="font-size: 13px!important;" class="required"><b>Select Project:</b></label>
+            <div class="center">
+              <angular2-multiselect [data]="controller_sites_list" [settings]="singledd1"
+                (onSelect)="sites_selectedSIDs($event);" (onDeSelect)="sites_onItemDeSelect($event)"
+                [(ngModel)]="project_list_name">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.name }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.name }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-line">
+            <label style="font-size: 13px!important;"><b>Select Setoff Type:</b></label>
+            <div class="center">
+              <angular2-multiselect [data]="controller_payment_setoff_list" [settings]="singledd2"
+                (onSelect)="setoff_selectedSIDs($event);" (onDeSelect)="setoff_onItemDeSelect($event)"
+                [(ngModel)]="setoff_list_name">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.key }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.key }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-3">
+          <div class="form-line">
+            <label style="font-size: 13px!important;"><b>Select Bank:</b></label>
+            <div class="center">
+              <angular2-multiselect [data]="controller_bank_list" [settings]="singledd3"
+                (onSelect)="bank_selectedSIDs($event);" (onDeSelect)="bank_onItemDeSelect($event)"
+                [(ngModel)]="bank_list_name">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.bankName }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.bankName }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-3">
+          <div class="form-line">
+            <label style="font-size: 13px!important;"><b>Select Owner Type:</b></label>
+            <div class="center">
+              <angular2-multiselect [data]="controller_owner_type_list" [settings]="singledd4"
+                (onSelect)="owner_selectedSIDs($event);" (onDeSelect)="owner_onItemDeSelect($event)"
+                [(ngModel)]="owner_list_name">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.flatSaleOwner }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.flatSaleOwner }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" style="position: relative;top: 0px;">
+        <div class="col-sm-3">
+          <label style="font-weight: bold;font-size: 13px!important;"> Search By Account Holder Name:</label>
+          <div class="form-line">
+            <input type="text" style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;"
+              class=" form-control" placeholder="Search" id="search_owner">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div style="width: 100%;text-align: right;position: relative; top: 31px;left: 102px;">
+            <button type="submit" class="btn-hover color-1" (click)="submitfunction()">Submit</button>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="row" *ngIf="table_controller?.length" style="position: relative;top: -14px;">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="body">
+          <div class="table-responsive">
+            <table id="tableExport" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="center">SNo.</th>
+                  <th class="center">Project Name</th>
+                  <th class="center">Set Off Type</th>
+                  <th class="center">Name</th>
+                  <th class="center">Account Number</th>
+                  <th class="center">Bank Name</th>
+                  <th class="center">Branch Name</th>
+                  <th class="center">IFSC Code</th>
+                  <th class="center">Sale Owner Type</th>
+                  <th class="center">Address</th>
+                  <th class="center">Action</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of table_controller; let i=index;" class="ticketList">
+                  <td class="center sas" (click)="edit_function(data)">{{i+1}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.siteName}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.setofftype}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.holder}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.accountno}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.bankName}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.branch}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.ifsc}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.saleOwner}}</td>
+                  <td class="center sas" (click)="edit_function(data)">{{data.adress}}</td>
+                  <td class="center sas">
+                    <!-- <span class="editcls" ><i class="fa fa-edit" style="color: #673ab7;font-size: 13px;"></i></span> -->
+                    <span class="deletecls" (click)="delete_function(data)"> <i class="fa fa-trash" aria-hidden="true"
+                        style="color: #e3165b;font-size: 13px;"></i></span>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="table_controller == null">
+    <div class="card-body">
+      <div>
+        <p class="nodata">No Records Found</p>
+      </div>
+    </div>
+  </div>
+
+</section>

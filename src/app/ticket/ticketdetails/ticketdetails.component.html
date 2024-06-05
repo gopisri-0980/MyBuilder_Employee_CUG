@@ -1,0 +1,1067 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<style>
+  .backbutton {
+    position: absolute;
+    right: 24px;
+    top: 98px;
+    width: auto;
+    color: #FFF;
+    background: #F44336;
+    border: none;
+  }
+  .my-class1 {
+        color: blue !important;
+    }
+
+    .my-class2 {
+        color: gray !important;
+    }
+  .marksofcomplaint {
+    position: relative;
+    right: 0;
+    top: -12px;
+  }
+
+  .loadercls {
+    position: relative;
+    left: 8px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+  }
+
+  .notecls {
+    width: 96%;
+    margin-left: 2%;
+    font-size: 14px;
+    font-family: 'Poppins';
+    color: rgb(0 0 0 / 87%);
+    font-weight:600;
+  }
+
+  table {
+      width: 100% !important;
+      overflow-x: auto;
+
+    }
+
+    th,
+    td {
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+      width: 134px!important;
+      position: relative;
+      font-size: 12px;
+      line-height: 13px;
+      top: -2px;
+    }
+
+
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <span *ngIf=" this.binding_parentpage == 'View All Tickets' || this.binding_parentpage == 'Ticket Graph'">
+                <h4 class="page-title">
+                  <i style="font-size:24px; cursor: pointer; padding: 4px 16px 1px 1px;" (click)="backToList()"
+                    class="fa fa-arrow-left"></i>
+                  Ticket Details
+                </h4>
+              </span>
+              <span *ngIf=" this.binding_parentpage != 'View All Tickets' && this.binding_parentpage != 'Ticket Graph'">
+                <h4 class="page-title">
+                  Ticket Details</h4>
+              </span>
+
+            </li>
+
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i> Ticketing</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'view_my_tickets'"
+              (click)="view_my_tickets()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'viewtickets'"
+              (click)="viewalltickets()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'viewtickets_graph'"
+              (click)="viewalltickets_graph()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'changeticketowner'"
+              (click)="changeticketowner()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'view_closed_tickets'"
+              (click)="viewclsedtickts()" routerLink="/view-closed-tickets">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'view_my_complaints'"
+              (click)="viewmycomplaints()" routerLink="/View_My_Complaints">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="this.parent_condition == 'changetickettype'"
+              (click)="changetickettype()">
+              <a href="#" onClick="return false;">{{this.binding_parentpage}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Ticket Details</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div>
+    <button type="button" class="btn btn-info backbutton" (click)="backfunction()"> Back to view closed tickets </button>
+  </div> -->
+
+
+  <mat-paginator [length]="tickettotaldetailsresponse.length" [pageSize]="1" [pageIndex]="pageIndex"
+    (page)="getServerData($event)" style="position: relative;
+    width: 30%;float: right;top: -60px;">
+  </mat-paginator>
+
+
+
+
+
+
+  <div class="row" style="
+  width: 100%;position: relative;top: -66px;">
+    <div class="col-xs-12 col-sm-12 col-lg-8">
+      <!-- <div class="card" >
+        <div class="card-body">
+          <h3>Ticket</h3>
+          <p>{{this.ticketINfomessage}}</p>
+        </div>
+      </div> -->
+
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="card-body">
+              <div class="row clearfix">
+                <div class="col-sm-6">
+                  <h3>Ticket</h3>
+                </div>
+                <div class="col-sm-6"
+                  *ngIf="(changeTicketTypeLink == true) && (ticketTypeChangeRequestID == null || ticketTypeChangeRequestID == 14 || ticketTypeChangeRequestID == 16)">
+                  <h5 style="cursor: pointer; text-align: right;text-decoration: underline;"
+                    (click)="openChangeTicketTypeModal()">Change Ticket Type</h5>
+                </div>
+                <div class="col-sm-6"
+                  *ngIf="(remindAgainLink == true) && (ticketTypeChangeRequestID != null && ticketTypeChangeRequestID == 34)">
+                  <h5 style="cursor: pointer; text-align: right;text-decoration: underline;"
+                    (click)="remindAgainAction()">Remind Again</h5>
+                </div>
+              </div>
+              <p>{{this.ticketINfomessage}}</p>
+            </div>
+
+ 
+            <!-- <div class="marksofcomplaint" *ngIf="deptid == 995 && roleid == 5 && parent_condition != 'view_my_tickets' || deptid == 995 && roleid == 1 && parent_condition != 'view_my_tickets' || deptid == 995 && roleid == 12 && parent_condition != 'view_my_tickets'  || deptid == 994 && roleid == 14 && parent_condition != 'view_my_tickets' || deptid == 994 && roleid == 6 && parent_condition != 'view_my_tickets'  || deptid == 988 && parent_condition != 'view_my_tickets'">
+              <button type="button" id="markascomplaint" class="btn-hover " style="width: 200px;" [disabled]="loading"
+                (click)="marksofcomplaintfun(controllertitle)">
+                <i class="fas fa-user-astronaut" style="font-size: 17px;"></i> &nbsp; {{controllertitle}}
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+              </button>
+            </div> -->
+
+            <div class="col-xs-6 col-sm-6 col-lg-11">
+              <h4>Ticket Replies</h4>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-lg-1">
+              <i style="font-size:24px" class="fa" (click)="getTicketDetails()">&#xf021;</i>
+            </div>
+          </div>
+          <ul class="list-unstyled m-t-40" style="height: 500px; overflow-y: auto;overscroll-behavior-y: none">
+            <div *ngFor="let data of ticketmessageData">
+              <li class="media">
+                <img *ngIf="data.profilepic == null" alt="Generic placeholder image" class="m-r-15" alt="user_image"
+                  src="https://img.icons8.com/bubbles/2x/user.png" width="60">
+                <img *ngIf="data.profilepic != null" alt="Generic placeholder image" class="m-r-15"
+                  src="{{data.profilepic}}" width="60">
+                <div class="media-body" style="float:left">
+                  <h5 class="mt-0 mb-1">{{data.name}}</h5>
+                  <p>{{data.desc}}</p>
+                  <div [innerHTML]="data.message">
+
+                  </div>
+                  <!-- <p><span [innerHTML]="data.message"></span>&nbsp;&nbsp;
+                  </p> -->
+                  <span class="pull-right">{{data.commentsDate|date : 'EEEE, MMMM d, y h:mm a'}}&nbsp;&nbsp;&nbsp;<span
+                    [ngClass]="(data.viewStatus=='NOT_VIEWED')?'my-class2':'my-class1'">✔✔</span></span>
+                 
+                </div>
+              </li>
+              <hr>
+            </div>
+          </ul>
+        </div>
+      </div>
+      <!-- CKEditor -->
+      <div class="card" id="hidingclass" *ngIf="parent_condition != 'view_my_complaints' ">
+        <div class="card-body">
+          <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card" style="border:0">
+                <div class="header replayheader">
+                  <h2>
+                    <strong>Write a reply</strong>
+                  </h2>
+
+                </div>
+
+                <p class="notecls"> <span style="color: #f44336;font-weight: 600;">Note :</span> For a
+                  better view of Tables and its data, Please add the tables which
+                  has
+                  borders and also data with shorter table, If longer tables it
+                  is suggested to use attachments.
+                </p>
+
+                <div class="body" id="ckeditorMainDiv">
+                  <div id="CKEditiorDiv">
+                    <textarea id="ckeditor">
+                    </textarea>
+                  </div>
+                  <p class="text-danger ckeditorerrormessage" id="ckeditorError">{{ckeditorError}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- #END# CKEditor -->
+          <div id="hidingclass2">
+            <h4 class="text-left Mrgtop20"><strong>You can upload Images/Files here </strong></h4>
+            <P><strong>Maximum File Upload Size: 25MB</strong></P>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="inputfile">
+            <input type="file" accept=".pdf,.xlsx,.xls,.txt,.docx,.jpeg,.png,.jpg" style="width: 96px;" id="files"
+              multiple (change)="handleFileSelect($event)">
+          </div><br>
+          <div [hidden]="hidepdf">
+            <span class="block" *ngFor="let file of file_name_array; let i= index;">
+              <span style="font-weight: 600; padding: 6px;">{{file}}</span><i (click)="deleteFile(file)"
+                class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
+              <br>
+              <!-- <span>{{file.substr(file.lastIndexOf('/') + 1)| truncate : 10 : "..." }}</span> -->
+            </span>
+          </div>
+
+          <div class="row clearfix" id="fileLinkField">
+            <div class="col-sm-8" style="padding-left: 32px;">
+              <div class="form-line">
+                <label style="font-weight: bold;">Please copy the file link here:</label>
+                <textarea style="border-radius: 4px; height: 52px; padding: 5px;" maxlength="500" id="driveLinkField"
+                  data-length="120"></textarea>
+              </div>
+            </div>
+          </div>
+          <!--IMS CODE <div class="">
+            <div class="">						
+            <div class="floatLeft">
+              <h4 class="text-left Mrgtop20"><strong>You can upload Images/PDF(s) here </strong>(<span style="font-size: 14px;"> Note :  Now you can upload upto 8 file's</span>)</h4>
+              <P><strong>Maximum File Upload Size: 1MB</strong></P>
+              <div class="col-md-12 files_place"><button type="button" id="Add" style="font-size:14px;padding:8px;" class="btn btn-warning btn-xs market_btn_style"  onclick="uploadFile()">Upload Files</button></div> 
+              <div class="col-md-12">
+               <div class="market_file_style">
+                <div class="clearfix"></div>
+               </div>
+              </div>
+              <input type="file" id="file" name="file" style="display:none">
+             </div> 
+            </div>
+           </div> -->
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button *ngIf="reply_ticket" class="btn-hover color-1" type="button" (click)="replyMessage()">Reply</button>
+            <button *ngIf="forward_ticket" class="btn-hover color-1" type="button"
+              (click)="openForwardModal()">Forward</button>
+            <button *ngIf="seekinfo_ticket" class="btn-hover color-1" type="button" (click)="openSeekInfoModal()">Seek
+              Info</button>
+            <button *ngIf="viewrequestInfo" class="btn-hover color-1" type="button" data-toggle="modal"
+              data-target="#viewrequestinfo" (click)="viewRequestInfo()">View Request Info</button>
+            <button *ngIf="close_ticket" class="btn-hover color-1" type="button" data-toggle="modal"
+              data-target="#closeticketmodal" (click)="closeTicket()">Close Ticket</button>
+
+          </div>
+
+        </div>
+      </div>
+      <button *ngIf="change_ticketowner" style="width: 200px;margin-left: 40%;margin-top: -7px;"
+        class="btn-hover color-1" type="button" (click)="ChangeTicketOwner()">Change Ticket Owner</button>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+        <button *ngIf="changeTcktTypeApprove" class="btn-hover color-1" type="button"
+          (click)="openTicketTypeModel()">Approve</button>
+        <button *ngIf="changeTcktTypeReject" class="btn-hover color-1" type="button"
+          (click)="rejectChangeTicketType()">Reject</button>
+      </div>
+    </div>
+
+
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title" style="margin-bottom: -1.25rem;">Ticket Info:</h4>
+        </div>
+        <!-- <div class="card-body bg-light">
+          <div class="row text-center">
+            <div class="col-4 m-t-10 m-b-10">
+              <span class="label label-warning">{{view_ticketdetails_status}}</span>
+            </div>
+            <div class="col-8 m-t-10 m-b-10"> {{ticketInfo_createdDate| date : 'EEEE, MMMM d, y h:mm a'}}</div>
+          </div>
+        </div> -->
+        <div class="card-body">
+          <div class="row clearfix">
+            <div class="col-md-6">
+              <h5 class="m-t-30">Ticket Type</h5><span>{{ticket_type}}</span>
+              <h5 class="m-t-30">Status</h5><span>{{view_ticketdetails_status}}</span>
+              <h5 class="m-t-30">Pending Department</h5><span>{{department_Name}}</span>
+              <h5 class="p-t-20">Flat Number</h5><span><a href="javascript:void(0);"
+                  (click)="viewflatDetails(flat_Id,customer_id)">{{flat_number}}</a></span>
+            </div>
+            <div class="col-md-6">
+              <h5 class="m-t-30">Ticket Number</h5><span>{{ticket_Id}}</span>
+              <h5 class="m-t-30">Created Date</h5>
+              <span>{{ticketInfo_createdDate| date : 'EEEE, MMMM d, y'}}</span>
+              <h5 *ngIf="this.parent_condition != 'view_closed_tickets'" class="m-t-30">Escalation Date</h5>
+              <span *ngIf="this.parent_condition != 'view_closed_tickets'">{{ticket_escalationdate| date : 'EEEE, MMMM
+                d, y'}}</span>
+              <h5 *ngIf="this.parent_condition == 'view_closed_tickets'" class="m-t-30">Closed Date</h5>
+              <span *ngIf="this.parent_condition == 'view_closed_tickets'">{{resovedDate| date : 'EEEE, MMMM d,
+                y'}}</span>
+        <span *ngIf="view_ticketdetails_status != 'Closed'">
+              <i  [hidden]="escalationCalender_hide" class="fas fa-calendar-alt m-l-10"
+                (click)="getExtendedEscalationTimeApprovalLevel()"
+                *ngIf=" this.parent_condition != 'view_my_complaints'"></i></span>
+              <h5 class="m-t-30">Project Name</h5><span>{{this.project_name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card">
+        <div class="card-body" style="height:360px;overflow-y: auto" id="customerinfoid1">
+
+          <div class="card-body text-center">
+            <h4 class="card-title">Attachments</h4>
+          </div>
+          <div class="row text-center">
+
+            <ul class="list-unstyled">
+              <div *ngFor="let item of pdflist">
+                <li class="media">
+                  <img src="assets/images/file1.jpg" (click)="pdfClick(item.url)" class="m-r-15" width="60">
+                  <div class="media-body" style="float:left;margin-right: 20px;">
+                    <p style="text-align: left;" class="mt-0 mb-1">
+                      <span *ngIf="item.createdType=='CUSTOMER'"
+                        style="width: 80%;float: left;word-break: break-all;font-size: 16px;font-weight: 600;">Customer:
+                        {{item.createdBy}}</span>
+                      <span *ngIf="item.createdType=='EMPLOYEE'"
+                        style="width: 80%;float: left;word-break: break-all;font-size: 16px;font-weight: 600;">{{item.createdBy}}</span>
+                      <span style="float: left;width: 20%;"><img *ngIf="item.visibilty == 2" class="m-r-15"
+                          src="assets/images/filename.png" (click)="makeasPublic(item.name,item.id)"
+                          style="float: right;margin-right: 0px;height: 30px;width: 30px;"></span>
+                    </p>
+                    <p style="text-align: left;word-break: break-all;margin-top: 13px;clear: both;">{{item.name}}</p>
+                  </div>
+                </li>
+                <hr>
+              </div>
+            </ul>
+
+          </div>
+        </div>
+
+        <div style="position: absolute;
+      margin-top: 40%;
+      width: 100%;
+      text-align: center;" *ngIf="customerhideme1">
+          <button [disabled]="loading1" class="btn-hover color-1"
+            style="width: auto;font-size: 15px;height: auto!important;text-align: left;padding: 10px;"
+            (click)="Attachmentsfun()">
+            Click here to view attachments
+            <span *ngIf="loading1" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+          </button>
+        </div>
+
+
+      </div>
+
+      <div class="card">
+        <div class="card-body text-center" id="customerinfoid">
+          <h4 class="card-title">Customer Info</h4>
+          <div class="profile-pic m-b-20 m-t-20">
+            <img id="customerinfoid" *ngIf="this.profilepic != null" alt="user" class="rounded-circle"
+              src="{{this.profilepic}}" width="150">
+            <img id="customerinfoid" *ngIf="this.profilepic == null" alt="user" class="rounded-circle"
+              src="assets/images/customerimage.png" width="150">
+
+            <h4 class="m-t-20 m-b-0"><a href="javascript:void(0)"
+                (click)="viewCustomerDetails(customer_id,flat_Id)"><span>{{customer_name}}</span></a>
+            </h4><a>{{customer_email}}</a>
+          </div>
+          <div class="row text-center m-t-40">
+            <div class="col-4">
+              <h3 class="font-bold">{{total_tickets}}</h3>
+              <h6>Total</h6>
+            </div>
+            <div class="col-4">
+              <h3 class="font-bold">{{total_open}}</h3>
+              <h6>Open</h6>
+            </div>
+            <div class="col-4">
+              <h3 class="font-bold">{{tickets_closed}}</h3>
+              <h6>Closed</h6>
+            </div>
+          </div>
+        </div>
+
+        <div style="position: absolute;
+           margin-top: 40%;
+           width: 100%;
+           text-align: center;" *ngIf="customerhideme">
+          <button [disabled]="loading2" class="btn-hover color-1" style="width:200px!important;font-size: 15px;"
+            (click)="Customerinfofun()">
+            Customer Info
+            <span *ngIf="loading2" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Escalation Date Extension</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label for="leave_start_date">Escalation Date</label>
+            <div class="row clearfix">
+              <!--<div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                  <label for="leave_start_date">Leave Start Date</label>
+              </div> -->
+              <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                <div class="form-group">
+                  <div class="form-line">
+                    <input type="text" class="datepicker form-control" placeholder="Please choose date"
+                      id="escalationDate">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row clearfix">
+              <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                <label for="remarks">Remarks</label>
+
+                <div class="form-group">
+                  <div class="form-line">
+                    <input type="text" [(ngModel)]="escalation_remarks" id="remarks" class="form-control"
+                      placeholder="Enter your remarks">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class=" text-center center-block">
+              <button type="button" class="btn-hover color-1 cancelBtnColor" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn-hover color-1" (click)="saveEscaltionDetails()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="changeticketinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">{{modellabel_name}}</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="offset-md-1 col-md-10">
+              <div class="row clearfix" style="border:solid 1px #bbb">
+                <div class="col-md-8 offset-md-2 center-block text-center">
+
+                  <b class="col-md-12 m-b-25 m-t-25 dept">Select Ticket Owner :</b>
+                  <div class="col-md-12">
+                    <select class="form-group" id="sel_ect">
+                      <option value="select">--Select--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 text-center center-block m-b-25">
+                  <button type="button" class="btn-hover color-1 cancelBtnColor" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn-hover color-1"
+                    (click)="change_ticket_owner_modal_Data()">Submit</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="seekinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">{{modellabel_name}}</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="offset-md-1 col-md-10">
+              <div class="row clearfix" style="border:solid 1px #bbb">
+                <div class="col-md-8 offset-md-2 center-block text-center">
+
+                  <b class="col-md-12 m-b-25 m-t-25 dept">Select Department :</b>
+                  <div class="col-md-12">
+                    <select  id="sel"  style="width:100%"  class="form-group"  single>
+                      <option value="select">--Select--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 text-center center-block m-b-25">
+                  <button type="button" class="btn-hover color-1 cancelBtnColor" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn-hover color-1" (click)="sendSeekInfo_forward_Data()">Submit</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="modal fade" id="closeticketmodal" tabindex="-1" role="dialog" aria-labelledby="closeticketmodal"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="closeticketmodal">Close Ticket</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Do you want to close the ticket?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-hover color-1 cancelBtnColor" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn-hover color-1" (click)="closeticket()">Close Ticket</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="closeticketmodal"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="closeticketmodal">View Request Information</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div role="tabpanel">
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist" style="font-size: small" *ngIf="seekInfoJson !== null">
+                <li *ngFor="let item of seekInfoJson;let i=index;" role="presentation" class="active"><a
+                    href="#tab{{i}}" aria-controls="uploadTab" role="tab" data-toggle="tab">{{item.name}}</a>
+
+                </li>
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content" *ngIf="seekInfoJson !== null">
+                <div role="tabpanel" [ngClass]="custom_Css(i)" *ngFor="let item of seekInfoJson;let i=index;"
+                  id="tab{{i}}">
+                  <div class="card">
+
+                    <div class="card-body">
+                      <div class="row clearfix">
+                        <div class="col-md-9">
+                          <h3>Seek Info Request</h3>
+                          <p>{{ticketINfomessage}}</p>
+                        </div>
+                        <div class="col-md-3">
+                          <p><span style="font-weight: bold;font-size:1.25rem">Request No : </span>
+                            <span>{{item.requestId}}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Seek Info Replies</h4>
+                      <ul class="list-unstyled m-t-40" style="height: 500px; overflow-y: auto">
+                        <div *ngFor="let data of item.ticketSeekInfo">
+                          <li class="media">
+                            <img *ngIf="data.profilepic == null" alt="Generic placeholder image" class="m-r-15"
+                              alt="user_image" src="assets/images/user_seekinfo.png" width="60">
+                            <img *ngIf="data.profilepic != null" alt="Generic placeholder image" class="m-r-15"
+                              src="{{data.profilepic}}" width="60">
+                            <div class="media-body" style="float:left">
+                              <h5 class="mt-0 mb-1">{{data.employeeName}}</h5>
+                              <p>{{data.desc}}</p>
+                              <p><span [innerHTML]="data.message"></span>&nbsp;&nbsp;<span
+                                  class="pull-right">{{data.createdDate| date : 'EEEE, MMMM d, y h:mm a'}}</span>
+                              </p>
+                            </div>
+                          </li>
+                          <hr>
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- -----------custom menu------------ -->
+    <div class="hide" id="rmenu">
+      <ul>
+        <li>
+          <a href="http://www.google.com">Google</a>
+        </li>
+
+        <li>
+          <a href="http://localhost:8080/login">Localhost</a>
+        </li>
+
+        <li>
+          <a href="C:\">C</a>
+        </li>
+      </ul>
+    </div>
+    <!-- custom menu -->
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="changeTicketTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Change Ticket Type Request</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="offset-md-1 col-md-10">
+              <div class="row clearfix" style="border:solid 1px #bbb">
+                <div class="col-md-2" style="margin-top:10px">
+                  <label class="lableclass" style="font-weight: bold;">To:</label>
+                </div>
+                <div class="col-md-10" style="margin-top:10px">
+                  <div class="form-line">
+                    <p style="border: 1px solid #4d474785; word-break: break-word; padding: 10px; border-radius:10px;"
+                      id="toField">{{to}}</p>
+                  </div>
+                  <!-- <input type="text" disabled style="border: 1px solid #4d474785; height: 25px; text-align: center;border-radius:10px;" class=" form-control"  id="toField"> -->
+                </div>
+
+                <div class="col-md-2" style="margin-top:10px">
+                  <label class="lableclass" style="font-weight: bold;">CC:</label>
+                </div>
+                <div class="col-md-10" style="margin-top:10px">
+                  <div class="form-line">
+                    <p style="border: 1px solid #4d474785; word-break: break-word; padding: 10px; border-radius:10px;"
+                      id="ccField">{{cc}}</p>
+                  </div>
+                  <!-- <input type="text" disabled style="border: 1px solid #4d474785; height: 25px; text-align: center;border-radius:10px;" class=" form-control"  id="ccField"> -->
+                </div>
+
+                <div class="col-md-2" style="margin-top:10px">
+                  <label class="lableclass" style="font-weight: bold;">Subject:</label>
+                </div>
+                <div class="col-md-10" style="margin-top:10px">
+                  <div class="form-line">
+                    <p style="border: 1px solid #4d474785; word-break: break-word; padding: 10px; border-radius:10px;"
+                      id="subjectField">{{subject}}</p>
+                  </div>
+                  <!-- <textarea  type="text" disabled class="form-control"  id="subjectField"></textarea>   -->
+                </div>
+
+                <div class="col-md-2" style="margin-top:10px">
+                  <label class="lableclass" style="font-weight: bold;">Message Body:</label>
+                </div>
+                <div class="col-md-10" style="margin-top:10px">
+                  <div class="form-line" style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;">
+                    <p style="word-break: break-word;" id="employeeNameField">Dear {{employeeName}},</p>
+                    <textarea type="text" id="messageField" style="height: 90px;" class="form-control">
+                    </textarea><br>
+                    <p style="word-break: break-word;" id="ticketNoField">Ticket No: {{ticketId}}</p>
+                    <p style="word-break: break-word;" id="ticketMessageField">Ticket Message: {{description}}</p>
+                    <p style="word-break: break-word;" id="ticketRaisedField">Raised Under Category:
+                      {{raisedUnderCategory}}</p>
+                    <div class="row clearfix">
+                      <div class="col-md-5" style="margin-top:10px">
+                        <p>Category to be Changed to:</p>
+                      </div>
+                      <div class="col-md-7" style="margin-top:10px">
+                        <input type="text"
+                          style="padding: 3px; border-radius:10px; border: 1px solid #4d474785; height: 25px;"
+                          class=" form-control" id="categoryChangeTo">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- <div class="col-md-2" style="margin-top:10px">
+                </div>
+
+                <div class="col-md-10" style="margin-top:10px">
+                  <div class="form-line" style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;">
+                    <p style="word-break: break-word;" id="ticketNoField">Ticket No: {{ticketId}}</p>
+                    <p style="word-break: break-word;" id="ticketMessageField">Ticket Message: {{description}}</p>
+                    <p style="word-break: break-word;" id="ticketRaisedField">Raised Under Category: {{raisedUnderCategory}}</p>
+                    <p>Category to be Changed to: <input type="text" style="height: 25px;" class=" form-control"  id="categoryChangeTo"></p>
+                  </div>
+                </div> -->
+
+                <!-- <div class="col-md-2" style="margin-top:10px">
+                  <label class="lableclass" style="font-weight: bold;">Ticket Message:</label>
+                </div>
+                <div class="col-md-10" style="margin-top:10px">
+                  <div class="form-line">
+                    <p style="border: 1px solid #4d474785; word-break: break-word; padding: 10px; border-radius:10px;" id="ticketMessageField">{{description}}</p>
+                  </div>
+                </div>
+
+                <div class="col-md-2" style="margin-top:10px">
+                  <label class="lableclass" style="font-weight: bold;">Raised Under Category:</label>
+                </div>
+                <div class="col-md-10" style="margin-top:10px">
+                  <div class="form-line">
+                    <p style="border: 1px solid #4d474785; word-break: break-word; padding: 10px; border-radius:10px;" id="ticketRaisedField">{{raisedUnderCategory}}</p>
+                  </div>
+                </div> -->
+
+                <!-- <div class="col-md-2" style="margin-top:10px">
+                  <label class="lableclass" style="font-weight: bold;">Category to be Changed to:</label>
+                </div>
+                <div class="col-md-10" style="margin-top:10px">
+                  <div class="form-line">
+                    <input type="text" style="border: 1px solid #4d474785; height: 25px; text-align: center;border-radius:10px;" class=" form-control"  id="categoryChangeTo">
+                  </div>
+                </div> -->
+
+                <div class="col-md-12 text-center center-block m-b-25">
+                  <button type="button" class="btn-hover color-1" (click)="sendChangeTicketTypeMail()">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="ticketTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Change Ticket Type</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="offset-md-1 col-md-10">
+              <div class="row clearfix" style="border:solid 1px #bbb">
+                <div class="col-md-8 offset-md-2 center-block text-center">
+                  <b class="col-md-12 m-b-25 m-t-25 dept" style="text-align: left;">Purpose Type :</b>
+                  <div class="form-line">
+                    <select class='center' style="width:100%; margin-top: 0px !important" id="purposeTypeID" single>
+                      <!-- <option value="select">--Select--</option> -->
+                    </select>
+                  </div>
+
+                  <b class="col-md-12 m-b-25 m-t-25 dept" style="text-align: left;">Sub Purpose Type :</b>
+                  <div class="form-line">
+                    <select style="width:100%;" id="subPurposeTypeID" single>
+                      <option value='select'>--Select SubPurpose Type--</option>
+                    </select>
+                  </div>
+                </div><br>
+                <div class="col-md-12 text-center center-block m-b-25">
+                  <button type="button" class="btn-hover color-1 cancelBtnColor" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn-hover color-1" (click)="approveChangeTicketType()">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="flatdetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Flat details</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                    <li role="presentation">
+                      <a href="#flatDetails" data-toggle="tab" class="active show">Flat Details</a>
+                    </li>
+                    <li role="presentation">
+                      <a href="#flatCost" data-toggle="tab">Flat Cost</a>
+                    </li>
+                    <li role="presentation">
+                      <a href="#documents" data-toggle="tab">Documents</a>
+                    </li>
+                    <!-- <li role="presentation">
+                      <a href="#modificationDetails" data-toggle="tab">Modification Details</a>
+                    </li> -->
+                  </ul>
+                  <div class="tab-content">              
+                      <div role="tabpanel" class="tab-pane fade in active show" id="flatDetails">
+                        <div *ngFor="let item of DetailsArray">
+                            <label class="keyname">{{item.name}}</label> 
+                            <span>{{item.value}}</span> 
+                        </div>                   
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="flatCost">
+                          <div *ngFor="let item of FlatcostArray">
+                              <label class="keyname">{{item.name}}</label> 
+                              <span>{{item.value}}</span> 
+                          </div>   
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="documents">
+                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                    
+                         <div  class="primaryclass">
+                          <img  *ngFor="let item of uploadeddocs" src="assets/images/pdf.png" (click)="downloadFile(item.pdfPath)" class="imgcls"><br>
+                          <span *ngFor="let item of uploadeddocs" style="white-space: normal;width: 130px;font-size: 11px;margin-right: 10px;">{{item.pdfName}}</span>
+                          <span *ngIf="!uploadeddocs" style="font-size:18px;" class="text-center">No Documents</span>
+                        </div>
+                        </div>
+                      </div>
+                      <!-- <div role="tabpanel" class="tab-pane fade" id="modificationDetails">
+                        <div *ngFor="let item of Modification_Array">
+                            <label class="keyname">{{item.name}}</label> 
+                            <span>{{item.cost}}</span> 
+                        </div>  
+                        <span *ngIf="Modification_Array.length==0" style="font-size:18px;" class="text-center">No Modification Details</span>                  
+                      </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div> 
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="customer_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Customer details</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <!-- <img src="assets/images/UnderConstruction.gif"> -->
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                    <li role="presentation">
+                      <a href="#applicant1" data-toggle="tab" class="active show">Applicant 1</a>
+                    </li>
+                    <li role="presentation" *ngFor = "let item of data_array; let i = index;">
+                      <a href="#applicant{{i+2}}" data-toggle="tab">Applicant {{i+2}}</a>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                      <div class="row clearfix">
+                          <div class="col-md-4"></div>
+                        
+                          <div class="col-md-4"></div>
+                        </div>
+                    <div role="tabpanel" class="tab-pane fade in active show" id="applicant1">
+                      <div>
+                         <label class="keyname">Name</label> 
+                         <span>{{prof_name}}</span> 
+                      </div>
+                      <div>
+                          <label class="keyname">Date of Birth</label> 
+                          <span>{{DOB| date : 'fullDate'}}</span> 
+                       </div>
+                       <div>
+                          <label class="keyname">S/O, D/O, W/O</label> 
+                          <span>{{son_of}}</span> 
+                       </div>
+                       <div>
+                          <div class="row">
+                            <div class="col-lg-2">
+                              <label class="keyname">Address</label> 
+                            </div>
+                            <!-- <span>{{address}}</span>  -->
+                            <div class="col-lg-10">
+                           <!-- <span *ngIf="resp_.customer.address == null"></span> *ngIf="resp_.customer.address != null"-->
+                          <span >{{address}}</span> 
+                          </div>
+                          </div>
+                       </div>
+                       <div>
+                          <label class="keyname">Tel (R)</label> 
+                          <span>{{telephone}}</span> 
+                       </div>
+                       <div>
+                          <label class="keyname">Mobile</label> 
+                          <span>{{phoneNo}}</span> 
+                       </div>
+                      <div>
+                          <label class="keyname">Email</label> 
+                          <span>{{email}}</span> 
+                       </div>
+                       <div>
+                          <label class="keyname">PAN Number</label> 
+                          <!-- <span>{{pan_num}}</span>  -->
+                          <span *ngIf="pan_num == null">N/A</span>
+                          <span *ngIf="pan_num != null">{{pan_num}}</span>  
+                       </div>
+                       <div>
+                          <label class="keyname">Nationality</label> 
+                          <span>{{nationality}}</span> 
+                       </div>
+                       <div>
+                          <label class="keyname">Aadhar Number</label> 
+                          <span>{{adar_num}}</span> 
+                       </div>
+                    </div>
+                    <div role="tabpanel"  class="tab-pane fade" id="applicant{{i+2}}"  *ngFor = "let item of data_array; let i = index;">
+                        <div>
+                            <label class="keyname">Name</label> 
+                            <span *ngIf="item.lastName == null">{{item.firstName}}</span>
+                            <span *ngIf="item.lastName != null">{{item.firstName+" "+item.lastName}}</span>  
+                         </div>
+                         <div>
+                             <label class="keyname">Date of Birth</label> 
+                             <span>{{item.dateofBirth| date : 'fullDate'}}</span> 
+                          </div>
+                          <div>
+                             <label class="keyname">S/O, D/O, W/O</label> 
+                             <span>{{item.relationName}}</span> 
+                          </div>
+                          <div>
+                              <label class="keyname">Address</label> 
+                              <span *ngIf="item.address == null"></span>
+                              <span *ngIf="item.address != null">{{item.address}}</span>
+                            </div>
+                           <div>
+                              <label class="keyname">Tel (R)</label> 
+                              <span>{{item.telephone}}</span> 
+                           </div>
+                           <div>
+                              <label class="keyname">Mobile</label> 
+                              <span>{{item.phoneNo}}</span> 
+                           </div>
+                          <div>
+                              <label class="keyname">Email</label> 
+                              <span>{{item.email}}</span> 
+                           </div>
+                           <div>
+                              <label class="keyname">PAN Number</label> 
+                              <span *ngIf="item.pancard == null">N/A</span>
+                              <span *ngIf="item.pancard != null">{{item.pancard}}</span>  
+                           </div>
+                           <div>
+                              <label class="keyname">Nationality</label> 
+                              <span>{{item.nationality}}</span> 
+                           </div>
+                           <div>
+                              <label class="keyname">Aadhar Number</label> 
+                              <span>{{item.adaharId}}</span> 
+                           </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div> 
+
+</section>
+
+

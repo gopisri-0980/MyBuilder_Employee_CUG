@@ -1,0 +1,185 @@
+<section class="content">
+
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Customer Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i> Ticketing</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.parent_condition == 'view_my_tickets'" (click)="view_my_tickets()">
+              <a href="#" onClick="return false;"  >{{this.binding_parentpage}}</a>
+            </li> 
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.parent_condition == 'viewtickets'" (click)="viewalltickets()">
+              <a href="#" onClick="return false;"  >{{this.binding_parentpage}}</a>
+            </li> 
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.parent_condition == 'view_info_request'" (click)="view_info_request()">
+              <a href="#" onClick="return false;"  >{{this.binding_parentpage}}</a>
+            </li> 
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.parent_condition == 'escalation_ticket'" (click)="escalation_ticket()">
+              <a href="#" onClick="return false;"  >{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.parent_condition == 'approve_escalation_ticket'" (click)="approve_escalation_ticket()">
+              <a href="#" onClick="return false;"  >{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.parent_condition == 'changeticketowner'" (click)="changeticketowner()">
+              <a href="#" onClick="return false;"  >{{this.binding_parentpage}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.parent_condition == 'view_closed_tickets'" routerLink="/view-closed-tickets">
+              <a href="#" onClick="return false;"  >{{this.binding_parentpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.child_condition == 'view_info_request_details'" (click)="viewinforequestdetail()">
+              <a href="#" onClick="return false;" >{{this.binding_childpage}}</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.child_condition == 'ticket_details'"  (click)="ticketdetail()">
+              <a href="#" onClick="return false;" >{{this.binding_childpage}}</a>
+            </li>
+            
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.child_condition == 'escalation_details'"  (click)="escalation_details()">
+              <a href="#" onClick="return false;" >{{this.binding_childpage}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf ="this.child_condition == 'approve_escalation_details'"  (click)="approve_escalation_details()">
+              <a href="#" onClick="return false;" >{{this.binding_childpage}}</a>
+            </li>
+            <li class="breadcrumb-item active">Customer Details</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <!-- <img src="assets/images/UnderConstruction.gif"> -->
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tab-nav-right" role="tablist">
+            <li role="presentation">
+              <a href="#applicant1" data-toggle="tab" class="active show">Applicant 1</a>
+            </li>
+            <li role="presentation" *ngFor = "let item of data_array; let i = index;">
+              <a href="#applicant{{i+2}}" data-toggle="tab">Applicant {{i+2}}</a>
+            </li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+              <div class="row clearfix">
+                  <div class="col-md-4"></div>
+                
+                  <div class="col-md-4"></div>
+                </div>
+            <div role="tabpanel" class="tab-pane fade in active show" id="applicant1">
+              <div>
+                 <label class="keyname">Name</label> 
+                 <span>{{prof_name}}</span> 
+              </div>
+              <div>
+                  <label class="keyname">Date of Birth</label> 
+                  <span>{{DOB| date : 'fullDate'}}</span> 
+               </div>
+               <div>
+                  <label class="keyname">S/O, D/O, W/O</label> 
+                  <span>{{son_of}}</span> 
+               </div>
+               <div>
+                  <div class="row">
+                    <div class="col-lg-2">
+                      <label class="keyname">Address</label> 
+                    </div>
+                    <!-- <span>{{address}}</span>  -->
+                    <div class="col-lg-10">
+                    <span *ngIf="resp.customer.address == null"></span>
+                    <span *ngIf="resp.customer.address != null">{{resp.customer.address}}</span>
+                  </div>
+                  </div>
+               </div>
+               <div>
+                  <label class="keyname">Tel (R)</label> 
+                  <span>{{telephone}}</span> 
+               </div>
+               <div>
+                  <label class="keyname">Mobile</label> 
+                  <span>{{phoneNo}}</span> 
+               </div>
+              <div>
+                  <label class="keyname">Email</label> 
+                  <span>{{email}}</span> 
+               </div>
+               <div>
+                  <label class="keyname">PAN Number</label> 
+                  <!-- <span>{{pan_num}}</span>  -->
+                  <span *ngIf="pan_num == null">N/A</span>
+                  <span *ngIf="pan_num != null">{{pan_num}}</span>  
+               </div>
+               <div>
+                  <label class="keyname">Nationality</label> 
+                  <span>{{nationality}}</span> 
+               </div>
+               <div>
+                  <label class="keyname">Aadhar Number</label> 
+                  <span>{{adar_num}}</span> 
+               </div>
+            </div>
+            <div role="tabpanel"  class="tab-pane fade" id="applicant{{i+2}}"  *ngFor = "let item of data_array; let i = index;">
+                <div>
+                    <label class="keyname">Name</label> 
+                    <span *ngIf="item.lastName == null">{{item.firstName}}</span>
+                    <span *ngIf="item.lastName != null">{{item.firstName+" "+item.lastName}}</span>  
+                 </div>
+                 <div>
+                     <label class="keyname">Date of Birth</label> 
+                     <span>{{item.dateofBirth| date : 'fullDate'}}</span> 
+                  </div>
+                  <div>
+                     <label class="keyname">S/O, D/O, W/O</label> 
+                     <span>{{item.relationName}}</span> 
+                  </div>
+                  <div>
+                      <label class="keyname">Address</label> 
+                      <span *ngIf="item.address == null"></span>
+                      <span *ngIf="item.address != null">{{item.address}}</span>
+                    </div>
+                   <div>
+                      <label class="keyname">Tel (R)</label> 
+                      <span>{{item.telephone}}</span> 
+                   </div>
+                   <div>
+                      <label class="keyname">Mobile</label> 
+                      <span>{{item.phoneNo}}</span> 
+                   </div>
+                  <div>
+                      <label class="keyname">Email</label> 
+                      <span>{{item.email}}</span> 
+                   </div>
+                   <div>
+                      <label class="keyname">PAN Number</label> 
+                      <span *ngIf="item.pancard == null">N/A</span>
+                      <span *ngIf="item.pancard != null">{{item.pancard}}</span>  
+                   </div>
+                   <div>
+                      <label class="keyname">Nationality</label> 
+                      <span>{{item.nationality}}</span> 
+                   </div>
+                   <div>
+                      <label class="keyname">Aadhar Number</label> 
+                      <span>{{item.adaharId}}</span> 
+                   </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

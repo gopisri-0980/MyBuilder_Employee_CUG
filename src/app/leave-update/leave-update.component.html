@@ -1,0 +1,184 @@
+<style>
+  input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      border-radius: 4px;
+      margin-right: 2px;
+      opacity: 0.9;
+      filter: invert(0.8);
+      position: absolute;
+      right: 35px;
+    }
+
+    ::ng-deep .my-class .modal-dialog {
+      max-width: 30%;
+      width: 30%;
+
+    }
+</style>
+
+<!-- https://wa.me/918977432879?text=I'm%20interested%20in%20your%20flat -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Leave Update</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Leave Update</a>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-1">
+              <a href="#" onClick="return false;">Leave Update</a>
+            </li> -->
+            <!-- <li class="breadcrumb-item active">Approve Customer</li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <div class="form-line">
+                <input type="text" class="datepicker form-control" placeholder="Please choose Start date...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                
+                <div class="body">
+                    <form class="form-horizontal" style="width: 80%;margin-left: 10%;
+                    line-height: 38px;">
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="leave_start_date">Leave Start Date</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+
+                                      <div class="center" style="position: relative;top: 9px;">
+                        
+                                        <span class="material-icons" style="position: absolute;
+                                        right: 12px;top: 7px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+                    
+                                        <input type="date" placeholder="Select Date"
+                                          style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                                          class=" form-control" id="leaveupdate_startdate" >
+                                      </div>
+
+                                      <!-- <input type="text" class="datepicker form-control" placeholder="Please choose Start date" id="leaveupdate_startdate"> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="leave_end_date">Leave End Date</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                      <div class="center" style="position: relative;top: 9px;">
+                        
+                                        <span class="material-icons" style="position: absolute;
+                                        right: 12px;top: 7px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+                    
+                                        <input type="date" placeholder="Select Date"
+                                          style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                                          class=" form-control" id="leaveupdate_enddate" >
+                                      </div>
+
+                                      <!-- <input type="text" class="datepicker form-control" placeholder="Please choose End date" id="leaveupdate_enddate"> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!-- 
+                        <div class="row clearfix">
+                       
+                          <div class="col-sm-12">
+                                
+                                  <div class="form-line">
+                                    <p> 
+                                      <b >Select Device:</b>
+                                    </p>
+                                    <select style="width:100%"id="deviceID" single>
+                                          <option value="select">--Select Device--</option>
+                                          <option value="all">All</option>
+                                        <option value="android">Android</option>
+                                        <option value="ios">Ios</option>
+                                    </select>
+                                  </div>
+                                 
+                                </div>
+                  </div><br> -->
+                        <!-- <div class="row clearfix">
+                          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                              <label for="leave_end_date">ReJoin Date</label>
+                          </div>
+                          <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                              <div class="form-group">
+                                  <div class="form-line">
+                                    <input type="text" class="datepicker form-control" placeholder="Please choose rejoin date..." id="leaveupdate_rejoindate">
+                                  </div>
+                              </div>
+                          </div>
+                      </div> -->
+
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="approver_name">Approver Name</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                      <select style="width:100%" id="approverID" single>
+                                        <option value="select">--Select Approver Name--</option>
+                                      </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input style="display:none"type="text" id="projeKatmanRaporCbx" />
+
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="remarks">Remarks</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <textarea  type="text" class="form-control"  id="remarks_leaveupdation"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <button type="button" class="btn-hover color-1" (click)="leaveupdationSubmission()">SUBMIT</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  </div>
+</section>

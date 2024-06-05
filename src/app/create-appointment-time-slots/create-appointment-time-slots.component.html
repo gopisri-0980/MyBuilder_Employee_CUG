@@ -1,0 +1,1049 @@
+<head>
+
+  <style>
+    .MyDate {
+      border: 1px solid #aaaa !important;
+      border-radius: 5px !important;
+      padding: 8px !important;
+      text-indent: 47px !important;
+    }
+
+    .radiocls {
+      position: relative;
+      top: -8px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    [type="radio"]:not(:checked),
+    [type="radio"]:checked {
+      opacity: 1 !important;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: -4px;
+    }
+
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+      border-radius: 50%;
+    }
+
+    .container:hover input~.checkmark {
+      background-color: #ccc;
+    }
+
+    .container input:checked~.checkmark {
+      background-color: #2196F3;
+    }
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    .container input:checked~.checkmark:after {
+      display: block;
+    }
+
+    .container .checkmark:after {
+      top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .loadercls {
+      position: relative;
+      left: 8px;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      top: 1px !important;
+      margin-left: -4px;
+    }
+
+    #Main_subDIV input[type="checkbox"][_ngcontent-c1] {
+      width: 15px;
+      height: 14px;
+      position: relative;
+      top: 5px;
+      float: right;
+      border-radius: 100px;
+      position: relative;
+      top: 3px;
+      display: none !important;
+    }
+
+    .green {
+      background-color: #03a9f4 !important;
+    }
+
+    .red {
+      background-color: #FFF !important;
+      color: #000 !important;
+    }
+
+    #maincontent input[type="checkbox"][_ngcontent-c1] {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      top: 5px;
+      display: none !important;
+    }
+
+    .mat-chip.mat-standard-chip {
+      background-color: #e0e0e0;
+      color: rgba(0, 0, 0, .87);
+    }
+
+    tr {
+      border-bottom: 1px solid rgb(247 247 247 / 12%) !important;
+    }
+
+
+    ::ng-deep mat-form-field {
+      width: 100%;
+    }
+
+    ::ng-deep .mat-calendar-body-cell.selected>.mat-calendar-body-cell-content,
+    ::ng-deep .mat-calendar-body-cell.selected:hover>.mat-calendar-body-cell-content,
+    ::ng-deep .mat-calendar-body-cell.selected>.mat-calendar-body-cell-content:hover {
+      background-color: #673ab7 !important;
+      color: #fff !important;
+    }
+
+    .mat-chip.mat-standard-chip {
+      background-color: #e0e0e0;
+      color: rgba(0, 0, 0, .87);
+    }
+
+    .subslots {
+      margin-left: 10px;
+      background-color: #e0e0e0;
+      color: rgba(0, 0, 0, .87);
+      padding: 2px;
+      border-radius: 19px;
+      width: 160px;
+      text-align: center;
+    }
+
+    .btn-info {
+      border-radius: 5px !important;
+      text-transform: capitalize !important;
+      font-size: 14px !important;
+      font-family: 'Poppins' !important;
+      font-weight: 500 !important;
+      width: 180px;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      border-radius: 4px;
+      margin-right: 2px;
+      opacity: 0.9;
+      filter: invert(0.8);
+      position: absolute;
+      right: 35px;
+    }
+
+    ::ng-deep .my-class .modal-dialog {
+      max-width: 30%;
+      width: 50%!important;
+
+    }
+
+    .fromdateval {
+      width: 100%;
+      text-align: center;
+      position: relative;
+      top: 11px;
+      color: orangered;
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .form-check,
+    label {
+      font-size: 15px;
+      line-height: 1.42857;
+      color: #414244;
+      font-weight: 400;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      top: 5px;
+    }
+
+    .pclose {
+      position: relative;
+      top: 5px;
+      font-size: 12px;
+      background: #000;
+      padding: 6px;
+      color: #FFF;
+      font-family: 'Poppins';
+      font-weight: 100;
+      text-shadow: none;
+      border-radius: 13px;
+    }
+
+    .viewblocks {
+      border: 1px solid #ccc0c0;
+      border-radius: 5px;
+      width: 100%;
+      margin-left: 0%;
+    }
+
+    .pviewblocks {
+      position: relative;
+      top: 5px;
+      font-size: 14px;
+      color: #483bca;
+    }
+
+    ::ng-deep .my-class .modal-dialog {
+      max-width: 30%;
+      width: 50%!important;
+
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .red {
+      background-color: red;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/momentjs/2.13.0/moment.min.js"></script>
+
+</head>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Create Appointment Time Slots </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer" (click)="homeClick()"></i> Create Appointment Time Slots
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="fg">
+          <div class="maindivclass">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <p class="titileclassproject" style="font-family: 'Poppins';"> Create Appointment Time Slots : </p>
+                  <hr>
+                  <label class="labelcls">Select Project :</label>
+                  <select style="width:100%;" class="form-group" id="projectID" single>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="labelcls">Select Blocks :</label><br>
+              <button type="button" class="btn btn-info " (click)="open(ViewAllBlocks)">View All Blocks</button>
+            </div>
+
+            <div style="position: relative;top: -17px;" class="row viewblocks"
+              *ngIf="ViewAllBlockshide || viewselectedvaluelength.length != 0">
+              <div class="col-sm-4">
+                <p class="pviewblocks"> {{viewselectedvaluelength.length}} blocks selected</p>
+              </div>
+              <div class="col-sm-8" style="text-align: right;position: relative;top: 5px;">
+                <button type="button" class="btn btn-info" style="border-radius: 100px!important;
+              font-size: 12px!important;" (click)='viewselectedblocks(viewselectedblc)'>View selected blocks</button>
+              </div>
+            </div>
+
+            <div style="border: 1px solid #e3d2d2;border-radius: 5px;width: 100%;
+            margin-left: 0%;padding: 7px;background: linear-gradient(105deg, rgba(255, 190, 0, 0), #8fd8ee)">
+              <div class="row" style="position: relative!important;top: 10px!important;">
+                <div class="col-sm-4 radio" *ngFor="let p of radio_Controller">
+                  <input [id]="p.id" name="radio" type="radio" (change)="handleChange($event,p)">
+                  <label [for]="p.id" class="radio-label radiocls">{{p.Name}}</label>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+              <label class="labelcls">Select Floors :</label> <br>
+              <button type="button" class="btn btn-info controll" (click)="viewallfloors(ViewAllFloors)">View All
+                Floors</button>
+            </div>
+
+            <div class="row viewblocks" *ngIf="floorDetIdArray != 0">
+              <div class="col-sm-4">
+                <p class="pviewblocks"> {{floorDetIdArray}} Floors selected</p>
+              </div>
+              <div class="col-sm-8" style="text-align: right;
+            position: relative;top: 5px;"> <button type="button" class="btn btn-info" style="border-radius: 100px!important;
+              font-size: 12px!important;" (click)="viewselectedfloors(viewselectedfls)">View selected Floors</button>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="labelcls">Select Flats :</label><br>
+              <button type="button" class="btn btn-info controll" (click)="viewallflats(ViewAllFlats)">View All
+                Flats</button>
+            </div>
+
+
+            <div class="row viewblocks" *ngIf="flatDetIdArray != 0">
+              <div class="col-sm-4">
+                <p class="pviewblocks">{{flatDetIdArray}} Flats selected</p>
+              </div>
+              <div class="col-sm-8" style="text-align: right;
+            position: relative;top: 5px;"> <button type="button" class="btn btn-info" style="border-radius: 100px!important;
+              font-size: 12px!important;" (click)="viewselectedflats(viewselectedflat)">View selected Flats</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="labelcls">Select Customers :</label>
+            </div>
+
+            <div style="position: relative;top: -40px;">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;" class="labelcls">Flat Booking From Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+
+                  <span class="material-icons" style="position: absolute;right: 19px;top: 7px;font-size: 20px;"
+                    (click)="startdatefun()">cancel </span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+
+              <div class="form-line">
+                <label style="position: relative;top: 10px;" class="labelcls">Flat Booking To Date:</label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;
+            right: 19px;top: 7px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+
+              <p *ngIf="fg.touched && fg.invalid" class="fromdateval">Please add a valid from and to date</p>
+              <!-- <br>
+              <button id="customerData" *ngIf="!fg.invalid" style="display:none" type="button" class="btn btn-info"
+                (click)="Customersviewallflats(customerallflats)">
+                Customer All Flats</button> -->
+
+            </div>
+
+
+            <div style="position: relative;top: -30px;" class="row viewblocks" id="customerData"
+              *ngIf="customer_All_Flats?.length">
+              <div class="col-sm-4">
+                <p class="pviewblocks"> {{customer_All_Flats.length}} Customers Selected</p>
+              </div>
+
+              <div class="col-sm-8" style="text-align: right;position: relative;top: 5px;">
+                <button type="button" class="btn btn-info" style="border-radius: 100px!important;
+              font-size: 12px!important;" (click)="Customersviewallflats(customerallflats)">View Customers
+                  Flats</button>
+              </div>
+
+            </div>
+
+
+            <div style="position: relative; top: -30px;">
+
+              <p class="titileclassproject"> <label class="labelcls">Select Start Time :</label></p>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <select style="width:100%;" class="form-group" id="selecthours" single>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="labelcls"> </label>
+                    <select style="width:100%;" class="form-group" id="selectminits" single>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="labelcls"> </label>
+                    <select style="width:100%;" class="form-group" id="selecampm" single>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="position: relative;top: -53px;">
+              <p class="titileclassproject"> <label class="labelcls">Select End Time :</label></p>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <select style="width:100%;" class="form-group" id="selecthoursend" single>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="labelcls"> </label>
+                    <select style="width:100%;" class="form-group" id="selectminitsend" single>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="labelcls"> </label>
+                    <select style="width:100%;" class="form-group" id="selecampmend" single>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div style="position: absolute;right: -109px;">
+                  <div class="form-group">
+                    <button type="button" class="btn btn-info"
+                      style="width: 80px;border-radius: 18px;position: relative;top: 0px;" (click)="buttonclickfun()">
+                      OK
+                    </button>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <div style="display: inline-flex;position: relative; top: -62px;">
+              <p *ngFor="let p of controller , let i = index" class="subslots">{{p.startTime}} - {{p.endTime}} <span
+                  class="material-icons" style="position: relative;
+              top: 6px;right: -2px;" (click)="removeItem(i)">
+                  cancel </span></p> &nbsp;&nbsp;
+            </div>
+
+            <div class="row" style="position: relative; top: -70px;">
+              <div class="col-sm-6">
+                <div class="form-line">
+                  <label class="labelcls">Start Date:</label>
+                  <div class="center">
+                    <span class="material-icons" style="position: absolute;
+                    right: 15px;top: 39px;font-size: 20px;" (click)="slotstartdatefun()">cancel </span>
+                    <input type="date" placeholder="Select Date"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                      class=" form-control" id="txtDate">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-6">
+                <div class="form-line">
+                  <label class="labelcls">End Date:</label>
+                  <div class="center">
+                    <span class="material-icons" style="position: absolute;
+                    right: 17px;top: 39px;font-size: 20px;" (click)="slotendtimefun()">cancel </span>
+                    <input type="date" placeholder="Select Date"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                      class=" form-control" id="txtDate1">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div style="position: relative;top: -65px;">
+              <p class="titileclassproject"> <label class="labelcls">Select Dates :</label></p>
+              <form [formGroup]="myForm">
+              
+                <div class="input-icons">
+                <i class="fa fa-calendar" aria-hidden="true" style="position: absolute;top: 68px;
+                left: 18px;font-size: 15px;" for="MyDate"></i>
+                <input type="text" id="Mydatetime"  class="MyDate flatpickr" name="my_expire_date" formControlName="firstDate"  style="text-indent: 47px!important"/>
+             </div>
+              </form>
+            </div> -->
+
+            <div class="row" style="position: relative;top: -45px;">
+              <div class="col-sm-12" style="text-align: center;">
+                <button style="width: 200px;" type="button" class="btn btn-info" (click)="submitfunction()">
+                  + Create New Slot</button> &nbsp;&nbsp;
+                <button style="width: 200px;" type="button" class="btn btn-info submit"
+                  (click)="finallsubmistion(submitcontent)">Submit</button>
+              </div>
+            </div>
+
+            <div *ngFor="let p of apptmtDtlsReqstList , let i = index">
+              <p style="font-size: 15px; font-weight: bold;" *ngIf="p.apptmtSlotTimeReqList?.length"> SET -
+                {{p.setName}}</p>
+              <br>
+
+              <div class="row" style="position: relative; top: -21px;">
+                <div class="col-sm-6" *ngFor="let item of p.apptmtSlotTimeReqList , let k = index">
+
+                  <p style="width:auto;background: #e0e0e0;padding:8px;border: 1px solid #b9d6e4;"> <span
+                      *ngFor="let item of p.slotDatesList; let isLast=last">{{item | date}} {{isLast ? '' : ', '}}
+                    </span> <span style="font-weight: 800;">:
+                      {{item.startTime}}-{{item.endTime}}</span> <span class="material-icons"
+                      style="position: absolute;top: 2px;right: 15px; color: orangered;font-size:18px;"
+                      (click)="slotsremoveItem(k,p.apptmtSlotTimeReqList ,apptmtDtlsReqstList, i)">
+                      cancel </span></p>
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<section>
+  <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="imagemodal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Appointment Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="height:500px;overflow: scroll;">
+            <div style="padding: 20px;background: #faf7f7; border-radius: 10px;">
+
+              <p class="textmessage"> Hey! Your meeting with below customer(s) has ended. Please "Proceed" to change the
+                status and include Your Minutes of Meeting, Which may help you further.</p>
+              <div *ngFor="let p of popres;let i = index;">
+                <div>
+
+                  <div class="row" style="line-height: 30px;border: 1px solid #f2eeee;">
+                    <div class="col-sm-5">{{i + 1}} &nbsp; . <b style="font-weight: 600;">Customer Name &nbsp;:
+                        &nbsp;</b> {{p.custName}} </div>
+                    <div class="col-sm-4"> <b style="font-weight: 600;">Appointment Time &nbsp; : &nbsp;</b>
+                      {{p.apptmtDate | date : 'dd MMMM yyy'}}</div>
+                    <div class="col-sm-3">{{p.slotTime}}</div>
+                  </div>
+
+                  <!-- <p class="textmessage"> </p> -->
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-hover color-1" (click)="paymentProceed()">Proceed</button>
+            <button type="button" class="btn-hover color-1" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ----------------------------------start Select Blocks popup------------------------------------------------ -->
+<ng-template #ViewAllBlocks let-modal id="CreateAppointment">
+  <div class="modal-header" style="background: #03a9f4; color: #FFF;border-top-left-radius: 15px;
+  border-top-right-radius: 15px;">
+    <h4 class="modal-title" id="modal-basic-title">Select Blocks</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+    </button>
+  </div>
+  <div class="modal-body" style="border: 1px solid #ede3e3;">
+    <form>
+      <div class="form-group">
+        <label style="color: #03a9f4;">
+          <input type="checkbox" name="allNonTrades" [value]="nontrade" [checked]="viewselected" id="selectblocks"
+            (change)="allNonTrades($event)"> Select All
+          Blocks
+        </label>&nbsp; <br>
+        <hr style="position: relative;top: -7px;">
+        <ng-container>
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let ntrd of nontrade; let i = index">
+              <label>
+
+                <input type="checkbox" name="nontrades" (change)="changeTradesByCategory($event, i, ntrd)"
+                  [checked]="ntrd.checked"> &nbsp;&nbsp;{{ ntrd.blockName }}
+              </label>&nbsp;
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" style="width:80px;" (click)="SelectBlocksfun()">Submit</button>
+  </div>
+</ng-template>
+
+<!-- ----------------------------------End Select Blocks popup------------------------------------------------ -->
+
+<!-- ----------------------------------start view selected Blocks popup------------------------------------------------ -->
+<ng-template #viewselectedblc let-modal id="CreateAppointment">
+  <div class="modal-header" style="background: #03a9f4; color: #FFF;border-top-left-radius: 15px;
+  border-top-right-radius: 15px;">
+    <h4 class="modal-title" id="modal-basic-title">Select Blocks</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+    </button>
+  </div>
+  <div class="modal-body" style="border: 1px solid #ede3e3;">
+    <form>
+      <div class="form-group">
+        <label style="color: #03a9f4;">
+          <input type="checkbox" name="allNonTrades" [value]="nontrade" [checked]="viewselected" id="selectblocks"
+            (change)="allNonTrades($event)"> Select All
+          Blocks
+        </label>&nbsp; <br>
+        <hr style="position: relative;top: -7px;">
+        <ng-container>
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let view of viewselectedController">
+              <label>
+                <input type="checkbox" name="viewnontrades" [checked]="view.checked"
+                  (change)="changeTradesByCategory($event, i, view)"> &nbsp;&nbsp;{{ view.blockName }}
+              </label>&nbsp;
+            </div>
+          </div>
+
+        </ng-container>
+      </div>
+
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" style="width:80px;" (click)="SelectBlocksfun()">Submit</button>
+  </div>
+</ng-template>
+
+<!-- ----------------------------------End Select Blocks popup------------------------------------------------ -->
+
+<!-- ----------------------------------start Select Floors popup------------------------------------------------ -->
+<ng-template #ViewAllFloors let-modal id="CreateAppointment">
+  <div class="modal-header" style="background: #03a9f4; color: #FFF;border-top-left-radius: 15px;
+  border-top-right-radius: 15px;">
+    <h4 class="modal-title" id="modal-basic-title"> Floors in {{title_blockname}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+    </button>
+  </div>
+  <div class="modal-body" style="border: 1px solid #ede3e3;">
+    <form>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label style="color: #03a9f4;">
+              <input type="checkbox" name="allTrades" [value]="trade" [checked]="viewselectedFloor"
+                (change)="allTrades($event)" id="selectfloors">
+              Select All
+              Floors
+            </label>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group" style="display: inline-flex;">
+              <label style="position: relative;top: 10px;">Block:</label>
+              <span style="position: relative;top: 6px;left: 20px;width: 152px;">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                  <!-- <option value="">select</option> -->
+                  <option *ngFor="let p of trade" [value]="p.blockId"> {{p.blockName}}</option>
+                </select>
+              </span>
+            </div>
+
+          </div>
+        </div>
+        <hr style="position: relative;top: -15px;">
+        <ng-container>
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let q of floorchangevalue; let i = index">
+              <label>
+                <input type="checkbox" name="floors" [checked]="q.checked"
+                  (change)="changeTradesByCategoryfloor($event ,i , q)">
+                &nbsp;&nbsp;{{ q.floorName }}
+              </label>&nbsp;
+            </div>
+          </div>
+
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" style="width:80px;" (click)="Selecfloorsfun()">Submit</button>
+  </div>
+</ng-template>
+
+<!-- ----------------------------------End Select Floors popup------------------------------------------------ -->
+
+
+<!-- ----------------------------------start view selected floors popup------------------------------------------------ -->
+<ng-template #viewselectedfls let-modal id="CreateAppointment">
+  <div class="modal-header" style="background: #03a9f4; color: #FFF;border-top-left-radius: 15px;
+  border-top-right-radius: 15px;">
+    <h4 class="modal-title" id="modal-basic-title"> Floors in {{title_blockname}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+    </button>
+  </div>
+  <div class="modal-body" style="border: 1px solid #ede3e3;">
+    <form>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label style="color: #03a9f4;">
+              <input type="checkbox" name="allTrades" [value]="trade" [checked]="viewselectedFloor"
+                (change)="allTrades($event)" id="selectfloors"> Select All
+              Floors
+            </label>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group" style="display: inline-flex;">
+              <label style="position: relative;top: 10px;">Block:</label>
+              <span style="position: relative;top: 6px;left: 20px;width: 152px;">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                  <option *ngFor="let p of trade" [value]="p.blockId"> {{p.blockName}}</option>
+                </select>
+              </span>
+            </div>
+
+          </div>
+        </div>
+        <hr style="position: relative;top: -15px;">
+        <ng-container>
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let sas of floorchangevalue">
+              <label>
+                <input type="checkbox" name="floors" [checked]="sas.checked"
+                  (change)="changeTradesByCategoryfloor($event ,i , sas)">
+                &nbsp;&nbsp;{{ sas.floorName }}
+              </label>&nbsp;
+            </div>
+          </div>
+
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" style="width:80px;" (click)="Selecfloorsfun()">Submit</button>
+  </div>
+</ng-template>
+
+<!-- ----------------------------------End Select Blocks popup------------------------------------------------ -->
+
+
+
+<!-- ----------------------------------start Select flats popup------------------------------------------------ -->
+<ng-template #ViewAllFlats let-modal id="CreateAppointment">
+  <div class="modal-header" style="background: #03a9f4; color: #FFF;border-top-left-radius: 15px;
+  border-top-right-radius: 15px;">
+    <h4 class="modal-title" id="modal-basic-title">{{title_blockname}} &nbsp; - &nbsp; {{title_floorname}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+    </button>
+  </div>
+  <div class="modal-body" style="border: 1px solid #ede3e3;">
+    <form>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label style="color: #03a9f4;">
+              <input type="checkbox" name="allTrades" [value]="trade" id="selectflats" (change)="selectAllFlats($event)"
+                [checked]="viewselectedFlats"> Select All
+              Flats
+            </label>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group" style="display: inline-flex;">
+              <label style="position: relative;top: 10px;">Block:</label>
+              <span style="position: relative;top: 6px;left: 20px;width: 152px;">
+                <select style="width:100%;" class="form-group" id="BlockId1">
+                  <!-- <option value="">select</option> -->
+                  <option *ngFor="let p of trade1" [value]="p.blockDetId"> {{p.blockName}}</option>
+                </select>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group" style="display: inline-flex;">
+              <label style="position: relative;top: 10px;">Floor:</label>
+              <span style="position: relative;top: 6px;left: 20px;width: 152px;">
+                <select style="width:100%;" class="form-group" id="Flatid">
+                  <!-- <option value="">select</option> -->
+                  <option *ngFor="let p of floor_controller" [value]="p.floorDetId"> {{p.floorName}}</option>
+                </select>
+              </span>
+            </div>
+          </div>
+
+
+        </div>
+        <hr style="position: relative;top: -15px;">
+        <ng-container>
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let trd of flatwiseselect; let i = index">
+              <label>
+                <input type="checkbox" name="trades" [checked]="trd.checked"
+                  (change)="changeTradesByCategoryflat($event , i , trd)">
+                &nbsp;&nbsp;{{ trd.flatNo }}
+              </label>&nbsp;
+            </div>
+          </div>
+
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" style="width:80px;" (click)="Selectflatsfun()">Submit</button>
+  </div>
+</ng-template>
+
+<!-- ----------------------------------End Select Flats popup------------------------------------------------ -->
+
+
+<!-- ----------------------------------start view selected floors popup------------------------------------------------ -->
+<ng-template #viewselectedflat let-modal id="CreateAppointment">
+  <div class="modal-header" style="background: #03a9f4; color: #FFF;border-top-left-radius: 15px;
+  border-top-right-radius: 15px;">
+    <h4 class="modal-title" id="modal-basic-title">{{title_blockname}} &nbsp; - &nbsp; {{title_floorname}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+    </button>
+  </div>
+  <div class="modal-body" style="border: 1px solid #ede3e3;">
+    <form>
+      <div class="form-group">
+        <div class="row">
+
+          <div class="col-sm-4">
+            <label style="color: #03a9f4;">
+              <input type="checkbox" name="allTrades" [value]="trade" id="selectflats" (change)="selectAllFlats($event)"
+                [checked]="viewselectedFlats"> Select All
+              Flats
+            </label>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group" style="display: inline-flex;">
+              <label style="position: relative;top: 10px;">Block:</label>
+              <span style="position: relative;top: 6px;left: 20px;width: 152px;">
+                <select style="width:100%;" class="form-group" id="BlockId1">
+                  <!-- <option value="">select</option> -->
+                  <option *ngFor="let p of trade1" [value]="p.blockDetId"> {{p.blockName}}</option>
+                </select>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group" style="display: inline-flex;">
+              <label style="position: relative;top: 10px;">Floor:</label>
+              <span style="position: relative;top: 6px;left: 20px;width: 152px;">
+                <select style="width:100%;" class="form-group" id="Flatid">
+                  <!-- <option value="">select</option> -->
+                  <option *ngFor="let p of floor_controller" [value]="p.floorDetId"> {{p.floorName}}</option>
+                </select>
+              </span>
+            </div>
+          </div>
+
+
+          <!-- <div class="col-sm-4">
+            <div class="form-group" style="display: inline-flex;">
+              <label style="position: relative;top: 10px;">Flat:</label>
+              <span style="position: relative;top: 6px;left: 20px;width: 152px;">
+                <select style="width:100%;" class="form-group" id="Flatid">
+                  <option *ngFor="let p of floorchangevalue" [value]="p.floorId"> {{p.floorName}}</option>
+                </select>
+              </span>
+            </div>
+          </div> -->
+
+
+        </div>
+        <hr style="position: relative;top: -15px;">
+        <ng-container>
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let trd of flatwiseselect; let i = index">
+              <label>
+                <input type="checkbox" name="trades" [checked]="trd.checked"
+                  (change)="changeTradesByCategoryflat($event , i , trd)">
+                &nbsp;&nbsp;{{ trd.flatNo }}
+              </label>&nbsp;
+            </div>
+          </div>
+
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" style="width:80px;" (click)="Selectflatsfun()">Submit</button>
+  </div>
+</ng-template>
+
+<!-- ----------------------------------End Select flat popup------------------------------------------------ -->
+
+<!-- ----------------------------------start view customers flats popup------------------------------------------------ -->
+<ng-template #customerallflats let-modal id="CreateAppointment">
+  <div class="modal-header" style="background: #03a9f4; color: #FFF;border-top-left-radius: 15px;
+  border-top-right-radius: 15px;">
+    <h4 class="modal-title" id="modal-basic-title">Customer all flats</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <p class="pclose">Close <span aria-hidden="true">&times;</span></p>
+    </button>
+  </div>
+  <div class="modal-body" style="border: 1px solid #ede3e3;" id="Main_subDIV">
+    <div class="row">
+      <div class="col-sm-3" style="text-align: center;" *ngFor="let p of customer_All_Flats; let i = index">
+        <label style="border: 1px solid #adcbe2;padding: 5px;
+        width: 85px;border-radius: 5px;
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);margin-top:5px;">
+          <input type="checkbox" name="sas" [checked]="p.selected" [(ngModel)]="p.selected" style="display:none">
+          {{ p.flatNo }}
+        </label>
+      </div>
+    </div>
+
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-info" style="width:80px;" (click)="SelectCustomers()">Submit</button>
+  </div> -->
+</ng-template>
+
+<!-- ----------------------------------End Select Blocks popup------------------------------------------------ -->
+
+
+
+
+
+<ng-template #submitcontent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create Appointment Time Slots :</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p style="color: #137b89;font-size: 14px;">{{title_submit}}</p>
+  </div>
+  <div class="modal-footer">
+
+    <button type="button" id="unreadid" class="btn-hover color-1" [disabled]="loading_submit"
+      (click)=" dialogsubmit(submitcontent)">
+      Submit
+      <span *ngIf="loading_submit" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+    </button>
+
+
+    <button type="button" class="btn-hover color-1" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #content_title let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create Appointment Time Slots :</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <p style="font-size: 14px;color: #060606;
+      font-weight: 600;">{{errormessage_controller}}</p>
+      <p style="font-size: 13px;line-height: 33px;
+      color: #888;">{{error_dates}}</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancle</button>
+  </div>
+</ng-template>

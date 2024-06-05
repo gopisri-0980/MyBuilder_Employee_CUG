@@ -1,0 +1,1997 @@
+<style>
+  label {
+    font-size: 15px;
+    color: #26a69a;
+  }
+
+  .input {
+    border: 1px solid #26a69a !important;
+    border-radius: 5px !important;
+    height: 30px !important;
+    color: #26a69a !important;
+    text-indent: 10px !important;
+  }
+
+  .form-group[_ngcontent-c1] input.form-control[_ngcontent-c1],
+  input[type=text][_ngcontent-c1]:not(.browser-default) {
+    font-size: 13px !important;
+    font-family: sans-serif;
+    color: #26a69a !important;
+    text-indent: 10px !important;
+  }
+
+  .myDIV {
+
+    position: absolute !important;
+    padding: 10px !important;
+    font-weight: 800 !important;
+    text-decoration: underline !important;
+    color: #f44336 !important;
+    left: 149px;
+    top: -9px;
+
+  }
+
+  .required_class:after {
+    content: " *";
+    color: #5e5e5e;
+    font-size: 16px;
+  }
+
+  input[type='file'] {
+    color: rgba(0, 0, 0, 0) !important;
+  }
+
+
+  .sass_validation{
+    position: relative;
+    top: -19px;
+    left: 11px;
+    color: #f44336;
+    font-weight: 540;
+    text-decoration: underline;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Update booking </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer" (click)="homeClick()"></i> Customer Registration</a>
+            </li>
+
+            <li class="breadcrumb-item active">
+              Update booking 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-weight: bold;" class="required">Select Project:</label>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="search_projectID" single>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-weight: bold;" class="required">Customer Name:</label>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="customername" single>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align:center;">
+            <button type="button" class="btn-hover color-1" (click)="search_function()">Search</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="maindiv_hideme" style="display: none;">
+      <div class="card-body">
+        <div class="tabbable">
+          <ul class="nav nav-tabs">
+            <li style="width:25%;" *ngFor="let data of tabList;let i=index;" class="active"><a
+                [ngClass]="customCsstabs(i)" href="#tab{{i}}" data-toggle="tab">{{data}}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active sas" id="tab0">
+              <div *ngFor="let p of kyc_controller; let i = index;">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <input type="checkbox" [checked]="p.status == 'true'" style="
+                    width: 20px; height: 20px; position: relative; top: 4px;"
+                      (change)="changecheckboxStatus(p , i , $event)" />
+                    <label> {{p.docName}} </label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <span style="position: relative;left: 50px;">
+                      <input type="file" id="fileInputId{{i}}" (change)="handle_FileSelect($event , i , p)"
+                        style=" cursor:pointer;" [disabled]="disableread[i]" />
+                    </span>
+
+                    <span *ngFor="let item of p.files" class="myDIV" (click)="preview_url(item)"> {{item.name}}</span>
+
+                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                            <object style="width:100%!important;" height="500" [attr.data]="fileName"
+                              type={{filetypeurlsplit1}}
+                              *ngIf="filesplitdata !== 'image' &&  filetypeurlsplit1 == 'application/pdf'"></object>
+
+
+                            <img [src]="imgsrc" height="450" style="width:100%" *ngIf="filesplitdata == 'image'">
+
+                            <a [href]="fileUrl" download="file.txt" *ngIf="this.filetypeurlsplit1 == 'text/plain'"
+                              style="font-size: 20px;">Download
+                              file</a>
+
+                            <a [href]="fileUrl" download="file.docx"
+                              *ngIf="this.filetypeurlsplit1 == 'application/octet-stream' && item.Type == 'docx'"
+                              style="font-size: 20px;">Download file</a>
+
+                            <a [href]="fileUrl" download="file.doc"
+                              *ngIf=" this.filetypeurlsplit1 == 'application/octet-stream' && item.Type == 'doc'"
+                              style="font-size: 20px;">Download file</a>
+
+                            <a [href]="fileUrl"  *ngIf=" extensiontype == 'xlsx' || extensiontype == 'xlsm' 
+                            || extensiontype == 'xlsb' || extensiontype == 'xltx' || extensiontype == 'xltm' 
+                            || extensiontype == 'xls' ||extensiontype == 'xlt' 
+                            || extensiontype == 'xls'  || extensiontype == 'xml'
+                             || extensiontype == 'xml' || extensiontype == 'xlam' 
+                             || extensiontype == 'xla' || extensiontype == 'xlw' ||extensiontype == 'xlr'
+                              
+                              " style="font-size: 20px;">Download file</a>
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+
+
+                </div>
+              </div>
+
+
+
+
+            </div>
+            <div class="tab-pane  sas" id="tab1" style="padding: 30px">
+
+
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="required">Name Prefix :</label>
+                  <select style="width:100%;background-color: #eee;"  class="form-group" id="first_namePrefix" single>
+                    <option value="select">--Select--</option>
+                    <option value="Dr">Dr</option>
+                  <option value="Mr">Mr</option>
+                  <option value="Ms">Ms</option>
+                 
+                  <option value="Mrs">Mrs</option>
+                  <option value="Air Cmde.">Air Cmde.</option>
+                  <option value="Air Marshal">Air Marshal</option>
+                  <option value="Air Vice Marshal">Air Vice Marshal</option>
+                  <option value="Brig.">Brig.</option>
+                  <option value="Capt.">Capt.</option>
+                  <option value="Cdr.">Cdr.</option>
+                  <option value="Cmde.">Cmde.</option>
+                  <option value="Cmdr.">Cmdr.</option>
+                  <option value="Col.">Col.</option>
+                  <option value="Gp. Capt.">Gp. Capt.</option>
+                  <option value="Lt. Cdr.">Lt. Cdr.</option>
+                  <option value="Lt. Col.">Lt. Col.</option>
+                  <option value="Lt. Gen.">Lt. Gen.</option>
+                  <option value="Lt.">Lt.</option>
+                  <option value="Maj.">Maj.</option>
+                  <option value="Sqn Ldr.">Sqn Ldr.</option>
+                  <option value="Wg. Cdr.">Wg. Cdr.</option>
+                  </select>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">Customer Name :</label>
+                    <input type="text" class="form-control input" (keypress)="keyPress1($event)" maxlength="100"
+                      (paste)="pasteEvent($event)" id="first_mr">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Date of Birth :</label>
+                    <input type="date" class="form-control input" id="dob_first">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="position: relative;top: -16px;">
+
+                <div class="col-sm-4">
+                  <label class="required">Relation With :</label>
+                  <select  class="form-group" id="first_Relation_with" single  style="width:100%;">
+                    <option value="select">--Select--</option>
+                    <option value="S/o">S/O</option>
+                    <option value="W/O">W/O</option>
+                        <option value="W/O">H/O</option>
+                    <option value="D/O">D/O</option>
+                  </select>
+                </div>
+
+                <div class="col-sm-4">
+                  <label class="required">Relation Name Prefix :</label>
+                  <select style="width:100%;"   class="form-group" id="first_relationnamePrefix" single>
+                    <option value="select">--Select--</option>
+                  
+                    <option value="Dr">Dr</option>
+                  <option value="Mr">Mr</option>
+                  <option value="Ms">Ms</option>
+                 
+                  <option value="Mrs">Mrs</option>
+                  <option value="Air Cmde.">Air Cmde.</option>
+                  <option value="Air Marshal">Air Marshal</option>
+                  <option value="Air Vice Marshal">Air Vice Marshal</option>
+                  <option value="Brig.">Brig.</option>
+                  <option value="Capt.">Capt.</option>
+                  <option value="Cdr.">Cdr.</option>
+                  <option value="Cmde.">Cmde.</option>
+                  <option value="Cmdr.">Cmdr.</option>
+                  <option value="Col.">Col.</option>
+                  <option value="Gp. Capt.">Gp. Capt.</option>
+                  <option value="Lt. Cdr.">Lt. Cdr.</option>
+                  <option value="Lt. Col.">Lt. Col.</option>
+                  <option value="Lt. Gen.">Lt. Gen.</option>
+                  <option value="Lt.">Lt.</option>
+                  <option value="Maj.">Maj.</option>
+                  <option value="Sqn Ldr.">Sqn Ldr.</option>
+                  <option value="Wg. Cdr.">Wg. Cdr.</option>
+                  <option value="Late">Late</option>
+                  </select>
+                </div>
+
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">Relation Name :</label>
+                    <input type="text" style="width:100%;"   class="form-control input" (keypress)="keyPress1($event)" maxlength="100"
+                      (paste)="pasteEvent($event)" id="first_relation_name">
+                  </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                  <label>Marrital Status :</label>
+                  <select style="width:100%" class="form-group" id="first_marrital_status" single>
+                    <option value="select">--Select--</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                  </select>
+                </div>
+
+                <div class="col-sm-4">
+                  <label>Date of Anniversary :</label>
+                  <input type="date" class="form-control input" id="doa_first">
+                </div>
+                
+                <div class="col-sm-4">
+                  <label>Handing Over Date :</label>
+                  <input type="date" class="form-control input" id="hod_first">
+                </div>
+                
+                <div class="col-sm-4">
+                  <label>Registration Date :</label>
+                  <input type="date" class="form-control input" id="rd_first">
+                </div>
+              </div>
+
+              <h5>ADDRESS:</h5>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <label class="required">Permanent:</label>
+                  <textarea class="form-control " cols="5" rows="5" style="height: 50px;" maxlength="500"
+                    id="Permanent_first"></textarea>
+                </div>
+              </div>
+
+              <div class="row" style="position: relative;top: 10px;">
+
+
+
+                
+
+               
+
+                <div class="col-sm-3">
+                  <label >Country :</label>
+                  <select style="width:100%" class="form-group country" id="first_country" single>
+                  </select>
+                </div>
+
+                
+                <div class="col-sm-3">
+                  <label >State :</label>
+                  <select style="width:100%" class="form-group state" id="first_State" single>
+                  </select>
+                </div>
+
+                
+                <div class="col-sm-3">
+                  <label >City :</label>
+                  <!-- <input type="text" maxlength="500" class="form-control input" id="first_City"> -->
+                  <select style="width:100%" class="form-group citysname" id="first_City" single>
+                  </select>
+                </div>
+
+
+
+                <div class="col-sm-3">
+                  <label class="required">Pincode :</label>
+                  <input type="tel"  maxlength="6" id="first_pincode" class="form-control input" (keypress)="pincodefun($event);">
+                </div>
+
+              </div>
+
+              <div class="row" style="position: relative;top: 15px;">
+                <div class="col-sm-12">
+                  <label class="required">Correspondence:</label>
+                  <textarea class="form-control" id="first_Correspondence" cols="5" rows="5" style="height: 50px;"
+                    maxlength="500"></textarea>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top: 23px;">
+
+
+
+                <div class="col-sm-3">
+                  <label >Country :</label>
+                  <select style="width:100%" class="form-group country" id="first_country1" single>
+                  </select>
+                </div>
+
+                <div class="col-sm-3">
+                  <label >State :</label>
+                  <select style="width:100%" class="form-group state" id="first_State1" single>
+                  </select>
+                </div>
+
+                
+                <div class="col-sm-3">
+                  <label >City :</label>
+                  <!-- <input type="text" maxlength="500" class="form-control input" id="first_City1"> -->
+                  <select style="width:100%" class="form-group citysname" id="first_City1" single>
+                  </select>
+                </div>
+
+
+                <div class="col-sm-3">
+                  <label class="required">Pincode :</label>
+                  <input type="tel"  maxlength="6" id="first_pincode1" class="form-control input" (keypress)="pincodefun($event);">
+                </div>
+
+              </div>
+
+
+              <h5 style="margin-top: 23px;">CONTACT DETAILS:</h5>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Tel.(R) :</label>
+                    <input type="tel"  maxlength="12" id="first_tel" class="form-control input" (keypress)="pincodefun($event);">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">Mobile :</label>
+                    <input type="tel"  maxlength="12" id="first_mobile" class="form-control input" (keypress)="pincodefun($event);">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">EMAIL :</label>
+                    <input type="email" id="first_email" class="form-control input"
+                      onKeyPress="if(this.value.length==72) return false;">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="position: relative;top: -20px;">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">PAN NO :</label>
+                    <input type="text" id="pan_no_first" class="form-control input" style="width:100%;"
+                    onkeypress="return String.fromCharCode(event.charCode).match(/[^a-zA-Z0-9]/g) === null"
+                    (keyup)="panvalidation($event);" (blur)="pan_number_change_event($event ,'first_applicant')">
+                </div>
+
+                <p class="sass_validation" *ngIf="validation_details" (click)="Validation_details()">Validation
+                  Details</p>
+
+              </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">NATIONALITY :</label>
+                    <input type="text" id="nationality_first" class="form-control input" 
+                      onKeyPress="if(this.value.length==10) return false;"  (keypress)="keyPress1($event)">
+                  </div>
+                </div>
+                <!-- <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">AADHAAR NO :</label>
+                    <input type="tel"  maxlength="12" id="aadhaar_no_first" class="form-control input"  style="width:100%;"
+                      onKeyPress="if(this.value.length==20) return false;" (keypress)="pincodefun($event);">
+                  </div>
+                </div> -->
+              </div>
+
+
+              <p style="position: relative;
+              top: -21px;
+              font-size: 13px;
+              color: #5e5e5e;
+              font-weight: 700;"><span><b>Note:</b></span> Please Enter Either Aadhar Number or Passport Number
+                (<span>&#8727;</span>)</p>
+
+
+              <div class="row" style="position: relative;top: -20px;">
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">AADHAAR NO :</label>
+                    <input type="tel" maxlength="12" id="aadhaar_no_first" class="form-control input"
+                      style="width:100%;" onKeyPress="if(this.value.length==20) return false;"
+                      (keypress)="pincodefun($event);">
+                  </div>
+                </div>
+
+                <span style="position: relative; top: 33px;"> (OR) </span>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required_class">PASSPORT NO :</label>
+                    <input type="text" maxlength="12" id="passport_no_first" class="form-control input"
+                      onkeypress="return String.fromCharCode(event.charCode).match(/[^a-zA-Z0-9]/g) === null"
+                      (keyup)="panvalidation($event);">
+
+                    <div class="box-infoes">
+                      <div style="color:red; display:none;" class="error"> Please enter a valid passport number !</div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+              <h5>PROFESSIONAL:</h5>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <label>Designation:</label>
+                  <textarea class="form-control" id="first_designation" cols="5" rows="5" style="height: 50px;"
+                    onKeyPress="if(this.value.length==100) return false;"></textarea>
+                </div>
+
+                <div class="col-sm-4">
+                  <label>Name of Organisation/ Business:</label>
+                  <textarea class="form-control" id="first_name_of_organisation" cols="5" rows="5" style="height: 50px;"
+                    onKeyPress="if(this.value.length==200) return false;"></textarea>
+                </div>
+
+                <div class="col-sm-4">
+                  <label>Address of Organisation/ Business:</label>
+                  <textarea id="first_address_of_organisation" class="form-control " cols="5" rows="5"
+                    style="height: 50px;" onKeyPress="if(this.value.length==2000) return false;"></textarea>
+                </div>
+
+              </div>
+
+
+
+
+
+
+              <div class="row" style="margin-top: 5px;">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Office Number :</label>
+                    <input type="tel"  maxlength="12" id="first_office_number" class="form-control input"
+                    (keypress)="pincodefun($event);">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Office Email Id :</label>
+                    <input type="email" id="first_office_email_id" class="form-control input"
+                      onKeyPress="if(this.value.length==50) return false;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Organizational Type :</label>
+                    <input type="text" id="first_organizational_type" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row" style="position: relative;top: -20px;">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Industry Sector of work/ Business :</label>
+                    <input type="text" id="first_industry_sector_of_work" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Work Function/ Role :</label>
+                    <input type="text" id="first_work_function_role" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Number of years of work Experience :</label>
+                    <input type="text" id="first_number_of_years" class="form-control input"
+                    onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row" style="position: relative;top: -34px;">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Education Qualification :</label>
+                    <input type="text" id="first_education_qualification" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Annual Household Income (Rupees) :</label>
+                    <input type="text" id="first_annual_household" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Purpose of purchase :</label>
+                    <input type="text" id="first_purpose_of_purchase" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div>
+                
+                <!-- <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>How did you get to know about the project :</label>
+                    <input type="text" id="first_how_did_get_to_know" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div> -->
+              </div>
+
+              <div class="row" style="position: relative; top: -47px;">
+                
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Current Residential Status :</label>
+                    <input type="email" id="first_current_residential_status" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row clearfix" style="position: relative;top: -54px;">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>
+                      <span class="with-gap">Have you ever owned a Property with us ?:</span>
+                    </label>
+
+                  
+
+                    <label *ngFor="let p of item_data">
+                      <input class="with-gap" name="myradio"  type="radio" [value]="p.value" [checked]="p.checked" (change)="changeradiobutton($event)"/>
+                      <span>{{p.key}}</span>
+                    </label>&nbsp;
+                   
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="row" style="position: relative;top: -72px;">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Name of Poa Holder(if applicable) :</label>
+                    <input type="text" id="first_name_of_poa_holder" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Tel.(R) :</label>
+                    <input type="tel"  maxlength="12" id="first_tel_bck" class="form-control input"
+                    (keypress)="pincodefun($event);">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Mobile Number(Mandatory) :</label>
+                    <input type="tel"  maxlength="12" id="first_mobile_number_bck" class="form-control input"
+                    (keypress)="pincodefun($event);">
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="row" style="position: relative;top: -85px;">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Email Id :</label>
+                    <input type="email" id="first_email_bck" class="form-control input"
+                      onKeyPress="if(this.value.length==50) return false;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Address :</label>
+                    <input type="text" id="first_address_back" class="form-control input"
+                      onKeyPress="if(this.value.length==500) return false;">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <label>Country :</label>
+                  <select style="width:100%" class="form-group country" id="first_country_back" single>
+                  </select>
+                </div>
+
+
+
+              </div>
+
+              <div class="row" style="position: relative;top: -98px;">
+
+
+                <div class="col-sm-4">
+                  <label>State :</label>
+                  <select style="width:100%" id="first_state_bck" class="form-group state" single>
+                  </select>
+                </div>
+
+                <div class="col-sm-4">
+                  <label>City :</label>
+                  <!-- <input type="text" maxlength="500" class="form-control input" id="first_city_bck"> -->
+                  <select style="width:100%" id="first_city_bck" class="form-group citysname" single>
+                  </select>
+                </div>
+
+
+                <div class="col-sm-4">
+                  <label>Pincode :</label>
+                  <input type="tel"  maxlength="6" id="first_pincode_bck" class="form-control input"
+                  (keypress)="pincodefun($event);">
+                </div>
+
+              </div>
+
+            </div>
+            <div class="tab-pane sas" id="tab2">
+
+
+           
+              <div id="tab_second2">
+                <input type="checkbox" (change)="changeStatus($event)" style=" width: 20px;
+                         height: 20px;position: relative;top: 1px;left: 8px;" id="second_checkbox">
+                <label style="font-size: 17px;">View details in second applicant</label>
+              </div>
+
+              <div id="tab_second" style="display: none;">
+                <div class="row">
+
+                  <div class="col-sm-4">
+                    <label class="required">Name Prefix :</label>
+                    <select style="width:100%;background-color: #eee;"   class="form-group" id="second_namePrefix" single>
+                      <option value="select">--Select--</option>
+                    <option value="Dr">Dr</option>
+                  <option value="Mr">Mr</option>
+                  <option value="Ms">Ms</option>
+                 
+                  <option value="Mrs">Mrs</option>
+                  <option value="Air Cmde.">Air Cmde.</option>
+                  <option value="Air Marshal">Air Marshal</option>
+                  <option value="Air Vice Marshal">Air Vice Marshal</option>
+                  <option value="Brig.">Brig.</option>
+                  <option value="Capt.">Capt.</option>
+                  <option value="Cdr.">Cdr.</option>
+                  <option value="Cmde.">Cmde.</option>
+                  <option value="Cmdr.">Cmdr.</option>
+                  <option value="Col.">Col.</option>
+                  <option value="Gp. Capt.">Gp. Capt.</option>
+                  <option value="Lt. Cdr.">Lt. Cdr.</option>
+                  <option value="Lt. Col.">Lt. Col.</option>
+                  <option value="Lt. Gen.">Lt. Gen.</option>
+                  <option value="Lt.">Lt.</option>
+                  <option value="Maj.">Maj.</option>
+                  <option value="Sqn Ldr.">Sqn Ldr.</option>
+                  <option value="Wg. Cdr.">Wg. Cdr.</option>
+                    </select>
+                  </div>
+
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">Customer Name :</label>
+                      <input type="text" id="second_mrs" class="form-control input"
+                        onKeyPress="if(this.value.length==100) return false;"  style="width:100%;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Date of Birth :</label>
+                      <input type="date" id="second_dob" class="form-control input"  style="width:100%;">
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row" style="position: relative;top: -14px;">
+                  <div class="col-sm-4">
+                    <label class="required">Relation With :</label>
+                    <select  class="form-group" id="second_Relation_with" single  style="width:100%;">
+                      <option value="select">--Select--</option>
+                      <option value="S/o">S/O</option>
+                      <option value="W/O">W/O</option>
+                          <option value="W/O">H/O</option>
+                      <option value="D/O">D/O</option>
+                    </select>
+                  </div>
+
+
+
+                  <div class="col-sm-4">
+                    <label class="required">Relation Name Prefix :</label>
+                    <select style="width:100%;"   class="form-group" id="second_relationnamePrefix" single>
+                      <option value="select">--Select--</option>
+                  
+                      <option value="Dr">Dr</option>
+                    <option value="Mr">Mr</option>
+                    <option value="Ms">Ms</option>
+                   
+                    <option value="Mrs">Mrs</option>
+                    <option value="Air Cmde.">Air Cmde.</option>
+                    <option value="Air Marshal">Air Marshal</option>
+                    <option value="Air Vice Marshal">Air Vice Marshal</option>
+                    <option value="Brig.">Brig.</option>
+                    <option value="Capt.">Capt.</option>
+                    <option value="Cdr.">Cdr.</option>
+                    <option value="Cmde.">Cmde.</option>
+                    <option value="Cmdr.">Cmdr.</option>
+                    <option value="Col.">Col.</option>
+                    <option value="Gp. Capt.">Gp. Capt.</option>
+                    <option value="Lt. Cdr.">Lt. Cdr.</option>
+                    <option value="Lt. Col.">Lt. Col.</option>
+                    <option value="Lt. Gen.">Lt. Gen.</option>
+                    <option value="Lt.">Lt.</option>
+                    <option value="Maj.">Maj.</option>
+                    <option value="Sqn Ldr.">Sqn Ldr.</option>
+                    <option value="Wg. Cdr.">Wg. Cdr.</option>
+                    <option value="Late">Late</option>
+                    </select>
+                  </div>
+
+
+
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">Relation Name :</label>
+                      <input type="text" style="width:100%;"   class="form-control input" (keypress)="keyPress1($event)" maxlength="100"
+                        (paste)="pasteEvent($event)" id="second_relation_name">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row" style="position: relative; top: -30px;">
+                  <div class="col-sm-4">
+                    <label>Marrital Status :</label>
+                    <select id="second_Marrital_status" style="width:100%" class="form-group" single>
+
+                      <option value="select">--Select--</option>
+                      <option value="Single">Single</option>
+                      <option value="Married">Married</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label>Date of Anniversary :</label>
+                    <input type="date" class="form-control input" id="doa_second">
+                  </div>
+
+
+                </div>
+
+                <h5>ADDRESS:</h5>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label class="required">Permanent:</label>
+                    <textarea class="form-control" id="second_permanent" cols="5" rows="5" style="height: 50px;"
+                      onKeyPress="if(this.value.length==500) return false;"></textarea>
+                  </div>
+                </div>
+
+                <div class="row" style="position: relative;top: 10px;">
+
+
+
+                 
+
+                  <div class="col-sm-3">
+                    <label >Country :</label>
+                    <select style="width:100%" class="form-group country" id="second_Country" single>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label >State :</label>
+                    <select style="width:100%" class="form-group state" id="second_State" single>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label >City :</label>
+                    <!-- <input type="text" maxlength="500" class="form-control input" id="second_City"> -->
+                    <select style="width:100%" class="form-group citysname" id="second_City" single>
+                    </select>
+                  </div>
+
+
+                  <div class="col-sm-3">
+                    <label class="required">Pincode :</label>
+                    <input type="tel"  maxlength="6" id="second_pincode" class="form-control input"
+                    (keypress)="pincodefun($event);">
+                  </div>
+
+                </div>
+
+                <div class="row" style="position: relative;top: 15px;">
+                  <div class="col-sm-12">
+                    <label class="required">Correspondence:</label>
+                    <textarea class="form-control" id="second_Correspondence" cols="5" rows="5" style="height: 50px;"
+                      onKeyPress="if(this.value.length==500) return false;"></textarea>
+                  </div>
+                </div>
+
+                <div class="row" style="margin-top: 23px;">
+
+
+
+                
+
+                  <div class="col-sm-3">
+                    <label >Country :</label>
+                    <select style="width:100%" class="form-group country" id="second_Country1" single>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label >State :</label>
+                    <select style="width:100%" class="form-group state" id="second_State1" single>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label >City :</label>
+                    <!-- <input type="text" maxlength="500" class="form-control input" id="second_City1"> -->
+                    <select style="width:100%" class="form-group citysname" id="second_City1" single>
+                    </select>
+                  </div>
+                 
+
+
+                  <div class="col-sm-3">
+                    <label class="required">Pincode :</label>
+                    <input type="tel"  maxlength="6" id="second_pincode1" class="form-control input"
+                    (keypress)="pincodefun($event);">
+                  </div>
+
+                </div>
+
+
+                <h5 style="margin-top: 23px;">CONTACT DETAILS:</h5>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Tel.(R) :</label>
+                      <input type="tel"  maxlength="12" id="second_tel" class="form-control input" (keypress)="pincodefun($event);">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">Mobile :</label>
+                      <input type="tel"  maxlength="12" id="second_mobile" class="form-control input"
+                      (keypress)="pincodefun($event);">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>EMAIL :</label>
+                      <input type="email" id="second_email" class="form-control input"
+                        onKeyPress="if(this.value.length==50) return false;">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="position: relative;top: -20px;">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">PAN NO :</label>
+                      <input type="text" id="second_pan_no" class="form-control input" style="width:100%;"
+                        onkeypress="return String.fromCharCode(event.charCode).match(/[^a-zA-Z0-9]/g) === null"
+                        (keyup)="panvalidation($event);" (blur)="pan_number_change_event($event ,'second_applicant')">
+                    </div>
+
+                    <p class="sass_validation" *ngIf="second_validation_details" (click)="Validation_details()">
+                      Validation Details</p>
+
+
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">NATIONALITY :</label>
+                      <input type="text" id="second_nationality" class="form-control input"
+                        onKeyPress="if(this.value.length==10) return false;" (keypress)="keyPress1($event)">
+                    </div>
+                  </div>
+                  <!-- <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">AADHAAR NO :</label>
+                      <input type="tel"  maxlength="12" id="second_aadhaar_no" class="form-control input"  style="width:100%;"
+                      (keypress)="pincodefun($event);" (keyup)="aadhaar_nofun($event);">
+                    </div>
+                  </div> -->
+                </div>
+
+                <p style="position: relative;
+                top: -21px;
+                font-size: 13px;
+                color: #5e5e5e;
+                font-weight: 700;"><span><b>Note:</b></span> Please Enter Either Aadhar Number or Passport Number
+                  (<span>&#8727;</span>)</p>
+
+
+                <div class="row" style="position: relative;top: -20px;">
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">AADHAAR NO :</label>
+                      <input type="tel" maxlength="12" id="second_aadhaar_no" class="form-control input"
+                        style="width:100%;" (keypress)="pincodefun($event);" (keyup)="aadhaar_nofun($event);">
+                    </div>
+                  </div>
+
+
+                  <span style="position: relative; top: 33px;"> (OR) </span>
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required_class">PASSPORT NO :</label>
+                      <input type="text" maxlength="12" id="passport_no_second" class="form-control input"
+                        onkeypress="return String.fromCharCode(event.charCode).match(/[^a-zA-Z0-9]/g) === null"
+                        (keyup)="panvalidation($event);">
+
+                      <div class="box-infoes">
+                        <div style="color:red; display:none;" class="error"> Please enter a valid passport number !
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <h5>PROFESSIONAL:</h5>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Designation:</label>
+                    <textarea id="second_Designation" class="form-control " cols="5" rows="5" style="height: 50px;"
+                      onKeyPress="if(this.value.length==100) return false;"></textarea>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label>Name of Organisation/ Business:</label>
+                    <textarea id="second_name_of_organisation" class="form-control " cols="5" rows="5"
+                      style="height: 50px;" onKeyPress="if(this.value.length==200) return false;"></textarea>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label>Address of Organisation/ Business:</label>
+                    <textarea id="second_of_organisation" class="form-control " cols="5" rows="5" style="height: 50px;"
+                      onKeyPress="if(this.value.length==2000) return false;"></textarea>
+                  </div>
+
+                </div>
+
+
+
+
+
+
+                <div class="row" style="margin-top: 5px;">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Office Number :</label>
+                      <input type="tel"  maxlength="12" class="form-control input"
+                      (keypress)="pincodefun($event);" id="second_office_number">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Office Email Id :</label>
+                      <input type="email" id="second_office_emailid" class="form-control input"
+                        onKeyPress="if(this.value.length==50) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Organizational Type :</label>
+                      <input type="text" class="form-control input" id="Second_Organisation_type"
+                        onKeyPress="if(this.value.length==2000) return false;">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row" style="position: relative;top: -20px;">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Industry Sector of work/ Business :</label>
+                      <input type="text" id="second_Industry_sector" class="form-control input"
+                        onKeyPress="if(this.value.length==2000) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Work Function/ Role :</label>
+                      <input type="email" class="form-control input" id="second_work_function_role"
+                        onKeyPress="if(this.value.length==2000) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Number of years of work Experience :</label>
+                      <input id="second_number_of_years" type="text"   class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row" style="position: relative;top: -34px;">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Education Qualification :</label>
+                      <input type="text" id="second_education_qualification" class="form-control input"
+                        onKeyPress="if(this.value.length==2000) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Annual Household Income (Rupees) :</label>
+                      <input id="second_Annual_household" type="text" class="form-control input"
+                        onKeyPress="if(this.value.length==2000) return false;">
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+
+            </div>
+
+            <div class="tab-pane sas" id="tab3">
+
+
+              <div id="tab_third3">
+                <input type="checkbox" (change)="changeStatus_three($event)" style=" width: 20px;
+                  height: 20px;position: relative;top: 1px;left: 8px;" id="third_checkbox">
+                <label style="font-size: 17px;">View details in third applicant</label>
+              </div>
+
+
+
+              <div id="tab_third" style="display: none;">
+                <div class="row">
+
+                  <div class="col-sm-4">
+                    <label class="required">Name Prefix :</label>
+                    <select style="width:100%;"   class="form-group" id="third_namePrefix" single>
+                      <option value="select">--Select--</option>
+                    <option value="Dr">Dr</option>
+                  <option value="Mr">Mr</option>
+                  <option value="Ms">Ms</option>
+                 
+                  <option value="Mrs">Mrs</option>
+                  <option value="Air Cmde.">Air Cmde.</option>
+                  <option value="Air Marshal">Air Marshal</option>
+                  <option value="Air Vice Marshal">Air Vice Marshal</option>
+                  <option value="Brig.">Brig.</option>
+                  <option value="Capt.">Capt.</option>
+                  <option value="Cdr.">Cdr.</option>
+                  <option value="Cmde.">Cmde.</option>
+                  <option value="Cmdr.">Cmdr.</option>
+                  <option value="Col.">Col.</option>
+                  <option value="Gp. Capt.">Gp. Capt.</option>
+                  <option value="Lt. Cdr.">Lt. Cdr.</option>
+                  <option value="Lt. Col.">Lt. Col.</option>
+                  <option value="Lt. Gen.">Lt. Gen.</option>
+                  <option value="Lt.">Lt.</option>
+                  <option value="Maj.">Maj.</option>
+                  <option value="Sqn Ldr.">Sqn Ldr.</option>
+                  <option value="Wg. Cdr.">Wg. Cdr.</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">Customer Name :</label>
+                      <input type="text" id="Third_mr" class="form-control input"  style="width:100%;"
+                        onKeyPress="if(this.value.length==100) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Date of Birth :</label>
+                      <input type="date" id="Third_dob" class="form-control input"  style="width:100%;">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row" style="position: relative;top: -17px;">
+                  <div class="col-sm-4">
+                    <label class="required">Relation With :</label>
+                    <select  class="form-group" id="third_Relation_with" single  style="width:100%;">
+                      <option value="select">--Select--</option>
+                      <option value="S/o">S/O</option>
+                      <option value="W/O">W/O</option>
+                          <option value="W/O">H/O</option>
+                      <option value="D/O">D/O</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label class="required">Relation Name Prefix :</label>
+                    <select style="width:100%;"   class="form-group" id="third_relationnamePrefix" single>
+                      <option value="select">--Select--</option>
+                  
+                    <option value="Dr">Dr</option>
+                  <option value="Mr">Mr</option>
+                  <option value="Ms">Ms</option>
+                 
+                  <option value="Mrs">Mrs</option>
+                  <option value="Air Cmde.">Air Cmde.</option>
+                  <option value="Air Marshal">Air Marshal</option>
+                  <option value="Air Vice Marshal">Air Vice Marshal</option>
+                  <option value="Brig.">Brig.</option>
+                  <option value="Capt.">Capt.</option>
+                  <option value="Cdr.">Cdr.</option>
+                  <option value="Cmde.">Cmde.</option>
+                  <option value="Cmdr.">Cmdr.</option>
+                  <option value="Col.">Col.</option>
+                  <option value="Gp. Capt.">Gp. Capt.</option>
+                  <option value="Lt. Cdr.">Lt. Cdr.</option>
+                  <option value="Lt. Col.">Lt. Col.</option>
+                  <option value="Lt. Gen.">Lt. Gen.</option>
+                  <option value="Lt.">Lt.</option>
+                  <option value="Maj.">Maj.</option>
+                  <option value="Sqn Ldr.">Sqn Ldr.</option>
+                  <option value="Wg. Cdr.">Wg. Cdr.</option>
+                  <option value="Late">Late</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">Relation Name :</label>
+                      <input type="text" class="form-control input" (keypress)="keyPress1($event)" maxlength="100"
+                        (paste)="pasteEvent($event)" id="third_relation_name" style="width:100%;">
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+                <div class="row" style="position: relative;top: -35px;">
+                  <div class="col-sm-4">
+                    <label>Marrital Status :</label>
+                    <select style="width:100%" class="form-group" id="third_marrital_status" single>
+                      <option value="select">--Select--</option>
+                      <option value="Single">Single</option>
+                      <option value="Married">Married</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label>Date of Anniversary :</label>
+                    <input type="date" class="form-control input" id="doa_third">
+                  </div>
+
+                </div>
+
+
+
+                <h5>ADDRESS:</h5>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label class="required">Permanent:</label>
+                    <textarea class="form-control" id="third_permanent" cols="5" rows="5" style="height: 50px;"
+                      onKeyPress="if(this.value.length==500) return false;"></textarea>
+                  </div>
+                </div>
+
+                <div class="row" style="position: relative;top: 10px;">
+
+                
+
+                  <div class="col-sm-3">
+                    <label >Country :</label>
+                    <select style="width:100%" class="form-group country" id="Third_Country" single>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label >State :</label>
+                    <select style="width:100%" class="form-group state" id="third_State" single>
+                    </select>
+                  </div>
+
+                
+                  <div class="col-sm-3">
+                    <label >City :</label>
+                    <!-- <input type="text" maxlength="500" class="form-control input" id="third_City"> -->
+                    <select style="width:100%" class="form-group citysname" id="third_City" single>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label class="required">Pincode :</label>
+                    <input type="tel"  maxlength="6" id="third_pincode" class="form-control input"
+                    (keypress)="pincodefun($event);">
+                  </div>
+
+                </div>
+
+                <div class="row" style="position: relative;top: 15px;">
+                  <div class="col-sm-12">
+                    <label class="required">Correspondence:</label>
+                    <textarea class="form-control" id="third_correspondence" cols="5" rows="5" style="height: 50px;"
+                      onKeyPress="if(this.value.length==500) return false;"></textarea>
+                  </div>
+                </div>
+
+                <div class="row" style="margin-top: 23px;">
+
+                  
+                  <div class="col-sm-3">
+                    <label >Country :</label>
+                    <select style="width:100%" class="form-group country" id="Third_Country1" single>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label >State :</label>
+                    <select style="width:100%" class="form-group state" id="third_State1" single>
+                    </select>
+                  </div>
+
+               
+                  <div class="col-sm-3">
+                    <label >City :</label>
+                    <!-- <input type="text" maxlength="500" class="form-control input" id="third_City1"> -->
+                    <select style="width:100%" class="form-group citysname" id="third_City1" single>
+                    </select>
+                  </div>
+
+
+
+                  <div class="col-sm-3">
+                    <label class="required">Pincode :</label>
+                    <input type="tel"  maxlength="6" id="third_pincode1" class="form-control input"
+                    (keypress)="pincodefun($event);">
+                  </div>
+
+                </div>
+
+
+                <h5 style="margin-top: 23px;">CONTACT DETAILS:</h5>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Tel.(R) :</label>
+                      <input type="tel"  maxlength="12" id="Third_tel" class="form-control input" (keypress)="pincodefun($event);">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">Mobile :</label>
+                      <input type="tel"  maxlength="12" id="Third_Mobile" class="form-control input"
+                      (keypress)="pincodefun($event);">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label >EMAIL :</label>
+                      <input type="email" id="Third_email" class="form-control input"
+                        onKeyPress="if(this.value.length==50) return false;">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="position: relative;top: -20px;">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">PAN NO :</label>
+                      <input type="text" id="Third_pan_no" class="form-control input" style="width:100%;"
+                      onkeypress="return String.fromCharCode(event.charCode).match(/[^a-zA-Z0-9]/g) === null"
+                      (keyup)="panvalidation($event);" (blur)="pan_number_change_event($event ,'third_applicant')">
+                  </div>
+                  <p class="sass_validation" *ngIf="third_validation_details" (click)="Validation_details()">
+                    Validation Details</p>
+
+                </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">NATIONALITY :</label>
+                      <input type="text" id="Third_Nationality" class="form-control input"
+                        onKeyPress="if(this.value.length==10) return false;" (keypress)="keyPress1($event)">
+                    </div>
+                  </div>
+                  <!-- <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">AADHAAR NO :</label>
+                      <input type="tel"  maxlength="12" id="Third_aadhaar_no" class="form-control input"  style="width:100%;"
+                      onKeyPress="if(this.value.length==20) return false;" (keypress)="pincodefun($event);">
+                    </div>
+                  </div> -->
+                </div>
+
+                <p style="position: relative;
+                top: -21px;
+                font-size: 13px;
+                color: #5e5e5e;
+                font-weight: 700;"><span><b>Note:</b></span> Please Enter Either Aadhar Number or Passport Number
+                  (<span>&#8727;</span>)</p>
+
+
+                <div class="row" style="position: relative;top: -20px;">
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required">AADHAAR NO :</label>
+                      <input type="tel" maxlength="12" id="Third_aadhaar_no" class="form-control input"
+                        style="width:100%;" onKeyPress="if(this.value.length==20) return false;"
+                        (keypress)="pincodefun($event);">
+                    </div>
+                  </div>
+
+                  <span style="position: relative; top: 33px;"> (OR) </span>
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="required_class">PASSPORT NO :</label>
+                      <input type="text" maxlength="12" id="passport_no_third" class="form-control input passno"
+                        onkeypress="return String.fromCharCode(event.charCode).match(/[^a-zA-Z0-9]/g) === null"
+                        (keyup)="panvalidation($event);">
+
+                      <div class="box-infoes">
+                        <div style="color:red; display:none;" class="error"> Please enter a valid passport number !
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                
+
+                <h5>PROFESSIONAL:</h5>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Designation:</label>
+                    <textarea class="form-control" id="Third_designation" cols="5" rows="5" style="height: 50px;"
+                      onKeyPress="if(this.value.length==100) return false;"></textarea>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label>Name of Organisation/ Business:</label>
+                    <textarea id="Third_Name_of_organisation" class="form-control " cols="5" rows="5"
+                      style="height: 50px;" onKeyPress="if(this.value.length==200) return false;"></textarea>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label>Address of Organisation/ Business:</label>
+                    <textarea id="Third_Address_of_Organisation" class="form-control " cols="5" rows="5"
+                      style="height: 50px;" onKeyPress="if(this.value.length==2000) return false;"></textarea>
+                  </div>
+
+                </div>
+
+
+
+
+
+
+                <div class="row" style="margin-top: 5px;">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Office Number :</label>
+                      <input type="tel"  maxlength="12" id="Third_Office_number" class="form-control input"
+                      (keypress)="pincodefun($event);">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Office Email Id :</label>
+                      <input type="email" id="Third_office_email_id" class="form-control input"
+                        onKeyPress="if(this.value.length==50) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Organizational Type :</label>
+                      <input type="text" id="Third_Organization_type" class="form-control input"
+                        onKeyPress="if(this.value.length==2000) return false;">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row" style="position: relative;top: -20px;">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Industry Sector of work/ Business :</label>
+                      <input type="text" class="form-control input" id="Third_Industry_sector_of_work"
+                        onKeyPress="if(this.value.length==500) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Work Function/ Role :</label>
+                      <input type="email" class="form-control input" id="Third_work_function_role"
+                        onKeyPress="if(this.value.length==500) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Number of years of work Experience :</label>
+                      <input type="text"   id="Third_Number_of_years" class="form-control input"
+                      onKeyPress="if(this.value.length==500) return false;">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row" style="position: relative;top: -34px;">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Education Qualification :</label>
+                      <input type="text" id="Third_Education_Qualification" class="form-control input"
+                        onKeyPress="if(this.value.length==500) return false;">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Annual Household Income (Rupees) :</label>
+                      <input type="text" id="Third_Annual_household" class="form-control input"
+                        onKeyPress="if(this.value.length==500) return false;">
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="tab-pane sas" id="tab4">
+              <div class="row">
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">Project :</label>
+                    <select id="unit_project" style="width:100%;" class="form-group projectname" single disabled>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">Wing / Block :</label>
+                    <select id="unit_block" style="width:100%" class="form-group" single disabled>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                  <label class="required">Floor :</label>
+                  <select id="unit_floor" style="width:100%" class="form-group" id="unit_floor" single disabled>
+                  </select>
+                </div>
+
+              </div>
+
+              <div class="row" style="position: relative;top: -16px;">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">Unit No :</label>
+                    <!-- <select id="unitno" style="width:100%" class="form-group" single disabled>
+                    </select> -->
+                    <input type="text"  id="unitno" class="form-control input"
+                    onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label class="required">Lead Id:</label>
+                    <input type="tel"  maxlength="50"  id="unit_LeadId" class="form-control input"
+                    (keypress)="pincodefun($event);" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label class="required">Booking Date:</label>
+                    <input type="date" id="unit_booking_date" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label>Agreement Date:</label>
+                    <input type="date" id="unit_Agreement_date" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <!-- <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label>Facing:</label>
+                    <input type="text" id="facing_unit" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div> -->
+
+              </div>
+
+
+              <div class="row" style="position: relative;top: -29px;">
+               
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label>Select Old Booking Id :</label>
+
+                    <select id="unit_oldbooking_name" style="width:100%" class="form-group" single disabled>
+                    </select>
+                    <!-- <input type="text" id="unit_oldbooking_name" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;"> -->
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label>New Booking Reason:</label>
+                    <input type="text" id="unit_new_booking_reason" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label >Carpet Area :</label>
+                    <input style="text-indent: 20px;background-color: #eee;" type="tel"  maxlength="25"  id="carpet_area_unit" class="form-control input"
+                    (keypress)="pincodefun($event);" [(ngModel)]="carpetArea" >
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+              <div class="row" style="position: relative;top: -40px;">
+                
+
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">SBUA :</label>
+                    <input style="text-indent: 20px;background-color: #eee;" type="tel"  maxlength="25" id="sbua_unit" class="form-control input"
+                    (keypress)="pincodefun($event);" [value]="fieldvalue" [(ngModel)]="sbua"
+                      (keyup)="sbua_keyFunc($event.target.value)" disabled>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">Scheme Name :</label>
+                    <select id="Scheme_name" style="width:100%" class="form-group" single disabled>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label class="required">Quoted Base Price per sq.ft: </label>
+                    <input type="tel"  maxlength="25" id="unit_quoted_base_price" class="form-control input"
+                    (keypress)="pincodefun($event);" disabled style="background-color: #eee!important;">
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="row" style="position: relative;top: -47px;">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="required">Deal Price per sq.ft :</label>
+                  <input id="Rate_per_sqft_unit" maxlength="25" type="text" disabled [value]="ratepersqftvalue" class="form-control input"
+                  onkeypress="return String.fromCharCode(event.charCode).match(/[^0-9.]/g) === null" 
+                    (keyup)="ratepersqft_keyFunc($event.target.value)" style="background-color: #eee!important;">
+                </div>
+              </div>
+
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required"> Basic Flat Cost :</label>
+                    <input type="tel"  maxlength="20" id="unit_basic_flat_cost" class="form-control input"
+                    (keypress)="pincodefun($event);" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required"> Facing :</label>
+                    <input type="tel"  maxlength="20" id="facing_unit" class="form-control input"
+                    (keypress)="pincodefun($event);" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+                
+              </div>
+
+              <div style="position: relative;top: -56px;">
+                <h4>Amenities Details : </h4>
+                <div class="row" style="border: 1px solid #26a69a;
+                width: 100%;margin-left: 0%;border-radius: 5px;padding: 10px;">
+
+                  <div class="col-sm-4" *ngFor="let item of aminitiesList_controller">
+                    <div class="form-group">
+                      <label class="required"> {{item.aminititesInfraName}}:</label>
+                      <input style="text-indent: 20px;background-color: #eee;" [value]="aminititesinfra" id="unit_amenities_cost" type="tel"  maxlength="20"
+                        class="form-control input" (keyup)="sbua_aminititesInfranamefun($event.target.value)"
+                        (keypress)="pincodefun($event);" [(ngModel)]="item.totalCost" disabled>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group form-float">
+                      <label class="required">Amenities Cost :</label>
+                      <input type="tel"   maxlength="20" id="unit_amenitiesFlatCost" class="form-control input"
+                      (keypress)="pincodefun($event);" disabled style="background-color: #eee;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="row" style="position: relative;top: -41px;">
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label class="required">Total Cost Exclude Gst :</label>
+                    <input type="tel"   maxlength="20" id="unit_total_cost_exclude_gst" class="form-control input"
+                      (paste)="totalcost_onPaste($event)" (keypress)="pincodefun($event);"
+                      (keyup)="total_cost_exclude_gstfun($event.target.value)" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required"> Total GST Amount :</label>
+                    <input id="unit_total_gst_amount" type="number" class="form-control input"
+                      onKeyPress="if(this.value.length==20) return false;"
+                      (keyup)="total_gst_amountfun($event.target.value)" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label class="required">Taxes PerSft :</label>
+                    <input type="text" id="unit_taxesPerSft" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="position: relative;top: -59px;">
+              
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required">Total Cost: Rs :</label>
+                    <input id="unit_total_cost" type="number" class="form-control input" disabled style="background-color: #eee;"
+                      onKeyPress="if(this.value.length==20) return false;" (keyup)="total_costfun($event.target.value)">
+                  </div>
+                </div>
+
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label class="required">Actual Price PerSft :</label>
+                    <input type="text" id="unit_actualPricePerSft" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;"
+                      (keyup)="Actualpricepersftfun($event.target.value)" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="required"> Total Agreement Cost :</label>
+                    <input id="unit_total_agreement_cost" type="text" class="form-control input"
+                      onKeyPress="if(this.value.length==20) return false;" [value]="total_agreement_cost"
+                      (keyup)="totalagreement_keyFunc($event.target.value)" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+              </div>
+              <div class="row" style="position: relative;top: -70px;">
+               
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Rupees In Words :</label>
+                    <input id="unit_Rupees_in_words" type="text" class="form-control input"
+                      onKeyPress="if(this.value.length==2000) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label class="required">Overall Price PerSft :</label>
+                    <input type="text" id="unit_overallPricePerSft" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label>Unit Group :</label>
+                    <input type="text" id="unit_group" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row" style="position: relative;top: -82px">
+                <!-- <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label class="required">SBUA Sqft :</label>
+                    <input type="text" id="unit_subaSqft" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;">
+                  </div>
+                </div> -->
+
+
+              
+
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>EOI Applicable :</label>
+                    <input id="unit_eoi_applicable" type="text" class="form-control input"
+                      onKeyPress="if(this.value.length==50) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>EOI Sequence Number :</label>
+                    <input id="unit_eoi_sequence_number" type="text" class="form-control input"
+                      onKeyPress="if(this.value.length==50) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group form-float">
+                    <label>Overall
+                      Experience with builder/company:</label>
+                    <input type="text" id="unit_experience_with_sumadhura" class="form-control input"
+                      onKeyPress="if(this.value.length==100) return false;" disabled style="background-color: #eee;">
+                  </div>
+                </div>
+
+
+              </div>
+
+
+           
+
+            </div>
+
+
+            <div class="tab-pane sas" id="tab5">
+
+              <div *ngIf="milestonedemand_details == undefined">No Data Found</div>
+              <table class="table table-bordered tabletrClass" id="tbl_posts" *ngIf="milestonedemand_details?.length">
+                <thead>
+                  <tr>
+                    <th class="center">S.NO</th>
+                    <th class="center">Milestone Name</th>
+                    <th class="center">Due Amount %</th>
+                    <th class="center">Milestone Completed Date</th>
+                    <th class="center">Demand Note Date</th>
+                    <th class="center">Due Date</th>
+                    <th class="center">Milestone Status</th>
+                  </tr>
+                </thead>
+                <tbody id="tbl_posts_body">
+                  <tr *ngFor="let item of milestonedemand_details; let i=index">
+                    <td class="center">{{item.mileStoneNo}}</td>
+                    <td class="center">{{item.milestoneName}}</td>
+                    <td class="center">{{item.mileStonePercentage}}</td>
+
+                    <td class="center">{{item.milestoneDate | date:'dd-MM-yyy '}} </td>
+
+                    <td class="center">{{item.masterDemandNotedate | date:'dd-MM-yyy '}}</td>
+
+                    <td class="center">{{item.mileStoneDueDate | date:'dd-MM-yyy '}}</td>
+                    <td *ngIf="item.projectMsStatusId == 53" class="center"><span
+                        id="{{'statusnameId'+i}}">{{item.statusName}}</span></td>
+                    <td *ngIf="item.projectMsStatusId == 54" class="center">
+                      <span id="{{'statusnameId'+i}}">{{item.statusName}}</span>
+                    </td>
+
+
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="width: 100%;text-align: center;
+              position: relative;">
+                <button type="button" class="btn-hover color-1" (click)="submitfun()">UPDATE</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal" id="statusData">
+    <div class="modal-dialog" style="width: 60%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12 center-block text-center">
+            <table class="table table-striped">
+              <thead>
+                <th>S.NO</th>
+                <th style="width: 15%;">Lead Id</th>
+                <th style="width: 20%;">Applicant Name</th>
+                <th>Status</th>
+                <th style="width: 50%;">Error</th>
+              </thead>
+              <tbody id="responseData">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer" style="padding: 50px;">
+          <div class="col-md-12 center-block text-center">
+            <button type="button" class="btn btn-warning" (click)="closefun()">close</button>
+            <!-- <button type="button" class="btn btn-warning" data-dismiss="modal">close</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="imagemodal_div" role="dialog">
+    <div class="modal-dialog" style="max-width: 35%!important">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <!-- <p style="color: var(--red);font-weight: 600;">{{pan_status_event}}</p> -->
+          <p>Validation Details : <b>{{status_dis}}</b></p>
+
+          <div *ngFor="let item of siteName_exits; let i=index;" style="border: 1px solid rgba(0,0,0,.12);
+          padding: 10px;line-height: 8px; border-radius: 5px;margin-top: 10px;">
+            <p> SNo : <b>{{i+1}}</b></p>
+            <p>Project Name : <b>{{item.siteName}}</b></p>
+            <p>Flat Number : <b>{{item.flatNo}}</b></p>
+            <p>Customer Name : <b>{{item.customerName}}</b></p>
+            <p>Pan Number : <b>{{item.panNo}}</b></p>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn-hover color-1" (click)="Accept_fun(siteName_exits)"> OK</button> -->
+          <button type="button" class="btn-hover color-1" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">Cancel</span> </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</section>

@@ -1,0 +1,362 @@
+
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">UnCleared Cheque</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active">UnCleared Cheque</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <form [formGroup]="userForm">
+      <div class="card">
+        <div class="card-body">
+          <div class="row clearfix" style="padding: 10px;">
+            <!-- <div class="col-sm-2"></div> -->
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b>Select Project:</b></label>
+
+                <angular2-multiselect [data]="project_wise_project" formControlName="project_wise_form"
+                  [settings]="singledd1" (onSelect)="selectedSIDs($event);" (onSelectAll)="onSelectAll($event)"
+                  (onDeSelect)="onItemDeSelect($event)" (onDeSelectAll)="onDeSelectAll($event)" [(ngModel)]="title1">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+
+
+                <!-- <select style="width:100%;" class="form-group" id="projectID" multiple>
+              </select> -->
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b>Company Bank Account :</b></label>
+                <div class="center">
+
+                  <angular2-multiselect [data]="Bank_account_number_wise" formControlName="Bank_account_number_form"
+                    [settings]="singledd2" (onSelect)="company_selectedSIDs($event);" (onSelectAll)="company_onSelectAll($event)"
+                    (onDeSelect)="company_onItemDeSelect($event)" (onDeSelectAll)="company_onDeSelectAll($event)" [(ngModel)]="title2">
+                    <c-badge>
+                      <ng-template let-item="item">
+                        <label>{{ item.siteBankAccountNumber }}</label>
+                      </ng-template>
+                    </c-badge>
+                    <c-item>
+                      <ng-template let-item="item">
+                        <label>{{ item.siteBankAccountNumber }}</label>
+                      </ng-template>
+                    </c-item>
+                  </angular2-multiselect>
+
+
+
+                  <!-- <select style="width:100%;" class="form-group" id="Bank_account_number" multiple>
+                </select> -->
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b>Transaction Set Off Type :</b></label>
+                <div class="center">
+
+                  <angular2-multiselect [data]="Transaction_Set_Off" formControlName="Transaction_set_off_form"
+                  [settings]="singledd3" (onSelect)="Transaction_set_off_selectedSIDs($event);" (onSelectAll)="Transaction_set_off_onSelectAll($event)"
+                  (onDeSelect)="companTransaction_set_offy_onItemDeSelect($event)" (onDeSelectAll)="Transaction_set_off_onDeSelectAll($event)" [(ngModel)]="title3">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.key }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.key }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+
+
+                  <!-- <select style="width:100%;" class="form-group" id="Transaction_set_offtype" multiple>
+                  </select> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row clearfix" style="padding: 10px;">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b>Transaction Type</b></label>
+                <select style="width:100%" class="form-group" id="transaction_type" single></select>
+              </div>
+            </div>
+            <!-- <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b>Transaction mode</b></label>
+                <select style="width:100%" class="form-group" id="transaction_mode" single></select>
+              </div>
+            </div> -->
+
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-12 center">
+              <button type="button" style="margin-top: 1px;
+            position: relative;top: 16px;" class="btn-hover color-1" (click)="searchFun()">Search</button>
+
+              <span style="position: relative;top: 15px;">(OR)</span>
+
+              <button type="button" class="btn-hover color-1" (click)="showallfun()"
+                style="margin-top: 1px;position: relative;top: 16px;">Show
+                All</button>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+
+    <div class="card" *ngIf="pendingTransData?.length">
+      <div class="card-body">
+        <div class="table-responsive">
+          <!-- <ul>
+    <li> -->
+
+          <table id="tableExport" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">S.NO</th>
+               
+                <th class="center">Action</th>
+                <th class="center">Clearance Date</th>
+                <th class="center">Bounce Date</th> 
+                <th class="center" style="width:50%!important">Bounce Reason</th> 
+                <th class="center">Cheque Date</th>
+                 <!-- <th class="center">Reference No</th>   -->
+                 <th class="center">Approval Req Receive Date</th>
+                <th class="center">Project Name</th>  
+                <th class="center">Flat No</th> 
+                <th class="center">Cheque/Reference No.</th>
+                <th class="center">Transaction Amount</th>
+
+               
+                <th class="center">Customer Bank Name</th>
+                <th class="center">Bank Account No.</th>
+                <th class="center">Transaction Type</th>
+                <th class="center">Transaction Mode</th>
+                <th class="center">Customer Name</th>
+
+                <th class="center">SetOff</th>
+               
+                <th class="center">Attachment</th>
+              
+                <th class="center">Transaction Id</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr *ngIf = "pendingTransData == ''">
+          <td class="center" colspan="12" style="font-size: medium;"> No data available in table</td>
+        </tr> (click)="goToDetails(item)" -->
+              <tr *ngFor="let item of pendingTransData; let i=index" style="cursor: pointer;">
+                <td class="center" (click)="goToDetails(item)">{{i+1}}</td>
+              
+                <td>
+                  
+                  <input  *ngIf = "item.transactionTypeName == 'Receipt' && item.transactionModeName == 'Cheque'" type="checkbox"  id="{{'tablerowdata'+(i+1)}}" 
+                  value="{{item.siteId+'-'+item.siteName+'-'+item.transactionTypeId+'-'+item.transactionModeId+'-'+item.transactionTypeName+'-'+item.transactionModeName+'-'+item.transactionDate+'-'+item.transactionAmount+'-'+item.transactionReceiveDate+'-'+item.flatId+'-'+item.bookingFormId+'-'+item.finTransactionNo+'-'+item.transactionEntryId }}"
+                   style="width:20px;height:20px;"class="checlist" (change)="toggleVisibility($event , item , i)">
+
+                </td>
+
+              
+                <td class="center" ><input type="date" id="{{'clearencedate'+(i+1)}}" value=""></td>
+                <td class="center" ><input type="date" id="{{'bouncedate'+(i+1)}}" value=""></td>
+                <td class="center" style="width:100%!important">
+                  <!-- <textarea type="date" id="{{'chequebounceComent'+(i+1)}}" value=""></textarea> -->
+                  <select style="width:100%" style="display:block" class="form-group" (change)="eventfunction($event , i , content)"  id="{{'chequebounceComent'+(i+1)}}" single>
+                    <option value="select">--Select--</option>
+                    <option value="Insufficient Funds / Exceeds arrangement">Insufficient Funds / Exceeds arrangement</option>
+                    <option value="Stop payment">Stop payment</option>
+                    <option value="Customer name mismatch with Database">Customer name mismatch with Database</option>
+                    <option value="Authentication of branch required">Authentication of branch required</option>
+                    <option value="Post dated cheque,Stale cheque">Post dated cheque,Stale cheque</option>
+                    <option value="Undated cheque">Undated cheque</option>
+                    <option value="Wrong / invalid Account number">Wrong / invalid Account number</option>
+                    <option value="NRE source confirmation required">NRE source confirmation required</option>
+                    <option value="Account closed">Account closed</option>
+                    <option value="Signature mismatch">Signature mismatch</option>
+                    <option value="Signature required">Signature required</option>  
+                    <option value="Alteration not permissible">Alteration not permissible</option>
+                    <option value="Crossed to two banks">Crossed to two banks</option>
+                    <option value="Amount in words and figures differs">Amount in words and figures differs</option>
+                    <option value="Payee name required">Payee name required</option>
+                    <option value="Endorsement required/to be signed">Endorsement required/to be signed</option>
+                    <option value="Non-CTS chq-send in Non-CTS session">Non-CTS chq-send in Non-CTS session</option> 
+                    <option value="Overwrite/Alteration required Drawer's Signature">Overwrite/Alteration required Drawer's Signature</option>
+                    <option value="Paper Not Received">Paper Not Received</option>
+                    <option value="Mandate Cancelled">Mandate Cancelled</option>
+                    <option value="Others">Others</option>
+                  </select>
+
+                  <ng-template #content let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Cheque Bounce :</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" style="height: 130px !important;">
+                      <form [formGroup]="registerForm">
+                      <div class="form-group" style="position: relative; top: -21px;" id="bouncedateid">
+                        <label class="required">Cheque bounce reason : </label>
+                        <textarea cols="3" rows="3" id="otherscomentid" placeholder="Comments" class="form-control"
+                         style="border-radius: 5px;text-indent: 20px;" formControlName="bounce_reason_commite" [ngClass]="{ 'is-invalid': submitted && f.bounce_reason_commite.errors }"  id="{{'chequebouncereson'+(i+1)}}"></textarea>
+                     
+                         <div *ngIf="submitted && f.bounce_reason_commite.errors" class="invalid-feedback">
+                          <div *ngIf="f.bounce_reason_commite.errors.required" style="font-size: 13px;">Cheque bounce reason is required !</div>
+                      </div>
+                  
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn-hover color-1" (click)="bounce_reason_savefunction(i)">Save</button>
+                    </div>
+                  </ng-template>
+
+
+                </td>
+                <td class="center" (click)="goToDetails(item)">
+
+                  <span *ngIf="item.transactionDate != null" style="display: none;">{{item.transactionDate}}</span>
+                  <span *ngIf="item.transactionDate != null">{{item.transactionDate| date:'dd-MM-yyy'}}</span>
+                  <span *ngIf="item.transactionDate == null"> - </span>
+                  
+                 
+                </td>
+
+                <!-- <td>
+                  <input *ngIf = "item.transactionTypeName == 'Receipt' && item.transactionModeName == 'Cheque'" type="text" (keypress)="keyPress($event)"  maxlength=8
+                                style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                                class=" form-control" id="{{'ChequeNumber'+(i+1)}}" >
+                </td> -->
+                <td class="center" (click)="goToDetails(item)">
+
+                  <span *ngIf="item.lastApprovedDate != null" style="display: none;">{{item.lastApprovedDate}}</span>
+                  <span *ngIf="item.lastApprovedDate != null">{{item.lastApprovedDate| date:'dd-MM-yyy'}}</span>
+                  <span *ngIf="item.lastApprovedDate == null"> - </span>
+
+                 
+                
+                </td>
+                <td class="center" (click)="goToDetails(item)">{{item.siteName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.flatNo}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.chequeOrReferenceNo}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.transactionAmount | currency: 'INR':'symbol-narrow':'1.0-0'}}</td>
+
+               
+                <td class="center" (click)="goToDetails(item)">{{item.bankName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.siteBankAccountNumber}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.transactionTypeName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.transactionModeName}}</td>
+                <td class="center" (click)="goToDetails(item)">{{item.customerName}}</td>
+
+                <td class="center" (click)="goToDetails(item)">{{item.transactionPaymentSetOff}}</td>
+               
+                <td class="center"  ><span *ngFor="let linklocns of item.multipleLocations;"><img  style="width:20px;height:20px;;margin-left:3px"  src="assets/images/pdficon.png" (click)="attachmentlink(linklocns.location)"></span></td>
+               
+               <td class="center">{{item.finTransactionNo}}</td>
+                <!-- <td class="center"></td> -->
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- </li>
+</ul> -->
+        </div>
+        <!-- Table code end -->
+        <br><br>
+        <!-- <div class="row clearfix" id="demandnotedatediv" style="display:none;" value="">
+          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+              <label for="leave_start_date">Demand Note Date</label>
+          </div>
+          <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+              <div class="form-group">
+                  <div class="form-line">
+                    <input type="text" class="datepicker form-control" placeholder="Please choose Start date" id="demand_note_date">
+                  </div>
+              </div>
+          </div>
+        </div> -->
+        <div class="row" *ngIf=approvebtns_showHide>
+         
+        </div>
+
+
+
+        <div class="row" *ngIf=approvebtns_showHide>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-6" style="text-align: right;">
+            <div class="form-group">
+              <button type="button" class="btn-hover color-1" (click)="cheque_bounce_clearFun('Approve')"> Cheque Clear</button>
+              <button type="button" class="btn-hover color-1" (click)="cheque_bounce_clearFun('Reject')">Cheque Bounce</button>
+              <button type="button" class="btn-hover color-1" (click)="cheque_reject_clearFun('Reject')">Cheque Reject</button>
+            </div>
+          </div>
+          <div class="col-sm-2"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card" *ngIf='hideme && pendingTransData?.length == 0'>
+      <div class="card-body">
+        <p class="titileclassproject"> UnCleared Cheque : </p>
+        <p>No Records Found</p>
+      </div>
+    </div>
+
+
+
+  </div>
+</section><br>
+
+
+
+
+
+
+ 
+

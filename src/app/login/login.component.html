@@ -1,0 +1,267 @@
+
+<style>
+  .show_password {
+    position: absolute;
+    right: 15px;
+    top: 25px;
+    z-index: 9;
+    cursor: pointer;
+}
+
+</style>
+
+<div style="width:100%; z-index: 99999999;
+position: fixed;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+width: 100%;
+height: 100%;
+background: #eee;
+overflow: hidden;
+text-align: center;" *ngIf="loaderhideme">
+  <img style="width:50px" class="loading-img-spin" src="assets/images/loader_img.gif" width="20" height="20"
+    alt="admin">
+</div>
+
+<div class="container-login100" style="background: url('assets/images/Login-Page-Background.jpg') center no-repeat;">
+  <div class="wrap-login100">
+    <form class="login100-form" [(formGroup)]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+
+      <span class="login100-form-title p-b-45">
+        <img src="assets/images/ams_logo.jpg" style="height:60px;">
+      </span>
+      <span class="login100-form-title p-b-45">
+        Login
+      </span>
+      <div class="wrap-input100 emaildiv">
+        <input class="input100" type="text" formControlName="email" [(ngModel)]="username" required autocomplete="off">
+        <span class="focus-input100"></span>
+        <span class="label-input100">User Name</span>
+        <div class="text-danger"
+          *ngIf="!loginForm.controls['email'].valid && (submitted==true || loginForm.controls['email'].touched)"> User
+          Name
+          is required
+        </div>
+      </div>
+
+      <div class="wrap-input100 passworddiv">
+        <input class="input100" [type]="hide ? 'password' : 'text'" formControlName="pass" [(ngModel)]="password" required
+          autocomplete="off">
+
+          <i class="show_password" (click)="hide = !hide"
+          [ngClass]="(hide)?'fa fa-eye':'fa fa-eye-slash'"></i>
+
+        <span class="focus-input100"></span>
+        <span class="label-input100">Password</span>
+        <div class="text-danger"
+          *ngIf="!loginForm.controls['pass'].valid && (submitted==true || loginForm.controls['pass'].touched)">Password
+          is
+          required</div>
+      </div>
+      <!-- <div class="flex-sb-m w-full p-t-15 p-b-20">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value=""> Remember me
+            <span class="form-check-sign">
+              <span class="check"></span>
+            </span>
+          </label>
+        </div>
+        <div>
+          <a routerLink="/authentication/forgot-password" class="txt1">
+            Forgot Password?
+          </a>
+        </div>
+      </div> -->
+
+
+      <div class="container-login100-form-btn">
+        <button class="login100-form-btn" type="submit">
+          Login
+        </button>
+      </div><br>
+
+      <div class="container-login100-form-btn" (click)="forgotPassword()">
+        <button class="login100-form-btn" type="button">
+          Forgot Password
+        </button>
+      </div>
+
+      <!-- <div class="text-center p-t-45 p-b-20">
+        <span class="txt2">
+          or sign up using
+        </span>
+      </div> -->
+
+      <!-- <div class="login100-form-social flex-c-m">
+          <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div> -->
+    </form>
+
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <div class="modal fade" id="changepasswrdmodal" tabindex="-1" role="dialog" aria-labelledby="changepasswrdmodal"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="offset-md-1 col-md-10">
+                <div class="row clearfix" style="border:solid 1px #bbb">
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+
+                    <b class="col-md-12 m-b-25 m-t-25 dept" style="font-weight: 900;">Get Verification Code</b>
+
+                  </div>
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+
+                    <b class="col-md-12 m-b-25 m-t-25 dept" style="font-weight: 600;">Please enter mobile number to get
+                      OTP</b>
+
+                  </div>
+
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+                    <input type="text" id='mobilenumid' (keypress)="keyPress($event)" minlength=10 maxlength=10
+                      placeholder="Mobile Number" autocomplete="off"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                      class=" form-control" max-length="10">
+                  </div>
+
+                  <div class="col-md-12 text-center center-block m-b-25">
+                    <button type="button" class="btn-hover btn-border-radius color-1"
+                      (click)="sendotp_Submission()">Send OTP</button>
+                    <!-- <button type="button" class="btn btn-default btn-border-radius waves-effect"
+                      data-dismiss="modal">Cancel</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <div class="modal fade" id="changepasswrdmodal2" tabindex="-1" role="dialog" aria-labelledby="changepasswrdmodal2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="offset-md-1 col-md-10">
+                <div class="row clearfix" style="border:solid 1px #bbb">
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+
+                    <b class="col-md-12 m-b-25 m-t-25 dept" style="font-weight: 900;">OTP Verification</b>
+
+                  </div>
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+
+                    <b class="col-md-12 m-b-25 m-t-25 dept" style="font-weight: 600;">6 digits OTP number was just sent
+                      to your mobile number ******{{shortmobile}}</b>
+
+                  </div>
+
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+                    <input (keypress)="keyPress($event)" minlength=6 maxlength=6 type="text" id="otpid"
+                      placeholder="Please enter OTP"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                      class=" form-control">
+                  </div>
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px;display:none">
+                    <input>
+                  </div>
+                  <div class="col-md-12 text-center center-block m-b-25">
+                    <a style="text-decoration: underline; cursor: pointer;" (click)="reSend()">Resend OTP</a>
+                    <button type="button" class="btn-hover btn-border-radius color-1"
+                      (click)="next_Submission()">Next</button>
+                    <!-- <button type="button" class="btn btn-default btn-border-radius waves-effect"
+                      data-dismiss="modal">Cancel</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <div class="modal fade" id="changepasswrdmodal3" tabindex="-1" role="dialog" aria-labelledby="changepasswrdmodal3"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="offset-md-1 col-md-10">
+                <div class="row clearfix" style="border:solid 1px #bbb">
+                  <!-- <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+  
+                    <b class="col-md-12 m-b-25 m-t-25 dept" style="font-weight: 900;">OTP Verification</b>
+                  
+                  </div> -->
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+
+                    <b class="col-md-12 m-b-25 m-t-25 dept" style="font-weight: 600;">Create new and strong password for
+                      your username {{usernaame}}</b>
+
+                  </div>
+
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+                    <input type="text" name="password" id="createpwdid" placeholder="Create password"
+                      autocomplete="false!important" autocomplete="off!important"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                      class=" form-control" max-length="10">
+
+                  </div>
+
+                  <div class="col-md-8 offset-md-2 center-block text-center" style="margin-top:10px">
+                    <input type="text" id="confirmpwd" placeholder="Confirm password" autocomplete="false!important"
+                      autocomplete="off!important"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                      class=" form-control" max-length="10">
+
+                  </div>
+                  <div class="col-md-12 text-center center-block m-b-25">
+
+                    <button type="button" class="btn-hover btn-border-radius color-1"
+                      (click)="forgotpwd_save()">Save</button>
+                    <!-- <button type="button" class="btn btn-default btn-border-radius waves-effect"
+                      data-dismiss="modal">Cancel</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="login100-more">
+    </div>
+  </div>
+</div>

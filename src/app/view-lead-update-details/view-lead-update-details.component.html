@@ -1,0 +1,133 @@
+<style>
+  .keyname {
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-table;
+    font-size: 15px;
+    line-height: 21px;
+    font-weight: 700;
+    margin-left: 10px;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Lead Updated Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a (click)="homeClick()">
+                <i class="fas fa-home" style="cursor:pointer"></i>
+                Apply Loan
+              </a>
+            </li>
+            <li class="breadcrumb-item active" style="cursor:pointer" (click)='view_lead_details()'> View Lead Details
+            </li>
+            <li class="breadcrumb-item active"> View Lead Updated Details</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+
+        <div *ngFor="let p of controller_data">
+          <div class="row">
+            <div class="col-sm-6"><label style="font-weight: 700;float:left;font-size: 15px">Lead ID :</label> <span
+                class="keyname">{{p.customerLoanEOIDetailsId}}</span></div>
+            <div class="col-sm-6"><label style="font-weight: 700;float:left;font-size: 15px">Lead Date :</label> <span
+                class="keyname">{{p.createdDate | date:'dd-MM-yyyy'}}</span></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6"><label style="font-weight: 700;float:left;font-size: 15px">Customer Name :</label>
+              <span class="keyname">{{p.customerName}}</span>
+            </div>
+            <div class="col-sm-6"><label style="font-weight: 700;float:left;font-size: 15px">Project Name :</label>
+              <span class="keyname">{{p.siteName}}</span>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-6"><label style="font-weight: 700;float:left;font-size: 15px">Flat No :</label> <span
+                class="keyname">{{p.flatNo}}</span></div>
+            <div class="col-sm-6"><label style="font-weight: 700;float:left;font-size: 15px">Flat Cost : </label> <span
+                class="keyname">{{flatcost}}</span> </div>
+          </div>
+        </div>
+
+
+
+        <h2 style="font-size: 18px;margin-top: 7px;">Documents :</h2>
+
+        <ul style="width: 100%;display: inline-flex;margin-top:7px;border: 1px solid #e6e6e6;border-radius: 5px;
+    padding: 10px;">
+          <li style="display: inline-flex;" *ngIf="controller_data[0].loanDocuments?.length">
+            <div *ngFor="let aggdetail of controller_data[0].loanDocuments"
+              style="width:40%;margin-left: 24px;text-align: center;">
+              <img src="assets/images/file1.png" style="width:70px;height:70px;cursor:pointer;"
+                (click)="image_preview(aggdetail)"> <br>
+              <p style="text-align: center;
+        position: relative;top: 20px;">{{aggdetail.docType}}</p>
+
+<!-- <a href=" http://106.51.38.64:8888/images/sumadhura_projects_images/apply_loan/107/16/Screenshot_2022-07-28-16-43-54-847_com.app.sumadhura_5.jpg" class="btn clss"
+target="_self" download>Download</a> -->
+
+            </div>
+          </li>
+        </ul>
+
+        <div class="row" style="position: relative;top: 10px;">
+          <div class="col-sm-4">
+            <label> <b>Banker Previous Comments:</b></label>
+            <div style="border: 1px solid #4d474785; border-radius:5px;height: auto;padding:10px;">
+              <div *ngFor="let item of controller_data">
+                <p *ngIf="item.bankerComments == null">No Comments Found</p>
+                <p *ngIf="item.bankerComments != null">{{item.bankerComments}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row clearfix" style="position: relative;margin-top: 33px;" id="update">
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-family: 'Poppins'" class="required"><b>Update Status :</b></label>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="update_status_names" single>
+                  <option value="select">--Select--</option>
+                  <option value="Inprogress">InProgress</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Amount Disbursed">Amount Disbursed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row" style="position: relative;margin-top: 33px;" *ngIf="dept_id == 984 && role_id == 21">
+          <div class="col-sm-4">
+            <label class="required"><b>Comments:</b></label>
+            <textarea
+              style="border: 1px solid #4d474785; border-radius:5px;height: auto;padding:10px;text-transform: lowercase!important;"
+              id="CustomerCommentsId" class="materialize-textarea">{{customerComments}}</textarea>
+          </div>
+        </div>
+
+        <div *ngIf="dept_id == 984 && role_id == 21" style="text-align:center;"> <button type="button"
+            class="btn-hover color-1" (click)="submitfun()">Submit</button> </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

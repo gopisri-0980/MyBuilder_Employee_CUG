@@ -1,0 +1,126 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Customer Ledger Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item" style="cursor: pointer;" (click)="customerLedgerClick()"> <a>Customer Ledger</a></li>
+            <li class="breadcrumb-item" style="cursor: pointer;" (click)="customerLedgerTableClick()"> <a>Customer Ledger Table</a></li>
+            <li class="breadcrumb-item active">Customer Ledger Details</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body"> 
+
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label>Customer Name:</label> {{ledgerItem.customerName}}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label>Project Name:</label> {{ledgerItem.siteName}}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label>Block:</label> {{ledgerItem.blockName}}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label>Flat No:</label> {{ledgerItem.flatNo}}
+              </p>
+            </div>
+          </div>
+        </div><br>
+
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label>Booking Date:</label> {{bookingDate |date:'dd-MM-yyyy'}}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label>Flat Cost:</label> {{totalFlatCost}}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+          <div class="col-sm-3"></div>
+        </div><br>
+
+        <div class="table-responsive">
+          <table>
+              <thead>
+                  <tr class="center">
+                      <th>S.No</th>
+                      <th>Date</th>
+                      <th>Description</th>
+                      <th>Reference Number</th>
+                      <th>Credit</th>
+                      <th>Debit</th>
+                      <th>Balance</th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngIf="tableLength == 0">
+                    <td class="center" colspan="8">No data available</td>
+                </tr>
+              </tbody>
+              
+              <tbody>
+                  <tr *ngFor="let item of tableData; let i = index;" class="customersList">
+                      <td class="center">{{i + 1}}</td>
+                      <td class="center">{{item.date | date: "dd-MM-yyyy"}}</td>
+                      <td class="center">{{item.description}}</td>
+                      <td class="center">
+                        <p *ngIf="item.url != '' && item.url != null" (click)="openDocument(item.url)" style="cursor:pointer; color: blue; text-decoration: underline;">{{item.referenceNumber}}</p>                      </td>
+                      <td class="center">{{item.creditAmount}}</td>
+                      <td class="center">{{item.debitAmount}}</td>
+                      <td class="center">{{item.balanceAmount}}</td>
+                  </tr>
+              </tbody>
+          </table>
+        </div><br>
+
+        <div class="row clearfix">
+          <div class="col-sm-7"></div>
+          <div class="col-sm-5">
+            <p *ngIf="totalCreditAmount != null" style="text-align: left; font-size: large; font-weight: bold;">Total Credit Amount:  {{totalCreditAmount}}</p>
+          </div>
+        </div>
+
+        <div class="row clearfix">
+          <div class="col-sm-7"></div>
+          <div class="col-sm-5">
+            <p *ngIf="totalDebitAmount != null" style="text-align: left; font-size: large; font-weight: bold;">Total Debit Amount: {{totalDebitAmount}}</p>
+          </div>
+        </div>
+
+		  </div>
+    </div>
+    
+  </div><br>
+</section><br>

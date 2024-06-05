@@ -1,0 +1,171 @@
+<style>
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        border-radius: 4px;
+        margin-right: 2px;
+        opacity: 0.9;
+        filter: invert(0.8);
+        position: absolute;
+        right: 35px;
+    }
+
+    ::ng-deep .my-class .modal-dialog {
+        max-width: 30%;
+        width: 30%;
+
+    }
+</style>
+
+
+<section class="content">
+
+    <div class="container-fluid">
+
+        <div class="block-header">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">View Non-Customer Notifications</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a>
+                                <i class="fas fa-home" (click)="homeClick()"></i> Company Notifications</a>
+                        </li>
+                       
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">View Non-Customer Notifications</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+
+                    <div class="body">
+
+                        <div class="row clearfix">
+
+                            <div class="col-sm-3">
+
+                                <div class="form-line">
+                                    <label style="font-weight: bold;">State:</label>
+                                    <div class="center">
+                                        <select style="width:100%" id="stateID">
+                                            <option value="select">--Select State--</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-line">
+                                    <label style="font-weight: bold;">Device:</label>
+                                    <div class="center">
+                                        <select style="width:100%" id="deviceID" single>
+                                            <option value="select">--Select Device--</option>
+                                            <option value="All">All</option>
+                                            <option value="Android">Android</option>
+                                            <option value="iOS">iOS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-line" style="position: relative;
+                                top: -14px;">
+                                    <label style="position: relative;top: 10px;font-weight: bold;">Start Date:</label>
+                                    <div class="center" style="position: relative;top: 9px;">
+
+                                        <span class="material-icons" style="position: absolute;
+                                    right: 19px;top: 7px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+
+                                        <input type="date" placeholder="Select Date"
+                                            style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                                            class=" form-control" id="fromDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-line" style="position: relative;
+                                top: -14px;">
+                                    <label style="position: relative;top: 10px;font-weight: bold;">End Date:</label>
+                                    <div class="center" style="position: relative;top: 9px;">
+                                        <span class="material-icons" style="position: absolute;
+                                    right: 19px;top: 7px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+
+                                        <input type="date" placeholder="Select Date"
+                                            style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                                            class=" form-control" id="toDate">
+                                    </div>
+                                </div>
+                            </div>
+                          
+
+                        </div>
+
+
+                        <div style="width:100%;text-align:center">
+                            <button type="button" class="btn-hover color-1"
+                            (click)="searchCompanynotificationList()">Search</button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="card" *ngIf="tabledata_companyNotifications?.length">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                          
+
+                            <table id="tableExport"
+                                class="display table table-hover table-checkable order-column width-per-100">
+                                <thead>
+                                    <tr class="center">
+                                        <th>S.NO</th>
+                                        <th>Notification Id</th>
+                                        <th>Title</th>
+                                        <th>Created Date</th>
+                                        <!-- <th>Read/Unread</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+
+                                    <tr *ngIf="tabledata_companyNotifications == 0">
+                                        <td class="center" colspan="8" id="noData"> No Data Available</td>
+                                    </tr>
+                                    <tr *ngFor="let item of tabledata_companyNotifications| filter : searchText | paginate: { itemsPerPage: totalItems_companyNotifications, currentPage: current_Page_companyNotifications,totalItems: itemsPer_Page_companyNotifications};let i=index;"
+                                        class="notificationsList" (click)="leadId(item)">
+                                        <td class="center">{{i+1}}</td>
+                                        <td class="center">{{item.id}}</td>
+                                        <td class="center"
+                                            style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden; width: 40%;max-width: 1px;">
+                                            {{item.message}}</td>
+                                        <td class="center">{{item.createdDate}}</td>
+                                        <!-- <td class="center"></td> -->
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                            <!-- </li>
+          </ul> -->
+                            <pagination-controls style="float: right; font-size: 18px"
+                                (pageChange)="pageChanged($event)"></pagination-controls>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

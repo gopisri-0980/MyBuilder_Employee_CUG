@@ -1,0 +1,129 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">VIEW LEAD LIST</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>View Lead List</a>
+            </li>
+         
+          </ul>
+        </div>
+      </div>
+
+      <div class="row clearfix">
+       
+         
+          <div class="col-sm-3">
+            <div class="form-line">
+              <input type="text" style="height: 30px;border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control"  id="fromDate" placeholder="From Date">
+            </div>
+          </div>
+      
+          <div class="col-sm-3">
+            <div class="form-line">
+              <input type="text" style="height: 30px;border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control" placeholder="To Date" id="toDate">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <!-- <p>
+                <b >Select View:</b>
+              </p> -->
+              <select style="width:100%" class="form-group states" id="viewId" single >
+                <option>--Select--</option>
+                <option>All Leads</option>
+                <option>New</option>
+                <option>Working</option>
+                <option>InActive</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-line">
+              <!-- <p> 
+                <b >Select Source:</b>
+              </p> -->
+              <select style="width:100%" class="form-group states" id="sourceId" single >
+                <option>--Select--</option>
+                <option>Facebook</option>
+                <option>LinkedIn</option>
+                <option>Chanel Partner</option>
+                <option>Reference</option>
+                <option>Website</option>
+              </select>
+           
+            </div>
+          </div>
+      </div>
+   
+      <div style="text-align:center;">
+        <button type="button" class="btn-hover color-1" (click)="demandNotes()">Search</button>
+      </div>
+
+      <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-top:60px;margin-bottom: 30px;" id="milestone_blocks_tables">
+       
+      
+      <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+        <thead>
+          <tr>
+              <!-- <th class="center">S.NO</th>  -->
+              <th class="center">Lead Id</th> 
+            <th class="center">Created date</th> 
+            <th class="center">Name</th>           
+            <th class="center">Phone Number</th>        
+            <th class="center">Email</th>   
+            <th class="center">Address</th> 
+            <th class="center">Status</th> 
+            <th class="center">Source</th> 
+            <!-- <th class="center">Due Date</th>          
+            <th class="center">Status</th> -->
+        
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="total_length == 0">
+            <td class="center" colspan="8" id="noData"> No Data Available</td>              
+          </tr>
+        </tbody>
+        <tbody>
+        <tr *ngFor="let item of leadlist_array">
+          <td class="center" (click)="view_leadinfo(item)" style="text-decoration: underline;">{{item.leadId}}</td>
+          <td class="center" >{{item.RegisteredOn}}</td>
+          <td class="center" >{{item.name}}</td>
+          <td class="center" >{{item.phone}}</td>
+          <td class="center" >{{item.mail_id}}</td>
+          <td class="center" >{{item.address}}</td>
+          <td class="center" >{{item.Lead_Status}}</td>
+          <td class="center" >{{item.source}}</td>
+          </tr>
+         
+          <!-- <tr *ngFor="let item of milestonedemand_table; let i=index">
+            
+              <td class="center" >{{i+1}}</td>
+            <td class="center" style="color:blue;text-decoration: underline;" (click)="demandnoteView(item.documentLocation)">{{item.demandNoteNo}}</td>
+            <td class="center" >{{item.custName}}</td>
+            <td class="center" >{{item.mileStoneTotalAmount}}</td>
+            <td class="center" >{{item.demandNoteDate| date:'yyyy-MM-dd'}}</td>
+                   </tr> -->
+          
+    
+        </tbody>
+      </table>
+   
+    </div>
+    </div>
+    
+
+    
+ </div>
+
+</section>
+
+

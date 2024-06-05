@@ -1,0 +1,167 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+      <div class="content__loader">
+          <div><i class="Favicon"></i></div>
+      </div>
+  </div>
+</div>
+
+<section class="content">
+  
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Tickets</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i> <span style="cursor:pointer;"> Reports </span></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="breadCrumbProjectWiseTktCount" routerLink="/ProjectWise-Ticket-Count">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Projectwise ticket count</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="breadCrumbProjectWiseTktReport" routerLink="/Projectwise-Ticket-Report">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Projectwise ticket report</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="breadCrumbAlltickettypesprojectwisereport" routerLink="/All-TicketTypes-ProjectWise-Report">
+              <a href="#" onClick="return false;" style="cursor:pointer;">All ticket types - Projectwise report</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="breadCrumbEmployeewiseticketcount" routerLink="/Employeewiseticket">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Employee - projectwise tickets</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="breadCrumbEscalationTktReport" routerLink="/Escalation-Tickets">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Escalation tickets</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2" *ngIf="breadCrumbEmpWiseAvgClosingTime" routerLink="/EmployeeWise-Ticket-Average-Closing-Time">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Employeewise ticket average closing time</a>
+            </li>
+
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="breadCrumbFeedbackticketcount" routerLink="/Ticket_Feedback_Report">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Feedback Report Details</a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2" *ngIf="breadCrumbMonthlyreportcount" routerLink="/Ticket_Monthly_Report">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Monthly Report Details</a>
+            </li>
+
+
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" style="cursor:pointer;">View tickets</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card" style="border:0">
+          
+          <div class="body" style="border:0.2px solid;margin-top: 10px;">
+
+            <div *ngIf="showTableOne" class="table-responsive">
+                
+              
+              <table id="tableExport" class="table table-bordered" *ngIf="getTicketsData?.length">
+                <thead>
+                  <tr>
+                    <th class="center">Sno</th>
+                    <th class="center">Ticket Number</th>
+                    <th class="center">Customer Name</th>                    
+                    <th class="center">Project Name</th>            
+                    <th class="center">Ticket type</th>
+                    <th class="center">Pending At</th>                    
+                    <th class="center">Status</th>        
+                    <th class="center">Received Date</th>
+                    <th class="center">Escalation Date</th>
+                    <!-- <th class="center">Action</th> -->
+
+                    <th class="center" *ngIf="breadCrumbFeedbackticketcount == true"> Rating</th>
+                    <th class="center" *ngIf="breadCrumbFeedbackticketcount == true"> Feedback </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr *ngIf="getTicketsData.length == 0">
+                      <td class="center" colspan="8" id="noData"> No Data Available</td>
+                  </tr>
+
+                  <tr *ngFor="let data of getTicketsData| filter : searchText | paginate: { itemsPerPage: totalItems, currentPage: current_Page,totalItems: itemsPer_Page};let i=index;" class="ticketList" (click)="gotoTicketDetailspage(data)">
+                    <td class="center"><a>{{i+1}}</a></td>
+                    <td class="center"><a>{{data.ticketId}}</a></td>
+                    <td class="center">{{data.customerName}}</td>
+                    <td class="center">{{data.siteName}}</td>                 
+                    <td class="center">{{data.ticketType}}</td>
+                    <td class="center">{{data.pendingDeptOrEmpName }}</td>
+                    <td class="center">
+                      <div class="badge" [ngStyle]="{'color':getColor(data.ticketHighLevelStatus)}">{{data.ticketHighLevelStatus}}</div>
+                    </td>                    
+                    <td class="center">{{data.ticketRecivedDate| date : 'fullDate'}}</td>
+                    <td class="center">{{data.ticketEscalationDate| date : 'fullDate'}}</td> 
+
+                    <td class="center" *ngIf="breadCrumbFeedbackticketcount == true"> {{data.rating}} </td>
+                    <td class="center" *ngIf="breadCrumbFeedbackticketcount == true"> {{data.feedbackDesc}} </td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+           
+            </div>
+
+
+            <div *ngIf="showTableTwo" class="table-responsive" style="max-height: 450px;">
+              <table style="border-radius: 10px;" class="table table-bordered" id="tableExport" *ngIf="getTicketsDataTwo?.length">
+                  <thead>
+                      <tr class="center">
+                          <th style="border: solid 0.5px; white-space: nowrap;">Ticket No</th>
+                          <th style="border: solid 0.5px; white-space: nowrap;">Creation Date</th>
+                          <th style="border: solid 0.5px; white-space: nowrap;">Reply Date</th>
+                          <th style="border: solid 0.5px; white-space: nowrap;">Time Difference</th>
+                          <th style="border: solid 0.5px; white-space: nowrap;">Closed Date</th>
+                          <th style="border: solid 0.5px; white-space: nowrap;">Time Difference</th>
+                          <th style="border: solid 0.5px; white-space: nowrap;">Life Time</th>
+                          <th style="border: solid 0.5px; white-space: nowrap;">Closed By</th>
+                         
+                      </tr>
+                  </thead>
+                  
+                  <tbody>
+                    <tr *ngIf="getTicketsDataTwo.length == 0">
+                      <td class="center" colspan="8"> No Data Available</td>
+                    </tr>
+
+                    <tr *ngFor="let item of getTicketsDataTwo; let i = index;">
+                        <td class="center" style="border: solid 0.5px; white-space: nowrap;">{{item.ticketId}}</td>
+                        <td class="center" style="border: solid 0.5px; white-space: nowrap;">{{item.createdDate| date : 'dd-MM-yyyy h:mm a'}}</td>
+                        <td class="center" style="border: solid 0.5px; white-space: nowrap;">{{item.repliedDate| date : 'dd-MM-yyyy h:mm a'}}</td>
+                        <td class="center" style="border: solid 0.5px; white-space: nowrap;">
+                          <span *ngIf="item.creation_reply != null">{{item.creation_reply +' hrs'}}</span>
+                        </td>
+                        <td class="center" style="border: solid 0.5px; white-space: nowrap;">{{item.resolvedDate| date : 'dd-MM-yyyy h:mm a'}}</td>
+                        <td class="center" style="border: solid 0.5px; white-space: nowrap;">
+                          <span *ngIf="item.reply_close != null">{{item.reply_close +' hrs'}}</span>
+                        </td>
+                        <td class="center" style="border: solid 0.5px; white-space: nowrap;">
+                          <span *ngIf="item.lifeTime != null">{{item.lifeTime +' hrs'}}</span>
+                        </td>
+                        <td class="center" style="border: solid 0.5px; white-space: nowrap;">{{item.closedBy}}</td>
+
+                      
+                    </tr>
+                </tbody>
+              </table>
+            </div><br>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</section>
+

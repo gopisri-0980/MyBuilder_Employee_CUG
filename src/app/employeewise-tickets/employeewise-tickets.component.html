@@ -1,0 +1,100 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+      <div class="content__loader">
+          <div><i class="Favicon"></i></div>
+      </div>
+  </div>
+</div>
+
+<section class="content">
+
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Employee - projectwise tickets</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeclick()"></i> 
+                <span (click)="dashtitle()" style="cursor:pointer;">Ticketing Dashboard</span></a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" style="cursor:pointer;">Employee - projectwise tickets</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body" style="border-radius: 0px;">
+
+
+            <div class="table-responsive" style="overflow: hidden;">
+              <table style="border-radius: 10px;" id="example" *ngIf="employeeprojectwisereports?.length" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr class="center">
+                    <th *ngFor="let item of controllerhead">{{item}}</th>
+                  </tr>
+                </thead>
+                <ng-container *ngFor="let employeeprojectwisereport of employeeprojectwisereports; let i = index;">
+
+
+                  <tr class="customersList"
+                    *ngFor="let sitewiseticketType of employeeprojectwisereport.sitewiseticketTypeArray; let j = index;">
+
+                    <td class="center">{{employeeprojectwisereport.employeename}}</td>
+                    <td class="center" style="text-decoration: underline;cursor: pointer;"
+                      (click)="eventclickfun(i,sitewiseticketType,j,sitewiseticketType, 'Total Tickets')">
+                      {{sitewiseticketType.totalTickets}}</td>
+                    <td class="center"> {{sitewiseticketType.sitename}}</td>
+
+                    <ng-container *ngFor="let ticketType of sitewiseticketType.tickettypearray; let k = index;">
+                      <td class="center" id="tickettypeval">
+                        <span *ngIf="ticketType.ticketType !== 'N/A'">{{ticketType.ticketType}} </span>
+                        <span *ngIf="ticketType.ticketType == 'N/A'"> - </span>
+                      </td>
+                      <td class="center" id="numberofticketsval" style="text-decoration: underline;cursor: pointer;"
+                        (click)="eventclickfun(i,ticketType,k,sitewiseticketType , 'No.of Tickets')">
+                        <span *ngIf="ticketType.numOfTickets !== 'N/A'"> {{ticketType.numOfTickets}} </span>
+                        <span *ngIf="ticketType.numOfTickets == 'N/A'"> - </span>
+                      </td>
+                      <td class="center" id="openticketval" style="text-decoration: underline;cursor: pointer;"
+                        (click)="eventclickfun(i,ticketType,k,sitewiseticketType , 'Open')">
+                        <span *ngIf="ticketType.Open !== 'N/A'"> {{ticketType.Open}} </span>
+                        <span *ngIf="ticketType.Open == 'N/A'"> - </span>
+                      </td>
+                      <td class="center" id="closedticketval" style="text-decoration: underline;cursor: pointer;"
+                        (click)="eventclickfun(i,ticketType,k,sitewiseticketType , 'Closed')">
+                        <span *ngIf="ticketType.close !== 'N/A'"> {{ticketType.close}} </span>
+                        <span *ngIf="ticketType.close == 'N/A'"> - </span>
+                      </td>
+                    </ng-container>
+
+                  </tr>
+                </ng-container>
+
+                <!-- <tbody *ngIf="employeeprojectwisereports.length != 0" class="center">
+                  <tr>
+                    <td class="center" style="font-weight: bold;" *ngFor="let item of TotalData; let i = index;">
+                      {{item}}</td>
+                  </tr>
+
+                </tbody> -->
+
+              </table>
+            </div><br>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,110 @@
+
+<!-- Dep: SALES CRM, Role: SR.CRM EXECUTIVE -->
+<div *ngIf = "depID == '995' && roleID == '1'">
+  <div class="open-card-BG">
+       <app-view-my-tickets></app-view-my-tickets>
+  </div>
+</div> 
+
+<!--Dep: SALES CRM, Role: CRM SALES HEAD -->
+<div *ngIf = "depID == '995' && roleID == '12'">
+  <div class="open-card-BG">
+    <app-escalation-tickets></app-escalation-tickets>
+  </div>
+</div>
+
+<!--Dep: TECH CRM, Role: SR.CRM EXECUTIVE -->
+<div *ngIf = "depID == '994' && roleID == '1'">
+  <div class="open-card-BG">
+    <app-view-my-tickets></app-view-my-tickets>
+  </div>
+</div>
+
+<!--Dep: TECH CRM, Role: TECH CRM HEAD -->
+<div *ngIf = "depID == '994' && roleID == '6'">
+  <div class="open-card-BG">
+    <app-view-my-tickets></app-view-my-tickets>
+  </div>
+</div>
+
+<!--Dep: TECH CRM, Role: CENTRAL TECH CRM -->
+<div *ngIf = "depID == '994' && roleID == '14'">
+  <div class="open-card-BG">
+    <app-escalation-tickets></app-escalation-tickets>
+  </div>
+</div>
+
+<!--Dep: MIS, Role: MIS HEAD -->
+<div *ngIf = "depID == '993'">
+  <div class="open-card-BG">
+    <app-view-my-tickets></app-view-my-tickets>
+  </div>
+</div>
+
+<!--Dep: SALES, Role: SALES HEAD -->
+<div *ngIf = "depID == '991'">
+  <div class="open-card-BG">
+    <app-viewinforequest></app-viewinforequest>
+  </div>
+</div>
+
+<!--Dep: LEGAL, Role: LEGAL HEAD -->
+<div *ngIf = "depID == '990'">
+  <div class="open-card-BG">
+    <app-viewinforequest></app-viewinforequest>
+  </div>
+</div>
+
+<!--Dep: ACCOUNTS, Role: ACCOUNTS HEAD -->
+<div *ngIf = "depID == '997'">
+  <div class="open-card-BG">
+    <app-view-my-tickets></app-view-my-tickets>
+  </div>
+</div>
+
+<!--Dep: ADMIN, Role: ADMIN -->
+<div *ngIf = "depID == '989'">
+  <div class="open-card-BG">
+    <!-- <section class="content">
+      <ul class="breadcrumb breadcrumb-style ">
+        <li class="breadcrumb-item">
+          <h4 class="page-title">View All Tickets</h4>
+        </li>
+      </ul>           
+    </section> -->
+    <app-viewtickets></app-viewtickets>
+  </div>
+</div>
+
+<!--Dep: MANAGEMENT, Role: ASSISTENT GENERAL MANAGER, DIRECTORS, CHIEF  MANAGING DIRECTOR -->
+<div *ngIf = "depID == '988'">
+  <div class="open-card-BG">
+    <app-viewtickets></app-viewtickets>
+       <!-- <app-escalation-tickets></app-escalation-tickets> -->
+       <!-- <app-ticketing-management-dashboard></app-ticketing-management-dashboard> -->
+  </div>
+</div>
+
+<!--Dep: MARKETING, Role: MARKETING EXECUTIVE -->
+<div *ngIf = "depID == '996'">
+  <div class="open-card-BG">
+    <app-all-company-notificationslist></app-all-company-notificationslist>
+  </div>
+</div>
+
+<!--Dep: EXECUTION, Role: EXECUTION HEAD -->
+<div *ngIf = "depID == '998'">
+  <div class="open-card-BG">
+    <app-view-my-tickets></app-view-my-tickets>
+  </div>
+</div>
+
+<!--Dep: INTERNAL AUDIT, Role: INTERNAL AUDIT HEAD -->
+<div *ngIf = "depID == '999'">
+  <div class="open-card-BG">
+    <app-view-my-tickets></app-view-my-tickets>
+  </div>
+</div>
+
+
+

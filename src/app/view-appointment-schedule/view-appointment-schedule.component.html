@@ -1,0 +1,713 @@
+<head>
+  <style>
+    ul:not(.browser-default)>li {
+      list-style-type: none;
+      padding: 10px;
+    }
+
+    .pclass {
+      font-size: 15px;
+      font-family: 'Poppins';
+      font-weight: 600;
+      color: #607d8b;
+
+
+    }
+
+    .go-corner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      overflow: hidden;
+      top: 0;
+      right: 0;
+      background-color: #00838d;
+      border-radius: 0 4px 0 32px;
+    }
+
+    .go-arrow {
+      margin-top: -4px;
+      margin-right: -4px;
+      color: white;
+      font-family: courier, sans;
+    }
+
+    .card1 {
+      display: block;
+      position: relative;
+
+      background-color: #f2f8f9;
+      border-radius: 4px;
+      padding: 32px 24px;
+      margin: 12px;
+      text-decoration: none;
+      z-index: 0;
+      overflow: hidden;
+
+    }
+
+    .form-check,
+    label {
+      font-size: 16px;
+      line-height: 1.42857;
+      font-weight: 600;
+    }
+
+    body {
+      background: #f3f3f3;
+      padding: 30px 20px;
+    }
+
+    .dashboard-cards {
+      position: relative;
+      padding-bottom: 50px;
+      margin: 0 !important;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .dashboard-cards .card {
+      background: #ffffff;
+      display: inline-block;
+      perspective: 1000;
+      z-index: 20;
+      padding: 0 !important;
+      margin: 5px 5px 10px 5px;
+      position: relative;
+      text-align: left;
+      transition: all 0.3s 0s ease-in;
+      z-index: 1;
+      width: calc(33.33333333% - 10px);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      height: 200px;
+    }
+
+    .dashboard-cards .card:hover {
+      box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+      transition: all 0.3s ease;
+      /* background-image: linear-gradient(to right,#25aae1,#30dd8a,#30dd8a,#2bb673);
+  color:#FFF; */
+    }
+
+    .card-title {
+      margin-bottom: 0 !important;
+      ;
+    }
+
+    .dashboard-cards .card .card-title {
+
+      padding: 20px 15px;
+      position: relative;
+      z-index: 0;
+    }
+
+    .dashboard-cards .card .card-title h2 {
+      font-size: 18px;
+      letter-spacing: -0.05em;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins';
+
+    }
+
+    .dashboard-cards .card .card-title h2 small {
+      display: block;
+      font-size: 14px;
+      margin-top: 8px;
+      letter-spacing: -0.025em;
+    }
+
+    .dashboard-cards .card .card-description {
+      position: relative;
+      font-size: 14px;
+      border-top: 1px solid #ddd;
+      padding: 10px 15px 0 15px;
+    }
+
+    .dashboard-cards .card .card-actions {
+      box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+      padding: 10px;
+      text-align: center;
+    }
+
+
+    .dashboard-cards .no-touch .dashboard-cards.showing .card:hover {
+      opacity: 0.94;
+      transform: scale(0.92);
+    }
+
+    .dashboard-cards .card.d-card-show {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+
+    .dashboard-cards .card.d-card-show .card-flap {
+      background: #ffffff;
+      transform: rotateX(0deg);
+    }
+
+    .dashboard-cards .card.d-card-show .flap1 {
+      transition: all 0.3s 0s ease-out;
+    }
+
+    .dashboard-cards .card.d-card-show .flap2 {
+      transition: all 0.3s 0.2s ease-out;
+    }
+
+    .dashboard-cards .card .task-count {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 22px;
+      right: 10px;
+      background: #ecf0f1;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 100%;
+      color: #333333;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .dashboard-cards .task-list {
+      padding: 0 !important;
+    }
+
+    .dashboard-cards .task-list li {
+      padding: 10px 0;
+      padding-left: 10px;
+      margin: 3px 0;
+      list-style-type: none;
+      border-bottom: 1px solid #e9ebed;
+      border-left: 3px solid #f36525;
+      transition: all 0.2s ease;
+    }
+
+    .dashboard-cards .task-list li:hover {
+      background: #ecf0f1;
+      transition: all 0.2s ease;
+    }
+
+    .dashboard-cards .task-list li span {
+      float: right;
+      color: #f36525;
+      margin-right: 5px;
+    }
+
+    .dashboard-cards.showing .card.d-card-show .task-count {
+      color: #ffffff;
+      background: #f36525;
+      transition: all 0.2s ease;
+    }
+
+    .dashboard-cards .card-actions .btn {
+      color: #333;
+    }
+
+    .dashboard-cards .card-actions .btn:hover {
+      color: #f36525;
+    }
+
+    .fromdateval {
+      width: 100%;
+      text-align: center;
+      position: relative;
+      top: 11px;
+      color: orangered;
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+
+    .my__textoverflow {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 200px;
+      display: block;
+      z-index: 99999999;
+    }
+
+    .prgclass {
+      position: relative;
+      top: -12px;
+      font-size: 17px;
+      color: #009688;
+      font-weight: 600;
+    }
+
+    ::ng-deep .my-class .modal-dialog {
+      max-width: 30%;
+      width: 30%;
+
+    }
+
+    .nodata {
+      position: relative;
+      font-size: 18px;
+      color: #607d8b;
+      /* font-weight: 600; */
+      font-family: 'Poppins';
+      left: 39px;
+      top: 5px;
+    }
+
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      border-radius: 4px;
+      margin-right: 2px;
+      opacity: 0.9;
+      filter: invert(0.8);
+      position: absolute;
+      right: 35px;
+    }
+
+
+    /* input[type="date"]::-webkit-datetime-edit,
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button {
+      color: #fff;
+      position: relative;
+    }
+
+    input[type="date"]::-webkit-datetime-edit-year-field {
+      position: absolute !important;
+      border-left: 1px solid #8c8c8c;
+      padding: 2px;
+      color: #000;
+      left: 56px;
+    }
+
+    input[type="date"]::-webkit-datetime-edit-month-field {
+      position: absolute !important;
+      border-left: 1px solid #8c8c8c;
+      padding: 2px;
+      color: #000;
+      left: 26px;
+    }
+
+
+    input[type="date"]::-webkit-datetime-edit-day-field {
+      position: absolute !important;
+      color: #000;
+      padding: 2px;
+      left: 4px;
+
+    } */
+
+    .dot {
+      height: 25px;
+      width: 25px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Appointment Time Slots </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer" (click)="homeClick()"></i> View Appointment Time Slots
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="maindivclass" style="position: relative; top: 11px;">
+          <form [formGroup]="fg">
+            <div class="row clearfix">
+
+              <div class="col-sm-4">
+                <div class="form-line">
+                  <label>Select Project:</label>
+                  <div class="center">
+                    <select style="width:100%;" class="form-group" id="projectID" single>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="form-line">
+                  <label>Start Date:</label>
+                  <div class="center">
+                    <span class="material-icons" style="position: absolute;
+                    right: 19px;top: 35px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+                    <input type="date" placeholder="Select Date"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                      class=" form-control" id="fromDate" formControlName="from">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="form-line">
+                  <label>End Date:</label>
+                  <div class="center">
+                    <span class="material-icons" style="position: absolute;
+                    right: 19px;top: 35px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+                    <input type="date" placeholder="Select Date"
+                      style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                      class=" form-control" id="toDate" formControlName="to">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="form-line">
+                  <p class="fieldHeaders">
+                    <label style="position: relative;top: 10px;">Select Status:</label>
+                  </p>
+                  <div class="center">
+                    <select style="width:100%;" class="form-group" id="StatusId" single>
+                      <option value="select">--Select--</option>
+                      <option value="All">All</option>
+                      <option value="active">Active</option>
+                      <option value="Booked">Booked</option>
+                      <option value="Deleted">Deleted</option>
+                      <option value="Hold">Hold</option>
+                      <option value="Active and Completed">Active and Completed</option>
+                      <option value="Booked and Completed"> Booked and Completed</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+            </div> <br>
+
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromdateval">Please add a valid from and to date</p>
+            <div style="width:100%;text-align:center;">
+              <button type="button" class="btn-hover color-1" style="width: 200px;font-size: 15px;
+              font-family: 'Poppins';" (click)="searchfunction()">Search</button>
+
+              <button type="button" class="btn-hover color-1" style="width: 200px;font-size: 15px;
+              font-family: 'Poppins';" (click)="ClearAll()">Clear All</button>
+
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <div class="card-body">
+        <p class="titileclassproject"> View Appointment Time Slots : </p>
+
+
+        <div class="color-swatch" title="Selected color">
+          <div class="js-swatch js-star" style="background-color: rgb(46, 134, 193);"></div>
+        </div>
+
+
+        <div style="width:100%;text-align:center;" *ngIf="loaderhideme">
+          <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+        </div>
+
+
+        <div class='row dashboard-cards' *ngIf="loaderhideme == false && Tablecontroller.length !== 0">
+          <div class='card col-md-4 card1'
+            *ngFor="let card of Tablecontroller| paginate: { itemsPerPage: 9, currentPage: p }; let i = index">
+
+
+            <div class='card-title' *ngIf="card.slotStatusName == 'Booked'"
+              style="background-color: #f5cb95;height: 220px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project Name &nbsp; : </span>
+                <span style="color:#17202A;">{{card.siteName}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Date &nbsp; : </span>
+                <span style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp; : </span>
+                <span style="color:#17202A;">{{card.slotTime}}</span>
+              </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp; : </span>
+                <span style="color:#17202A;text-transform: capitalize;">{{card.slotStatusName}}</span>
+              </p>
+
+
+              <p><i class="fas fa-trash-alt" style="position: absolute;
+                right: 6px;bottom: 33px;font-size: 20px;color: var(--danger);background: #eaf9fb;
+                border-radius: 18px; padding: 5px;" (click)="open(content)"></i></p>
+            </div>
+
+
+            <div class='card-title' *ngIf="card.slotStatusName == 'active'" style="background: #10e810;height: 220px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project Name &nbsp; : </span>
+                <span style="color:#17202A;">{{card.siteName}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Date &nbsp; : </span>
+                <span style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp; : </span>
+                <span style="color:#17202A;">{{card.slotTime}}</span>
+              </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp; : </span>
+                <span style="color:#17202A;text-transform: capitalize;">{{card.slotStatusName}}</span>
+              </p>
+
+              <p><i class="fas fa-trash-alt" style="position: absolute;
+                right: 6px;bottom: 33px;font-size: 20px;color: var(--danger);background: #eaf9fb;
+                border-radius: 18px; padding: 5px;" (click)="open(content)"></i></p>
+            </div>
+
+
+
+
+            <div class='card-title' *ngIf="card.slotStatusName == 'Completed'"
+              style="background: #FF5858;height: 220px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project Name &nbsp; : </span>
+                <span style="color:#17202A;">{{card.siteName}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Date &nbsp; : </span>
+                <span style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp; : </span>
+                <span style="color:#17202A;">{{card.slotTime}}</span>
+              </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp; : </span>
+                <span style="color:#17202A;text-transform: capitalize;">{{card.slotStatusName}}</span>
+              </p>
+
+              <!-- <p><i class="fas fa-trash-alt" style="position: absolute;
+                right: 6px;bottom: 33px;font-size: 20px;color: var(--danger);background: #eaf9fb;
+                border-radius: 18px; padding: 5px;" (click)="open(content)"></i></p> -->
+            </div>
+
+
+
+            <div class='card-title' *ngIf="card.slotStatusName == 'Hold'" style="background: #6495ED;height: 220px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project Name &nbsp; : </span>
+                <span style="color:#17202A;">{{card.siteName}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Date &nbsp; : </span>
+                <span style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp; : </span>
+                <span style="color:#17202A;">{{card.slotTime}}</span>
+              </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp; : </span>
+                <span style="color:#17202A;text-transform: capitalize;">{{card.slotStatusName}}</span>
+              </p>
+
+              <p><i class="fas fa-trash-alt" style="position: absolute;
+                right: 6px;bottom: 33px;font-size: 20px;color: var(--danger);background: #eaf9fb;
+                border-radius: 18px; padding: 5px;" (click)="open(content)"></i></p>
+            </div>
+
+
+
+            <div class='card-title' *ngIf="card.slotStatusName == 'Deleted'"
+              style="background: var(--success);height: 220px;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project Name &nbsp; : </span>
+                <span style="color:#17202A;">{{card.siteName}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Date &nbsp; : </span>
+                <span style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp; : </span>
+                <span style="color:#17202A;">{{card.slotTime}}</span>
+              </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp; : </span>
+                <span style="color:#17202A;text-transform: capitalize;">{{card.slotStatusName}}</span>
+              </p>
+
+              <!-- <p><i class="fas fa-trash-alt" style="position: absolute;
+                right: 6px;bottom: 33px;font-size: 20px;color: var(--danger);background: #eaf9fb;
+                border-radius: 18px; padding: 5px;" (click)="open(content)"></i></p> -->
+            </div>
+
+
+
+            <div class='card-title' *ngIf="card.slotStatusName == 'Active and Completed' "
+              style="height: 220px;background: #ef1e09;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project Name &nbsp; : </span>
+                <span style="color:#17202A;">{{card.siteName}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Date &nbsp; : </span>
+                <span style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp; : </span>
+                <span style="color:#17202A;">{{card.slotTime}}</span>
+              </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp; : </span>
+                <span style="color:#17202A;text-transform: capitalize;">{{card.slotStatusName}}</span>
+              </p>
+
+              <!-- <p><i class="fas fa-trash-alt" style="position: absolute;
+                right: 6px;bottom: 33px;font-size: 20px;color: var(--danger);background: #eaf9fb;
+                border-radius: 18px; padding: 5px;" (click)="open(content)"></i></p> -->
+            </div>
+
+
+
+            <div class='card-title' *ngIf="card.slotStatusName == 'Booked and Completed' "
+              style="height: 220px;background: #E6B0AA;">
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Project Name &nbsp; : </span>
+                <span style="color:#17202A;">{{card.siteName}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Date &nbsp; : </span>
+                <span style="color:#17202A;">{{card.apptmtDate | date : 'dd MMMM yyy'}}</span>
+              </p>
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Appointment Time &nbsp; : </span>
+                <span style="color:#17202A;">{{card.slotTime}}</span>
+              </p>
+
+              <p class="pclass"> <span style="color: rgba(0, 0, 0, 0.54);">Status &nbsp; : </span>
+                <span style="color:#17202A;text-transform: capitalize;">{{card.slotStatusName}}</span>
+              </p>
+
+              <!-- <p><i class="fas fa-trash-alt" style="position: absolute;
+                right: 6px;bottom: 33px;font-size: 20px;color: var(--danger);background: #eaf9fb;
+                border-radius: 18px; padding: 5px;" (click)="open(content)"></i></p> -->
+            </div>
+
+
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">View Appointment Time Slots</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p style="color: #137b89;font-size: 14px;">Do you really want to Delete ?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn-hover color-1" (click)="deletebtnfun(card)">Delete</button>
+                <button type="button" class="btn-hover color-1" (click)="modal.close('Save click')">Cancel</button>
+              </div>
+            </ng-template>
+
+
+
+          </div>
+          <div>
+
+
+
+
+
+            <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+          </div>
+
+          <div *ngIf="Tablecontroller?.length">
+            <div style="text-align: center;position: relative;top: 36px;">
+              <span class="dot" style="background:#ef1e09;"></span> <span style="position: relative;
+              top: -8px;left: 6px;">Active and Completed</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              <span class="dot" style="background-color: #E6B0AA;"></span> <span style="position: relative;
+              top: -8px;left: 6px;"> Booked and Completed</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              <span class="dot" style="background-color: #f5cb95;"></span> <span style="position: relative;
+              top: -8px;left: 6px;">Booked</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+              <span class="dot" style="background-color: #10e810;"></span> <span style="position: relative;
+              top: -8px;left: 6px;">Active</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              <span class="dot" style="background-color: #6495ED;"></span> <span style="position: relative;
+              top: -8px;left: 6px;">Hold</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card" *ngIf="Tablecontroller.length == 0  && loaderhideme == false">
+          <div class="card-body">
+            <div>
+              <p class="nodata">No Appointments scheduled</p>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+</section>
+<section>
+  <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="imagemodal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Appointment Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="height:500px;overflow: scroll;">
+
+            <div style="padding: 20px;background: #faf7f7; border-radius: 10px;">
+              <p class="textmessage"> Hey! Your meeting with below customer(s) has ended. Please "Proceed" to change the
+                status and include Your Minutes of Meeting, Which may help you further.</p>
+              <div *ngFor="let p of popres;let i = index;">
+                <div>
+
+                  <div class="row" style="line-height: 30px;border: 1px solid #f2eeee;">
+                    <div class="col-sm-5"> {{i + 1}} &nbsp; . <b style="font-weight: 600;">Customer Name &nbsp;:
+                        &nbsp;</b> {{p.custName}} </div>
+                    <div class="col-sm-4"> <b style="font-weight: 600;">Appointment Time &nbsp; : &nbsp;</b>
+                      {{p.apptmtDate | date : 'dd MMMM yyy'}}</div>
+                    <div class="col-sm-3">{{p.slotTime}}</div>
+                  </div>
+
+                  <!-- <p class="textmessage"> </p> -->
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-hover color-1" (click)="paymentProceed()">Proceed</button>
+            <button type="button" class="btn-hover color-1" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

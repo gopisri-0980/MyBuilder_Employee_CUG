@@ -1,0 +1,211 @@
+<style>
+  ::placeholder {
+    color: #bbb;
+  }
+</style>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Add Bank Account Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer" (click)="homeClick()"></i>Add Bank Account Details</a>
+            </li>
+
+            <li class="breadcrumb-item active" style="cursor:pointer;" (click)="view_and_update_account()">
+              View  Bank Account Details
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body" style="width: 80%;margin-left: 10%;margin-top: 30px;">
+        <div class="row clearfix" style="position: relative;top: -10px;">
+
+          <div class="col-sm-4">
+            <label style="font-weight: bold;font-size: 13px!important;" class="required"> Enter Account Holder
+              Name:</label>
+            <div class="form-line">
+              <input type="text"
+                style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;font-size: 14px;"
+                class=" form-control" placeholder="Enter Account Holder Name" id="Account_Holder_Name"
+                (keypress)="keyPress($event)">
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <label style="font-weight: bold;font-size: 13px!important;" class="required">Enter Account Number:</label>
+            <div class="form-line">
+              <input type="text"
+                style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;font-size: 14px;"
+                class=" form-control" placeholder="Enter Account Number" id="Enter_Account_Number"
+                (keypress)="pincodefun($event);" (blur)="autocompletedfun($event)" maxlength="20">
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-size: 13px!important;" class="required"><b>Select Bank:</b></label>
+              <div class="center">
+                <angular2-multiselect [data]="controller_bank_list" [settings]="singledd3"
+                  (onSelect)="bank_selectedSIDs($event);" (onDeSelect)="bank_onItemDeSelect($event)"
+                  [(ngModel)]="bank_list_name">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.bankName }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.bankName }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-sm-4">
+            <label style="font-weight: bold;font-size: 13px!important;" class="required">Enter Branch Name:</label>
+            <div class="form-line">
+              <input type="text"
+                style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;font-size: 14px;"
+                class=" form-control" placeholder="Enter Branch Name" id="Enter_Branch_Name"
+                (keypress)="keyPress1($event)">
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <label style="font-weight: bold;font-size: 13px!important;" class="required">Enter IFSC Code:</label>
+            <div class="form-line">
+
+              <form [formGroup]="ifscForm">
+                <input type="text" formControlName="ifscCode"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;font-size: 14px;"
+                  class=" form-control" placeholder="Enter IFSC Code" id="Enter_ISFC_Code" maxlength="11">
+
+                <div class="text-danger" *ngIf="ifscForm.get('ifscCode').invalid && ifscForm.get('ifscCode').touched">
+                  <div *ngIf="ifscForm.get('ifscCode').errors?.pattern" class="text-danger"> IFSC code pattern
+                    (SBIN0000400)</div>
+                </div>
+
+
+              </form>
+
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-size: 13px!important;" class="required" class="required"><b>Select Project:</b></label>
+              <div class="center">
+                <angular2-multiselect [data]="controller_sites_list" [settings]="singledd1"
+                  (onSelect)="sites_selectedSIDs($event);" (onDeSelect)="sites_onItemDeSelect($event)"
+                  [(ngModel)]="project_list_name">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="row">
+
+
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-size: 13px!important;" class="required"><b>Select Setoff Type:</b></label>
+              <div class="center">
+                <angular2-multiselect [data]="controller_payment_setoff_list" [settings]="singledd2"
+                  (onSelect)="setoff_selectedSIDs($event);" (onDeSelect)="setoff_onItemDeSelect($event)"
+                  [(ngModel)]="setoff_list_name">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.key }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.key }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-size: 13px!important;" class="required"><b>Select Sale Owner Type:</b></label>
+              <div class="center">
+                <angular2-multiselect [data]="controller_owner_type_list" [settings]="singledd4"
+                  (onSelect)="owner_selectedSIDs($event);" (onDeSelect)="owner_onItemDeSelect($event)"
+                  [(ngModel)]="owner_list_name">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.flatSaleOwner }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.flatSaleOwner }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-size: 13px!important;" class="required"><b>Enter Address:</b></label>
+              <div class="center">
+
+                <textarea cols="3" rows="3" id="address_data" placeholder="Enter Address"></textarea>
+
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+
+        <div style="width: 100%;text-align: center">
+          <button type="submit" class="btn-hover color-1" (click)="submitfunction()">Submit</button>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>

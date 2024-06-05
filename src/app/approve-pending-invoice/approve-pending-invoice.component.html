@@ -1,0 +1,82 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Approve Pending Invoice</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" ></i> Transactions</a>
+            </li>
+
+            <li class="breadcrumb-item active">Approve Pending Invoice</li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="table-responsive" style="overflow-x:revert!important;">
+          <table id="viewpendingdata" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">S.NO</th>
+                <!-- <th class="center">Action</th> -->
+                <th class="center">Invoice Type</th>
+                <th class="center">creation date</th>
+                <th class="center">Customer Name</th>
+                <th class="center">Flat No</th>
+                <th class="center">Amount</th>
+                <th class="center">Project</th>
+                
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of controller; let i=index" style="cursor: pointer;" (click)="viewdetails(item)">
+                <td class="center">{{i+1}}</td>
+                <!-- <td class="center">
+                  <input type="checkbox" style="width:20px;height:20px;">
+                </td> -->
+                <td class="center">{{item.invocieType}}</td>
+                <td class="center">{{item.createdDate| date:'dd-MM-yyy '}}</td>
+                <td class="center">{{item.customerName}}</td>
+                <td class="center">{{item.flatNo}}</td>
+                <td class="center">{{item.totalAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.siteName}}</td>
+              
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!-- <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2">
+            <button type="button" style="margin-top: 1px;position: relative;top: 16px;"
+              class="btn-hover color-1">Approve</button>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" style="margin-top: 1px;position: relative;top: 16px;"
+              class="btn-hover color-1">Reject</button>
+          </div>
+          
+          <div class="col-sm-4"></div>
+
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,273 @@
+<style>
+  textarea {
+    overflow: auto;
+    resize: vertical;
+    height: 50px;
+    border-radius: 5px;
+    border-color: #ddd5d5;
+
+  }
+
+  .trashicon {
+    position: relative;
+    left: 51px;
+    color: #2196F3;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 23px;
+    width: 30px;
+    height: 30px;
+  }
+</style>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Request for interest waiver</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a (click)="homeClick()"><i class="fas fa-home" style="cursor:pointer;"></i> View Customer Data </a>
+            </li>
+            <li class="breadcrumb-item active">Request for interest waiver</li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+      <div class="card">
+        <div class="card-body">
+          <table id="tableExport"
+            class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+            <thead>
+              <tr>
+                <th class="center">S.NO</th>
+
+                <th class="center">Milestone Name</th>
+                <!-- <th class="center">Due%</th>
+                <th class="center">Completion Status</th> -->
+                <th class="center">Demand Note Date</th>
+                <th class="center">Due Date</th>
+                <th class="center">Demand Amount</th>
+                <th class="center">Amount Paid</th>
+                <th class="center">Amount Due</th>
+                <th classs="center">Interest Amount</th>
+                <th class="center"> Interest Amount Paid</th>
+                <th class="center">Interest Amount Due</th>
+                <!-- <th class="center">Demand Amount Cleared Date</th>
+                <th class="center">Payment Aging</th> -->
+                <th class="center">Interest Days</th>
+                <th class="center"> Waiver request</th>
+
+                <th class="center"> Interest Waiver Amount </th>
+                <th class="center"> interest Waiver Pending Amount </th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let item of milestonedetails; let i=index">
+                <td class="center">{{i+1}}</td>
+                <td class="center">{{item.mileStoneName}}</td>
+                <!-- <td class="center">{{item.paymentPercentageInMileStone}}</td>
+                <td class="center">{{item.mileStoneStatus}}</td> -->
+                <td class="center" *ngIf="item.demandNoteDate == null">-</td>
+                <td class="center" *ngIf="item.demandNoteDate != null">{{item.demandNoteDate| date:'dd-MM-yyyy'}}
+                </td>
+                <td class="center">{{item.dueDate|date:'dd-MM-yyyy'}}</td>
+                <td class="center" *ngIf="item.documentLocation == null">{{item.mileStoneAmount.toLocaleString('en-IN')}}</td>
+                <td class="center" style="text-decoration: underline;cursor: pointer;"
+                  (click)="milestoneamountreceipt(item.documentLocation)" *ngIf="item.documentLocation != null">
+                  {{item.mileStoneAmount.toLocaleString('en-IN')}}</td>
+                <td *ngIf="item.mileStonePaidAmount != '0.00'" class="center"
+                  style="text-decoration: underline;cursor: pointer;"
+                  (click)="generateRecetitformilestone(item.paymentScheduleId)">{{item.mileStonePaidAmount.toLocaleString('en-IN')}}</td>
+                <td *ngIf="item.mileStonePaidAmount == '0.00'" class="center">{{item.mileStonePaidAmount.toLocaleString('en-IN')}}</td>
+                <td class="center" *ngIf="item.milestoneAmountDue != null">{{item.milestoneAmountDue.toLocaleString('en-IN')}}</td>
+                <td class="center" *ngIf="item.milestoneAmountDue == null">-</td>
+
+
+
+                <td class="center" *ngIf="item.totalPenalityAmount != null">{{item.totalPenalityAmount.toLocaleString('en-IN')}}</td>
+                <td class="center" *ngIf="item.totalPenalityAmount == null">-</td>
+
+                <td class="center" *ngIf="item.totalPenalityPaidAmount != null">{{item.totalPenalityPaidAmount.toLocaleString('en-IN')}}</td>
+                <td class="center" *ngIf="item.totalPenalityPaidAmount == null">-</td>
+
+
+                <td class="center" *ngIf="item.totalPendingPenaltyAmount != null">{{item.totalPendingPenaltyAmount.toLocaleString('en-IN')}}
+                </td>
+                <td class="center" *ngIf="item.totalPendingPenaltyAmount == null">-</td>
+
+                <!-- <td class="center" *ngIf="item.milestoneLastReceiptDate != null">{{item.milestoneLastReceiptDate|
+                  date:'dd-MM-yyyy'}}</td>
+                <td class="center" *ngIf="item.milestoneLastReceiptDate == null">-</td>
+                <td class="center" *ngIf="item.daysDiffInDN_Date_AndLastReceipt == null">-</td>
+                <td class="center" *ngIf="item.daysDiffInDN_Date_AndLastReceipt != null">
+                  {{item.daysDiffInDN_Date_AndLastReceipt}}</td> -->
+
+                <td class="center" *ngIf="item.daysDelayed == null">-</td>
+                <td class="center" *ngIf="item.daysDelayed != null">
+                  {{item.daysDelayed}}</td>
+
+                <td class="center" *ngIf="item.totalPenalityAmount != null">
+                  <input type="tel" class="demo" [(ngModel)]="milestonedetails[i].value" maxlength="15"
+                    (keypress)="mobilenumberfun($event)" (paste)="pastemobilenumEvent($event)">
+                </td>
+                <td class="center" *ngIf="item.totalPenalityAmount == null">-</td>
+
+
+                <td class="center" *ngIf="item.interestWaiverAdjAmount == null">-</td>
+                <td class="center" *ngIf="item.interestWaiverAdjAmount != null">
+                  {{item.interestWaiverAdjAmount.toLocaleString('en-IN')}}</td>
+
+                  <td class="center" *ngIf="item.interestWaiverPendingAmount == null">-</td>
+                  <td class="center" *ngIf="item.interestWaiverPendingAmount != null">
+                    {{item.interestWaiverPendingAmount.toLocaleString('en-IN')}}</td>
+                    
+
+              </tr>
+
+
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <td colspan="7">Total</td>
+                <td class="center"> {{Totalforinterest.toFixed(2)}} </td>
+                <td class="center">{{interestamountpaid.toFixed(2)}}</td>
+                <td class="center">{{interestamountdue.toFixed(2)}}</td>
+                <td></td>
+                <td></td>
+                <td class="center">{{interestWaiverAdjAmount.toFixed(2)}}</td>
+                <td class="center">{{interestWaiverPendingAmount.toFixed(2)}}</td>
+              </tr>
+            </tfoot>
+          </table>
+
+
+
+
+          <div class="row">
+            <div class="col-sm-2" style="font-weight: 600;"> Waiver Reason </div>
+            <div class="col-sm-1">:</div>
+            <div class="col-sm-5"> <textarea rows="5" cols="5" id="waiverreason"></textarea></div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-sm-2" style="font-weight: 600;"> Attachment </div>
+            <div class="col-sm-1">:</div>
+            <div class="col-sm-5">
+
+              <input type='file' (change)="onSelectFile($event)" multiple id="fileInputId"> <br />
+              <div class="container" style="position: relative;
+                top: 22px;display: inline-flex;margin-top: 20px;">
+                <div *ngFor='let url of urls; let i = index;' style="margin-left: 20px;min-width: 20%;">
+                  <span *ngIf="url.Type == 'jpg' || url.Type =='png' || url.Type == 'svg' || url.Type == 'jpeg'">
+                    <img [src]="url.upload" height="150" width="150" (click)="fileClickfun(url.upload , url.Type)"
+                      style="cursor:pointer;">
+                    <br />
+                    <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)"
+                      style="cursor:pointer;">
+                  </span>
+                  <span
+                    *ngIf="url.Type == 'docx' || url.Type =='exe' || url.Type == 'N/A' || url.Type == 'pdf' ||  url.Type == 'xlsx' ||
+                            url.Type == 'mp4' || url.Type == 'txt' || url.Type == 'gif' || url.Type == 'doc' || url.Type == 'doc' || url.Type == 'zip' || url.Type == 'xls' || url.Type == 'dwg' ">
+                    <img src="assets/images/file1.png" height="150" width="150"
+                      (click)="fileClickfun(url.upload , url.Type)" style="cursor:pointer;">
+                    <br />
+                    <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)"
+                      style="cursor:pointer;">
+                  </span>
+
+                  <p style="position: relative;
+                        text-align: center;">{{url.Name}}</p>
+                </div>
+                <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body" style="text-align: center;">
+                        <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                        <object style="width:100%!important;" height="500" [attr.data]="fileName"
+                          type={{filetypeurlsplit1}}
+                          *ngIf="filesplitdata !== 'image' &&  filetypeurlsplit1 == 'application/pdf'"></object>
+
+
+                        <img [src]="imgsrc" height="450" style="width:auto" *ngIf="filesplitdata == 'image'">
+
+                        <a [href]="fileUrl" download="file.txt" *ngIf="this.filetypeurlsplit1 == 'text/plain'"
+                          style="font-size: 20px;">Download
+                          file</a>
+
+                        <a [href]="fileUrl" download="file.docx"
+                          *ngIf="this.filetypeurlsplit1 == 'application/octet-stream' && extensiontype == 'docx'"
+                          style="font-size: 20px;">Download file</a>
+
+                        <a [href]="fileUrl" download="file.doc"
+                          *ngIf=" this.filetypeurlsplit1 == 'application/octet-stream' && extensiontype == 'doc'"
+                          style="font-size: 20px;">Download file</a>
+
+                        <a [href]="fileUrl" download="file.xlsx"
+                          *ngIf=" this.filetypeurlsplit1 == 'application/octet-stream' && extensiontype == 'xlsx'"
+                          style="font-size: 20px;">Download file</a>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div> <br>
+
+
+          <!-- <div class="row">
+            <div class="col-sm-2" style="font-weight: 600;"> Preveious Comments </div>
+            <div class="col-sm-1">:</div>
+            <div class="col-sm-5"> <textarea rows="5" cols="5"></textarea></div>
+          </div> <br> -->
+
+          <div class="row">
+            <div class="col-sm-2" style="font-weight: 600;"> Comments </div>
+            <div class="col-sm-1">:</div>
+            <div class="col-sm-5"> <textarea rows="5" cols="5" id="Comments"></textarea></div>
+          </div>
+
+
+
+          <!-- <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2">
+        <button type="button" style="margin-top: 1px;position: relative;top: 16px;"
+          class="btn-hover color-1" (click)="Approvefun('Approve')">Approve</button>
+      </div>
+      <div class="col-sm-2">
+        <button type="button" style="margin-top: 1px;position: relative;top: 16px;"
+          class="btn-hover color-1" (click)="Approvefun('Reject')">Reject</button>
+      </div>
+      <div class="col-sm-4"></div>
+    </div> -->
+
+          <div style="width:100%;text-align: center;">
+            <button type="button" class="btn-hover color-1" (click)="Submitfun()">Submit</button>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>

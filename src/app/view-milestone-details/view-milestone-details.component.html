@@ -1,0 +1,130 @@
+<section class="content">
+  <div class="container-fluid">
+    
+          <div class="block-header">
+                  <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                          <ul class="breadcrumb breadcrumb-style ">
+                              <li class="breadcrumb-item">
+                                  <h4 class="page-title">View Milestone</h4>
+                              </li>
+                              <li class="breadcrumb-item bcrumb-1">
+                                  <a>
+                                      <i class="fas fa-home" (click)="homeClick()"></i>Milestones</a>
+                              </li>
+                              <li class="breadcrumb-item active">View Milestone</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+      <div class="card">
+          <div class="card-body">
+
+              <div class="row clearfix">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="form-line">
+                    <p class="fieldHeaders"> 
+                      <b>Select Project:</b>
+                    </p>
+                    <select style="width:100%;" class="form-group states" id="projectID" single>
+                      <option value="select">--Select--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-3"></div>
+              </div><br>      
+             
+              <div class="row clearfix aliasNamesDiv" id="aliasNamesID">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 aliasNames">
+                  <span style="font-weight: bold;">Milestone alias names:</span><br>
+                  <li style="cursor: pointer;" *ngFor = "let item of availableAliasNames" [class.selectedname]="item.mileStoneAliasName == milestoneAlias" (click)="blocksClickEvent(item)">
+                    <!-- (click)="blocksClickEvent(item.mileStoneAliasName+'-'+item.finMilestoneClassifidesId+'-'+item.siteId+'-'+item.siteName)" -->
+                    <a  href="#" style="text-decoration: underline; cursor: pointer; pointer-events: none;">{{item.mileStoneAliasName}}</a><br> 
+                  </li>
+                </div>
+                <div class="col-sm-4"></div>
+              </div><br>
+               <div id="milestonediv" class="row clearfix" style="display:none" >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="form-line">
+                    <p class="fieldHeaders">
+                      <b>*Select Milestone Type:</b>
+                    </p>
+                    <div class="center">
+                      <select style="width:100%;" class="form-group" id="milestonetypeID" single disabled>
+                        <option value="select">--Select--</option>
+                        <option value=181>Regular</option>
+                        <option value=182>Customized</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3"></div>
+              </div><br>
+              
+<!-- Table code start -->
+    <form enctype="multipart/form-data" id="milestone_blocks_tables" style="display: none;">
+      <table *ngIf="milestonedemand_details != '' "class="table table-bordered tabletrClass"  id="tbl_posts">
+        <thead>
+          <tr>
+          <th class="center">S.NO</th> 
+          <th class="center">Milestone Name</th>           
+          <th class="center">Due Amount %</th>       
+          <th class="center">Milestone Completed Date</th>
+          <th class="center">Demand Note Date</th>  
+          <th class="center">Due Date</th>  
+           <th class="center">Milestone Status</th> 
+          </tr>
+        </thead>
+        <tbody id="tbl_posts_body">
+          <tr *ngFor="let item of milestonedemand_details; let i=index">
+            <td class="center">{{item.mileStoneNo}}</td>
+            <td class="center" >{{item.milestoneName}}</td>
+            <td class="center" >{{item.mileStonePercentage}}</td>
+            <td  class="center"><input  type="date" class ="demandnotedateclass" id="{{'completed_date'+(i+1)}}"
+              value="{{item.milestoneDate | date:'yyyy-MM-dd'}}" class="completedate"></td>
+            <!-- <td class="center">{{item.milestoneDate| date : 'dd-MM-y'}}</td> -->
+            <!-- <td class="center" >{{item.mileStoneDueDate| date : 'dd-MM-y'}}</td> -->
+            <!-- <td *ngIf="item.masterDemandNotedate != null"class="center" id="{{'demand_note_date'+(i+1)}}">{{item.masterDemandNotedate| date : 'dd-MM-y'}}</td> -->
+            <td  class="center"><input  type="date" class ="demandnotedateclass" id="{{'demand_note_date'+(i+1)}}"
+              value="{{item.masterDemandNotedate | date:'yyyy-MM-dd'}}" class="completedate"></td>
+            <!-- <td class="center" ><input type="text" id="{{'demandnotedateselection'+(i+1)}}" value=""></td> -->
+            <!-- <td *ngIf="item.mileStoneDueDate != null"class="center"id="{{'duedateselection'+(i+1)}}" >{{item.mileStoneDueDate| date : 'dd-MM-y'}}</td> -->
+            <td class="center"><input type="date" id="{{'duedateselection'+(i+1)}}"
+                value="{{item.mileStoneDueDate | date:'yyyy-MM-dd'}}" class="duedate"></td>
+            <td *ngIf="item.projectMsStatusId == 53" class="center" ><span  id="{{'statusnameId'+i}}">{{item.statusName}}</span></td>
+            <td *ngIf="item.projectMsStatusId == 54"> 
+              <select  style="width:100%;display:block;border:solid 1px #000"
+                class="form-group percentages" value="{{item.projectMsStatusId}}" name="{{'statusnameId'+i}}" id="{{'statusnameId'+i}}"
+                (change)='changebasement($event)'>
+                <option value="53" style="padding: 10px!important;">Completed</option>
+                <option value="54" style="padding: 10px!important;">Incomplete</option>
+              
+              </select>
+            </td> 
+           
+            
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align:center;" *ngIf="deptid == 993">
+        <button type="button" class="btn-hover color-1" (click)="update_staus()">Update Status</button>
+      </div> 
+  
+      <input id ="dummyinput" style="display:none;" value="0">
+    </form>
+
+
+
+
+        </div>
+      </div>
+
+  </div>
+  
+</section><br>
+

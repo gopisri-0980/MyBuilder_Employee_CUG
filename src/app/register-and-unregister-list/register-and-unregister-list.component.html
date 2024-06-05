@@ -1,0 +1,184 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Register And Unregister Data </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Register And Unregister Data </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <form [formGroup]="userForm">
+      <div class="card">
+        <div class="card-body">
+          <div class="row clearfix" style="padding: 10px;">
+          
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'" class="required"><b>Select Project:</b></label>
+
+                <angular2-multiselect [data]="project_wise_project" formControlName="project_wise_form"
+                  [settings]="singledd1" (onSelect)="selectedSIDs($event);" (onSelectAll)="onSelectAll($event)"
+                  (onDeSelect)="onItemDeSelect($event)" (onDeSelectAll)="onDeSelectAll($event)" [(ngModel)]="title1">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b>Action :</b></label>
+                <div class="center">
+
+                  <angular2-multiselect [data]="Action_element" formControlName="Action" [settings]="singledd2"
+                  (onSelect)="Action_onItemSelect($event)" (onDeSelect)="Action_OnItemDeSelect($event)">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.Action_name }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.Action_name }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+
+
+                  <!-- <select style="width:100%;" class="form-group" id="Actionfield" single formControlName="Action">
+                    <option value="select">--Select--</option>
+                    <option value="register">Register</option>
+                    <option value="unregister">Unregister</option>
+                    <option value="showAll">Show All</option>
+                  </select> -->
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <button type="button" class="btn-hover color-1" (click)="searchfunction()">Submit</button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="card" *ngIf="controller_register?.length">
+      <div class="card-body">
+
+        <p class="titileclassproject">App Register Details : </p>
+
+
+        <div class="table-responsive">
+          <table id="tableExport" class="table table-bordered" style="width:100%">
+            <thead>
+              <tr class="center">
+                <th>S.No</th>
+                <th>Project</th>
+                <th>Wing / Block</th>
+                <th>Unit</th>
+                <th>Applicant Name</th>
+                <th> Booking Date </th>
+                <th>Agreement Date</th>
+                <th>Handing Over Date</th>
+                <th>Registration Date</th>
+                <th> Total cost(Incl GST)</th>
+                <th>SBUA</th>
+                <th>Status</th>
+                <th>Total Pending Amount As Per Work Completion</th>
+                <th>Amenities Flat Cost</th>
+                <th>Basic Flat Cost</th>
+                <!-- <th>pancard</th> -->
+                <th>Pending Amount</th>
+                <th>SaleDeed Date</th>
+                <th>Total Amount Paid</th>
+                <th>Total Cost Excl GST</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of controller_register; let i = index;">
+                <td class="center">{{i + 1}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center">{{item.blockName}}</td>
+                <td class="center">{{item.flatNo}}</td>
+                <td class="center">{{item.custName}}</td>
+                <td class="center">
+                  <span *ngIf="item.bookingDate != null">{{item.bookingDate}}</span>
+                  <span *ngIf="item.bookingDate == null"> - </span>
+                </td>
+                <td class="center">
+                  <span *ngIf="item.agreementDate != null">{{item.agreementDate}}</span>
+                  <span *ngIf="item.agreementDate == null"> - </span>
+                </td>
+                <td class="center">
+                  <span *ngIf="item.handingOverDate != null">{{item.handingOverDate}}</span>
+                  <span *ngIf="item.handingOverDate == null"> - </span>
+                </td>
+
+                <td class="center">
+                  <span *ngIf="item.registrationDate != null">{{item.registrationDate}}</span>
+                  <span *ngIf="item.registrationDate == null"> - </span>
+                </td>
+
+                <td class="center">{{item.totalAgreementCost}}</td>
+                <td class="center">{{item.sbua}}</td>
+                <td class="center">{{item.Status}}</td>
+                <td class="center">{{item.TotalPendingAmountAsPerWorkCompletion}}</td>
+                <td class="center">{{item.amenitiesFlatCost}}</td>
+                <td class="center">{{item.basicFlatCost}}</td>
+                <!-- <td class="center">{{item.pancard}}</td> -->
+                <td class="center">{{item.pendingAmount}}</td>
+                <td class="center">{{item.saleDeedDate}}</td>
+                <td class="center">{{item.totalAmountPaid}}</td>
+                <td class="center">{{item.totalCostExclGST}}</td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <div class="card" *ngIf="controller_register.length == 0 && hideme">
+      <div class="card-body">
+        <p>No records found</p>
+      </div>
+    </div> 
+
+
+
+
+  </div>
+</section>

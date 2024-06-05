@@ -1,0 +1,3020 @@
+<section class="content">
+
+    <div class="container-fluid">
+
+        <div class="block-header">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Booking Form</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a>
+                                <i class="fas fa-home" (click)="homeClick()"></i>{{module}}</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;" routerLink={{navigateTo}}>{{submodule}}</a>
+                        </li>
+                        <li class="breadcrumb-item active">{{pagename}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="container"> -->
+            <!-- <div class="col-md-12"> -->
+
+            
+              
+              <!-- </div> -->
+            <!-- </div> -->
+
+        <!-- #END# Basic Examples -->
+        <div class="body">
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs" style="border: 0px;">
+                  <!-- <li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
+                  <li><a href="#tab2" data-toggle="tab">Section 2</a></li>
+                  <li><a href="#tab2" data-toggle="tab">Section 3</a></li>
+                  <li><a href="#tab2" data-toggle="tab">Section 4</a></li>
+                  <li><a href="#tab2" data-toggle="tab">Section 5</a></li>
+                  <li><a href="#tab2" data-toggle="tab">Section 6</a></li>
+                  <li><a href="#tab2" data-toggle="tab">Section 7</a></li> -->
+                </ul>
+                <div class="tab-content">
+                  <!-- <div class="tab-pane active" id="tab1"> -->
+                    <!-- <p>I'm in Section 1.</p> -->
+                  <!-- </div>
+                  <div class="tab-pane" id="tab2"> -->
+                    <!-- <p>I'm in Section 2.</p> -->
+                  <!-- </div> -->
+                </div>
+            </div>
+              
+            <!-- Basic Example | Vertical Layout -->
+            <!-- <div id="wizard_vertical"> -->
+                <div class="tabbable" style="position: relative; top: -33px;">
+                    <ul class="nav nav-tabs">
+                       <li style="width:300px;" *ngFor="let data of tabList;let i=index;" class="active"><a [ngClass]="customCsstabs(i)" href="#tab{{i}}" data-toggle="tab">{{data}}</a></li>
+                    </ul>
+
+                <div class="tab-content">
+
+                <!-- <h2>KYC DOCUMENTS (ALL APPLICANTS)</h2> -->
+                <!-- <section class="wizardView"> -->
+                    
+
+                    <div class="tab-pane active" id="tab0">
+                        <!-- <h2>KYC DOCUMENTS (ALL APPLICANTS)</h2> -->
+                        <div class="row clearfix" >
+                            <!-- <div class="col-md-2"></div> -->
+                            <div class="col-md-12">
+                        <div id="KYCDiv" style="border: solid 1px; padding: 10px;"></div>
+                    </div>
+                    <!-- <div class="col-md-2"></div> -->
+
+                    </div>
+                    </div>
+                        
+                <!-- </section> -->
+
+                <!-- <h2>FIRST APPLICANT (MANDATORY)</h2> -->
+
+
+                <div class="tab-pane" id="tab1">
+                    <!-- <h2>FIRST APPLICANT (MANDATORY)</h2> -->
+                    <div class="row clearfix" >
+                        <!-- <div class="col-md-2"></div> -->
+                        <div class="col-md-12 divView">
+                    <div class="row clearfix" >
+                        <div class="col-md-8">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="hidden" id="customerId">
+                                    <input type="hidden" id="flatBookingId">
+                                    <input type="hidden" id="pageName">
+                                    <input type="text" id="salutation" class="form-control" name="MrMrsMs">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a" class="form-label"
+                                        id="namePrefixCust"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                        max="3000-12-31" min="1000-01-01">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date of Birth:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" id="realtion_name" class="form-control" name="S/o/ D/o/ W/o:">
+                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a" class="form-label"
+                                id="relationWith"></label>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="marital_status" type="text" class="form-control" name="Marrital Status:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Marrital Status:</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="date_of_anniversary" type="text" class="form-control datepicker"
+                                        name="DOA:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date of Anniversary:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6>ADDRESS:</h6><br>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <input type="text" id="perminent_address" class="form-control" name="Permanent:"> -->
+                                    <textarea id="perminent_address" class="materialize-textarea textareaforaddress"
+                                        data-length="120" disabled></textarea>
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Permanent:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="perminentAdd_city" type="text" class="form-control" name="City:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">City:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="perminentAdd_state" type="text" class="form-control" name="State:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">State:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="perminentAdd_pincode" type="text" class="form-control" name="Pincode:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Pincode:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <input id="correspondence_address" type="text" class="form-control"
+                                        name="Correspondence:"> -->
+                                    <textarea id="correspondence_address"
+                                        class="materialize-textarea textareaforaddress" data-length="120"
+                                        disabled></textarea>
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Correspondence:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="correspondence_city" type="text" class="form-control" name="City:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">City:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="correspondence_state" type="text" class="form-control" name="State:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">State:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="correspondence_pincode" type="text" class="form-control" name="Pincode:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Pincode:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <h6>CONTACT DETAILS:</h6><br>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="telephone_num" type="text" class="form-control" name="Tel.(R):">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Tel.(R):</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="mobile_num" type="text" class="form-control" name="Mobile (Mandatory):">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Mobile:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input id="email_id" type="text" class="form-control" name="EMAIL:">
+                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                class="form-label">EMAIL:</label>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="pan_number" type="text" class="form-control" name="PAN NO:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">PAN NO:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="nationality" type="text" class="form-control" name="NATIONALITY:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">NATIONALITY:</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="adhar_num" type="text" class="form-control">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">AADHAAR NO:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6>PROFESSIONAL:</h6><br>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="designation" type="text" class="form-control">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Designation:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="business_name" type="text" class="form-control">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Name of Organisation/ Business:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="business_address" type="text" class="form-control" name="AADHAAR NO:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Address of Organisation/ Business:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="office_number" type="text" class="form-control" name="Office Number:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Office Number:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="office_emailid" type="text" class="form-control"
+                                        name="Mobile (Mandatory):">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Office Email Id:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="organisation_type" type="text" class="form-control"
+                                        name="Organizational Type:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Organizational Type:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" id="industry_sector"
+                                        name="Industry Sector of work/ Business:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Industry Sector of work/ Business:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" id="work_role" class="form-control" name="Work Function/ Role:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Work Function/ Role:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="exp_work" type="text" class="form-control"
+                                        name="Number of years of work Experience:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Number of years of work Experience:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="education_qualification" type="text" class="form-control"
+                                        name="Education Qualification:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Education Qualification:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="annual_household_income" type="text" class="form-control">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Annual Household Income (Rupees):</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="about_project" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">How did you get to know about the project:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="ownedSumahuraDiv" style="display: none;">
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="referenceSumadhuraHomeOwnerName" type="text" class="form-control"
+                                            name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Name:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="referenceProjectName" type="text" class="form-control" name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Project:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="unitNum" type="text" class="form-control" name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Unit No:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix" id="referenceFriendsFamilyNameDiv" style="display: none;">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="referenceFriendsFamilyName" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Name:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="referenceChannelPartnerDiv" style="display: none;">
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="channelPartnerName" type="text" class="form-control" name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Name:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="cpCompany" type="text" class="form-control" name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">CP Company:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="cpID" type="text" class="form-control" name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">CP ID:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="cpReraRegNum" type="text" class="form-control" name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">CP RERA Registration No:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="purchase_purpose" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Purpose of purchase:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="residential_status" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Current Residential Status:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>
+                                    <span class="with-gap">Have you ever owned a ams home: </span>
+                                </label>
+                                <label>
+                                    <input class="with-gap" name="myradio" type="radio" value="yes"
+                                        id="yesOwnedSumadhuraHome" />
+                                    <span>Yes</span>
+                                </label>
+                                <label>
+                                    <input class="with-gap" name="myradio" type="radio" value="no"
+                                        id="noOwnedSumadhuraHome" />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="ownhouse_hidden_fields">
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="sumadhura_sitename" type="text" class="form-control" name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">If Yes, Project Name :</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="unit_num" type="text" class="form-control" name="">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Unit No:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="POA_holder" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Name of PoA Holder(if applicable):</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="POA_telephone_num" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Tel.(R):</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="POA_mobile_number" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Mobile Number(Mandatory):</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="POA_email_id" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Email Id:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="POA_addres" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Address:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="POA_city" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">City:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="POA_state" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">State:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="POA_pincode" type="text" class="form-control" name="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Pincode:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-- <div class="col-md-2"></div> -->
+
+                </div>
+                </div>
+            
+
+
+                <!-- <h2>SECOND APPLICANT (MANDATORY)</h2> -->
+                <div class="tab-pane" id="tab2">
+                <!-- <section class="wizardView"> -->
+                <!-- <h2>SECOND APPLICANT (MANDATORY)</h2> -->
+
+
+                <div class="row clearfix">
+                    <!-- <div class="col-md-2"></div> -->
+                    <div class="col-md-12">
+
+                    <div id="secondApplicantNoData" style="text-align: center;margin-top: 3%;font-size: 20px;">
+                        No Co-Applicant Data Found.
+                    </div>
+                    <div id="secondApplicantData" class="divView">
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_salutation" type="text" class="form-control">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            id="secondApplicantPrifix" class="form-label"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_Dob" type="text" class="form-control" name="DOB:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Date of Birth:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_relation" type="text" class="form-control"
+                                            name="S/o/ D/o/ W/o:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            id="secondApplicantrelationWith" class="form-label"></label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_marital_satatus" type="text" class="form-control"
+                                            name="Marrital Status:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Marrital Status:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6>ADDRESS:</h6><br>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <!-- <input id="secnd_aplcnt_perminentadds" type="text" class="form-control"
+                                        name="Permanent:"> -->
+                                        <textarea id="secnd_aplcnt_perminentadds"
+                                            class="materialize-textarea textareaforaddress" data-length="120"
+                                            disabled></textarea>
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Permanent:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_perminent_city" type="text" class="form-control"
+                                            name="City:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">City:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_perminent_state" type="text" class="form-control"
+                                            name="State:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">State:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_perminent_pincode" type="text" class="form-control"
+                                            name="Pincode:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Pincode:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <!-- <input id="secnd_aplcnt_correspond_addres" type="text" class="form-control"
+                                        name="Correspondence:"> -->
+                                        <textarea id="secnd_aplcnt_correspond_addres"
+                                            class="materialize-textarea textareaforaddress" data-length="120"
+                                            disabled></textarea>
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Correspondence:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_correspond_city" type="text" class="form-control"
+                                            name="City:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">City:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_correspond_state" type="text" class="form-control"
+                                            name="State:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">State:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_correspond_pincode" type="text" class="form-control"
+                                            name="Pincode:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Pincode:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <h6>CONTACT DETAILS:</h6><br>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_telephone" type="text" class="form-control"
+                                            name="Tel.(R):">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Tel.(R):</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_mobilenum" type="text" class="form-control"
+                                            name="Mobile (Mandatory):">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Mobile:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="secnd_aplcnt_emailid" type="text" class="form-control" name="EMAIL:">
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">EMAIL:</label>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_panno" type="text" class="form-control" name="PAN NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">PAN NO:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_nationality" type="text" class="form-control"
+                                            name="NATIONALITY:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">NATIONALITY:</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_adharnum" type="text" class="form-control"
+                                            name="AADHAAR NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">AADHAAR NO:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6>PROFESSIONAL:</h6><br>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_designation" type="text" class="form-control"
+                                            name="AADHAAR NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Designation:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_business" type="text" class="form-control"
+                                            name="AADHAAR NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Name of Organisation/ Business:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_business_address" type="text" class="form-control"
+                                            name="AADHAAR NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Address of Organisation/ Business:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_officenumber" type="text" class="form-control"
+                                            name="Office Number:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Office Number:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_office_emailid" type="text" class="form-control">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Office Email Id:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_organisal_type" type="text" class="form-control"
+                                            name="Organizational Type:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Organizational Type:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_industrywork" type="text" class="form-control"
+                                            name="Industry Sector of work/ Business:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Industry Sector of work/ Business:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_workrole" type="text" class="form-control"
+                                            name="Work Function/ Role:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Work Function/ Role:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_workexperience" type="text" class="form-control"
+                                            name="Number of years of work Experience:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Number of years of work Experience:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_eduction_qualificationn" type="text"
+                                            class="form-control" name="Education Qualification:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Education Qualification:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="secnd_aplcnt_householdIncom" type="text" class="form-control"
+                                            name="Annual Household Income (Rupees):">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Annual Household Income (Rupees):</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- <div class="col-md-2"></div> -->
+                </div>
+                <!-- </section> -->
+                </div>
+
+                <!-- <h2>THIRD APPLICANT (MANDATORY)</h2> -->
+                <div class="tab-pane" id="tab3">
+                <!-- <section class="wizardView"> -->
+                <!-- <h2>THIRD APPLICANT (MANDATORY)</h2> -->
+                <div class="row clearfix">
+                    <!-- <div class="col-md-2"></div> -->
+                    <div class="col-md-12">
+
+                    <div id="thirdApplicantNoData" style="text-align: center;margin-top: 3%;font-size: 20px;">
+                        No Co-Applicant Data Found.
+                    </div>
+                    <div id="thirdApplicantData" class="divView">
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_salutation" type="text" class="form-control">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            id="thirdApplicantPrifix" class="form-label"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_Dob" type="text" class="form-control" name="DOB:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Date of Birth:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_relation" type="text" class="form-control"
+                                            name="S/o/ D/o/ W/o:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label" id="thirdApplicantrelationWith"></label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_marital_satatus" type="text" class="form-control"
+                                            name="Marrital Status:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Marrital Status:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6>ADDRESS:</h6><br>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <!-- <input id="third_aplcnt_perminentadds" type="text" class="form-control"
+                                        name="Permanent:"> -->
+                                        <textarea id="third_aplcnt_perminentadds"
+                                            class="materialize-textarea textareaforaddress" data-length="120"
+                                            disabled></textarea>
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Permanent:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_perminent_city" type="text" class="form-control"
+                                            name="City:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">City:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_perminent_state" type="text" class="form-control"
+                                            name="State:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">State:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_perminent_pincode" type="text" class="form-control"
+                                            name="Pincode:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Pincode:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <!-- <input id="third_aplcnt_correspond_addres" type="text" class="form-control"
+                                        name="Correspondence:"> -->
+                                        <textarea id="third_aplcnt_correspond_addres"
+                                            class="materialize-textarea textareaforaddress" data-length="120"
+                                            disabled></textarea>
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Correspondence:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_correspond_city" type="text" class="form-control"
+                                            name="City:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">City:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_correspond_state" type="text" class="form-control"
+                                            name="State:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">State:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_correspond_pincode" type="text" class="form-control"
+                                            name="Pincode:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Pincode:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <h6>CONTACT DETAILS:</h6><br>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_telephone" type="text" class="form-control"
+                                            name="Tel.(R):">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Tel.(R):</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_mobilenum" type="text" class="form-control"
+                                            name="Mobile (Mandatory):">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Mobile:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="third_aplcnt_emailid" type="text" class="form-control" name="EMAIL:">
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">EMAIL:</label>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_panno" type="text" class="form-control" name="PAN NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">PAN NO:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_nationality" type="text" class="form-control"
+                                            name="NATIONALITY:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">NATIONALITY:</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_adharnum" type="text" class="form-control"
+                                            name="AADHAAR NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">AADHAAR NO:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6>PROFESSIONAL:</h6><br>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_designation" type="text" class="form-control"
+                                            name="AADHAAR NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Designation:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_business" type="text" class="form-control"
+                                            name="AADHAAR NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Name of Organisation/ Business:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_business_address" type="text" class="form-control"
+                                            name="AADHAAR NO:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Address of Organisation/ Business:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_officenumber" type="text" class="form-control"
+                                            name="Office Number:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Office Number:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_office_emailid" type="text" class="form-control">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Office Email Id:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_organisal_type" type="text" class="form-control"
+                                            name="Organizational Type:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Organizational Type:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_industrywork" type="text" class="form-control"
+                                            name="Industry Sector of work/ Business:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Industry Sector of work/ Business:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_workrole" type="text" class="form-control"
+                                            name="Work Function/ Role:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Work Function/ Role:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_workexperience" type="text" class="form-control"
+                                            name="Number of years of work Experience:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Number of years of work Experience:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_eduction_qualificationn" type="text"
+                                            class="form-control" name="Education Qualification:">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Education Qualification:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="third_aplcnt_householdIncom" type="text" class="form-control"
+                                            name="Annual Household Income (Rupees):">
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Annual Household Income (Rupees):</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </section> -->
+                </div>
+                
+                    <!-- <div class="col-md-2"></div> -->
+                    </div>
+                </div>
+                <!-- <h2>UNIT DETAILS</h2> -->
+                <!-- <section class="wizardView"> -->
+                    <div class="tab-pane" id="tab4">
+                        <div class="row clearfix">
+                            <!-- <div class="col-md-2"></div> -->
+                            <div class="col-md-12 divView">
+                            
+                    <!-- <h2>UNIT DETAILS</h2> -->
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_unitnumber" type="text" class="form-control" name="Unit No:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Unit No:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_sbua" type="text" class="form-control" name="SBUA:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">SBUA:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_carpetarea" type="text" class="form-control"
+                                        name="Carpet Area:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Carpet Area:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_floor" type="text" class="form-control" name="Floor:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Floor:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_ratepersqft" type="text" class="form-control"
+                                        name="Rate per sq.ft:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Rate per sq.ft:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_plc" type="text" class="form-control" name="PLC:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">PLC:</label>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_floorrise" type="text" class="form-control"
+                                        name="Floor Rise:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Floor Rise:</label>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_wingblock" type="text" class="form-control"
+                                        name="Wing / Block:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Wing / Block:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="aminitiesDiv">
+
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_totalcost" type="text" class="form-control"
+                                        name="Total Cost: Rs">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Total Cost: Rs</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <input id="unitdetails_rupees_words" type="text" class="form-control"
+                                        name="Rupees In Words:"> -->
+                                    <textarea id="unitdetails_rupees_words"
+                                        class="materialize-textarea textareaforaddress" data-length="120"
+                                        disabled></textarea>
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Rupees In Words:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_EOI_applicable" type="text" class="form-control"
+                                        name="EOI Applicable:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">EOI Applicable:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="unitdetails_eoisequence" type="text" class="form-control"
+                                        name="EOI Sequence Number:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">EOI Sequence Number:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <textarea id="overall_exp_with_sumadhura" type="text" class="form-control"
+                                        name="EOI Applicable:"></textarea> -->
+                                    <textarea id="overall_exp_with_sumadhura"
+                                        class="materialize-textarea textareaforaddress" data-length="200"
+                                        disabled></textarea>
+                                    <label style="top: -17px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Overall Experience with ams:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                <!-- </section> -->
+                        </div>
+                        <!-- <div class="col-md-2"></div> -->
+                    </div>
+                </div>
+
+                <!-- <h2>TERMS AND CONDITIONS</h2> -->
+                <!-- <section class="wizardView"> -->
+                    <div class="tab-pane" id="tab5">
+                        <!-- <h2>TERMS AND CONDITIONS</h2> -->
+                        <div class="row clearfix">
+                            <!-- <div class="col-md-2"></div> -->
+                            <div class="col-md-12 divView">
+                            
+                            <div id="termsAndConditions">
+
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-2"></div> -->
+                    </div>
+                    </div>
+                <!-- </section> -->
+
+                <!-- <h2>BOOKING CONFIRMATION CHECKLIST-SALES HEAD</h2> -->
+                <!-- <section class="wizardView"> -->
+                    <div class="tab-pane" id="tab6">
+                    <!-- <h2>BOOKING CONFIRMATION CHECKLIST-SALES HEAD</h2> -->
+                    <div class="row clearfix">
+                        <!-- <div class="col-md-2"></div> -->
+                        <div class="col-md-12 divView">
+                        
+                    <div id="salesHeadDIV">
+
+                    </div>
+                    <!-- <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input datepicker salesHeadCheckList" type="checkbox"
+                                        value="Booking Date">
+                                    Booking Date
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Amenities Facing">
+                                    Amenities Facing
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Project Name">
+                                    Project Name
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Total Cost">
+                                    Total Cost
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Flat Number">
+                                    Flat Number
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Contact Details">
+                                    Contact Details
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Area of Flat">
+                                    Area of Flat
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="DOB Applicant">
+                                    DOB Applicant
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input id="baserate" class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Base Rate">
+                                    Base Rate
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Anniversary Date">
+                                    Anniversary Date
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="Floor Rise">
+                                    Floor Rise
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input salesHeadCheckList" type="checkbox"
+                                        value="DOB Co-Applicant">
+                                    DOB Co-Applicant
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div> -->
+
+                    <!-- </div><br> -->
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="applicant_name" type="text" class="form-control" name="Applicant Name:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Applicant Name:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="leadid" type="text" class="form-control" name="Lead Id:">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Lead Id:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="stm" type="text" class="form-control" name="STM">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">STM:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="booking_source" type="text" class="form-control"
+                                        name="Source of Booking">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Source of Booking:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="referal_bonus" type="text" class="form-control" name="Referal Bonus">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Referal Bonus:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="offers_ifany" type="text" class="form-control" name="Offers if any">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Offers if any:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="Availability_listin_erp" type="text" class="form-control"
+                                        name="Availability list in ERP">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Availability list in ERP:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea id="comitments_sales_team" type="text"
+                                        class="materialize-textarea textareaforaddress"
+                                        name="Availability list in ERP"></textarea>
+                                    <label style="top: -17px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Commitments From sales team mebers:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea id="remarks_booking_confirmation" type="text"
+                                        class="materialize-textarea textareaforaddress" name="remarks"></textarea>
+                                    <label style="top: -17px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Remarks:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="sales_project_sale_Name" type="text" class="form-control"
+                                        name="Referal Bonus">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Signature of Project Sales Head:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="sales_project_sale_Date" type="text" class="form-control"
+                                        name="Offers if any">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="sales_authorised_Name" type="text" class="form-control"
+                                        name="Referal Bonus">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Authorized Signature:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="sales_authorised_Date" type="text" class="form-control"
+                                        name="Offers if any">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date::</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                        </div>
+                        <!-- <div class="col-md-2"></div> -->
+                    </div>
+                  </div>
+                <!-- </section> -->
+
+                <!-- <h2>BOOKING CONFIRMATION CHECKLIST-CRM</h2> -->
+                <!-- <section class="wizardView"> -->
+                    <div class="tab-pane" id="tab7">
+                        <!-- <h2>BOOKING CONFIRMATION CHECKLIST-CRM</h2> -->
+                        <div class="row clearfix">
+                            <!-- <div class="col-md-2"></div> -->
+                            <div class="col-md-12 divView">
+                            
+                    <div id="crmDIV">
+
+                    </div>
+                    <!-- <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox" value="Booking Date">
+                                    Booking Date
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox" value="Total Cost">
+                                    Total Cost
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox" value="Project Name">
+                                    Project Name
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox"
+                                        value="Contact Details">
+                                    Contact Details
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox" value="Flat Number">
+                                    Flat Number
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox" value="DOB Applicant">
+                                    DOB Applicant
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox" value="Area of Flat">
+                                    Area of Flat
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox"
+                                        value="Anniversary Date">
+                                    Anniversary Date
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox" value="Pancard">
+                                    Pancard
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input CRMCheckList" type="checkbox"
+                                        value="DOB Co-Applicant">
+                                    DOB Co-Applicant
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div><br> -->
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <textarea id="checklist_crm_commitment_sales_team_members" type="text"
+                                        class="form-control" name="Commitments from sales team members"></textarea> -->
+                                    <textarea id="checklist_crm_commitment_sales_team_members"
+                                        class="materialize-textarea textareaforaddress" data-length="120"
+                                        disabled></textarea>
+                                    <label style="top: -17px;left: 0;font-size: 15px;color:#26a69a" class="form-label"
+                                        class="form-label">Commitments from sales team members:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <textarea id="checkilist_crm_remarks" type="text" class="form-control"
+                                        name="remarks"></textarea> -->
+                                    <textarea id="checkilist_crm_remarks"
+                                        class="materialize-textarea textareaforaddress" data-length="120"
+                                        disabled></textarea>
+                                    <label style="top: -17px;left: 0;font-size: 15px;color:#26a69a" class="form-label"
+                                        class="form-label">Remarks:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <textarea id="checkilist_crm_bankloan" type="text" class="form-control"
+                                        name="PreferencesForBankLoan"></textarea> -->
+                                    <textarea id="checkilist_crm_bankloan"
+                                        class="materialize-textarea textareaforaddress" data-length="120"
+                                        disabled></textarea>
+                                    <label style="top: -17px;left: 0;font-size: 15px;color:#26a69a" class="form-label"
+                                        class="form-label">Preferences For Bank Loan:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <h6>Expected Agreement Date:</h6><br>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="expected_agrmnt_comment" type="text" class="form-control datepicker"
+                                        name="comment">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Comment:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="expected_agrmnt_date" type="text" class="form-control datepicker"
+                                        name="date">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="expected_agrmnt_verifiedName" type="text" class="form-control"
+                                        name="Verifiebyname">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Verified By Name:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="expected_agrmnt_emailId" type="text" class="form-control" name="date">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Emp Id:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="expected_agrmnt_signature" type="text" class="form-control"
+                                        name="Signature">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Signature:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="expected_agrmnt_datee" type="text" class="form-control datepicker"
+                                        name="date">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="expected_agrmnt_authorizedSignatory" type="text" class="form-control"
+                                        name="Signature">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Authorized Signatory:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="expected_agrmnt_authorizedSignatory_date" type="text"
+                                        class="form-control datepicker" name="date">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                            </div>
+                            <!-- <div class="col-md-2"></div> -->
+                        </div>
+                    </div>
+                <!-- </section> -->
+
+                <!-- <h2>AGREEMENT CHECKLIST-LEGAL OFFICER</h2> -->
+                <!-- <section class="wizardView"> -->
+                    <div class="tab-pane" id="tab8">
+                    <!-- <h2>AGREEMENT CHECKLIST-LEGAL OFFICER</h2> -->
+                    <div class="row clearfix">
+                        <!-- <div class="col-md-2"></div> -->
+                        <div class="col-md-12 divView">
+                        
+                    <div id="legalCustDIV">
+
+                    </div>
+
+                    <!-- <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox"
+                                        value="Booking Form">
+                                    Booking Form
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox"
+                                        value="Project Name">
+                                    Project Name
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox" value="Flat No">
+                                    Flat No
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox" value="Floor No">
+                                    Floor No
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox" value="Block/Wing">
+                                    Block/Wing
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox" value="SBUA">
+                                    SBUA
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox"
+                                        value="Carpet Area, UDS">
+                                    Carpet Area, UDS
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox"
+                                        value="Agreement Cost">
+                                    Agreement Cost
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox"
+                                        value="Cost Break Up">
+                                    Cost Break Up
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox"
+                                        value="Tripartite Agreement">
+                                    Tripartite Agreement
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input leagalCustCheck" type="checkbox" value="Own Funds">
+                                    Own Funds
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div><br><br>
+                    <div id="co-appCheckListVerify1">
+                        <h6>Applicant 1</h6><br>
+                        <div class="row clearfix">
+
+                            <div class="col-md-4">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input legalApp1" type="checkbox"
+                                            value="Applicant Name">
+                                        Applicant Name
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input legalApp1" type="checkbox" value="Age">
+                                        Age
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input legalApp1" type="checkbox" value="Relation">
+                                        Relation
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input legalApp1" type="checkbox" value="Address">
+                                        Address
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div><br><br>
+                    </div> -->
+
+                    <div id="legalCoappDIV">
+                        
+                    </div>
+
+                    <!-- <div id="co-appCheckListVerify2">
+                        <h6>Applicant 2</h6><br>
+                        <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input legalApp2" type="checkbox"
+                                            value="Applicant Name">
+                                        Applicant Name
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input legalApp2" type="checkbox" value="Age">
+                                        Age
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+
+
+                            <div class="col-md-4">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input legalApp2" type="checkbox" value="Relation">
+                                        Relation
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input legalApp2" type="checkbox" value="Address">
+                                        Address
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div><br><br>
+                    </div> -->
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_bankername" type="text" class="form-control"
+                                        name="BankerName">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Banker Name:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_bank" type="text" class="form-control" name="bank">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Bank:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_contact" type="text" class="form-control" name="contact">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Contact:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_emailaddress" type="text" class="form-control" name="bank">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Banker Email Address:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_officers_if_any" type="text" class="form-control"
+                                        name="Offersifany">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Offers if any:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <textarea id="legal_officer_comment" type="text" class="form-control"
+                                        name="Offersifany"></textarea> -->
+                                    <textarea id="legal_officer_comment" class="materialize-textarea textareaforaddress"
+                                        data-length="120" disabled></textarea>
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Comments:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_legal_officer" type="text" class="form-control"
+                                        name="LegalOfficer">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Legal
+                                        Officer:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_empId" type="text" class="form-control" name="empid">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Emp Id:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_datee" type="text" class="form-control datepicker"
+                                        name="bank">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_authorized_signatory" type="text" class="form-control"
+                                        name="LegalOfficer">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Authorized Signatory:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="legal_officer_date" type="text" class="form-control datepicker"
+                                        name="empid">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                            </div>
+                            <!-- <div class="col-md-2"></div> -->
+                        </div>
+                    </div>
+                <!-- </section> -->
+
+                <!-- <h2>REGISTRATION CHECKLIST</h2> -->
+                <!-- <section class="wizardView"> -->
+                    <div class="tab-pane" id="tab9">
+                        <!-- <h2>REGISTRATION CHECKLIST</h2> -->
+                        
+                        <div class="row clearfix">
+                            <!-- <div class="col-md-2"></div> -->
+                            <div class="col-md-12 divView">
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_checklist_project" type="text" class="form-control"
+                                        name="project">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Project:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_checklist_fno" type="text" class="form-control" name="fno">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a" class="form-label">F
+                                        No:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_checklist_agvalue" type="text" class="form-control"
+                                        name="project">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Ag Value:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_checklist_sdvalue" type="text" class="form-control"
+                                        name="fno">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">SD Value:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="regDIV">
+                        
+                    </div>
+
+                    <!-- <h6>LEGAL:</h6><br>
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input regCheckList" type="checkbox"
+                                        value="Project/ Flat Number">
+                                    Project/ Flat Number
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input regCheckList" type="checkbox"
+                                        value="Applicant & Co applicants names">
+                                    Applicant & Co applicants names
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input regCheckList" type="checkbox"
+                                        value="Floor, SBUA, UDS">
+                                    Floor, SBUA, UDS
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input regCheckList" type="checkbox" value="Agreement Cost">
+                                    Agreement Cost
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div><br>
+                    <h6>ACCOUNT:</h6><br>
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input regCheckList" type="checkbox"
+                                        value="Flat Advance(RECO)">
+                                    Flat Advance(RECO)
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input regCheckList" type="checkbox"
+                                        value="Extra works Receipts are">
+                                    Extra works Receipts are
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input regCheckList" type="checkbox"
+                                        value="TDS Challan Payments">
+                                    TDS Challan Payments
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div><br>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-check m-l-10">
+                                <label class="form-check-label">
+                                    <input class="form-check-input regCheckList" type="checkbox"
+                                        value="VERIFIED ALL THE ABOVE PARAMETERS WITH SALE DEED.">
+                                    VERIFIED ALL THE ABOVE PARAMETERS WITH SALE DEED.
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div><br><br> -->
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <textarea id="registration_comment_legal" type="text" class="form-control"
+                                        name="fno"></textarea> -->
+                                    <textarea id="registration_comment_legal"
+                                        class="materialize-textarea textareaforaddress" data-length="120"
+                                        disabled></textarea>
+                                    <label style="top: -17px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Comments From Legal:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <!-- <textarea id="registration_comentsfromaccounts" type="text" class="form-control"
+                                        name="fno"></textarea> -->
+                                    <textarea id="registration_comentsfromaccounts"
+                                        class="materialize-textarea textareaforaddress" data-length="120"
+                                        disabled></textarea>
+                                    <label style="top: -17px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Comments From Accounts:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_flatnumber" type="text" class="form-control"
+                                        name="LegalOfficerSignature">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Legal Officer Signature:</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_empid" type="text" class="form-control"
+                                        name="LegalOfficerSignature">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Emp Id:</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_date" type="text" class="form-control datepicker"
+                                        name="LegalOfficerSignature">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_executive_signature" type="text" class="form-control"
+                                        name="LegalOfficerSignature">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Accounts Executive Signature:</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_empid2" type="text" class="form-control" name="Emp Id">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Emp Id:</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_date2" type="text" class="form-control datepicker"
+                                        name="Date">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_authorized_signature" type="text" class="form-control"
+                                        name="LegalOfficerSignature">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Authorized Signatory:</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registration_date3" type="text" class="form-control datepicker"
+                                        name="Emp Id">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Date:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    
+                        </div>
+                        <!-- <div class="col-md-2"></div> -->
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-2">
+                            <button id="finishButton" type="button" class="btn-hover color-1"
+                            (click)="approveModel()">Finish</button>
+                        </div>  
+                        <div class="col-md-2"></div>  
+                    </div>
+            </div>
+                <!-- </section> -->
+                
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="modal" id="approveModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 center-block text-center">
+                        <p style="font-size: 1.75rem;">Please approve/reject to complete this booking form.</p>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 50px;">
+                    <div class="col-md-12 center-block text-center">
+                        <button type="button" class="btn-hover color-1 cancelBtnColor"
+                            (click)="approveOrRejectCustomer('reject')">Reject</button>
+                        <button type="button" class="btn-hover color-1"
+                            (click)="approveOrRejectCustomer('approve')">Approve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

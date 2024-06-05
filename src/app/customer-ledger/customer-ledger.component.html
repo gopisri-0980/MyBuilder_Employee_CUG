@@ -1,0 +1,108 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Customer Ledger</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active">Customer Ledger</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">*Select Project:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="blocksID" class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Block:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="floorsID" class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Floor:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="floorSelection">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="flatsID" class="col-sm-3">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Flat:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="flatSelection">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+        </div><br>
+
+        <div class="row clearfix">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4 text-center">
+            <button type="submit" class="btn-hover color-1" (click)="getCustomerLedger()">Submit</button>
+          </div>
+          <div class="col-sm-3"></div>
+        </div> 
+
+        <!-- <div class="table-responsive">
+          <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+              <thead>
+                  <tr class="center">
+                      <th>S.No</th>
+                      <th>Booking Date</th>
+                      <th>Customer Name</th>
+                      <th>Site Project</th>
+                      <th>Flat No</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of viewData; let i = index;" (click)="getApproveCustomer(item)" class="customersList">
+                      <td class="center">{{i + 1}}</td>
+                      <td class="center">{{item.bookingDate | date: "dd-MM-yyyy"}}</td>
+                      <td class="center">{{item.customerName}}</td>
+                      <td class="center">{{item.siteName}}</td>
+                      <td class="center">{{item.flatNo}}</td>
+                  </tr>
+              </tbody>
+
+          </table>
+      </div> -->
+        
+		</div>
+    </div>
+    
+    </div><br>
+</section><br>

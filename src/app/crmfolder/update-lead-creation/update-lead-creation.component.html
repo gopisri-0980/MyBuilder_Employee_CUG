@@ -1,0 +1,2222 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">UPDATE LEAD DETAILS</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a (click)="homeClick()">
+                                <i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">Update Lead Details</a>
+                        </li>
+                        <!-- <li class="breadcrumb-item active">Wizard</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Advanced Form Example With Validation -->
+     
+        <div class="body">
+  
+          <div class="tabbable">
+              <ul class="nav nav-tabs" style="border: 0px;">
+              
+              </ul>
+              <div class="tab-content">
+              
+              </div>
+          </div>
+            
+          <!-- Basic Example | Vertical Layout -->
+          <!-- <div id="wizard_vertical"> -->
+              <div class="tabbable" style="position: relative; top: -33px;">
+                  <ul class="nav nav-tabs">
+                     <li *ngFor="let data of tabList;let i=index;" class="active"><a [ngClass]="customCsstabs(i)" href="#tab{{i}}" data-toggle="tab">{{data}}</a></li>
+                  </ul>
+  
+              <div class="tab-content">
+  
+              <!-- <h2>KYC DOCUMENTS (ALL APPLICANTS)</h2> -->
+              <!-- <section class="wizardView"> -->
+          
+  
+                  <div class="tab-pane active" id="tab0">
+                      <!-- <h2>KYC DOCUMENTS (ALL APPLICANTS)</h2> -->
+                      <div class="row clearfix" >
+                          <div class="col-md-1"></div>
+                          <div class="col-md-10 divView">
+                              <div class="row clearfix">
+                
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="lead_id" class="form-control" type="number" name="bday"
+                                                  disabled value="" disabled>
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Lead Id:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="nameid" class="form-control" type="text" name="nameid"
+                                                value="" required>
+                                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                class="form-label">Name:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="company_id" class="form-control datepicker" type="text" name="bday"
+                                             >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Company:</label>
+                                      </div>
+                                  </div>
+                              </div>
+                             
+                              </div>
+                
+                              <div class="row clearfix">
+                                  
+                               
+                              <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="disignation_id" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Designation:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input id="registeredon_id" class="form-control datepicker" type="date" name="bday"
+                                            value="">
+                                      <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                          class="form-label">Registerd On:</label>
+                                  </div>
+                              </div>
+                          </div>
+                
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="location_id" class="form-control datepicker" type="text" name="bday"
+                                       >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Location:</label>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                
+                            <div class="row clearfix">
+                                  
+                             
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input id="lead_crtd_sit_scdule_id" class="form-control datepicker" type="text" name="bday"
+                                           >
+                                      <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                          class="form-label">Lead created to site scheduled:</label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="email_id" class="form-control datepicker" type="text" name="bday"
+                                         value="" required>
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Email:</label>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="aternative_email_id" class="form-control datepicker" type="text" name="bday"
+                                      >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Alternate Email:</label>
+                              </div>
+                          </div>
+                      </div>
+                          </div>
+                
+                          <div class="row clearfix">
+                                  
+                          
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="alter_email2_id" class="form-control datepicker" type="text" name="bday"
+                                        >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Alternate Email 2:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="mobileid" class="form-control " type="number" name="mobileid"
+                                      value="" required>
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Mobile:</label>
+                              </div>
+                          </div>
+                      </div>
+                
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="addi_mob_id" class="form-control datepicker" type="number" name="bday"
+                                    >
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">Additional Mobile:</label>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                        
+                        <div class="row clearfix">
+                                  
+                         
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="add_mob2_id" class="form-control datepicker" type="number" name="bday"
+                                      >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Additional Mobile 2:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="phone_id" class="form-control datepicker" type="text" name="bday"
+                                    value="">
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">Phone:</label>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4">
+                      <div class="form-group form-float">
+                          <div class="form-line">
+                              <input id="extension_id" class="form-control datepicker" type="text" name="bday"
+                                  >
+                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                  class="form-label">Extension:</label>
+                          </div>
+                      </div>
+                  </div>
+                      </div>
+                
+                      <div class="row clearfix">
+                          
+                          <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                    <label style="color:#26a69a">Projects:</label>
+                                    <div class="center">
+                                    <select style="width:100%" id="projectID" single required>
+                                        <option >--Select Project--</option>
+                                        <option value="Breezy Village">Breezy Village</option>
+                                        <option value="Ocean shores">Ocean shores</option>
+                                        <option value="Greenspace">Greenspace</option>
+                                       
+                                    </select>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                  <label style="color:#26a69a">Time Slot:</label>
+                                  <div class="center">
+                                  <select style="width:100%" id="timeslotID" single>
+                                      <option value="select">--Select Slot--</option>
+                                      <option value="All" selected>10Am-1pm</option>
+                                      <option value="Android">3pm-4pm</option>
+                                    
+                                  </select>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                <label style="color:#26a69a">Prefered Project Location:</label>
+                                <div class="center">
+                                <select style="width:100%" id="projectlocID" single>
+                                    <option value="select">--Select project location--</option>
+                                    <option value="Hyderabad" selected>Hyderabad</option>
+                                    <option value="Banglore">Banglore</option>
+                                   
+                                </select>
+                                </div>
+                              </div>
+                          </div>
+                      </div>         
+                         
+                       
+                      </div>
+                      <div class="row clearfix">
+                      <div class="col-md-6">
+                        <div class="form-check m-l-10">
+                            <label class="form-check-label">
+                                <input class="form-check-input datepicker salesHeadCheckList" id="channel_partner_id" type="checkbox"
+                                    value="Booking Date">
+                               Channel Partner Lead Id
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-6">
+                      <div class="form-check m-l-10">
+                          <label class="form-check-label">
+                              <input class="form-check-input datepicker salesHeadCheckList" id="walkinformId" type="checkbox"
+                                  value="Booking Date">
+                            Walkin Form 1
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                              </span>
+                          </label>
+                      </div>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="col-md-1"></div>
+  
+                  </div>
+                     <div class="row clearfix ">
+  
+                      <div class="col-md-12 center" >
+                          <button id="finishButton" type="button" class="btn-hover color-1 "
+                          (click)="updateLead()">Update</button>
+                      </div>  
+                   
+                  </div>
+                  </div>
+            
+  
+              <div class="tab-pane" id="tab1">
+                  <!-- <h2>FIRST APPLICANT (MANDATORY)</h2> -->
+                  <div class="row clearfix" >
+                      <div class="col-md-1"></div>
+                      <div class="col-md-10 divView">
+                          <div class="row clearfix">
+                
+       
+                              <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="second_source_id" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Second source:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input id="third_srce_id" class="form-control datepicker" type="text" name="bday"
+                                           value="">
+                                      <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                          class="form-label">Thired Source:</label>
+                                  </div>
+                              </div>
+                          </div>
+                      
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="reactive_source_id" class="form-control datepicker" type="text" name="bday"
+                                        >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Reactived source:</label>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+          
+                            <div class="row clearfix">
+                            
+                   
+                              <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="Reason" class="form-control datepicker" type="text" name="bday"
+                                           >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Reason:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input id="last_task_comments" class="form-control datepicker" type="text" name="bday"
+                                          value="">
+                                      <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                          class="form-label">Last task comments:</label>
+                                  </div>
+                              </div>
+                          </div>
+                      
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="rating_id" class="form-control datepicker" type="text" name="bday"
+                                         >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Rating:</label>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+          
+                            <div class="row clearfix">
+                              <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="lead_sub_status_id" class="form-control datepicker" type="text" name="bday"
+                                               >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Lead sub status:</label>
+                                      </div>
+                                  </div>
+                              </div>
+                   
+                              <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                      <label style="color:#26a69a">Source Description:</label>
+                                      <div class="center">
+                                      <select style="width:100%" id="sourcedescID" single>
+                                          <option value="select">--Select source description--</option>
+                                          <option value="All">Sumadhura Acropolis</option>
+                                          <option value="Android">Sumadhura Nandanam</option>
+                                         
+                                      </select>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                    <label style="color:#26a69a">First Source:</label>
+                                    <div class="center">
+                                    <select style="width:100%" id="firstsourceID" single>
+                                        <option value="select">--Select first source--</option>
+                                        <option value="All">10Am-1pm</option>
+                                        <option value="Android">3pm-4pm</option>
+                                      
+                                    </select>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      
+                          
+                            </div>
+          
+                            <div class="row clearfix">
+                            
+                   
+                              <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                        <label style="color:#26a69a">Latest Source:</label>
+                                        <div class="center">
+                                        <select style="width:100%" id="latsrcID" single>
+                                            <option value="select">--Select latest source--</option>
+                                            <option value="All">Hyderabad</option>
+                                            <option value="Android">Banglore</option>
+                                           
+                                        </select>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                    <label style="color:#26a69a">Lead Owner:</label>
+                                    <div class="center">
+                                    <select style="width:100%" id="leadownerID" single>
+                                        <option value="select">--Select lead owner--</option>
+                                        <option value="Mr.Satish">Mr.Satish</option>
+                                        <option value="Ms.Alekya">Ms.Alekya</option>
+                                        <option value="Mr.Prasad">Mr.Prasad</option>
+                                      
+                                    </select>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                  <label style="color:#26a69a">Lead status:</label>
+                                  <div class="center">
+                                  <select style="width:100%" id="leadstatusID" single>
+                                      <option value="select">--Select lead status--</option>
+                                      <option value="New">New</option>
+                                      <option value="Working">Working</option>
+                                      <option value="Inactive">Inactive</option>
+                                      
+                                  </select>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                      </div>
+                  <div class="col-md-1"></div>
+  
+              </div>
+              <div class="row clearfix ">
+  
+                  <div class="col-md-12 center" >
+                      <button id="finishButton" type="button" class="btn-hover color-1 "
+                      (click)="updateLead()">Update</button>
+                  </div>  
+               
+              </div>
+              </div>
+              
+          
+              <div class="tab-pane" id="tab2">
+            
+  
+  
+              <div class="row clearfix">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-10 divView">
+                      <div class="row clearfix">
+                  
+         
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="house_type_id" class="form-control datepicker" type="text" name="bday"
+                                        >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">House Type:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="comments_id" class="form-control datepicker" type="text" name="bday"
+                                     >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label"> Comments:</label>
+                              </div>
+                          </div>
+                      </div>
+                  
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="max_budget" class="form-control datepicker" type="text" name="bday"
+                                     >
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">Maximum Budget:</label>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="row clearfix">
+                        
+               
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="mini_budget_id" class="form-control datepicker" type="text" name="bday"
+                                         >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Minimum Budget:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="budge_range_id" class="form-control datepicker" type="text" name="bday"
+                                      max="3000-12-31" min="1000-01-01" value="">
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label"> Budget Range:</label>
+                              </div>
+                          </div>
+                      </div>
+                  
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="req_type" class="form-control datepicker" type="text" name="bday"
+                                     >
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">Requirement Type:</label>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                          <div class="row clearfix">
+                              <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="flat_area_id" class="form-control datepicker" type="text" name="bday"
+                                              >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Flat Area:</label>
+                                      </div>
+                                  </div>
+                              </div>
+                 
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                    <label style="color:#26a69a">Time Frame To Purchase:</label>
+                                    <div class="center">
+                                    <select style="width:100%" id="timeframepurID" single>
+                                        <option value="select">--Select time frame--</option>
+                                        <option value="2-6 months" selected>2-6 months</option>
+                                        <option value="0-2 months">0-2 months</option>
+                                        <option value="6-12 months">6-12 months</option>
+                                    
+                                       
+                                       
+                                    </select>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                  <label style="color:#26a69a">Housing Requirements:</label>
+                                  <div class="center">
+                                  <select style="width:100%" id="housinreqID" single>
+                                      <option value="select">--Select requirement--</option>
+                                      <option value="2BHK" selected>2BHK</option>
+                                      <option value="2.5BHK">2.5BHK</option>
+                                      <option value="3BHK">3BHK</option>
+                                     
+                                    
+                                  </select>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        
+                          </div>
+                  </div>
+                 
+                  <div class="col-md-1"></div>
+              </div>
+              <div class="row clearfix ">
+                  <div class="col-md-12 center" >
+                      <button id="finishButton" type="button" class="btn-hover color-1 "
+                      (click)="updateLead()">Update</button>
+                  </div>  
+               
+              </div>
+  
+              </div>
+  
+             
+              <div class="tab-pane" id="tab3">
+             
+              <div class="row clearfix">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-10 divView">
+                      <div class="row clearfix">
+                  
+         
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="area_id" class="form-control datepicker" type="text" name="bday"
+                                         >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Area:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="lacality_id" class="form-control datepicker" type="text" name="bday"
+                                     >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Locality:</label>
+                              </div>
+                          </div>
+                      </div>
+                  
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="alt_address" class="form-control datepicker" type="text" name="bday"
+                                    >
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label"> Alternative Address:</label>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                          <div class="row clearfix">
+                          
+                 
+                            <div class="col-md-6">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                    <label style="color:#26a69a">City:</label>
+                                    <div class="center">
+                                    <select style="width:100%" id="cityID" single>
+                                        <option value="select">--Select city--</option>
+                                        <option value="Hyderabad" >Hyderabad</option>
+                                       
+                                       
+                                    </select>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                  <label style="color:#26a69a">State:</label>
+                                  <div class="center">
+                                  <select style="width:100%" id="stateID" single >
+                                      <option value="">--Select state--</option>
+                                      <option value="Telangana" selected>Telangana</option>
+                                      <option value="AndraPradesh">Andra Pradesh</option>
+                                      <option value="Karnataka">Karnataka</option>
+                                      <option value="Maharastra">Maharastra</option>
+                                     
+                                    
+                                  </select>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        
+                          </div>
+                  </div>
+                 
+              
+                  <div class="col-md-1"></div>
+                  </div>
+                  <div class="row clearfix ">
+  
+                      <div class="col-md-12 center" >
+                          <button id="finishButton" type="button" class="btn-hover color-1 "
+                          (click)="updateLead()">Update</button>
+                      </div>  
+                   
+                  </div>
+              </div>
+             
+                  <div class="tab-pane" id="tab4">
+                      <div class="row clearfix">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-10 divView">
+                              <div class="row clearfix">
+                  
+                                  <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                          <label style="color:#26a69a">Marketing Type:</label>
+                                          <div class="center">
+                                          <select style="width:100%" id="marketingID" single>
+                                              <option value="select">--Select type--</option>
+                                              <option value="Facebook">Facebook</option>
+                                              <option value="livechat">Live Chat</option>
+                                              <option value="LinkedIn">LinkedIn</option>
+                                              <option value="Channel Partner">Chanel partner</option>
+                                              <option value="Reference">Reference</option>
+                                          </select>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                </div> 
+              
+                                <div class="row clearfix" id="fbid" style="display: none;">
+                                
+                                  <div class="col-md-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="facebook_leadId" class="form-control datepicker" type="text" name="bday"
+                                               >
+                                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                class="form-label">Facebook Lead Id:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                </div>
+              
+                                <div class="row clearfix" id="linkedinid" style="display: none;">
+                                
+                                  <div class="col-md-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="linked_lead_id" class="form-control datepicker" type="text" name="bday"
+                                                >
+                                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                class="form-label">LinkedIn Lead Id:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                </div>
+              
+                                <div class="row clearfix" id="livechat" style="display: none;">
+                                
+                                  <div class="col-md-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                                max="3000-12-31" min="1000-01-01" >
+                                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                class="form-label">Live Chat Lead Id:</label>
+                                        </div>
+                                    </div>
+                                </div>
+              
+                                <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                              max="3000-12-31" min="1000-01-01" >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Raw Transcript Id link:</label>
+                                      </div>
+                                  </div>
+                              </div>
+                               
+                                </div>
+              
+                                <div class="row clearfix" id="channelpartner" style="display: none;">
+                                
+                                  <div class="col-md-3">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="chanel_partnr_leadId" class="form-control datepicker" type="text" name="bday"
+                                               >
+                                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                class="form-label">Chanel Partner Lead Id:</label>
+                                        </div>
+                                    </div>
+                                </div>
+              
+                                <div class="col-md-3">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="chanel_partnr_name" class="form-control datepicker" type="text" name="bday"
+                                              >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Channel Partner Name:</label>
+                                      </div>
+                                  </div>
+                              </div>
+              
+                              <div class="col-md-3">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="chanel_partnr_address" class="form-control datepicker" type="text" name="bday"
+                                               >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Channel Partner Address:</label>
+                                      </div>
+                                  </div>
+                              </div>
+              
+                              <div class="col-md-3">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="chanel_partnr_number" class="form-control datepicker" type="text" name="bday"
+                                               >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Channel Partner Number:</label>
+                                      </div>
+                                  </div>
+                              </div>
+                               
+                                </div>
+              
+                                <div class="row clearfix" id="referencediv" style="display: none;">
+                                
+                                  <div class="col-md-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="reference_name" class="form-control datepicker" type="text" name="bday"
+                                                >
+                                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                class="form-label">Reference Name:</label>
+                                        </div>
+                                    </div>
+                                </div>
+              
+                                <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="reference_project" class="form-control datepicker" type="text" name="bday"
+                                               >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Reference Project:</label>
+                                      </div>
+                                  </div>
+                              </div>
+              
+                              <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="reference_unit_number" class="form-control datepicker" type="text" name="bday"
+                                               >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Reference Unit Number:</label>
+                                      </div>
+                                  </div>
+                              </div>
+              
+                            
+                               
+                                </div>  
+                          </div>
+                         
+                      <div class="col-md-1"></div>
+                  </div>
+                  <div class="row clearfix ">
+  
+                      <div class="col-md-12 center" >
+                          <button id="finishButton" type="button" class="btn-hover color-1 "
+                          (click)="updateLead()">Update</button>
+                      </div>  
+                   
+                  </div>
+              </div>
+  
+              <div class="tab-pane" id="tab5">
+                <div class="row clearfix">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10 divView">
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <div class="form-check m-l-10">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input datepicker salesHeadCheckList" type="checkbox"
+                                            value="Booking Date">
+                                        Marked As Opportunity
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+    
+    
+                        </div>
+                    </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row clearfix ">
+
+                <div class="col-md-12 center" >
+                    <button id="finishButton" type="button" class="btn-hover color-1 "
+                    (click)="updateLead()">Update</button>
+                </div>  
+             
+            </div>
+        </div>
+
+        <div class="tab-pane" id="tab6">
+            <div class="row clearfix">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 divView">
+                    <div class="row clearfix">
+                        <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-bottom: 30px;margin-left: 5px;
+                        margin-right: 5px" id="milestone_blocks_tables">
+
+
+                          <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+                            <thead>
+                              <tr>
+                                  <!-- <th class="center">S.NO</th>  -->
+                                  <th class="center">Subject</th> 
+                                <th class="center">Due date</th> 
+                                <th class="center">Assigned To</th>           
+                                <th class="center">Status</th>        
+                                <th class="center">Create Date</th>   
+                                <th class="center">Time</th> 
+                               
+                                <!-- <th class="center">Due Date</th>          
+                                <th class="center">Status</th> -->
+                            
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="nodata_open_activites" >
+                                    <td class="center" colspan="8" id="noData"> No Data Available</td>
+                                </tr>
+                            </tbody>
+                            <tbody id="open_activites1" style="display:none">
+                              <tr *ngFor="let item of open_activites"  >
+                                <td class="center" style="text-decoration: underline;" (click)="activityhistrygenflowModal(item)"> {{item.subject}}</td>
+                                <td class="center" >{{item.Due_Date}}</td>
+                                <td class="center" >{{item.Assigned_To}}</td>
+                                <td class="center" >{{item.Status}}</td>
+                                <td class="center" >{{item.Follow_up_Date}}</td>
+                                <td class="center" >{{item.Follow_up_Time}}</td>
+                               
+                                </tr>
+                            </tbody>
+                            <tbody id="open_activites2" style="display:none" >
+                                <tr *ngFor="let item of open_activites2"  >
+                                    <td class="center" style="text-decoration: underline;" (click)="activityhistrygenflowModal(item)"> {{item.subject}}</td>
+                                    <td class="center" >{{item.Due_Date}}</td>
+                                    <td class="center" >{{item.Assigned_To}}</td>
+                                    <td class="center" >{{item.Status}}</td>
+                                    <td class="center" >{{item.Follow_up_Date}}</td>
+                                    <td class="center" >{{item.Follow_up_Time}}</td>
+                                   
+                                    </tr>
+                                </tbody>
+                                <tbody  id="open_activites3" style="display:none">
+                                    <tr *ngFor="let item of open_activites3">
+                                        <td class="center" style="text-decoration: underline;" (click)="activityhistrygenflowModal(item)"> {{item.subject}}</td>
+                                        <td class="center" >{{item.Due_Date}}</td>
+                                        <td class="center" >{{item.Assigned_To}}</td>
+                                        <td class="center" >{{item.Status}}</td>
+                                        <td class="center" >{{item.Follow_up_Date}}</td>
+                                        <td class="center" >{{item.Follow_up_Time}}</td>
+                                       
+                                        </tr>
+                             
+                              
+                        
+                            </tbody>
+                          
+                          </table>
+                       
+                        </div>
+                    </div>  
+                </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row clearfix ">
+
+            <div class="col-md-12 center" >
+                <button id="finishButton" type="button" class="btn-hover color-1 "
+                (click)="updateLead()">Update</button>
+            </div>  
+         
+        </div>
+    </div>
+    <div class="tab-pane" id="tab7">
+        <div class="row clearfix">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 divView">
+                <div class="row clearfix">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                       <button class="btn-hover color-1" id="logacallId">Log a Call</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn-hover color-1" id="sendemailId">Send an Email</button>
+                     </div>
+                     <div class="col-md-2"></div>
+                </div>
+              <div class="row clearfix">
+                <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-bottom: 30px;margin-left: 5px;
+                margin-right: 5px" id="milestone_blocks_tables">
+
+
+<table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+    <thead>
+      <tr>
+          <!-- <th class="center">S.NO</th>  -->
+          <th class="center">Subject</th> 
+        <th class="center">Due date</th> 
+        <th class="center">Assigned To</th>           
+        <th class="center">Status</th>        
+        <th class="center">Create Date</th>   
+        <th class="center">Time</th> 
+       
+        <!-- <th class="center">Due Date</th>          
+        <th class="center">Status</th> -->
+    
+      </tr>
+    </thead>
+   
+    <tbody>
+        <tr id="nodata" >
+            <td class="center" colspan="8" id="noData"> No Data Available</td>
+        </tr>
+    </tbody>
+    <tbody id="acthistry1" style="display:none">
+      <tr *ngFor="let item of activityHistory"  >
+        <td class="center" style="text-decoration: underline;" (click)="activityhistrygenflowModal(item)"> {{item.subject}}</td>
+        <td class="center" >{{item.Due_Date}}</td>
+        <td class="center" >{{item.Assigned_To}}</td>
+        <td class="center" >{{item.Status}}</td>
+        <td class="center" >{{item.Follow_up_Date}}</td>
+        <td class="center" >{{item.Follow_up_Time}}</td>
+       
+        </tr>
+    </tbody>
+    <tbody id="acthistry2" style="display:none" >
+        <tr *ngFor="let item of activityHistory2"  >
+            <td class="center" style="text-decoration: underline;" (click)="activityhistrygenflowModal(item)"> {{item.subject}}</td>
+            <td class="center" >{{item.Due_Date}}</td>
+            <td class="center" >{{item.Assigned_To}}</td>
+            <td class="center" >{{item.Status}}</td>
+            <td class="center" >{{item.Follow_up_Date}}</td>
+            <td class="center" >{{item.Follow_up_Time}}</td>
+           
+            </tr>
+        </tbody>
+        <tbody  id="acthistry3" style="display:none">
+            <tr *ngFor="let item of activityHistory3">
+                <td class="center" style="text-decoration: underline;" (click)="activityhistrygenflowModal(item)"> {{item.subject}}</td>
+                <td class="center" >{{item.Due_Date}}</td>
+                <td class="center" >{{item.Assigned_To}}</td>
+                <td class="center" >{{item.Status}}</td>
+                <td class="center" >{{item.Follow_up_Date}}</td>
+                <td class="center" >{{item.Follow_up_Time}}</td>
+               
+                </tr>
+     
+      
+
+    </tbody>
+  </table>
+                 
+                  </div>
+            </div>
+            </div>
+           
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row clearfix ">
+
+        <div class="col-md-12 center" >
+            <button id="finishButton" type="button" class="btn-hover color-1 "
+            (click)="updateLead()">Update</button>
+        </div>  
+     
+    </div>
+</div>    
+
+<div class="tab-pane" id="tab8">
+    <div class="row clearfix">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 divView">
+            <div class="row clearfix">
+                <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-bottom: 30px;margin-left: 5px;
+                margin-right: 5px" id="milestone_blocks_tables">
+
+
+                    <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+                      <thead>
+                        <tr>
+
+                            <th class="center">Date</th> 
+                            <th class="center">User</th>
+                          <th class="center">Action</th> 
+                          
+                         
+                        </tr>
+                      </thead>
+                     
+                      <tbody>
+                      <tr >
+                        <td class="center" >13/05/2020</td>
+                        <td class="center" >Shylaja</td>
+                        <td class="center" >Changed Lead status from new to working</td>
+                        
+                        </tr>
+                       
+                        
+                  
+                      </tbody>
+                    </table>
+                 
+                  </div>
+          </div>
+        </div>
+    
+        
+    <div class="col-md-1"></div>
+</div>
+<div class="row clearfix ">
+
+    <div class="col-md-12 center" >
+        <button id="finishButton" type="button" class="btn-hover color-1 "
+        (click)="updateLead()">Update</button>
+    </div>  
+ 
+</div>
+</div> 
+
+<div class="tab-pane" id="tab9">
+    <div class="row clearfix">
+        <div class="col-md-1"></div>
+        
+            <div class="col-md-10 divView">
+                        <div class="row clearfix">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                               <button class="btn-hover color-1" id="sitevisitId" >New Site Visit</button>
+                            </div>
+                            
+                             <div class="col-md-4"></div>
+                        </div>
+                      <div class="row clearfix">
+                        <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-bottom: 30px;margin-left: 5px;
+                        margin-right: 5px" id="milestone_blocks_tables">
+
+
+                            <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+                              <thead>
+                                <tr>
+
+                                    <th class="center">Site Visit Name</th> 
+                                    <th class="center">Project Name</th>
+                                  <th class="center">Date Of Visit</th> 
+                                  <th class="center">Site Visit Status</th>   
+                                  <th class="center"> Sales Rep</th> 
+                               
+                                 
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr id="nodata_sitvist" >
+                                    <td class="center" colspan="8" id="noData"> No Data Available</td>
+                                </tr>
+                            </tbody>
+                              <tbody  id="sitvst1" style="display:none">
+                              <tr *ngFor="let item of site_visit">
+                                <td class="center" >{{item.Site_Visit_Name}}</td>
+                                <td class="center" style="text-decoration: underline;" (click)="sitvisit_modalclick(item)">{{item.Projects_Name}}</td>
+                                <td class="center" >{{item.Date_of_Visit}}</td>
+                                <td class="center" >{{item.Site_Visit_Status}}</td>
+                                <td class="center" >{{item.Sales_Rep}}</td>
+                                </tr>
+
+                              </tbody>
+
+                              <tbody id="sitvst2" style="display:none">
+                                <tr *ngFor="let item of site_visit2">
+                                    <td class="center" >{{item.Site_Visit_Name}}</td>
+                                    <td class="center" style="text-decoration: underline;"  (click)="sitvisit_modalclick(item)">{{item.Projects_Name}}</td>
+                                    <td class="center" >{{item.Date_of_Visit}}</td>
+                                    <td class="center" >{{item.Site_Visit_Status}}</td>
+                                    <td class="center" >{{item.Sales_Rep}}</td>
+                                  </tr>
+  
+                                </tbody>
+
+                                <tbody id="sitvst3" style="display:none">
+                                    <tr *ngFor="let item of site_visit3">
+                                        <td class="center" >{{item.Site_Visit_Name}}</td>
+                                        <td class="center" style="text-decoration: underline;" (click)="sitvisit_modalclick(item)">{{item.Projects_Name}}</td>
+                                        <td class="center" >{{item.Date_of_Visit}}</td>
+                                        <td class="center" >{{item.Site_Visit_Status}}</td>
+                                        <td class="center" >{{item.Sales_Rep}}</td>
+                                       </tr>
+      
+                                    </tbody>
+                            </table>
+                         
+                          </div>
+                    </div>
+                    </div>
+       
+    <div class="col-md-1"></div>
+</div>
+<div class="row clearfix ">
+
+    <div class="col-md-12 center" >
+        <button id="finishButton" type="button" class="btn-hover color-1 "
+        (click)="updateLead()">Update</button>
+    </div>  
+ 
+</div>
+</div> 
+  
+  
+       
+  </div>
+  </div>
+  </div>
+  </div>
+   
+  <div class="modal" id="activityHistoryModal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Activity History</h5>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <div class="row clearfix center-block text-center">
+                      
+                      <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="subjectId" class="form-control " type="text" name="bday"
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Subject:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+  
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="statusId" class="form-control " type="text" name="bday"
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Status:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="assignedId" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Assigned To:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                              
+                  </div>
+                  <div class="row clearfix center-block ">
+                      
+                      <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="nameId" class="form-control " type="text" name="bday"
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Name:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+  
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="duedateId" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Due date:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+  
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="priorityId" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Priority:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                 
+                                 
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="descriptionId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Description:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="typeId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Type:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="timeId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Time:</label>
+                              </div>
+                          </div>
+                      </div>
+                      
+                    
+                     
+  
+                                  
+                                 
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="FirstCompletedActivityId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">First Completed Activity:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="RelatedToId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Related To:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="CommentsId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Comments:</label>
+                              </div>
+                          </div>
+                      </div>
+                      
+                    
+                     
+  
+                                  
+                                 
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="FollowupDescriptionId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Follow up Description:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="FollowupTypeId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Follow up Type:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="FollowupDateId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Follow up Date:</label>
+                              </div>
+                          </div>
+                      </div>
+                      
+                    
+                     
+  
+                                  
+                                 
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="FollowupTimeId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Follow up Time:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                                 
+                  </div>
+              </div>
+             
+          </div>
+      </div>
+  </div>
+  
+    <div class="modal" id="logcallModal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Log A Call</h5>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <div class="row clearfix center-block text-center">
+                      
+                      <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="subjectId" class="form-control " type="text" name="bday"
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Subject:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="assignedId" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Assigned To:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="duedateId" class="form-control " type="date" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Due date:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                  </div>
+                  <div class="row clearfix center-block ">
+                      
+                      <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="nameId" class="form-control " type="text" name="bday"
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Name:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="descriptionId" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Description:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+  
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line" style="margin-top: -13px;">
+                                            <label style="color:#26a69a">Time:</label>
+                                            <div class="center">
+                                              <select style="width:100%" class="form-group" id="log_timeId" single >
+                                                  <option>--Select--</option>
+                                                  <option>10:00 AM</option>
+                                                </select>
+                                            </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                 
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                      
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line" style="margin-top: -13px;">
+                                <label style="color:#26a69a">Status:</label>
+                                <div class="center">
+                                  <select style="width:100%" class="form-group" id="log_statusId" single >
+                                      <option>--Select--</option>
+                                      <option>Open</option>
+                                    </select>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line" style="margin-top: -13px;">
+                                <label style="color:#26a69a">Priority:</label>
+                                <div class="center">
+                                  <select style="width:100%" class="form-group" id="log_priorityId" single >
+                                      <option>--Select--</option>
+                                      <option>Normal</option>
+                                    </select>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+  
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line" style="margin-top: -13px;">
+                                            <label style="color:#26a69a">Type:</label>
+                                            <div class="center">
+                                              <select style="width:100%" class="form-group" id="log_typeId" single >
+                                                  <option>--Select--</option>
+                                                  <!-- <option>10:00 AM</option> -->
+                                                </select>
+                                            </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                 
+                  </div>
+              </div>
+              <div class="modal-footer" >
+                  <div class="col-md-12 center-block text-center">
+                      <button type="button" class="btn-hover color-1 "
+                          (click)="logaCallsubmission()">Submit</button>
+  
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <div class="modal" id="sendanemailModal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+  
+              
+              <div class="modal-header">
+                  <h5 class="modal-title">Send An Mail</h5>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <div class="row clearfix center-block text-center">
+                      <div class="col-md-2">From</div>
+                      <div class="col-md-8">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="subjectId" class="form-control " type="text" name="bday"
+                                              autocomplete="off" style="margin-top:-18px">
+                                              
+                                          </div>
+                                      </div>
+                                  </div>
+                                
+                                 
+                  </div>
+                  <div class="row clearfix center-block text-center">
+                      <div class="col-md-2">To</div>
+                      <div class="col-md-8">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="subjectId" class="form-control " type="text" name="bday"
+                                              autocomplete="off" style="margin-top:-18px">
+                                              
+                                          </div>
+                                      </div>
+                                  </div>
+                                
+                                 
+                  </div>
+  
+                  <!-- <div class="row clearfix center-block text-center">
+                      <div class="col-md-2">Additional To</div>
+                      <div class="col-md-8">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <textarea id="textarea" style="height:60px;font-size:16px;" data-length="120"></textarea> 
+                                          </div>
+                                      </div>
+                                  </div>
+                               
+                  </div> -->
+  
+                  <div class="row clearfix center-block text-center">
+                      <div class="col-md-2">CC</div>
+                      <div class="col-md-8">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <textarea id="textarea" style="height:60px;font-size:16px;" data-length="120"></textarea> 
+                                          </div>
+                                      </div>
+                                  </div>
+                               
+                  </div>
+                  <div class="row clearfix center-block text-center">
+                      <div class="col-md-2">BCC</div>
+                      <div class="col-md-8">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <textarea id="textarea" style="height:60px;font-size:16px;" data-length="120"></textarea> 
+                                          </div>
+                                      </div>
+                                  </div>
+                               
+                  </div>
+                  <div class="row clearfix center-block text-center">
+                      <div class="col-md-2">Subject</div>
+                      <div class="col-md-8">
+                      <div class="form-group form-float">
+                          <div class="form-line">
+                              <input id="subjectId" class="form-control " type="text" name="bday"
+                              autocomplete="off" style="margin-top:-18px">
+                              
+                          </div>
+                      </div>
+                  </div>
+                      <!-- <div class="col-md-8">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <textarea id="textarea" style="height:60px;font-size:16px;" data-length="120"></textarea> 
+                                          </div>
+                                      </div>
+                                  </div> -->
+                               
+                  </div>
+                  <div class="row clearfix center-block text-center">
+                      <div class="col-md-2">Body</div>
+                      <div class="col-md-8">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <textarea id="textarea_body" style="height:60px;font-size:16px;" data-length="120"></textarea> 
+                                          </div>
+                                      </div>
+                                  </div>
+                               
+                  </div>
+              </div>
+              <div >
+                  <div class="col-md-12 row clearfix text-center row clearfix">
+                     
+                      <div class="col-md-3">
+                          <button type="button" class="btn-hover color-1 "
+                          (click)="sendanemailsubmission()">Send</button>
+                      </div>
+                      <div class="col-md-3">
+                          <button type="button" class="btn-hover color-1 "
+                          (click)="selectTemplateclick()">Select Template</button>
+                      </div>
+                      <div class="col-md-3">
+                          <button type="button" class="btn-hover color-1 "
+                          (click)="sendanemailsubmission()">Attach File</button>
+                      </div>
+                      <div class="col-md-3">
+                          <button type="button" class="btn-hover color-1 "
+                          (click)="sendanemailsubmission()">Cancel</button>
+                      </div>
+                     
+                          
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <div class="modal" id="selecttemplateModal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Select Template</h5>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-bottom: 30px;" id="milestone_blocks_tables">
+         
+        
+                      <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+                        <thead>
+                          <tr>
+                              <th class="center">Name</th> 
+                            <th class="center">Type</th> 
+                            <th class="center">Description</th>           
+                      
+                          </tr>
+                        </thead>
+  
+                        <tbody>
+                        <tr *ngFor="let item of templates_array">
+                          <td class="center" (click)="nameforbody(item.name)">{{item.name}}</td>
+                          <td class="center" >{{item.type}}</td>
+                          <td class="center" >{{item.description}}</td>
+                          
+                          </tr>
+                         
+                         
+                    
+                        </tbody>
+                      </table>
+                   
+                    </div>
+                 
+              </div>
+              
+          </div>
+      </div>
+  </div>
+  <div class="modal" id="sitevisitModal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Create Site Visit</h5>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <div class="row clearfix center-block text-center">
+                      
+                      <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="project_name" class="form-control " type="text" name="bday"
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Project Name:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="lead_id" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Lead:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="due_ofvisitId" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Due Of Visit:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                  </div>
+                  <div class="row clearfix center-block ">
+                      
+                      <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="opportunity_Id" class="form-control " type="text" name="bday"
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Opportunity:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="act_sitedateId" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Actual Site Visit Date:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="sales_repId" class="form-control " type="text" name="bday"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Sales Rep:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                 
+                                 
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                      
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="sId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Site Visit status:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="cust_emailId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Customer Email:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="custemailId" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Site Visit Comments:</label>
+                              </div>
+                          </div>
+                      </div>
+                                 
+                                 
+                  </div>
+                  <div class="row clearfix center-block ">
+                
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line" style="margin-top: -13px;">
+                                <label style="color:#26a69a">Site Visit status:</label>
+                                <div class="center">
+                                  <select style="width:100%" class="form-group" id="sitevisitstatusId" single >
+                                      <option>--Select--</option>
+                                      <option>Normal</option>
+                                    </select>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+  
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line" style="margin-top: -13px;">
+                                            <label style="color:#26a69a">Site Visit Priority:</label>
+                                            <div class="center">
+                                              <select style="width:100%" class="form-group" id="sitevisitpriorityId" single >
+                                                  <option>--Select--</option>
+                                                
+                                                </select>
+                                            </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                 
+                  </div>
+              </div>
+              <div class="modal-footer" >
+                  <div class="col-md-12 center-block text-center">
+                      <button type="button" class="btn-hover color-1 "
+                          (click)="siteVisitsubmission()">Submit</button>
+  
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal" id="sitevisitDetailModal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Site Visit</h5>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <div class="row clearfix center-block text-center">
+                      
+                      <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="sitevisitname" class="form-control " type="text" name="bday"
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Site Visit Name:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="leadid" class="form-control " type="text" 
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Lead:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="dueofvisitId" class="form-control " type="text"
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Due Of Visit:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                  </div>
+                  <div class="row clearfix center-block ">
+                      
+                      <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input id="opportunityId" class="form-control " type="text" 
+                                              autocomplete="off" >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Opportunity:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="actsitedateId" class="form-control " type="text" 
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Actual Site Visit Date:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group form-float">
+                                          <div class="form-line">
+                                              <input autocomplete="off" id="salesrepId" class="form-control " type="text" 
+                                                   >
+                                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                  class="form-label">Sales Rep:</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                 
+                                 
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                      
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="siteVisitstatusId" class="form-control " type="text" 
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Site Visit status:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="custemailId" class="form-control " type="text" 
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Customer Email:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="sit_vst_cmnt_Id" class="form-control " type="text" 
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Site Visit Comments:</label>
+                              </div>
+                          </div>
+                      </div>
+                                 
+                                 
+                  </div>
+                  <div class="row clearfix center-block ">
+                
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="projectnameId" class="form-control " type="text" 
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Projects Name:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="sit_vst_priority_Id" class="form-control " type="text" 
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Site Visit Priority:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="sit_visit_aging_Id" class="form-control " type="text" 
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Site Visit Aging:</label>
+                              </div>
+                          </div>
+                      </div>         
+                  </div>
+                  <div class="row clearfix center-block ">
+                
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="current_user_Id" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Current User:</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="walk_in_form_number_id" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Walk In Form Number:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="oportunty_aging_Id" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Opportunity Aging:</label>
+                              </div>
+                          </div>
+                      </div>         
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="sit_lead_aging_Id" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Site Lead Aging :</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="sqad_time_of_vst_Id" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Sqad Time Of Visit:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="sqad_voice_rec_url_Id" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Squad Voice Record Url:</label>
+                              </div>
+                          </div>
+                      </div>         
+                  </div>
+  
+                  <div class="row clearfix center-block ">
+                
+                      <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input autocomplete="off" id="opportunit_Id" class="form-control " type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Opportunity Id :</label>
+                              </div>
+                          </div>
+                      </div>
+  
+                              
+                  </div>
+              </div>
+              <div class="modal-footer" >
+                  <div class="col-md-12 center-block text-center">
+                      <button type="button" class="btn-hover color-1 "
+                          (click)="siteVisitedit()">Edit</button>
+  
+                          <button type="button" class="btn-hover color-1 "
+                          (click)="siteVisitdelete()">Delete</button>
+  
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </section>

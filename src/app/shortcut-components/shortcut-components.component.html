@@ -1,0 +1,2082 @@
+<style>
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  .milestonecls {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #dddddd;
+    color: #000000;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .accordion-item {
+    margin-bottom: 10px;
+  }
+
+  .keyname {
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-table;
+    font-size: 13px;
+    line-height: 21px;
+    width: 200px;
+  }
+
+  .keyname2 {
+    font-weight: bold;
+    margin-left: 20px;
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-table;
+    font-size: 13px;
+    line-height: 21px;
+    width: 200px;
+  }
+
+  .accordion-item-heading {
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0px 0px 10px 0px;
+    padding: 10px 20px;
+    background-color: #dddddd;
+    color: #000000;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .open .accordion-item-heading,
+  .open .accordion-item-content {
+    width: 100%;
+  }
+
+  .closed .accordion-item-content {
+    width: 60%;
+    height: 0px;
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
+    float: left;
+    display: block;
+  }
+
+  .open .accordion-item-content {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin: 0;
+    display: block;
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
+    box-sizing: border-box;
+  }
+
+  .open .accordion-item-heading {
+    margin: 0px;
+  }
+
+
+  .maindiv [type="radio"]:not(:checked),
+  [type="radio"]:checked {
+
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .maindiv input[type=radio] {
+    border: 0px;
+    width: 2%;
+    height: 2em;
+    position: relative !important;
+    top: -3px;
+    left: 12px;
+
+  }
+
+
+  /* 
+  .regular-checkbox+label {
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .regular-checkbox+label:active,
+  .regular-checkbox:checked+label:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .regular-checkbox:checked+label {
+    background-color: #e9ecee;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    color: green;
+  }
+
+  .regular-checkbox:checked+label:after {
+    content: '\2714';
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    left: 3px;
+    color: green;
+  }
+
+  .big-checkbox+label {
+    position: relative;
+    top: 4px;
+  }
+
+
+  .regular-checkbox {
+    display: none;
+  }
+
+  .big-checkbox:checked+label:after {
+    font-size: 18px;
+    left: 3px;
+    top: 2px;
+  }
+
+  .tag {
+    font-family: Arial, sans-serif;
+    position: relative;
+    top: 5px;
+    font-weight: bold;
+    text-transform: capitalize;
+    display: block;
+    float: left;
+    font-size: 14px;
+
+  }
+
+
+
+  .big-checkbox+label {
+    position: relative;
+    top: 4px;
+  }
+
+  .big-checkbox:checked+label:after {
+    font-size: 18px;
+    left: 3px;
+    top: 2px;
+  } */
+
+
+  .radio {
+    margin: 0.5rem;
+  }
+
+  .radio input[type=radio] {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .radio input[type=radio]+.radio-label:before {
+    content: "";
+    background: #f4f4f4;
+    border-radius: 100%;
+    border: 1px solid #b4b4b4;
+    display: inline-block;
+    width: 1.4em;
+    height: 1.4em;
+    position: relative;
+    top: -0.2em;
+    margin-right: 1em;
+    vertical-align: top;
+    cursor: pointer;
+    text-align: center;
+    transition: all 250ms ease;
+  }
+
+  .radio input[type=radio]:checked+.radio-label:before {
+    background-color: #3197EE;
+    box-shadow: inset 0 0 0 4px #f4f4f4;
+  }
+
+  .radio input[type=radio]:focus+.radio-label:before {
+    outline: none;
+    border-color: #3197EE;
+  }
+
+  .loadercls {
+    position: relative;
+    left: 8px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+  }
+
+  .loadercls1 {
+    position: relative;
+    left: 8px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Customer Data</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>Customer Details</a>
+            </li>
+            <li class="breadcrumb-item active">View Customer Data</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+
+        <div class="row clearfix">
+          <div class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Project*:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="blocksID" class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Block:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="floorsID" class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Floor:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="floorSelection">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div id="flatsID" class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Flat:</label>
+              </p>
+              <div class="center" style="position: relative;top: -10px;">
+                <select style="width:100%;" class="form-group" id="flatSelection">
+                  <!-- <option value="--Select--">--Select--</option> id="hideflat"-->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">Customer Name:</label>
+                <div class="center">
+                  <input type="text" placeholder="" autocomplete="off"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                     id="custmerName">
+                </div>
+              </div>
+            </div> -->
+          <div class="col-sm-4">
+            <label style="font-weight: bold;">Customer Name :</label>
+            <div class="ng-autocomplete" style="width: 396px!important;
+              ">
+              <!-- border: solid 0.5px lightgrey!important;id="hideflat2" -->
+              <form [formGroup]="autocompleteform">
+                <ng-autocomplete [data]="countries" [searchKeyword]="keyword" placeHolder="Enter the Customer Name"
+                  (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                  (inputCleared)="onClearSearch($event)" historyIdentifier="countries" [itemTemplate]="itemTemplate"
+                  [notFoundTemplate]="notFoundTemplate" #auto formControlName="employeename">
+                </ng-autocomplete>
+                <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.name"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                </ng-template>
+              </form>
+            </div>
+            <!-- <div class="form-line">
+                  <input type="text" style="border: 1px solid #4d474785; text-align: center;border-radius:10px;"
+                    class="form-control autocomplete" id="customername" (blur)="customerDetails($event)">
+                </div> -->
+          </div>
+
+        </div>
+
+        <div class="row clearfix">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4 text-center">
+            <button type="submit" class="btn-hover color-1" (click)="getDetails()">Submit</button>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+      </div>
+    </div>
+
+    
+    <div id="hideshowcontent" >
+      <span id="onlymisshowing">
+       <div class="row" id="totaldiv_update">
+        <div  class="col-sm-4" id="activstate" >
+          <div class="form-line">
+            <p class="fieldHeaders">
+              <label style="font-weight: bold;" class="required">Status:</label>
+            </p>
+            <div class="center" style="position: relative;top: -10px;">
+              <select style="width:100%;" class="form-group" id="statusId1">
+                <option value="select">--Select--</option>
+                <option value="Swap">Swap</option>
+                <option value="Price Update">Price Update</option>
+                <option value="PMAY Scheme Eligible">PMAY Scheme Eligible</option>
+                <option value="Cancelled not refunded">Cancelled not refunded</option>
+                <option value="cancel">cancel</option>
+
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div  class="col-sm-4" id="pendingstate" >
+          <div class="form-line">
+            <p class="fieldHeaders">
+              <label style="font-weight: bold;" class="required">Status:</label>
+            </p>
+            <div class="center" style="position: relative;top: -10px;">
+              <select style="width:100%;" class="form-group" id="statusId2">
+               
+                <option value="select">--Select--</option>
+                <option value="cancel">cancel</option>
+                <option value="Delete">Delete</option>
+                <option value="Price Update">Price Update</option>
+                <option value="PMAY Scheme Eligible">PMAY Scheme Eligible</option>
+                <option value="Swap">Swap</option>
+                <option value="Cancelled not refunded">Cancelled not refunded</option>
+                <option value="Blocked">Blocked</option>
+                <option value="Not Open">Not Open</option>
+                <option value="Legal case">Legal case</option>
+                <option value="reject">reject</option>
+                <option value="Car Parking Adjustment">Car Parking Adjustment</option>
+              
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div  class="col-sm-4" id="Cancelbutnotrefund" >
+          <div class="form-line">
+            <p class="fieldHeaders">
+              <label style="font-weight: bold;" class="required">Status:</label>
+            </p>
+            <div class="center" style="position: relative;top: -10px;">
+              <select style="width:100%;" class="form-group" id="statusId3">
+                <option value="select">--Select--</option>
+                <option value="Swap">Swap</option>
+                <option value="Price Update">Price Update</option>
+                <option value="PMAY Scheme Eligible">PMAY Scheme Eligible</option>
+                <option value="Delete">Delete</option>
+                <option value="cancel">cancel</option>
+                <option value="active">active</option>
+                <option value="Blocked">Blocked</option>
+                <option value="Not Open">Not Open</option>
+                <option value="Legal case">Legal case</option>
+                <option value="reject">reject</option>
+                <option value="Car Parking Adjustment">Car Parking Adjustment</option>
+
+               
+               
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" >
+          <label class="required">Comments:</label>
+          <textarea style="overflow: auto;
+          resize: none;border-radius: 4px;height: 50px;" rows="5" cols="5" id="statusComentId"
+                    data-length="120"></textarea>
+          <!-- <textarea id="statusComentId"style="border: 1px solid #4d474785; padding: 10px; border-radius:10px;"></textarea> -->
+        </div>
+         <div class="col-sm-4">
+            <div class="form-line">
+              <div class="col-sm-4 text-center">
+                <button type="submit" class="btn-hover color-1" (click)="statusUpdate()">Update</button>
+              </div>
+            </div>
+          </div> 
+       
+  
+      </div>
+    </span>
+      <span style="font-weight: bold;font-size: 22px;">Customer Details:</span>
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row">
+            <span style="font-weight: bold;text-decoration: underline;margin-left:15px;font-size: 16px;">Primary
+              Applicant Details:</span><br>
+
+          </div>
+          <div class="row clearfix">
+            <div class="col-sm-6" style="float:left;" *ngFor="let item of custmerDetails;">
+
+              <div class="form-line" style="padding:5px;">
+                <!--                
+                  <label  class="keyname" style="font-weight: 900;">{{item.key}} :</label> 
+                  <span  class="keyname" style="font-weight:bold">{{item.value}}</span> 
+                   -->
+                <label class="keyname" style="font-weight: 700;float:left;font-size: 15px">{{item.key}}</label>
+                <span style="font-weight:bold">:</span>
+                <span class="keyname" style="font-weight:bold;margin-left:20px;"
+                  *ngIf="item.key == 'Date Of Birth'">{{item.value| date:'dd-MM-yyyy'}}</span>
+                <span class="keyname" style="font-weight:bold;margin-left:20px;"
+                  *ngIf="item.key == 'Booking Date'">{{item.value| date:'dd-MM-yyyy'}}</span>
+                <span class="keyname" style="font-weight:bold;margin-left:20px;"
+                  *ngIf="item.key == 'Agreement Date'">{{item.value| date:'dd-MM-yyyy'}}</span>
+                <span class="keyname" style="font-weight:bold;margin-left:20px;"
+                  *ngIf="item.key != 'Date Of Birth' && item.key != 'Booking Date'&& item.key != 'Agreement Date'">{{item.value}}</span>
+
+              </div>
+
+
+            </div>
+          </div><br>
+
+          <div class="row clearfix">
+
+            <div class="col-sm-6" style="float:left;" *ngFor="let item of financialAmtDetails;">
+              <div class="form-line" style="padding:5px;">
+                <label class="keyname" style="font-weight: 700;float:left;font-size: 15px">{{item.key}}</label>
+                <span style="font-weight:bold">:</span>
+                <span class="keyname" style="font-weight:bold;margin-left:20px;">{{item.value}}</span>
+              </div>
+            </div>
+
+          </div><br>
+
+
+
+          <div class="row" *ngIf="coaplicant_custmerDetails != ''">
+            <span style="font-weight: bold;text-decoration: underline;margin-left:15px;font-size: 16px;">Secondary
+              Applicant Details:</span><br><br>
+
+          </div>
+          <div class="row clearfix" *ngIf="coaplicant_custmerDetails != ''">
+            <div class="col-sm-6" style="float:left;" *ngFor="let item of coaplicant_custmerDetails;let i=index;">
+              <!-- <div class="col-sm-12" style="height:28px"> -->
+
+              <div class="form-line">
+                <label class="keyname" style="font-weight: 700;float:left;font-size: 15px">{{item.key}}</label>
+                <span style="font-weight:bold">:</span>
+                <span class="keyname" style="font-weight:bold;margin-left:20px;"
+                  *ngIf="item.key == 'Date Of Birth'">{{item.value| date:'dd-MM-yyyy'}}</span>
+                <span class="keyname" style="font-weight:bold;margin-left:20px;"
+                  *ngIf="item.key != 'Date Of Birth'">{{item.value}}</span>
+
+
+              </div>
+              <!-- </div> -->
+
+            </div>
+          </div><br>
+        </div>
+      </div>
+      <span style="font-weight: bold;font-size: 22px;">Unit Details:</span>
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row clearfix">
+            <div class="col-sm-4" style="float:left;" *ngFor="let item of Unit_Details;">
+
+              <div class="form-line" style="padding:5px;">
+
+                <label class="keyname" style="font-weight: 700;float:left;font-size: 15px">{{item.key}}</label>
+                <span style="font-weight:bold">:</span>
+                <span style="font-weight:bold;margin-left:20px;">{{item.value}}</span>
+
+
+              </div>
+
+
+            </div>
+          </div><br>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span style="font-weight: bold;font-size: 22px;">
+            <span>Milestone Details:</span>
+            <span style="margin-left: 100px">Payment Schedule Name : <span style=" font-size: 16px; padding: 4px 3px;">{{milestone_alias_name}}</span></span>
+            <!-- text-decoration: underline; color: #04a1fc; -->
+            </span>
+          <div class="table-responsive" id="milestone_blocks_tables">
+            <ul>
+              <li>
+
+                <table id="tableExport"
+                  class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="center">S.NO</th>
+                      <!-- <th class="center">Action</th> -->
+
+                      <th class="center"> <input type="checkbox" style="width:20px;height:20px;" name="allNonTrades"
+                          [value]="milestonedetails" (change)="allNonTrades($event)"> Select All</th>
+
+                      <th class="center">Milestone Name</th>
+                      <th class="center">Due%</th>
+                      <th class="center">Completion Status</th>
+                      <th class="center">Demand Note Date</th>
+                      <th class="center">Due Date</th>
+                      <th class="center">Demand Amount</th>
+                      <th class="center">Amount Paid</th>
+                      <th class="center">Amount Due</th>
+                      <th class="center">Interest Amount Due</th>
+                      <th class="center">Demand Amount Cleared Date</th>
+                      <th class="center">Payment Aging</th>
+                      <th class="center">Interest Days</th>
+                      <th class="center"> Total Interest Amount </th>
+                      <th class="center"> Interest Paid Amount </th>
+                      <th class="center"> Interest Waiver Amount </th>
+                      <th class="center"> interest Waiver Pending Amount </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+
+                    <tr *ngFor="let item of milestonedetails; let i=index">
+                      <td class="center">{{i+1}}</td>
+                      <!-- <td class="center" *ngIf="item.mileStoneStatus == 'Incomplete'"> - </td>
+                      <td class="center" *ngIf="item.mileStoneStatus == 'Completed'"> <input type="checkbox"
+                          style="width:20px;height:20px;" (change)="onChange($event.target.checked, item)"
+                          [checked]="checked(item)"></td> -->
+
+                      <td class="center" *ngIf="item.mileStoneStatus == 'Incomplete'"> - </td>
+                      <td class="center" *ngIf="item.mileStoneStatus == 'Completed'"> <input type="checkbox"
+                          id="{{'tablerowdata'+(i+1)}}" style="width:20px;height:20px;"
+                          (change)="onChange($event,$event.target.checked, item)" [checked]="item.selected"></td>
+
+
+
+                      <td class="center">{{item.mileStoneName}}</td>
+                      <td class="center">{{item.paymentPercentageInMileStone}}</td>
+                      <td class="center">{{item.mileStoneStatus}}</td>
+                      <td class="center" *ngIf="item.demandNoteDate == null">-</td>
+                      <td class="center" *ngIf="item.demandNoteDate != null">{{item.demandNoteDate| date:'dd-MM-yyyy'}}
+                      </td>
+                      <td class="center">{{item.dueDate|date:'dd-MM-yyyy'}}</td>
+                      <td class="center" *ngIf="item.documentLocation == null">{{item.mileStoneAmount.toLocaleString('en-IN')}}</td>
+                      <td class="center" style="text-decoration: underline;cursor: pointer;"
+                        (click)="milestoneamountreceipt(item.documentLocation)" *ngIf="item.documentLocation != null">
+                        {{item.mileStoneAmount.toLocaleString('en-IN')}}</td>
+                      <td *ngIf="item.mileStonePaidAmount != '0.00'" class="center"
+                        style="text-decoration: underline;cursor: pointer;"
+                        (click)="generateRecetitformilestone(item.paymentScheduleId)">{{item.mileStonePaidAmount.toLocaleString('en-IN')}}</td>
+                      <td *ngIf="item.mileStonePaidAmount == '0.00'" class="center">{{item.mileStonePaidAmount.toLocaleString('en-IN')}}</td>
+                      <td class="center" *ngIf="item.milestoneAmountDue != null">{{item.milestoneAmountDue.toLocaleString('en-IN')}}</td>
+                      <td class="center" *ngIf="item.milestoneAmountDue == null">-</td>
+                      <td class="center" *ngIf="item.totalPendingPenaltyAmount != null">
+                        {{item.totalPendingPenaltyAmount.toLocaleString('en-IN')}}</td>
+                      <td class="center" *ngIf="item.totalPendingPenaltyAmount == null">-</td>
+
+                      <td class="center" *ngIf="item.milestoneLastReceiptDate != null">{{item.milestoneLastReceiptDate|
+                        date:'dd-MM-yyyy'}}</td>
+                      <td class="center" *ngIf="item.milestoneLastReceiptDate == null">-</td>
+                      <td class="center" *ngIf="item.daysDiffInDN_Date_AndLastReceipt == null">-</td>
+                      <td class="center" *ngIf="item.daysDiffInDN_Date_AndLastReceipt != null">
+                        {{item.daysDiffInDN_Date_AndLastReceipt}}</td>
+
+                      <td class="center" *ngIf="item.daysDelayed == null">-</td>
+                      <td class="center" *ngIf="item.daysDelayed != null">
+                        {{item.daysDelayed}}</td>
+
+
+                      <td class="center" *ngIf="item.totalPenalityAmount == null">-</td>
+                      <td class="center" *ngIf="item.totalPenalityAmount != null">
+                        {{item.totalPenalityAmount.toLocaleString('en-IN')}}</td>
+
+                      <td class="center" *ngIf="item.totalPenalityPaidAmount == null">-</td>
+                      <td class="center" *ngIf="item.totalPenalityPaidAmount != null">
+                        {{item.totalPenalityPaidAmount.toLocaleString('en-IN')}}</td>
+
+                      <td class="center" *ngIf="item.interestWaiverAdjAmount == null">-</td>
+                      <td class="center" *ngIf="item.interestWaiverAdjAmount != null">
+                        {{item.interestWaiverAdjAmount.toLocaleString('en-IN')}}</td>
+
+                      <td class="center" *ngIf="item.interestWaiverPendingAmount == null">-</td>
+                      <td class="center" *ngIf="item.interestWaiverPendingAmount != null">
+                        {{item.interestWaiverPendingAmount.toLocaleString('en-IN')}}</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+          <div style="position: relative;top: -35px;"><input type="checkbox" value=""
+              style="width:20px;height:20px;float:left;" class="checlist1">
+            <div style="float:left;margin-left:5px;font-weight: 900;">Interest</div>
+          </div>
+
+
+
+
+          <div *ngIf="milestonedetails != ''" style="float: left;width: 100%;">
+
+
+
+            <button id="gdn" style="width:230px" type="button" class="btn-hover color-1"
+              (click)="generate_and_regenerate_Demand_note('Generate')"
+              *ngIf="(deptid == 995 && roleid == 1) || (deptid == 993 && roleid == 8)|| (deptid == 993 && roleid == 20)">Generate
+              Demand Note </button>
+
+            <button id="gdnp" style="width:230px" type="button" class="btn-hover color-1" (click)="Save('Generate')"
+            *ngIf="(deptid == 995 && roleid == 1) || (deptid == 993 && roleid == 8)|| (deptid == 993 && roleid == 20)">Preview
+              Demand Note</button>
+
+            <button id="rgdn" style="width:230px" type="button" class="btn-hover color-1"
+              (click)="Regeneratedemandnotefun('regeneratedemandnote')"
+              *ngIf="(deptid == 995 && roleid == 1) || (deptid == 993 && roleid == 8)|| (deptid == 993 && roleid == 20)">Re-Generate
+              Demand Note</button>
+
+            <button id="rgdnp" style="width:300px" type="button" class="btn-hover color-1"
+              (click)="Regeneratedemandnotefun('regeneratedemandnotesave')"
+              *ngIf="(deptid == 995 && roleid == 1) || (deptid == 993 && roleid == 8)|| (deptid == 993 && roleid == 20)">Preview
+              Regenerated Demand
+              Note</button>
+
+            <button id="gil" style="width:230px" type="button" class="btn-hover color-1"
+              (click)="generate_and_regenerate_Demand_note('Interest_Letter')"
+              *ngIf="(deptid == 995 && roleid == 1) || (deptid == 993 && roleid == 8)|| (deptid != 993 && roleid != 20)">Generate
+              Interest
+              Letter</button>
+
+            <button id="vil" style="width:230px" type="button" class="btn-hover color-1"
+              (click)="viewInterestLetters('Interest_Letter_View')"
+              *ngIf="(deptid == 995 && roleid == 1) || (deptid == 993 && roleid == 8)|| (deptid != 993 && roleid != 20)">View
+              Interest Letters</button>
+
+            <!-- <button id="soa" style="width:230px" type="button" class="btn-hover color-1" (click)="Consolidatedfun()"
+              *ngIf="(deptid == 995 && roleid == 1) || (deptid == 995 && roleid == 8) || (deptid !== 995 )">Consolidated
+              Receipt</button> -->
+
+            <button id="vib" style="width:300px" type="button" class="btn-hover color-1" (click)="InterestBreakupfun()"
+            *ngIf="(deptid == 995 && roleid == 1) || (deptid == 993 && roleid == 8) || (deptid !== 995 && deptid !== 993)|| (deptid != 993 && roleid != 20)">View
+              Interest Breakup</button>
+             
+            <span *ngIf="(deptid == 988 )">
+              <button id="edit" style="width:230px" type="button" class="btn-hover color-1"
+                (click)="EditFunction()">Edit and Save >></button>
+            </span>
+
+            <button id="request_interest" style="width:230px" type="button" class="btn-hover color-1" (click)="Requestforinterest()"
+            *ngIf="(deptid == 995 && roleid == 1) ||  (deptid != 993 && roleid != 20)">
+              Request for interest waiver</button>
+
+            <button *ngIf="(deptid == 988 )" id="edit" style="width:230px" type="button"
+              class="btn-hover color-1" (click)="Editgenerate_Function()">Edit and Generate >></button>
+
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+     
+
+      <!-- <div class="card">
+        <div class="card-body">
+          <div class="table-responsive" id="waivedInteresttables">
+            <ul>
+              <li>
+                <span style="font-weight: bold;font-size: 22px;">View Interest Paid And Waived Details:</span><br><br>
+                <table id="tableExport1"
+                class="display table table-hover table-checkable order-column width-per-100 table-bordered"
+                style="margin-top: 10px;overflow: auto;">
+                <thead>
+                  <tr class="center">
+                    <th class="center" style="font-weight:bolder"><b>S.No</b></th>
+                    <th class="center" style="font-weight:bolder"><b> Project Name</b></th>
+                    <th class="center" style="font-weight:bolder"><b>customer Name</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Flat No</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Booking Date</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Sale Deed Date</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Total Interest Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Amount waived off</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Waiver amount request pending</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Interest Collected</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Bal Interest</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Basic Flat Cost</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Amenities Flat Cost</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Total Flat Cost Excl Gst</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Total Agreement Cost</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Total Paid Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Handing Over Date</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Agreement Date</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Legal Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Legal Paid Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Flat Khata Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Flat Khata Paid Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Maintenance Charge Pay Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Maintenance Charge Paid Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Modification Charges Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Modification Charges Paid Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Corpus Amount</b></th>
+                    <th class="center" style="font-weight:bolder"><b>Corpus Paid Amount</b></th> 
+                 
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of controller1; let i = index;" class="customersList"
+                    (click)="viewcustomerdata(item)" style="cursor:pointer;">
+                    <td class="center">{{i + 1}}</td>
+                    <td class="center">{{item.siteName}}</td>
+                    <td class="center">{{item.customerName}}</td>
+                    <td class="center">{{item.flatNo}}</td>
+                    <td class="center">{{item.bookingDate}}</td>
+                    <td class="center">{{item.saleDeedDate}}</td>
+                    <td class="center">{{item.totalInterestAmount}}</td>
+                    <td class="center"> {{item.totalInterestWaiverAdjAmount}} </td>
+                    <td class="center"> {{item.sumOfInitiatedWaiverAmount}} </td>
+                    <td class="center"> {{item.totalPenalityPaidAmount}} </td>
+                    <td class="center"> {{item.penaltybalanceAmount}} </td>
+                    <td class="center">{{item.basicFlatCost}}</td>
+                    <td class="center">{{item.amenitiesFlatCost}}</td>
+                    <td class="center">{{item.totalFlatCostExclGst}}</td>
+                    <td class="center">{{item.totalAgreementCost}}</td>
+                    <td class="center">{{item.totalPaidAmount}}</td>
+                    <td class="center">{{item.handingOverDate}}</td>
+                    <td class="center">{{item.agreementDate}}</td>
+                    <td class="center">{{item.legalPayAmount}}</td>
+                    <td class="center">{{item.legalPaidAmount}}</td>
+                    <td class="center">{{item.flatKhataPayAmount}}</td>
+                    <td class="center">{{item.flatKhataPaidAmount}}</td>
+                    <td class="center">{{item.maintenanceChargePayAmount}}</td>
+                    <td class="center">{{item.maintenanceChargePaidAmount}}</td>
+                    <td class="center">{{item.modificationPayAmount}}</td>
+                    <td class="center">{{item.modificationPaidAmount}}</td>
+                    <td class="center">{{item.corpusPayAmount}}</td>
+                    <td class="center">{{item.corpusPaidAmount}}</td>
+                  
+                  </tr>
+                </tbody>
+              </table>
+              </li>
+            </ul>
+          </div><br>
+
+
+
+
+
+        </div>
+      </div> -->
+
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive" id="milestone_blocks_tables">
+            <ul>
+              <li>
+                <span style="font-weight: bold;font-size: 22px;">Receipt Details:</span><br><br>
+
+                <table id="tablereceiptdetails"
+                  class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="center">S.NO</th>
+
+                      <th class="center">Received Date</th>
+                      <th class="center">Challan/Cheque Date</th>
+                      <th class="center">Deposit Date / Reflection Date</th>
+                      <th class="center">Clearance Date</th>
+                      <th class="center">Cheque Bounce Date</th>
+                      <th class="center">Amount</th>
+                      <th class="center">Mode Of Payment</th>
+                      <th class="center">Receipt Stage</th>
+                      <th class="center">Cheque Number</th>
+                      <th class="center">Receipt Type</th>
+                      <th class="center">Source Of Funds</th>
+                      <th class="center">Flat Number</th>
+                      <!-- <th class="center">Attachments</th>  -->
+                      <!-- <th class="center">Bounce Date</th> -->
+                      <th class="center">Bounce Reason</th>
+                      <th class="center">Project Bank Account</th>
+                      <th class="center">File Upload</th>
+                      <th class="center">Ack Number</th>
+                      <th class="center">Bank Name</th> 
+                      <th class="center">Receipt Against To</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+
+                    <tr *ngFor="let item of receiptDetailsdata; let i=index">
+                      <td class="center" (click)="Receipt_Details_fun(item)">{{i+1}}</td>
+                      <td class="center" (click)="Receipt_Details_fun(item)">{{item.transactionReceiveDate| date:'dd-MM-yyyy'}}</td>
+                      <td class="center" *ngIf="item.transactionDate == null" (click)="Receipt_Details_fun(item)">-</td>
+                      <td class="center" *ngIf="item.transactionDate != null" (click)="Receipt_Details_fun(item)">{{item.transactionDate|
+                        date:'dd-MM-yyyy'}}</td>
+                      <td class="center" *ngIf="item.chequeDepositedDate != null" (click)="Receipt_Details_fun(item)">{{item.chequeDepositedDate|
+                        date:'dd-MM-yyyy'}}</td>
+                      <td class="center" *ngIf="item.chequeDepositedDate == null" (click)="Receipt_Details_fun(item)">-</td>
+                      <td class="center" *ngIf="item.chequeClearanceDate != null" (click)="Receipt_Details_fun(item)">{{item.chequeClearanceDate|
+                        date:'dd-MM-yyyy'}}</td>
+                      <td class="center" *ngIf="item.chequeClearanceDate == null" (click)="Receipt_Details_fun(item)">-</td>
+
+                      <td class="center" *ngIf="item.chequeBounceDate != null" (click)="Receipt_Details_fun(item)">{{item.chequeBounceDate|
+                        date:'dd-MM-yyyy'}}</td>
+                      <td class="center" *ngIf="item.chequeBounceDate == null" (click)="Receipt_Details_fun(item)">-</td>
+
+                      <td class="center" *ngIf="item.transactionReceipts ==''">{{item.transactionAmount.toLocaleString('en-IN')}}</td>
+                      <td class="center" style="text-decoration: underline;cursor: pointer;"
+                        (click)="attachmentlink_receiptdetails(item.transactionReceipts)"
+                        *ngIf="item.transactionReceipts !=''">{{item.transactionAmount.toLocaleString('en-IN')}}</td>
+
+                      <td class="center" (click)="Receipt_Details_fun(item)">{{item.transactionModeName}}</td>
+                      <td class="center" style="cursor:pointer;" (click)="Receipt_Details_fun(item)">{{item.receiptStage}}</td>
+                      <td class="center" (click)="Receipt_Details_fun(item)">{{item.chequeOrReferenceNo}}</td>
+                      <td class="center" (click)="Receipt_Details_fun(item)">{{item.transactionPaymentSetOff}}</td>
+                      <td class="center" *ngIf="item.sourceOfFunds == null" (click)="Receipt_Details_fun(item)">-</td>
+                      <td class="center" *ngIf="item.sourceOfFunds != null" (click)="Receipt_Details_fun(item)">{{item.sourceOfFunds}}</td>
+                      <td class="center" (click)="Receipt_Details_fun(item)">{{item.flatNo}}</td>
+                      <!-- <td class="center" style="text-decoration: underline;" ><span *ngFor="let linklocns of item.multipleLocations;"><img  style="width:20px;height:20px;;margin-left:3px"  src="assets/images/pdficon.png" (click)="attachmentlink(linklocns.location)"></span></td> -->
+                      <td class="center" *ngIf="item.chequeBounceComment == null" (click)="Receipt_Details_fun(item)">-</td>
+                      <td class="center" *ngIf="item.chequeBounceComment != null" (click)="Receipt_Details_fun(item)">{{item.chequeBounceComment}}</td>
+                      <td class="center" (click)="Receipt_Details_fun(item)">{{item.siteBankAccountNumber}}</td>
+                      <td class="center"><span *ngIf="item.multipleLocations !=''"><span
+                            *ngFor="let linklocns of item.multipleLocations;"><img
+                              style="width:20px;height:20px;;margin-left:3px ;cursor: pointer;"
+                              src="assets/images/pdficon.png"
+                              (click)="attachmentlink(linklocns.location)"></span></span><span
+                          *ngIf="item.multipleLocations ==''">-</span></td>
+
+                          <td class="center" (click)="Receipt_Details_fun(item)" *ngIf="item.ackNo != null">{{item.ackNo}}</td>
+
+                          <td class="center" (click)="Receipt_Details_fun(item)" *ngIf="item.ackNo == null">-</td>
+
+
+                          <td class="center" (click)="Receipt_Details_fun(item)" *ngIf="item.bankName != null">{{item.bankName}}</td>
+                          <td class="center" (click)="Receipt_Details_fun(item)" *ngIf="item.bankName == null">-</td>
+                         
+                          <td class="center" (click)="Receipt_Details_fun(item)" *ngIf="item.receiptAgainstTo != null">{{item.receiptAgainstTo}}</td>
+                          <td class="center" (click)="Receipt_Details_fun(item)" *ngIf="item.receiptAgainstTo == null">-</td>
+                          
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div><br>
+
+
+
+          <button id="soa" style="width:230px" type="button" class="btn-hover color-1" (click)="Consolidatedfun()"
+            *ngIf="(deptid == 995 && roleid == 1) || (deptid == 995 && roleid == 8) || 
+    (deptid !== 995)">Consolidated Receipt</button>
+
+    <button id="costBreakdocument" style="width:230px" type="button" class="btn-hover color-1"
+    (click)="costBreakdocumentOpen()" >Cost Break Up Letter</button>
+
+
+
+          <button type="button" id="SendWelcomemail" class="btn-hover color-1"
+            style="width: 250px;font-size: 13px;font-family: 'Poppins';" (click)="sendwelcomemail(documentcontent)"
+            *ngIf="document_status != false">
+            Send Welcome Mail</button>
+
+
+          <ng-template #documentcontent let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title" style="position: relative;top: 18px;
+            left: 25px;">Welcome mail document format :</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-1">
+                      <img src="assets/images/pdficon.png">
+                      <!-- <i class="fas fa-file-pdf" style="font-size: 32px;color: var(--success);"></i> -->
+                    </div>
+                    <div class="col-sm-10"><span style="position: relative;top: 6px;font-size: 15px;
+                    font-weight: 600;color: #000;">Allotment letter</span></div>
+                  </div>
+
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-1">
+                      <img src="assets/images/pdficon.png">
+                      <!-- <i class="fas fa-file-pdf" style="font-size: 32px;color: var(--success);"></i> -->
+                    </div>
+                    <div class="col-sm-10"><span style="position: relative;top: 6px;font-size: 15px;
+                    font-weight: 600;color: #000;">Cost break up letter</span></div>
+                  </div>
+
+                 
+
+                  <div style="line-height: 15px;" *ngIf="Document_Typesname?.length">
+                    <p style="position: relative;top: 12px;color: var(--primary);font-size: 15px;">Demand draft</p>
+                    
+                    <div class="radio" *ngFor="let p of Document_Typesname">
+                      <input [id]="p.AGGR_DRF_MAS_ID" name="radio" type="radio" (change)="handleChange($event,p)">
+                      <label [for]="p.AGGR_DRF_MAS_ID" class="radio-label" style="position: relative;
+                  top: 13px;padding:0!important;line-height: 15px;">{{p.AGGREMENT_DRAFT_NAME}}</label>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div>
+
+                <div *ngIf="status_name != '' || status_name != null || status_name != 'null'" style="width: 100%;font-size: 16px;
+                  color: #03a9f4;position: relative;top: -8px;">{{status_name}}
+                </div>
+
+                <div class="card" *ngIf="democlass">
+                  <div class="card-body">
+                    <span style="font-weight: bold;font-size: 17px;">Documents:</span><br><br>
+
+                    <div style="text-align: center;">
+
+                      <ul style="width: 100%;display: inline-flex;">
+                        <li style="width:30%;" *ngIf="agreementDraftFile?.length">
+                          <div *ngFor="let aggdetail of agreementDraftFile">
+                            <img src="assets/images/pdficon.png" style="width:70px;height:70px;cursor:pointer;"
+                              (click)="image_preview(aggdetail)"> <br>
+                            <p style="text-align: center;
+                          position: relative;top: 20px;">{{aggdetail.name}}</p>
+                          </div>
+                        </li>
+                        <li style="width:30%;" *ngIf="allotmentLetterFile?.length">
+                          <div *ngFor="let allotletter of allotmentLetterFile">
+                            <img src="assets/images/pdficon.png" style="width:70px;height:70px;cursor:pointer;"
+                              (click)="image_preview(allotletter)">
+                            <p style="text-align: center;
+                          position: relative;top: 20px;">{{allotletter.name}}</p> <br>
+                          </div>
+                        </li>
+                        <li style="width:30%;" *ngIf="costBreakUpLetterFile?.length">
+                          <div *ngFor="let costbreakup of costBreakUpLetterFile">
+                            <img src="assets/images/pdficon.png" style="width:70px;height:70px;cursor:pointer;"
+                              (click)="image_preview(costbreakup)">
+                            <p style="text-align: center;
+                          position: relative;top: 20px;">{{costbreakup.name}}</p> <br>
+                          </div>
+                        </li>
+                      </ul>
+
+                    </div>
+
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer" >
+              <!-- <button type="button" class="btn-hover color-1" (click)="document_submitfun()">Send</button> -->
+              <button type="button" class="btn-hover color-1" (click)="document_submitfun (content) ">Submit</button>
+
+              <button type="button" class="btn-hover color-1" [disabled]="loading1" (click)="document_previewfun()"
+                *ngIf="documentpreview">
+                Preview
+                <span *ngIf="loading1" class="spinner-border spinner-border-sm mr-1 loadercls1"></span>
+              </button>
+
+            </div>
+          </ng-template>
+
+
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive" id="milestone_blocks_tables">
+            <ul>
+              <li>
+                <span style="font-weight: bold;font-size: 22px;">Modification Details:</span><br><br>
+
+                <table id="tablemodificationdetails"
+                  class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="center">S.NO</th>
+
+                      <th class="center">Details Of Modification</th>
+                      <th class="center">Units</th>
+                      <th class="center">Quantity</th>
+                      <th class="center">Rate</th>
+                      <th class="center">Amount</th>
+                      <th class="center">Invoice Number</th>
+                      <th class="center">Modification Status</th>
+                                         </tr>
+                  </thead>
+                  <tbody>
+
+
+                    <tr *ngFor="let item of modificationDetailsdata; let i=index">
+                      <td class="center" >{{i+1}}</td>
+                      <td class="center" >{{item.modificationChargeDesc}}</td>
+                      <td class="center"  >{{item.units}}</td>
+                      <td class="center" >{{item.quantity}}</td>
+                      <td class="center" >{{item.rate}}</td>
+                      <td class="center"  >{{item.basicAmount}}</td>
+                      <td *ngIf="item.documentLocation == null"class="center" >{{item.invoiceNo}}</td>
+                      <td *ngIf="item.documentLocation != null"class="center" style="text-decoration: underline;" (click)="invoice_Details_fun(item)">{{item.invoiceNo}}</td>
+                      <td class="center" >{{item.modificationStatus}}</td>
+
+                          
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div><br>
+
+
+
+        </div>
+      </div>
+
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Welcome mail document format :</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="color: #137b89;font-size: 14px;">Do you really want to Submit ?</p>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" id="unreadid" class="btn-hover color-1" [disabled]="loading"
+            (click)=" DailogSubmit(card)">
+            Submit
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+          </button>
+
+
+          <button type="button" class="btn-hover color-1" (click)="modal.close('Save click')">Cancel</button>
+        </div>
+      </ng-template>
+
+
+
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="modal fade" id="paymentdetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true"  style="z-index: 9999999!important">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Payment Details:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <div>
+                    <div class="table-responsive" id="milestone_blocks_tables">
+                      <ul>
+                        <li>
+
+                          <table id="tablereceiptdetails_modalpop"
+                            class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                            <thead>
+                              <tr>
+                                <!-- <th class="center">S.NO</th>  -->
+                                <th class="center">Receipt No</th>
+                                <th class="center">Rec Amount</th>
+                                <th class="center">Amount Adjusted Against Milestone</th>
+                                <th class="center"> Received date/Payment Date</th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+
+
+                              <tr *ngFor="let item of paymentdetailsList; let i=index">
+                                <!-- <td class="center">{{i+1}}</td> -->
+                                <td class="center" (click)="paymentdetailspdf(item.uploadedDocs)"><span
+                                    style="text-decoration: underline;cursor: pointer;">{{item.receiptNumber}}</span>
+                                </td>
+                                <td class="center">{{item.amount}}</td>
+                                <td class="center">{{item.milestoneAdjustedAmount.toLocaleString('en-IN')}}</td>
+                                <td class="center">{{item.receivedDate | date:'dd-MM-yyyy'}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </li>
+                      </ul>
+                    </div><br>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="modal fade" id="interestbreakup_modal" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Interest Breakup:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <div>
+                    <div class="table-responsive" id="milestone_blocks_tables">
+                      <ul>
+                        <li>
+
+                          <table id="interestbreakuptableId_modal_modalpop"
+                            class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                            <thead>
+                              <tr>
+                                <th class="center">S.NO</th>
+                                <th class="center">Milestone No</th>
+                                <th class="center">Milestone Name</th>
+                                <th class="center">Demand Note Date</th>
+                                <th class="center">Due Date</th>
+                                <th class="center">Basic Amount</th>
+                                <th class="center">Paid Basic Amount</th>
+                                <th class="center">Interest Calculate On Amount</th>
+                                <th class="center">Start Date</th>
+                                <th class="center">End Date</th>
+                                <th class="center">Interest Percentage</th>
+                                <th class="center">Days Difference</th>
+                                <th class="center">Interest Amount</th>
+                                <th class="center">GST Amount On Interest Amount</th>
+                                <th class="center">Total Amount</th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+
+
+                              <tr *ngFor="let item of interest_breakuplist; let i=index">
+                                <td class="center">{{i+1}}</td>
+                                <td class="center">{{item.milestoneNo}}</td>
+                                <td class="center">{{item.milestoneName}}</td>
+                                <td class="center">{{item.demandNoteDate| date:'dd-MM-yyyy'}}</td>
+                                <td class="center">{{item.demandNoteDueDate| date:'dd-MM-yyyy'}}</td>
+                                <td class="center">{{item.demandNoteBasicAmount }}</td>
+                                <td class="center">{{item.paidBasicAmount}}</td>
+                                <td class="center">{{item.interestCalculationOnAmount}}</td>
+                                <td class="center">{{item.startDate| date:'dd-MM-yyyy'}}</td>
+                                <td class="center">{{item.endDate| date:'dd-MM-yyyy'}}</td>
+                                <td class="center">{{item.interestPercentage}}</td>
+                                <td class="center">{{item.daysDifference}}</td>
+                                <td class="center">{{item.interestAmount}}</td>
+                                <td class="center">{{item.gstAmount}}</td>
+                                <td class="center">{{item.interestTotalAmount}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </li>
+                      </ul>
+                    </div><br>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="modal fade" id="viewinterest_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View Interest Letters:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <div>
+                    <div class="table-responsive" id="milestone_blocks_tables">
+                      <ul>
+                        <li>
+
+                          <table id="viewinterest_modal_modalpop"
+                            class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                            <thead>
+                              <tr>
+                                <!-- <th class="center">S.NO</th>  -->
+                                <th class="center">Date</th>
+                                <th class="center">Interest Amount</th>
+                                <th class="center">Interest Letter</th>
+                                <th class="center">Created By</th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+
+
+                              <tr *ngFor="let item of interestletterList; let i=index">
+                                <!-- <td class="center">{{i+1}}</td> -->
+                                <td class="center">{{item.createdDate| date:'dd-MM-yyyy'}}</td>
+                                <td class="center">{{item.interestAmountWithFormat}}</td>
+                                <td class="center"><img style="width:20px;height:20px;;margin-left:3px"
+                                    src="assets/images/pdficon.png" (click)="attachmentlink(item.documentLocation)">
+                                </td>
+                                <td class="center">{{item.employeeName}}</td>
+
+                              </tr>
+                            </tbody>
+                          </table>
+                        </li>
+                      </ul>
+                    </div><br>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body" style="margin-top: 35px;">
+
+
+          <div class="accordion-item closed" (click)="documentsfun()">
+            <h2 class="accordion-item-heading" (click)="documentsfun()">Documents</h2>
+            <div class="accordion-item-content">
+              <div class="card" *ngIf="controller_documentlist?.length">
+                <div class="card-body">
+                  <!-- <span style="font-weight: bold;font-size: 17px;">Documents:</span><br><br> -->
+                  <ul style="width: 100%;">
+                    <li style="width: 25%;display: inline-flex;" *ngFor="let aggdetail of controller_documentlist">
+                      <div style="text-align:center;">
+                        <img src="assets/images/pdficon.png" style="width:70px;height:70px;cursor:pointer;"
+                          (click)="image_preview(aggdetail)"> <br><br>
+                        <p style="text-align: center;
+                  position: relative;top: 2px;width:200px;">{{aggdetail.name}}</p>
+                      </div>
+                    </li>
+                  </ul>
+
+
+
+
+                  <!-- <div *ngFor="let p of controller_documentlist">
+            <div> <img  src="assets/images/file1.png" style="width:100px;height:100px;cursor:pointer;" (click)="image_preview(p)"></div><br>
+            <div>  <span>{{p.name}}</span></div>
+             
+            
+            </div> -->
+                </div>
+              </div>
+
+              <div *ngIf="controller_documentlist == null">
+                <p>No data found</p>
+              </div>
+
+
+            </div>
+          </div>
+
+
+
+
+          <div class="accordion-item closed" (click)="ticket_Details()">
+            <h2 class="accordion-item-heading">Tickets</h2>
+            <div class="accordion-item-content">
+              <span style="font-weight: bold;font-size: 22px;">Ticket Details:</span>
+
+              <div class="table-responsive">
+                <ul>
+                  <li>
+
+                    <table id="ticketdetailsId"
+                      class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="center">Sno</th>
+                          <th class="center">Ticket Number</th>
+                          <th class="center">Ticket Receive Date</th>
+                          <th class="center">Ticket Closed Date</th>
+
+                          <th class="center">Ticket Type</th>
+                          <th class="center">Subject</th>
+                          <th class="center">Pending Department</th>
+                          <th class="center">Status</th>
+
+
+
+
+
+                          <th class="center">Ticket Owner</th>
+                          <th class="center">Feedback</th>
+                          <th class="center">Rating</th>
+
+
+                        </tr>
+                      </thead>
+                      <tbody>
+
+
+                        <tr *ngFor="let item of ticketdetails_Id; let i=index" style="cursor: pointer;"
+                          (click)="gotoTicketDetailspage(item)">
+                          <td class="center">{{i+1}}</td>
+                          <td class="center">{{item.ticketId}}</td>
+                          <td class="center">{{item.ticketRecivedDate| date:'dd-MM-yyyy'}}</td>
+                          <td class="center">{{item.resolvedDate| date:'dd-MM-yyyy'}}</td>
+                          <td class="center">{{item.ticketType}}</td>
+                          <td class="center">{{item.title}}</td>
+                          <td class="center">{{item.pendingDeptOrEmpName}}</td>
+                          <td class="center">{{item.ticketStatus}}</td>
+
+                          <td class="center">{{item.ticketOwner}}</td>
+                          <td class="center" *ngIf="item.feedbackDesc == null">-</td>
+                          <td class="center"
+                            style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden; width: 30%;max-width: 1px;"
+                            *ngIf="item.feedbackDesc != null">{{item.feedbackDesc}}</td>
+                          <td class="center">{{item.rating}}</td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                </ul>
+              </div><br>
+
+
+            </div>
+          </div>
+
+          <div class="accordion-item closed" (click)="EmployyeeCommunication_details()">
+            <h2 class="accordion-item-heading">Employee Communication</h2>
+            <div class="accordion-item-content">
+
+              <div class="table-responsive" id="milestone_blocks_tables">
+                <ul>
+                  <li>
+
+                    <table id="table_employeeCommunicationId"
+                      class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="center">S.NO</th>
+                          <!-- <th class="center">Project Name</th> -->
+                          <th class="center">Message Creation</th>
+                          <th class="center">Last Updated</th>
+                          <th class="center">Employee Name</th>
+                          <th class="center">Subject</th>
+                          <th class="center">Completion Status</th>
+
+
+
+
+
+                        </tr>
+                      </thead>
+                      <tbody>
+
+
+                        <tr *ngFor="let item of employeecommunication_Responses; let i=index"
+                          (click)="viewallcustomers(item , i)" style="cursor: pointer;">
+                          <td class="center">{{i+1}}</td>
+                          <!-- <td class="center">{{item.siteName}}</td> -->
+                          <td class="center">{{item.createdDate| date:'dd-MM-yyyy'}}</td>
+                          <td class="center">{{item.lastChattedDate| date:'dd-MM-yyyy'}}</td>
+                          <td class="center">{{item.employeeName}}</td>
+                          <td class="center">{{item.subject}}</td>
+                          <td class="center">{{item.messengerStatus}}</td>
+
+
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                </ul>
+              </div><br>
+
+            </div>
+          </div>
+          <div class="accordion-item closed" (click)="projectNotfic_details()">
+            <h2 class="accordion-item-heading">Project Notification</h2>
+            <div class="accordion-item-content">
+
+              <div class="table-responsive" id="milestone_blocks_tables">
+                <ul>
+                  <li>
+
+                    <table id="table_projectnotifictionID"
+                      class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="center">Sno</th>
+                          <th class="center">Notification Id</th>
+                          <!-- <th class="center">Project</th> -->
+                          <th class="center">Notification Title</th>
+                          <th class="center">Notification Desc</th>
+                          <th class="center">Notification Date</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+
+
+                        <tr style="cursor: pointer;" *ngFor="let item of notification_Responses; let i=index"
+                          (click)="leadId(item)">
+                          <td class="center">{{i+1}}</td>
+                          <td class="center">{{item.id}}</td>
+                          <!-- <td class="center">{{item.siteNames}}</td> -->
+                          <td class="center">{{item.message}}</td>
+                          <td class="center" *ngIf="item.description == null">-</td>
+                          <td class="center"
+                            style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden; width: 30%;max-width: 1px;"
+                            *ngIf="item.description != null"><span [innerHTML]="item.description"></span></td>
+                          <td class="center">{{item.createdDate| date:'dd-MM-yyyy'}}</td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                </ul>
+              </div><br>
+
+            </div>
+          </div>
+          <div class="accordion-item closed" (click)="reference_details()">
+            <h2 class="accordion-item-heading">Reference Details</h2>
+            <div class="accordion-item-content">
+
+              <div class="table-responsive" id="milestone_blocks_tables">
+                <ul>
+                  <li>
+
+                    <table id="tablereferencedetailsID"
+                      class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="center">sno</th>
+                          <th class="center">Reference Id</th>
+                          <th class="center">Referee Name</th>
+                          <th class="center">Referrer Name</th>
+                          <th class="center">Reference Date</th>
+                          <th class="center">Referee Project Name</th>
+                          <th class="center">Company Comments</th>
+                          <th class="center">Referal Status</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+
+
+                        <tr *ngFor="let item of referFriend_Dtot; let i=index" (click)="viewReferenceData(item)"
+                          style="cursor: pointer;">
+                          <td class="center">{{i+1}}</td>
+                          <td class="center">{{item.refrenceId}}</td>
+                          <td class="center">{{item.referrerName}}</td>
+                          <td class="center">{{item.customerName}}</td>
+                          <td class="center">{{item.referredDate| date:'dd-MM-yyyy'}}</td>
+                          <td class="center" *ngIf="item.interestedSiteName == null">-</td>
+                          <td class="center" *ngIf="item.interestedSiteName != null">{{item.interestedSiteNames}}</td>
+                          <td class="center" *ngIf="item.comments == null">-</td>
+                          <td class="center" *ngIf="item.comments != null">{{item.comments}}</td>
+                          <td class="center" *ngIf="item.referralStatusName == ''">-</td>
+                          <td class="center" *ngIf="item.referralStatusName != ''">{{item.referralStatusName}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                </ul>
+              </div><br>
+
+            </div>
+          </div>
+          <div class="accordion-item closed" (click)="registration_details()">
+            <h2 class="accordion-item-heading">Registration Details</h2>
+            <div class="accordion-item-content">
+              <div class="row clearfix">
+
+                <div class="col-sm-4" style="float:left;">
+                  <div class="form-line" style="padding:5px;">
+                    <label class="keyname" style="font-weight: 900;float:left;font-size: 15px">Sales Deed No</label>
+                    <span style="font-weight:bold">:</span>
+                    <span *ngIf="sale_DeedNo == null" style="font-weight:bold;margin-left:20px;">-</span>
+                    <span *ngIf="sale_DeedNo != null" style="font-weight:bold;margin-left:20px;">{{sale_DeedNo}}</span>
+                  </div>
+
+
+                </div>
+                <div class="col-sm-4" style="float:left;">
+                  <div class="form-line" style="padding:5px;">
+                    <label class="keyname" style="font-weight: 900;float:left;font-size: 15px">Sales Deed Date</label>
+                    <span style="font-weight:bold">:</span>
+                    <span style="font-weight:bold;margin-left:20px;" *ngIf="sale_DeedDate != null">{{sale_DeedDate|
+                      date:'dd-MM-yyyy'}}</span>
+                    <span style="font-weight:bold;margin-left:20px;" *ngIf="sale_DeedDate == null">-</span>
+
+
+                  </div>
+
+
+                </div>
+                <div class="col-sm-4" style="float:left;">
+                  <div class="form-line" style="padding:5px;">
+                    <label class="keyname" style="font-weight: 900;float:left;font-size: 15px">Sales Deed Value</label>
+                    <span style="font-weight:bold">:</span>
+                    <span style="font-weight:bold;margin-left:20px;"
+                      *ngIf="sale_DeedValue != null">{{sale_DeedValue}}</span>
+                    <span style="font-weight:bold;margin-left:20px;" *ngIf="sale_DeedValue == null">-</span>
+
+
+
+                  </div>
+
+
+                </div>
+              </div><br>
+              <div class="row clearfix">
+
+                <div class="col-sm-4" style="float:left;">
+                  <div class="form-line" style="padding:5px;">
+                    <label class="keyname" style="font-weight: 900;float:left;font-size: 15px">Registration
+                      Status</label>
+                    <span style="font-weight:bold">:</span>
+                    <span style="font-weight:bold;margin-left:20px;"
+                      *ngIf="registration_Status != null">{{registration_Status}}</span>
+                    <span style="font-weight:bold;margin-left:20px;" *ngIf="registration_Status == null">-</span>
+
+
+
+                  </div>
+
+
+                </div>
+                <div class="col-sm-4" style="float:left;">
+                  <div class="form-line" style="padding:5px;">
+                    <label class="keyname" style="font-weight: 900;float:left;font-size: 15px">Sales Deed CD No</label>
+                    <span style="font-weight:bold">:</span>
+                    <span style="font-weight:bold;margin-left:20px;"
+                      *ngIf="saleDeed_CDno != null">{{saleDeed_CDno}}</span>
+                    <span style="font-weight:bold;margin-left:20px;" *ngIf="saleDeed_CDno == null">-</span>
+
+
+                  </div>
+                </div>
+              </div><br>
+            </div>
+          </div>
+
+
+          <div class="accordion-item closed" (click)="noc_details()"
+          *ngIf="deptid == 997 || deptid == 988 || deptid == 995">
+          <h2 class="accordion-item-heading">NOC</h2>
+          <div class="accordion-item-content">
+
+            <!-- <div *ngIf="deptid !== 997 && roleid !== 4 && generate_noc_Letter == 'showNocButton'">
+              <p style="font-size: 14px;">No Documents Found</p>
+            </div> -->
+
+            <ul style="width: 100%;text-align: center;"
+              *ngIf="generate_noc_Letter == 'hideNocButton' && deptid == 997 || deptid == 988 || deptid == 995">
+              <li style="display: inline-flex;" *ngFor="let aggdetail of controller_docNoc">
+                <div style="text-align:center;" *ngIf="aggdetail.nocURLLocation !== null ">
+                  <img src="assets/images/pdficon.png" style="width:70px;height:70px;cursor:pointer;"
+                    (click)="image_previewNOC_data(aggdetail)"> <br><br>
+                  <p style="text-align: center;position: relative;top: 2px;width:200px;"> {{aggdetail.docName}}</p>
+                </div>
+
+                <!-- <div *ngIf="aggdetail.nocURLLocation == null && generate_noc_Letter == 'showNocButton' || aggdetail.nocURLLocation == null && generate_noc_Letter !== 'showNocButton'">
+                  <p style="font-size: 14px;">No Documents Found</p>
+                </div> -->
+
+              </li>
+            </ul>
+
+
+
+
+            <ul style="width: 100%;text-align: center;" *ngIf="deptid !== 995">
+              <li style="display: inline-flex;" *ngFor="let aggdetail of controller_NOCdocumentlist">
+                <div style="text-align:center;">
+                  <img src="assets/images/pdficon.png" style="width:70px;height:70px;cursor:pointer;"
+                    (click)="image_previewNOC(aggdetail)"> <br><br>
+                  <p style="text-align: center;position: relative;top: 2px;width:200px;"> {{aggdetail.name}}</p>
+                </div>
+              </li>
+            </ul>
+
+
+            <div style="width:100%;text-align: center;">
+              <button *ngIf="nocbankerhide == true"style="width: 200px;"type="button" class="btn-hover color-1" (click)="GenerateNOCforBankerFun()" >Generate NOC for banker</button>
+
+              <button type="button" class="btn-hover color-1" style="width:200px;" [disabled]="NOC_preview_loading"
+                (click)="NOC_previewfun()"
+                *ngIf="deptid == 997 && roleid == 4 && generate_noc_Letter == 'showNocButton' && previewNOCbtn || deptid == 995 && roleid == 1 && generate_noc_Letter == 'showNocButton'  && previewNOCbtn ">
+                Preview
+                <span *ngIf="NOC_preview_loading" class="spinner-border spinner-border-sm mr-1 loadercls1"></span>
+              </button>
+              <button type="button" class="btn-hover color-1" style="width:200px;" [disabled]="Noc_loading"
+                (click)="generateBookingNOCLetter()"
+                *ngIf="deptid == 997 && roleid == 4 && generate_noc_Letter == 'showNocButton' && GenerateNOCbtn || employee_id == 128 && generate_noc_Letter == 'showNocButton' && GenerateNOCbtn ">
+                Generate NOC
+                <span *ngIf="Noc_loading" class="spinner-border spinner-border-sm mr-1 loadercls1"></span>
+              </button>
+            </div>
+
+
+
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <br><br>
+    </div>
+   
+  </div>
+
+  
+</section>
+
+
+
+<section>
+  <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="imagemodal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          </div>
+          <div class="modal-body">
+            <div>
+              <div class="maindiv">
+
+                <div class="row" *ngFor="let season of DemandNoteFormats_controller; let i = index">
+                  <input [id]="season.FORMAT_NAME" name="seasons" type="radio" [value]="season"
+                    [(ngModel)]="favoriteSeason" (click)="selectCheckBox($event ,  season)" />
+                  <label [for]="season.FORMAT_NAME" class="tag"
+                    style="position: relative;left: 30px;font-size: 14px;">{{season.FORMAT_NAME}}</label>
+                </div>
+                <!-- <div class="row">
+                  <div class="col-sm-1" style="text-align:center;"> <input type="checkbox" name="Disbusment"
+                      id="checkbox1" class="regular-checkbox big-checkbox"
+                      [checked]="currentlyChecked === check_box_type.APPLY_FOR_JOB"
+                      (click)="selectCheckBox(check_box_type.APPLY_FOR_JOB)" /><label for="checkbox1"></label></div>
+                  <div class="col-sm-11">
+                    <div class="tag">1st Disbursement - Demand Note</div>
+                  </div>
+                </div> -->
+
+                <!-- <div class="row">
+                  <div class="col-sm-1" style="text-align:center;"> <input type="checkbox" name="Milestone"
+                      id="checkbox2" class="regular-checkbox big-checkbox"
+                      [checked]="currentlyChecked === check_box_type.MODIFY_A_JOB"
+                      (click)="selectCheckBox(check_box_type.MODIFY_A_JOB)" /><label for="checkbox2"></label></div>
+                  <div class="col-sm-11">
+                    <div class="tag">Milestone Completion - Demand Note</div>
+                  </div>
+                </div> -->
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-hover color-1" (click)="generate_and_regenerate_Demand_note('ReGenerate')"
+              *ngIf='hideme'>Submit</button>
+
+            <button type="button" class="btn-hover color-1" (click)="Save('ReGenerate')" *ngIf='hideme1'>Submit</button>
+
+
+            <!-- <button type="button" class="btn-hover color-1" data-dismiss="modal">Cancel</button> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="modal fade" id="editdetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 152%;
+        margin-left: -220px;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Milestone Details:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="overflow: scroll;
+          height: 500px;">
+            <div>
+              <div>
+                <div class="table-responsive" style="overflow-x: revert!important;" id="milestone_blocks_tables_edit">
+                  <ul>
+                    <li>
+
+                      <table id="tableExport1"
+                        class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                        <thead>
+                          <tr>
+                            <th class="center">S.NO</th>
+                            <!-- <th class="center">Action</th> (change)="allNonTrades1($event)"-->
+
+                            <th class="center"> <input id="selectallid" type="checkbox" style="width:20px;height:20px;"
+                                (change)="allNonTrades1($event)" name="allNonTrades" [value]="milestonedetails"> Select
+                              All</th>
+
+                            <th class="center">Milestone Name</th>
+                            <th class="center">Due%</th>
+                            <th class="center">Completion Status</th>
+                            <th class="center">Demand Note Date</th>
+                            <th class="center">Due Date</th>
+                            <th class="center">Demand Amount</th>
+                            <th class="center">Amount Paid</th>
+                            <th class="center">Amount Due</th>
+                            <th class="center">Interest Amount Due</th>
+                            <th class="center">Demand Amount Cleared Date</th>
+                            <th class="center">Payment Aging</th>
+                            <th class="center">Interest Days</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+
+
+                          <ng-container *ngFor="let item of milestonedetails; let i=index">
+                            <tr *ngIf="item.documentName != null && item.mileStoneStatus != 'Incomplete'">
+
+                              <td class="center">{{i+1}}</td>
+                              <!-- <td class="center" *ngIf="item.mileStoneStatus == 'Incomplete'"> - </td>
+                           <td class="center" *ngIf="item.mileStoneStatus == 'Completed'"> <input type="checkbox"
+                               style="width:20px;height:20px;" (change)="onChange($event.target.checked, item)"
+                               [checked]="checked(item)"></td> -->
+
+
+                              <td class="center"> <input type="checkbox" id="{{'tablerowdata'+(i+1)}}"
+                                  style="width:20px;height:20px;"
+                                  (change)="onChange_edit($event,$event.target.checked, item)"
+                                  [checked]="item.selected1">
+                              </td>
+
+
+
+                              <td class="center">{{item.mileStoneName}}</td>
+                              <td class="center">{{item.paymentPercentageInMileStone}}</td>
+                              <td class="center">{{item.mileStoneStatus}}</td>
+                              <td class="center" *ngIf="item.demandNoteDate == null">-</td>
+                              <td *ngIf="item.demandNoteDate != null" class="center"><span><input type="date"
+                                    id="{{'demandnoteDate'+(i+1)}}" value="{{item.demandNoteDate | date:'yyyy-MM-dd'}}"
+                                    (change)="dateonchange($event)"></span></td>
+                              <!-- <td class="center" *ngIf="item.demandNoteDate != null">{{item.demandNoteDate| date:'dd-MM-yyyy'}}
+                           </td> -->
+                              <!-- <span *ngIf="item.mileStoneStatus == 'Incomplete'">
+                           <td class="center" *ngIf="item.demandNoteDate == null">-</td>
+                           <td class="center" *ngIf="item.demandNoteDate != null">{{item.demandNoteDate| date:'dd-MM-yyyy'}}
+                           </td>
+                          </span>
+                             <span *ngIf="item.mileStoneStatus == 'Completed'">
+                               <td class="center" ><span ><input
+                                 type="date" id="{{'demandnoteDate'+(i+1)}}"
+                                 value="{{item.chequeDepositedDate | date:'yyyy-MM-dd'}}" (change)="dateonchange($event)" disabled></span></td></td>
+                               </span> -->
+                              <td class="center" *ngIf="item.dueDate == null">-</td>
+                              <td class="center" *ngIf="item.demandNoteDate != null"><span><input type="date"
+                                    id="{{'dueDateDate'+(i+1)}}" value="{{item.dueDate | date:'yyyy-MM-dd'}}"
+                                    (change)="dateonchange($event)"></span></td>
+
+                              <!-- <td class="center">{{item.dueDate|date:'dd-MM-yyyy'}}</td> -->
+                              <td class="center" *ngIf="item.documentLocation == null">{{item.mileStoneAmount.toLocaleString('en-IN')}}</td>
+                              <td class="center" style="text-decoration: underline;cursor: pointer;"
+                                (click)="milestoneamountreceipt(item.documentLocation)"
+                                *ngIf="item.documentLocation != null">
+                                {{item.mileStoneAmount.toLocaleString('en-IN')}}</td>
+                              <td *ngIf="item.mileStonePaidAmount != '0.00'" class="center"
+                                style="text-decoration: underline;cursor: pointer;"
+                                (click)="generateRecetitformilestone(item.paymentScheduleId)">
+                                {{item.mileStonePaidAmount.toLocaleString('en-IN')}}
+                              </td>
+                              <td *ngIf="item.mileStonePaidAmount == '0.00'" class="center">{{item.mileStonePaidAmount.toLocaleString('en-IN')}}
+                              </td>
+                              <td class="center" *ngIf="item.milestoneAmountDue != null">{{item.milestoneAmountDue.toLocaleString('en-IN')}}
+                              </td>
+                              <td class="center" *ngIf="item.milestoneAmountDue == null">-</td>
+                              <td class="center" *ngIf="item.totalPenalityAmount != null">{{item.totalPenalityAmount.toLocaleString('en-IN')}}
+                              </td>
+                              <td class="center" *ngIf="item.totalPenalityAmount == null">-</td>
+
+                              <td class="center" *ngIf="item.milestoneLastReceiptDate != null">
+                                {{item.milestoneLastReceiptDate|
+                                date:'dd-MM-yyyy'}}</td>
+                              <td class="center" *ngIf="item.milestoneLastReceiptDate == null">-</td>
+                              <td class="center" *ngIf="item.daysDiffInDN_Date_AndLastReceipt == null">-</td>
+                              <td class="center" *ngIf="item.daysDiffInDN_Date_AndLastReceipt != null">
+                                {{item.daysDiffInDN_Date_AndLastReceipt}}</td>
+
+                              <td class="center" *ngIf="item.daysDelayed == null">-</td>
+                              <td class="center" *ngIf="item.daysDelayed != null">
+                                {{item.daysDelayed}}</td>
+
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+
+                    </li>
+                  </ul>
+                </div><br>
+              </div>
+            </div>
+          </div>
+          <div style="position: relative;top: 15px;left: 10px;"><input type="checkbox" value=""
+              style="width:20px;height:20px;float:left;" class="checlist1">
+            <div style="float:left;margin-left:5px;font-weight: 900;">Interest</div>
+          </div>
+          <!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <button type="button" class="btn-hover color-1" (click)="editSubmit()" >Submit</button>
+        </div> -->
+          <div style="text-align:center;">
+            <button type="button" class="btn-hover color-1" (click)="editSubmit()">Submit</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<section>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="modal fade" id="editgeneratedetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 162%;
+        margin-left: -297px;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit and Generate Demand Note:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="overflow: scroll;
+          height: 500px;">
+            <div>
+              <div>
+                <div class="table-responsive" style="overflow-x: revert!important;" id="milestone_blocks_tables_edit">
+                  <ul>
+                    <li>
+
+                      <table id="tableExport2"
+                        class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                        <thead>
+                          <tr>
+                            <th class="center">S.NO</th>
+                            <!-- <th class="center">Action</th> (change)="allNonTrades1($event)"-->
+
+                            <th class="center"> <input id="selectallid" type="checkbox" style="width:20px;height:20px;"
+                                (change)="allNonTrades2($event)" name="allNonTrades" [value]="milestonedetails"> Select
+                              All</th>
+
+                            <th class="center">Milestone Name</th>
+                            <th class="center">Due%</th>
+                            <th class="center">Completion Status</th>
+                            <th class="center">Demand Note Date</th>
+                            <th class="center">Due Date</th>
+                            <th class="center">Demand Amount</th>
+                            <th class="center">Amount Paid</th>
+                            <th class="center">Amount Due</th>
+                            <th class="center">Interest Amount Due</th>
+                            <th class="center">Demand Amount Cleared Date</th>
+                            <th class="center">Payment Aging</th>
+                            <th class="center">Interest Days</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+
+
+                          <ng-container *ngFor="let item of milestonedetails; let i=index">
+                            <tr>
+
+                              <td class="center">{{i+1}}</td>
+                              <!-- <td class="center" *ngIf="item.mileStoneStatus == 'Incomplete'"> - </td>
+                           <td class="center" *ngIf="item.mileStoneStatus == 'Completed'"> <input type="checkbox"
+                               style="width:20px;height:20px;" (change)="onChange($event.target.checked, item)"
+                               [checked]="checked(item)"></td> -->
+
+
+                              <td class="center"> <input *ngIf="item.documentName == null" type="checkbox"
+                                  id="{{'tablerowdata'+(i+1)}}" style="width:20px;height:20px;"
+                                  (change)="onChange_edit_generate($event,$event.target.checked, item)"
+                                  [checked]="item.selected1">
+                              </td>
+
+
+
+                              <td class="center">{{item.mileStoneName}}</td>
+                              <td class="center">{{item.paymentPercentageInMileStone}}</td>
+                              <td class="center">{{item.mileStoneStatus}}</td>
+                              <td class="center" *ngIf="item.demandNoteDate == null">-</td>
+                              <td *ngIf="item.demandNoteDate != null" class="center"><span><input type="date"
+                                    id="{{'demandnoteDate'+(i+1)}}" value="{{item.demandNoteDate | date:'yyyy-MM-dd'}}"
+                                    (change)="dateonchange($event)"></span></td>
+                              <!-- <td class="center" *ngIf="item.demandNoteDate != null">{{item.demandNoteDate| date:'dd-MM-yyyy'}}
+                           </td> -->
+                              <!-- <span *ngIf="item.mileStoneStatus == 'Incomplete'">
+                           <td class="center" *ngIf="item.demandNoteDate == null">-</td>
+                           <td class="center" *ngIf="item.demandNoteDate != null">{{item.demandNoteDate| date:'dd-MM-yyyy'}}
+                           </td>
+                          </span>
+                             <span *ngIf="item.mileStoneStatus == 'Completed'">
+                               <td class="center" ><span ><input
+                                 type="date" id="{{'demandnoteDate'+(i+1)}}"
+                                 value="{{item.chequeDepositedDate | date:'yyyy-MM-dd'}}" (change)="dateonchange($event)" disabled></span></td></td>
+                               </span> -->
+                              <td class="center" *ngIf="item.dueDate == null">-</td>
+                              <td class="center" *ngIf="item.demandNoteDate != null"><span><input type="date"
+                                    id="{{'dueDateDate'+(i+1)}}" value="{{item.dueDate | date:'yyyy-MM-dd'}}"
+                                    (change)="dateonchange($event)"></span></td>
+
+                              <!-- <td class="center">{{item.dueDate|date:'dd-MM-yyyy'}}</td> -->
+                              <td class="center" *ngIf="item.documentLocation == null">{{item.mileStoneAmount.toLocaleString('en-IN')}}</td>
+                              <td class="center" style="text-decoration: underline;cursor: pointer;"
+                                (click)="milestoneamountreceipt(item.documentLocation)"
+                                *ngIf="item.documentLocation != null">
+                                {{item.mileStoneAmount.toLocaleString('en-IN')}}</td>
+                              <td *ngIf="item.mileStonePaidAmount != '0.00'" class="center"
+                                style="text-decoration: underline;cursor: pointer;"
+                                (click)="generateRecetitformilestone(item.paymentScheduleId)">
+                                {{item.mileStonePaidAmount.toLocaleString('en-IN')}}
+                              </td>
+                              <td *ngIf="item.mileStonePaidAmount == '0.00'" class="center">{{item.mileStonePaidAmount.toLocaleString('en-IN')}}
+                              </td>
+                              <td class="center" *ngIf="item.milestoneAmountDue != null">{{item.milestoneAmountDue.toLocaleString('en-IN')}}
+                              </td>
+                              <td class="center" *ngIf="item.milestoneAmountDue == null">-</td>
+                              <td class="center" *ngIf="item.totalPenalityAmount != null">{{item.totalPenalityAmount.toLocaleString('en-IN')}}
+                              </td>
+                              <td class="center" *ngIf="item.totalPenalityAmount == null">-</td>
+
+                              <td class="center" *ngIf="item.milestoneLastReceiptDate != null">
+                                {{item.milestoneLastReceiptDate|
+                                date:'dd-MM-yyyy'}}</td>
+                              <td class="center" *ngIf="item.milestoneLastReceiptDate == null">-</td>
+                              <td class="center" *ngIf="item.daysDiffInDN_Date_AndLastReceipt == null">-</td>
+                              <td class="center" *ngIf="item.daysDiffInDN_Date_AndLastReceipt != null">
+                                {{item.daysDiffInDN_Date_AndLastReceipt}}</td>
+
+                              <td class="center" *ngIf="item.daysDelayed == null">-</td>
+                              <td class="center" *ngIf="item.daysDelayed != null">
+                                {{item.daysDelayed}}</td>
+
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+
+                    </li>
+                  </ul>
+                </div><br>
+              </div>
+            </div>
+          </div>
+          <div style="position: relative;top: 15px;left: 10px;"><input type="checkbox" value=""
+              style="width:20px;height:20px;float:left;" class="checlist2">
+            <div style="float:left;margin-left:5px;font-weight: 900;">Interest</div>
+          </div>
+          <!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <button type="button" class="btn-hover color-1" (click)="editSubmit()" >Submit</button>
+        </div> -->
+          <div style="text-align:center;">
+            <button style="width:230px" type="button" class="btn-hover color-1"
+              (click)="editGenerate_demandnote('Generate')">Generate Demand Note</button>
+            <button style="width:230px" type="button" class="btn-hover color-1"
+              (click)="editGenerate_demandnote('Save')">Preview</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>

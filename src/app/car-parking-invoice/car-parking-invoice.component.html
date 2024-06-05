@@ -1,0 +1,210 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Car Parking Invoice</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active">Car Parking Invoice</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b class="required">Select Project:</b>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                 
+                </select>
+              </div>
+            </div>
+          </div>
+          <div  class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>Select Block:</b>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                 
+                </select>
+              </div>
+            </div>
+          </div>
+        
+          <div  class="col-sm-4" >
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b class="required">Select Flat:</b>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="flatSelection">
+                 
+                </select>
+              </div>
+            </div>
+          </div>
+        </div><br>
+
+        <div class="row clearfix">
+          <div id="customerName" class="col-sm-6" style="display: none;">
+            <div class="form-line">
+              <label style="float:left;font-weight: bold;">Customer Name: {{customerName}}</label>
+            </div>
+          </div>
+        </div><br>
+
+        <!-- Table code start -->
+        <form #raiseInvoice="ngForm"  (ngSubmit)="onSubmit(raiseInvoice.value)"  enctype="multipart/form-data" id="totalTableID" style="display: none;">
+          <table class="table table-bordered" id="tbl_posts"  [ngStyle]="{'border-color': (!raiseInvoice.valid && !raiseInvoice.pristine) ? 'red' : '#4d474785' }">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th class="tableHeaderClass required">Details Of Car Parking</th>
+                <th class="tableHeaderClass required">Units</th>
+                <th class="tableHeaderClass required">Quantity</th>
+                <th class="tableHeaderClass required">Rate</th>
+                <th class="tableHeaderClass required">Amount</th>
+                <th class="tableHeaderClass">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_posts_body">
+              <tr class="tabletrClass" *ngFor="let item of milestoneArray ; let i = index ; trackBy:customTrackBy"
+                id="{{'rec-' + i}}" >
+                <td>
+                  <p style="padding: 9px; border: 1px solid #4d474785;text-align:center;">{{i+1}}</p>
+                </td>
+                <td class="tdDateClass">
+                  <input  type="text" style="border: 1px solid #4d474785;text-align:center;" class="milestone_name"
+                    [(ngModel)]="milestoneArray[i].detailsOfModification" placeholder="Enter car parking"
+                    id="{{'milestone_name'+i}}" name="{{'milestone_name'+i}}"  required
+                    [ngStyle]="{'border-color':  ( isValidFormSubmitted || getTouched('milestone_name'+i)) && getValidity('milestone_name'+i) ? 'Tomato' : '#4d474785' }"
+                    (input) = "onChange($event)"  onKeyPress="if(this.value.length==50) return false;">
+                </td>
+                <td class="tdDateClass">
+                  <input  type="text" style="border: 1px solid #4d474785;text-align:center;" class="units"
+                    [(ngModel)]="milestoneArray[i].units" placeholder="Enter units" id="{{'units'+i}}"
+                    name="{{'units'+i}}" required
+                    (input) = "onChange($event)"
+                    [ngStyle]="{'border-color':  ( isValidFormSubmitted || getTouched('units'+i)) && getValidity('units'+i) ? 'Tomato' : '#4d474785' }" 
+                    (keypress)='nospace($event)' (paste)="pastemobilenumEvent($event)"
+                    >
+                </td>
+                <td>
+                  <input type="text"   style="border: 1px solid #4d474785;text-align:center;" class="quantity demo"
+                    [(ngModel)]="milestoneArray[i].quantity" placeholder="Enter quantity" id="{{'quntity'+i}}"
+                    name="{{'quntity'+i}}" required
+                    (input) = "onChange($event)" 
+                    [ngStyle]="{'border-color':  ( isValidFormSubmitted || getTouched('quntity'+i)) && getValidity('quntity'+i) ? 'Tomato' : '#4d474785' }"
+                    (keypress)="mobilenumberfun($event)" (paste)="pastemobilenumEvent($event)" >
+                </td>
+                <td>
+                  <input type="text"  style="border: 1px solid #4d474785;text-align:center;" class="rate demo"
+                    [(ngModel)]="milestoneArray[i].rate" placeholder="Enter rate" id="{{'rate'+i}}" name="{{'rate'+i}}" required
+                    (input) = "onChange($event)"  
+                    [ngStyle]="{'border-color':  ( isValidFormSubmitted || getTouched('rate'+i)) && getValidity('rate'+i) ? 'Tomato' : '#4d474785' }"
+                    (keypress)="mobilenumberfun($event)" (paste)="pastemobilenumEvent($event)" pattern="^\d*(\.\d{0,2})?$">
+                </td>
+                <td>
+                  <input type="text"  style="border: 1px solid #4d474785;text-align:center;" class="amount demo"
+                    [(ngModel)]="milestoneArray[i].amount" placeholder="Enter amount" id="{{'amount'+i}}"
+                    name="{{'amount'+i}}" required readonly (keypress)="mobilenumberfun($event)" (paste)="pastemobilenumEvent($event)" pattern="^\d*(\.\d{0,2})?$">
+                </td>
+                <td class="addDeleteRowClass">
+                  <a (click)="addRow(i)" class="btn btn-xs" data-id="0"><i class="fa fa-plus-circle"
+                      aria-hidden="true"></i></a>
+                  <a (click)="deleteRow(i)" class="btn btn-xs" data-id="0"><i class="fa fa-trash"
+                      aria-hidden="true"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="alert alert-warning alert-dismissible fade show" [hidden]="raiseInvoice.valid ">
+            <strong>Warning!</strong> Please enter valid values in all the required fields before proceeding.
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+
+          <div class="row clearfix" id="calculationPart" style="display: none;" [hidden]="raiseInvoice.invalid || raiseInvoice.pristine" >
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6">
+              <label style="font-weight: bold;font-size: 17px;">Total Amount Before Tax :
+                {{transactionAmount}}/-</label><br>
+                <div class="row clearfix" >
+                  <div class="col-sm-4">
+                    <div class="form-line">
+                      <p class="fieldHeaders">
+                        <b>*Percentage:</b>
+                      </p>
+                     
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-line">
+                    
+                      <div class="center">
+                        <select style="width:100%;" class="form-group" id="percentageID" single>
+                          <option value="select">--Select--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span id="labelhideshow"  style="display:none;position: relative;top:-10px">
+              <label style="font-weight: bold;font-size: 17px;" >CGST : <span id="cgst"></span>/- </label><br>
+              <label style="font-weight: bold;font-size: 17px;" >SGST : <span id="sgst"></span>/-</label><br>
+              <label style="font-weight: bold;font-size: 17px;" >Total Amount After Tax : <span id="aftertax"></span>/-</label><br>
+              
+            
+            </span>
+             
+            </div>
+            <div class="row" style="padding:10px">
+              <div class="col-sm-3">
+            <div class="form-group" >
+              <label class="required"><b>Company bank Account:</b></label>
+              <select style="width:100%" class="form-group" id="companybankAcId" single></select>
+            </div>
+            </div>
+            </div>
+            <div class="row" style="padding: 10px;">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label style="font-size: 13px;
+                  font-weight: 600;font-family: 'Poppins';">Comments :</label>
+
+                  <textarea cols="40" rows="5" name="description" wrap=physical id="Comments"></textarea>
+
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="row clearfix" id="calculateButton" style="display: none;" [hidden]="raiseInvoice.invalid || raiseInvoice.pristine">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-12 text-center" id="submitButtonID">
+              <button type="submit" class="btn-hover color-1">Raise Invoice</button>
+            </div>
+          
+            <div class="col-sm-3"></div>
+          </div> 
+        </form><br>
+		</div>
+		</div>
+
+    
+    </div>
+    </section>

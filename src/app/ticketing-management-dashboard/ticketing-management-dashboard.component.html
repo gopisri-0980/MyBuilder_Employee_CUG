@@ -1,0 +1,687 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+    <div class="content__loader">
+      <div><i class="Favicon"></i></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .fromtoclass {
+    position: relative;
+    left: 38px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    top: -17px;
+    font-weight: 600;
+    font-family: 'Poppins';
+    background-color: #FFF;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+
+  .loadercls {
+    position: relative;
+    left: 8px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+  }
+
+
+  .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+  }
+
+  .noteclass {
+    width: 100%;
+    text-align: justify;
+    font-size: 15px;
+    font-family: 'Poppins';
+    color: #8bc34a;
+    margin-left: 0%;
+  }
+
+  .unorderlist {
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 500;
+    color: #607d8b;
+    font-family: 'Poppins';
+  }
+</style>
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Ticketing Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a style="cursor:pointer;">
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeclick()"></i>Ticketing Dashboard</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" style="cursor:pointer;"> View Reports</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+   
+
+    <div class="card" style="position: relative;top: -24px;">
+      <div class="card-body" style="padding: 0px!important;">
+        <form [formGroup]="fg">
+          <div class="row clearfix" style="position: relative;top: 7px;left: 18px;">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">From Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">To Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <button type="button" class="btn-hover color-1" (click)="searchAllServices('submitClick')">Submit</button>
+            </div>
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">Please add a valid from and to date</p>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+    <div *ngIf="projectWiseTicketCountTableData?.length" style="position: relative;top: -40px;">
+      <div>
+        <div style="background-color: transparent;border:none">
+          <h4 class="subheadercls">Note : Tickets showing only from <span>{{startdateDatavalue |
+              date:'dd-MM-yyyy'}}</span> to <span>{{enddateDatavalue | date:'dd-MM-yyyy'}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+   
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card" style="position: relative; top: -34px;">
+
+
+          <div class="body" style="border-radius: 0px;">
+            <p class="titileclassproject"> Projectwise ticket count : </p>
+            <div *ngIf="projectWiseTicketCountTableData?.length" class="explorecls">
+              <button type="button" (click)="exploreTable()" class="btn-hover color-1 float-right"
+                *ngIf="projectbasenoOfTickets !== 0">
+                Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+              </button>
+            </div>
+
+            <div style="width:100%;text-align:center;" *ngIf="loaderhideme">
+              <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+            </div>
+
+            <div class="row clearfix">
+              <div class="col-sm-12">
+                <div class="table-responsive" style="overflow-x:revert!important;"
+                  *ngIf="loaderhideme == false && projectbasenoOfTickets !== 0 ">
+                  <table style="border-radius: 10px;" id="Projectwisedatatable">
+                    <thead>
+                      <tr class="center">
+                        <th>Project Name</th>
+                        <th>No.Of.Tickets</th>
+                        <th>New</th>
+                        <th>Open</th>
+                        <th>Inprogress</th>
+                        <th>Reopen</th>
+                        <th>Close</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let item of projectWiseTicketCountTableData; let i = index;">
+                        <td class="center">{{item.siteName}}</td>
+                        <td class="center">{{item.totalTickets}}</td>
+                        <td class="center">{{item.newT}}</td>
+                        <td class="center">{{item.openT}}</td>
+                        <td class="center">{{item.inprogressT}}</td>
+                        <td class="center">{{item.reopenT}}</td>
+                        <td class="center">{{item.closedT}}</td>
+                      </tr>
+
+                      <tr style="color: #9E9E9E;border: none;" *ngIf="projectbasenoOfTickets !== 0">
+                        <td class="center" style="font-weight: bold;">Total</td>
+                        <td class="center" style="font-weight: bold;">{{sumOfTotal}}</td>
+                        <td class="center" style="font-weight: bold;">{{sumOfNew}}</td>
+                        <td class="center" style="font-weight: bold;">{{sumOfOpen}}</td>
+                        <td class="center" style="font-weight: bold;">{{sumOfInprogress}}</td>
+                        <td class="center" style="font-weight: bold;">{{sumOfReopen}}</td>
+                        <td class="center" style="font-weight: bold;">{{sumOfClose}}</td>
+                      </tr>
+                    </tbody>
+
+
+
+                  </table>
+                </div><br>
+
+                <div *ngIf="projectbasenoOfTickets == 0">
+                  <p>No data available</p>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-sm-10">
+                <p class="titileclassproject">Project - raised ticket type data (Projectwise ticket report) : </p>
+              </div>
+              <div class="col-sm-2">
+                <div style="position: relative;
+                top: 14px;">
+                  <button type="button" (click)="exploreTableTwo()" class="btn-hover color-1 sasbtn">
+                    Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+                  </button>
+                </div>
+              </div>
+            </div> <br><br>
+
+
+            <div style="width:100%;text-align:center;" *ngIf="loaderhideme2">
+              <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+            </div>
+
+            <div class="row clearfix" style="max-height: 600px;overflow-X: scroll;">
+              <div class="col-sm-12">
+                <div *ngFor="let siteItem of projectWiseTicketRaisedTicketTypeTableData; let i = index;">
+                  <p> {{i+1}} . {{siteItem.siteName}}</p>
+                  <div class="table-responsive" style="padding:10px;">
+
+                    <table class="display" style="width:100%" *ngIf="siteItem.ticktTypewiseTicketCount?.length">
+                      <thead>
+                        <tr class="center">
+                          <th>Ticket Type</th>
+                          <th>No.Of.Tickets</th>
+                          <th>New</th>
+                          <th>Open</th>
+                          <th>Inprogress</th>
+                          <th>Reopen</th>
+                          <th>Close</th>
+                          <th>Total Escalated Tickets</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of siteItem.ticktTypewiseTicketCount; let i = index;">
+                          <td class="center">{{item.ticketType}}</td>
+                          <td class="center">{{item.totalTickets}}</td>
+                          <td class="center">{{item.newT}}</td>
+                          <td class="center">{{item.openT}}</td>
+                          <td class="center">{{item.inprogressT}}</td>
+                          <td class="center">{{item.reopenT}}</td>
+                          <td class="center">{{item.closedT}}</td>
+                          <td class="center">{{item.totalEscalatedTickets}}</td>
+                        </tr>
+
+                        <tr style="color: #9E9E9E;border: none;" *ngIf="siteItem.ticktTypewiseTicketCount.length != 0">
+                          <td class="center" style="font-weight: bold;">Total</td>
+                          <td class="center" style="font-weight: bold;">{{siteItem.noOfTickets}}</td>
+                          <td class="center" style="font-weight: bold;">{{siteItem.newTT}}</td>
+                          <td class="center" style="font-weight: bold;">{{siteItem.openTT}}</td>
+                          <td class="center" style="font-weight: bold;">{{siteItem.inprogressTT}}</td>
+                          <td class="center" style="font-weight: bold;">{{siteItem.reOpenTT}}</td>
+                          <td class="center" style="font-weight: bold;">{{siteItem.closedTT}}</td>
+                          <td class="center" style="font-weight: bold;">{{siteItem.totalEscalatedTickets}}</td>
+                        </tr>
+
+
+                      </tbody>
+                    </table>
+
+                    <div *ngIf="siteItem.ticktTypewiseTicketCount.length == 0">
+                      <p>No data available</p>
+                    </div>
+
+                  </div><br>
+                </div>
+              </div>
+            </div>
+
+
+
+
+          
+
+
+
+
+            <div class="row">
+              <div class="col-sm-10">
+                <p class="titileclassproject" style="position: relative;
+                top: 30px;">Unattended and Not Closed Tickets : </p>
+              </div>
+              <div class="col-sm-2">
+                <div *ngIf="unRespondingTicketsTableData?.length">
+                  <button type="button" (click)="exploreTableSeven()" class="btn-hover color-1 sasbtn" style="position: relative;
+                  top: 14px;">
+                    Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div style="width:100%;text-align:center;" *ngIf="loaderhideme7">
+              <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h3>Note points :</h3>
+                <ul class="unorderlist">
+                  <li> 1. This section shows all the tickets for which action is not taken within 24
+                    hrs and not closed within 48 hours.</li>
+                  <li> 2. Any Ticket which is in the same status "New" ,"Open" for more than 24 hours,
+                    then all
+                    those corresponding tickets will be shown.</li>
+                  <li> 3. Tickets which are not closed in 48 hours also will
+                    be shown in
+                    this section, so that the employee will look into these tickets as a priority.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row clearfix">
+              <div class="col-sm-12">
+                <div class="table-responsive" *ngIf="unRespondingTicketsTableData?.length" style="overflow: hidden;">
+                  <table style="border-radius: 10px;" id="Unrespondingdata" class="display nowrap" style="width:100%">
+                    <thead>
+                      <tr class="center">
+                        <th>Ticket No</th>
+                        <th>Project Name</th>
+                        <th>Ticket Type</th>
+                        <th>Creation Date</th>
+                        <th>Hrs Pending</th>
+                        <th>Status</th>
+                        <th>Last Activity Date</th>
+                        <th>Ticket Owner</th>
+                        <th>Pending At</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of unRespondingTicketsTableData; let i = index;">
+                        <td class="center">{{item.ticketId}}</td>
+                        <td class="center">{{item.siteName}}</td>
+                        <td class="center">{{item.ticketType}}</td>
+                        <td class="center">{{item.ticketRecivedDate | date: "dd-MM-yyyy h:mm a"}}</td>
+                        <td class="center">{{item.hrsPending}}</td>
+                        <td class="center">{{item.ticketHighLevelStatus}}</td>
+                        <td class="center">{{item.lastActivityDate | date: "dd-MM-yyyy h:mm a"}}</td>
+                        <td class="center">{{item.ticketOwner}}</td>
+                        <td class="center">{{item.pendingDeptOrEmpName}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div *ngIf="unRespondingTicketsTableData.length == 0">
+                  <p *ngIf="loaderhideme7 == false">No data available</p>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="row">
+              <div class="col-sm-10">
+                <p class="titileclassproject" style="position: relative;
+                top: 30px;">Employee - projectwise tickets : </p>
+              </div>
+              <div class="col-sm-2">
+                <div *ngIf="empticketTypeWiseReports?.length">
+
+                  <button type="button" (click)="EmployeeTable(empheadersArray , empticketTypeWiseReports)"
+                    class="btn-hover color-1 sasbtn" style="position: relative;
+                  top: 14px;">
+                    Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+                  </button>
+
+                </div>
+              </div>
+            </div>
+
+
+            <div style="width:100%;text-align:center;" *ngIf="loaderhideme4">
+              <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+            </div>
+
+
+            <div class="row clearfix">
+              <div class="col-sm-12">
+                <div class="table-responsive" *ngIf="EmployeeDetails" >
+                  <table style="border-radius: 10px;" id="employeeprojectwise">
+                    <thead>
+                      <tr class="center">
+                        <th *ngFor="let item of empheadersArray">{{item}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="customersList" *ngFor="let empmainItem of empticketTypeWiseReports; let i = index;">
+                        <td class="center" *ngFor="let Item of empmainItem; let j = index;" class="center">
+                          <span *ngIf="empmainItem[j] !== 'N/A'" [ngStyle]="{'font-weight':getColor(empmainItem[j])}">
+                            {{empmainItem[j]}}</span>
+                          <span *ngIf="empmainItem[j] == 'N/A'"> - </span>
+
+
+                        </td>
+                      </tr>
+                    </tbody>
+
+                    <!-- <tbody *ngIf="empticketTypeWiseReports.length != 0">
+                      <tr  class="center">
+                        <td class="center" style="font-weight: bold;" *ngFor="let item of empsumOfArray">{{item}}</td>
+                      </tr>
+                    </tbody> -->
+
+                  </table>
+                </div>
+
+
+                <div *ngIf="employeeprojectwisereports.length == 0">
+                  <p *ngIf="loaderhideme4 == false">No data available</p>
+                </div>
+
+
+              </div>
+
+            </div>
+
+
+
+
+
+            <!-- <div class="row">
+              <div class="col-sm-10">
+                <p class="titileclassproject" style="position: relative;
+                top: 30px;">All ticket types - Projectwise report (Ticket type project wise) : </p>
+              </div>
+              <div class="col-sm-2">
+                <div *ngIf="ticketTypeWiseReports?.length">
+
+                  <button type="button" (click)="exploreTableThree()" class="btn-hover color-1 sasbtn" style="position: relative;
+                  top: 14px;">
+                    Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div style="width:100%;text-align:center;" *ngIf="loaderhideme3">
+              <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+            </div>
+
+            <div class="row clearfix" style="overflow-y: hidden;padding:10px;">
+              <div class="col-sm-12" style="padding: 10px;">
+                <div class="table-responsive" *ngIf="ticketTypeWiseReports?.length" style="overflow: hidden;">
+                  <table style="border-radius: 10px;" id="Alltickettypes" class="display nowrap" style="width:100%">
+                    <thead>
+                      <tr class="center">
+                        <th *ngFor="let item of headersArray">{{item}}</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngIf="ticketTypeWiseReports.length == 0">
+                        <td class="center" colspan="7">No data available</td>
+                      </tr>
+                      <tr *ngFor="let mainItem of ticketTypeWiseReports; let i = index;">
+                        <td *ngFor="let Item of mainItem; let j = index;" class="center">
+                          <span *ngIf="mainItem[j] !== 'N/A'" [ngStyle]="{'font-weight':getColor(mainItem[j])}">
+                            {{mainItem[j]}}</span>
+                          <span *ngIf="mainItem[j] == 'N/A'"> - </span>
+
+                        </td>
+                      </tr>
+
+                      <tr class="center" style="color: #9E9E9E;border: none;" *ngIf="ticketTypeWiseReports.length != 0">
+                        <td class="center" style="font-weight: bold;" *ngFor="let item of sumOfArray">{{item}}</td>
+                      </tr>
+
+                    </tbody>
+
+                  </table>
+                </div>
+
+                <div *ngIf="ticketTypeWiseReports.length == 0">
+                  <p *ngIf="loaderhideme3 == false">No data available</p>
+                </div>
+
+              </div>
+            </div> -->
+
+
+
+
+
+            <!-- <div class="row">
+              <div class="col-sm-10">
+                <p class="titileclassproject" style="position: relative;
+                top: 30px;">Ticket average closing time employee wise : </p>
+              </div>
+              <div class="col-sm-2">
+                <div *ngIf="avgClosingTimeTicketsDetailsTableData?.length">
+                  <button type="button" (click)="exploreTableSix()" class="btn-hover color-1 sasbtn" style="position: relative;
+                  top: 14px;">
+                    Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+                  </button>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div style="width:100%;text-align:center;" *ngIf="loaderhideme6">
+              <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+            </div>
+
+
+            <div class="row clearfix">
+              <div class="col-sm-12">
+                <div class="table-responsive" *ngIf="tktAvgClosingTimeTableArray?.length" style="overflow: hidden;">
+                  <table style="border-radius: 10px;" id="ticketaverageclosingtime" class="display nowrap"
+                    style="width:100%">
+                    <thead>
+                      <tr class="center">
+                        <th>Ticket Type</th>
+                        <th>Project Name</th>
+                        <th>Total</th>
+                        <th>Open</th>
+                        <th>Close</th>
+                        <th>Avg closing time</th>
+                        <th>Avg reply time</th>
+                        <th>Emp Name</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let item of tktAvgClosingTimeTableArray; let i = index;">
+                        <td class="center">{{item.ticketType}}</td>
+                        <td class="center">{{item.projectName}}</td>
+                        <td class="center">{{item.totalTickets}}</td>
+                        <td class="center">{{item.openTickets}}</td>
+                        <td class="center">{{item.closedTickets}}</td>
+                        <td class="center">{{item.avgClosingTime + ' hrs'}}</td>
+                        <td class="center">{{item.avgReplyTime + ' hrs'}}</td>
+                        <td class="center">{{item.empName}}</td>
+                      </tr>
+
+                      <tr style="color: #9E9E9E;border: none;"
+                        *ngIf="avgClosingTimeTicketsDetailsTableData.length != 0">
+                        <td class="center" style="font-weight: bold;">Total</td>
+                        <td class="center" style="font-weight: bold;"> - </td>
+                        <td class="center" style="font-weight: bold;">{{tab6sumOfTotal}}</td>
+                        <td class="center" style="font-weight: bold;">{{tab6sumOfOpen}}</td>
+                        <td class="center" style="font-weight: bold;">{{tab6sumOfClosed}}</td>
+                        <td class="center" style="font-weight: bold;">{{tab6sumOfAvgClosingTime}} hrs</td>
+                        <td class="center" style="font-weight: bold;">{{tab6sumOfAvgReplyTime}} hrs</td>
+                        <td class="center" style="font-weight: bold;">-</td>
+                      </tr>
+
+                    </tbody>
+
+
+                  </table>
+                </div>
+
+                <div *ngIf="avgClosingTimeTicketsDetailsTableData.length == 0">
+                  <p *ngIf="loaderhideme6 == false">No data available</p>
+                </div>
+              </div>
+            </div> -->
+
+
+
+            <div class="row">
+              <div class="col-sm-10">
+                <p class="titileclassproject" style="position: relative;
+                top: 30px;">Ticket Details : </p>
+              </div>
+            </div>
+
+
+            <div style="width: 100%;text-align: center;border: 1px solid #e4d7d7;
+            border-radius: 5px;margin-top:20px;" *ngIf="controllermaindata.length == 0">
+
+              <button type="button" class="btn-hover color-1" style="width: 260px;" [disabled]="loading"
+                (click)="ticketDetailsIds('default')"> View Ticket Details
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+              </button>
+
+
+            </div>
+
+
+
+            <!-- <div style="width:100%;text-align:center;" *ngIf="loaderhideme8">
+              <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+            </div> -->
+
+
+            <div class="row clearfix">
+              <div class="col-sm-12">
+                <div class="table-responsive" *ngIf="controllermaindata?.length" >
+                  <table style="border-radius: 10px;" id="ticketDetails" class="display nowrap" style="width:100%">
+                    <thead>
+                      <tr class="center">
+                        <th>Ticket No</th>
+                        <th>Project Name</th>
+                        <th>Flat No</th>
+
+                        <th>Customer Name</th>
+                        <th>Queries in detail</th>
+                        <th>Ticket Type</th>
+                        <th>Created date</th>
+                        <th>Closed date</th>
+                        <th>Pending department</th>
+                        <th>Escalations</th>
+                        <th>Complaint/Query</th>
+
+                        <th>Feedback Ratings</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                      <tr *ngFor="let item of controllermaindata; let i = index;">
+                        <td class="center">{{item.ticketId}}</td>
+                        <th class="center"> {{item.siteName}} </th>
+                        <td class="center">{{item.flatNo}}</td>
+
+                        <td class="center">{{item.customerName}}</td>
+                        <td class="center"> <span class="my__textoverflow" placement="left"
+                            ngbPopover={{item.description}}>{{item.description}} </span></td>
+                        <td class="center">{{item.ticketType}}</td>
+                        <td class="center">{{item.createdDate | date:'dd-MM-yyy '}}</td>
+                        <td class="center">{{item.resolvedDate | date:'dd-MM-yyy '}}</td>
+                        <td class="center">{{item.pendingDeptOrEmpName}}</td>
+                        <td class="center"> <span *ngIf="item.escalationLevelEmpName == null">NA</span>
+                          {{item.escalationLevelEmpName}}</td>
+
+                        <td class="center">{{item.complaintOrQuery}}</td>
+
+                        <td class="center">{{item.rating}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- <div *ngIf="avgClosingTimeTicketsDetailsTableData.length == 0">
+                  <p *ngIf="loaderhideme6 == false">No data available</p>
+                </div> -->
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

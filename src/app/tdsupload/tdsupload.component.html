@@ -1,0 +1,77 @@
+<style>
+    .errorsmsg {
+        width: 100%;
+        margin-top: .25rem;
+        font-size: 14px;
+        color: #dc3545;
+        font-family: inherit;
+    }
+</style>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">TDS UPLOAD</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a>
+                                <i class="fas fa-home" (click)="homeClick()"></i>Services</a>
+                        </li>
+                        <li class="breadcrumb-item active"> TDS Upload</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <form [formGroup]="uploadtdsform">
+                                        <div class="file-field input-field">
+                                            <div class="btn">
+                                                <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                                                <input accept=".xls,.xlsx" type="file" id="files"
+                                                    (change)="handleFileSelect($event)"
+                                                    formControlName="filruploadinput"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.filruploadinput.errors }">
+                                            </div>
+
+                                            <div class="file-path-wrapper">
+                                                <input class="file-path validate" type="text" placeholder="Upload file">
+                                            </div>
+
+
+                                        </div>
+                                        <div *ngIf="submitted && f.filruploadinput.errors" class="errorsmsg">
+                                            <div *ngIf="f.filruploadinput.errors.required"> * Please import your file.
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                            </div>
+
+                            <ul style="position: relative;
+                            display: flex;">
+                                <li> <button class="btn-hover color-1" (click)="filesubmit()">SUBMIT</button> </li>
+                                <li> <button class="btn-hover color-1" (click)="resetfun()">RESET</button> </li>
+                            </ul>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

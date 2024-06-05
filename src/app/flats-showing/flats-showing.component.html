@@ -1,0 +1,243 @@
+<style>
+  .my-class2 {
+    color: #000 !important;
+    background-color: #90EE90;
+  }
+
+  .tooltip {
+    border: solid 1px #ff4d4d;
+    color: red;
+  }
+
+  .my-class1 {
+
+    color: #FFF !important;
+    background-color: #ff4d4d;
+
+  }
+
+  .backbutton {
+    position: absolute;
+    right: 24px;
+    top: 98px;
+    width: auto;
+    color: #FFF;
+    background: #ff4d4d;
+    border: none;
+  }
+
+  .marksofcomplaint {
+    position: relative;
+    right: 0;
+    top: -12px;
+  }
+
+  .loadercls {
+    position: relative;
+    left: 8px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+  }
+
+  .seat {
+    float: left;
+    text-align: center;
+    border: 1px solid #607D8B;
+    padding: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 5px;
+    margin-left: 8px;
+    width: 60px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+  }
+
+  .nodata {
+    position: relative;
+    font-size: 18px;
+    color: #607d8b;
+    /* font-weight: 600; */
+    font-family: 'Poppins';
+    left: 39px;
+    top: 5px;
+  }
+
+  .dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+  }
+</style>
+
+
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Customer Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home"></i> Customer Details</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <span>Flats Availability Details</span></a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+
+        <div class="col-sm-4" style="position: relative;top: 24px;">
+          <div class="form-group">
+            <label style="font-family: 'Poppins'" class="required"><b style="font-size: 15px;"> Project Wise Flats
+                Availability Details :
+              </b></label>
+            <angular2-multiselect [data]="controller_sites_list" [settings]="" (onSelect)="sites_selectedSIDs($event);"
+              (onSelectAll)="sites_onSelectAll($event)" (onDeSelect)="sites_onItemDeSelect($event)"
+              (onDeSelectAll)="sites_onDeSelectAll($event)" [(ngModel)]="project_list_name">
+              <c-badge>
+                <ng-template let-item="item">
+                  <label>{{ item.name }}</label>
+                </ng-template>
+              </c-badge>
+              <c-item>
+                <ng-template let-item="item">
+                  <label>{{ item.name }}</label>
+                </ng-template>
+              </c-item>
+            </angular2-multiselect>
+          </div>
+        </div>
+
+
+        <div class="col-sm-4" style="position: relative;top: 31px;">
+          <div class="form-group">
+            <button type="button" class="btn-hover color-1" (click)="search_function()">Search</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card" *ngIf="fltas_array == []">
+    <div class="card-body">
+      <div>
+        <p class="nodata">No data found</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div style="border: solid 1px #cfeeeb;margin: 5px;width: 100%;padding: 10px;border-radius: 5px;"
+    *ngIf="fltas_array?.length">
+    <div *ngFor="let item of fltas_array; let i=index">
+
+      <div *ngIf="fltas_array?.length">
+        <div style="text-align: right;position: relative;top: 0;">
+          <span class="dot" style="background:#ff4d4d"></span> <span style="position: relative;
+          top: -8px;left: 6px;">Booked Flats</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="dot" style="background-color: #90EE90"></span> <span style="position: relative;
+          top: -8px;left: 6px;">Available Flats</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+      </div>
+
+
+      <span style="padding: 10px;font-weight: 600;background: #f1f8f9;color: #607D8B;position: relative;
+      top: -27px;border-radius: 5px;font-size: 14px;">Project Name : {{item.name}}</span>
+      <div *ngFor="let block of item.blockDetRespList; let j=index;let first = first;">
+        <br>
+        <span
+          style="padding: 0px;font-size: 13px;font-weight: 600;position: relative;top: -20px;color: var(--pink);">Block
+          Name: {{block.blockName}}</span>
+        <br>
+        <div style="border: 1px solid #e4dfdf;
+        width: 100%;padding: 16px;line-height: 8px;border-radius: 5px;position: relative;top: -10px;">
+
+
+          <div *ngFor="let floor of block.floorDetRespList; let k=index;">
+            <span style="padding: 10px;font-size: 16px;font-weight: 600; position: relative;left: -15px;font-size: 13px;">{{floor.floorName}}
+              :</span>
+            <div *ngIf="floor.flatstatuslist!=null" style="position: relative;top: -20px;">
+              <div
+                style="margin-left: 13%; flex-grow: 1; overflow-x: auto; overflow-y: hidden;white-space: nowrap;display: flex!important;">
+
+                <div *ngFor="let flat of floor.flatstatuslist; let k=index;" style="float:left;">
+                  <div *ngIf="flat.flatNo!=null">
+
+                    <span *ngIf="flat.facing=='North'">
+                      <div class="seat" [ngClass]="(flat.status=='NON_BOOKED')?'my-class2':'my-class1'"
+                        style="float:left;text-align:center;border:solid 0.5px #000;padding: 8px;font-size: 11px;font-weight: 600;margin:5px;margin-left: 8px;width:80px;cursor:pointer"
+                        data-toggle="tooltip"
+                        title="SBUA :{{flat.sbua}}&#013; BHK :{{flat.bhk}} &#013;Carpet Area :{{flat.carpetArea}}">
+                        {{flat.flatNo}}-<span>N</span></div>
+                    </span>
+
+                    <span *ngIf="flat.facing=='West'">
+                      <div class="seat" [ngClass]="(flat.status=='NON_BOOKED')?'my-class2':'my-class1'"
+                        style="float:left;text-align:center;border:solid 0.5px #000;padding: 8px;font-size: 11px;font-weight: 600;margin:5px;margin-left: 8px;width:80px;cursor:pointer"
+                        data-toggle="tooltip"
+                        title="SBUA :{{flat.sbua}}&#013; BHK :{{flat.bhk}}&#013; Carpet Area :{{flat.carpetArea}}">
+                        {{flat.flatNo}}-<span>W</span></div>
+                    </span>
+                    <span *ngIf="flat.facing=='East'">
+                      <div class="seat" [ngClass]="(flat.status=='NON_BOOKED')?'my-class2':'my-class1'"
+                        style="float:left;text-align:center;border:solid 0.5px #000;padding: 8px;font-size: 11px;font-weight: 600;margin:5px;margin-left: 8px;width:80px;cursor:pointer"
+                        data-toggle="tooltip"
+                        title="SBUA :{{flat.sbua}}&#013; BHK :{{flat.bhk}}&#013; Carpet Area :{{flat.carpetArea}}">
+                        {{flat.flatNo}}-<span>E</span></div>
+                    </span>
+                    <span *ngIf="flat.facing=='South'">
+                      <div class="seat" [ngClass]="(flat.status=='NON_BOOKED')?'my-class2':'my-class1'"
+                        style="float:left;text-align:center;border:solid 0.5px #000;padding: 8px;font-size: 11px;font-weight: 600;margin:5px;margin-left: 8px;width:80px;cursor:pointer"
+                        data-toggle="tooltip"
+                        title="SBUA :{{flat.sbua}}&#013; BHK :{{flat.bhk}}&#013; Carpet Area :{{flat.carpetArea}}">
+                        {{flat.flatNo}}-<span>S</span></div>
+                    </span>
+                    <span *ngIf="flat.facing=='NA'">
+                      <div class="seat" [ngClass]="(flat.status=='NON_BOOKED')?'my-class2':'my-class1'"
+                        style="float:left;text-align:center;border:solid 0.5px #000;padding: 8px;font-size: 11px;font-weight: 600;margin:5px;margin-left: 8px;width:80px;cursor:pointer"
+                        data-toggle="tooltip"
+                        title="SBUA :{{flat.sbua}}&#013; BHK :{{flat.bhk}}&#013; Carpet Area :{{flat.carpetArea}}">
+                        {{flat.flatNo}}<span></span></div>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

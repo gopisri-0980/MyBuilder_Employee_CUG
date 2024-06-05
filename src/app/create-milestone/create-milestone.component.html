@@ -1,0 +1,185 @@
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Create Milestone</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Milestones</a>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-2">
+                                  <a href="#" onClick="return false;">Company Notifications</a>
+                              </li> -->
+            <li class="breadcrumb-item active">Create Milestone</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row clearfix">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>*Select Project:</b>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                  <option value="select">--Select--</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div><br>
+
+        <div id="blocksID" class="row clearfix" style="display: none;">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>*Blocks:</b>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="BlockId" multiple>
+                  <option value="--Select--">--Select--</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div><br>
+
+        <div id="milestonediv" class="row clearfix" style="display: none;">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>*Select Milestone Type:</b>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="milestonetypeID" single>
+                  <option value="select">--Select--</option>
+                  <option value=181>Regular</option>
+                  <option value=182>Customized</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div><br>
+
+        <div id="aliasNameID" style="display: none;" class="row clearfix">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>*Alias Name:</b>
+              </p>
+              <input type="text" style="border: 1px solid #4d474785;" class="form-group" id="Alias_Name"
+                placeholder="Alias Name">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" (click)="aliasNameAvailabilityFun('OnButtonCalling')" class="btn-hover color-1">View
+              Alias Names</button>
+          </div>
+          <div id="aliasNamesID" class="col-sm-3 aliasNames">
+            <span style="font-weight: bold;">Existing alias names:</span>
+            <li *ngFor="let item of availableAliasNames">{{item.mileStoneAliasName}}</li>
+          </div>
+        </div><br>
+
+
+        <!-- Table code start -->
+        <form enctype="multipart/form-data" id="totalTableID" style="display: none;">
+          <table class="table table-bordered" id="tbl_posts">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th class="tableHeaderClass">*Date</th>
+                <th class="tableHeaderClass">*Milestone Name</th>
+                <th class="tableHeaderClass">*Milestone Percentage</th>
+                <th class="tableHeaderClass">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_posts_body">
+              <tr class="tabletrClass" *ngFor="let item of milestoneArray ; let i = index ; trackBy:customTrackBy"
+                id="{{'rec-' + i}}">
+                <td>
+                  <p style="padding: 9px; border: 1px solid #4d474785;text-align:center;">{{i+1}}</p>
+                </td>
+                <td class="tdDateClass">
+                  <input type="date" [(ngModel)]="milestoneArray[i].date"
+                    style="border: 1px solid #4d474785; text-align: center;" class="form-control"
+                    placeholder="Please choose date" name="{{'milestone_createDate'+i}}"
+                    id="{{'milestone_createDate'+i}}">
+                </td>
+                <td>
+                  <input type="text" [(ngModel)]="milestoneArray[i].name" style="border: 1px solid #4d474785;"
+                    class="milestone_name" placeholder="Enter milestone name" name="{{'milestone_name'+i}}"
+                    id="{{'milestone_name'+i}}">
+                </td>
+                <td class="tdPercentageClass">
+                  <select style="width:100%;" [(ngModel)]="milestoneArray[i].percentage" class="form-group percentages"
+                    name="{{'milestone_percentage'+i}}" id="{{'milestone_percentage'+i}}" single
+                    [ngModelOptions]="{standalone: true}">
+                    <option value="select">--Select--</option>
+                  </select>
+                </td>
+                <td class="addDeleteRowClass">
+                  <a *ngIf="i==(milestoneArray.length)-1" (click)="addMilestone(i)" class="btn btn-xs add-record"
+                    data-id="0"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                  <a (click)="deleteMilestone(i)" class="btn btn-xs delete-record" data-id="0"><i class="fa fa-trash"
+                      aria-hidden="true"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input id="dummyinput" style="display:none;" value="0">
+        </form>
+
+
+        <!-- <div style="display:none;">
+      <table id="sample_table">
+        <tr id="">
+          <td id="">                                      
+            <input id="" type="text" style="border: 1px solid #4d474785;" class="datepicker form-control" placeholder="Please choose date">
+          </td>
+          <td>
+            <input type="text" style="border: 1px solid #4d474785;" placeholder="Enter milestone name">
+          </td>
+          <td>
+            <select style="width:100%" class="form-group states" id="percentageID2" single>
+              <option value="select">--Select--</option>
+            </select>
+          </td>
+          <td>
+            <a class="btn btn-xs add-record" data-id="0"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+            <a class="btn btn-xs delete-record" data-id="0"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          </td>
+        </tr>
+      </table>
+      
+      <input style="display:none" id="temperory-table-val" value="1">
+    </div> -->
+        <!-- Table code end -->
+
+        <div id="submitButtonID" style="display: none;" class="col-md-11 center-block text-center m-t-30">
+          <button type="button" class="btn-hover color-1" (click)="createMilestone()">Submit</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</section><br>

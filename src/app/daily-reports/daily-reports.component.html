@@ -1,0 +1,206 @@
+
+  <div class="container-fluid">
+    
+    <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title"></h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a>
+                                <i class="fas fa-home" ></i></a>
+                        </li>
+                        <li class="breadcrumb-item active"></li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+
+<div class="card">
+    <div class="card-body">
+
+        <div class="row clearfix">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <div class="form-line">
+              <p class="fieldHeaders"> 
+                <b>Select Project:</b>
+              </p>
+              <select style="width:100%;" class="form-group states" id="projectID" single>
+                <option value="select">--Select--</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div><br>   
+        
+        <div class="row clearfix">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-8">
+            <span class="spancls" id="labelorange" style="text-align: center;width:100%;margin-left: 41%;color: orange;font-size: 20px;display:none">Daily Reports on {{this.end_Date| date:'dd-MM-yyyy'}}</span><br>
+          </div>
+          <div class="col-sm-2"></div>
+        </div><br> 
+
+        <div class="row clearfix">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-8">
+            <span class="spancls" id="labelgreen" style="text-align: center;width:100%;margin-left: 36%;color: green;font-size: 20px;display:none"><span id="sitenmae"></span> - Total Tickets Count</span>
+
+          </div>
+          <div class="col-sm-2"></div>
+        </div><br> 
+        
+                
+
+        
+<!-- Table code start -->
+<form enctype="multipart/form-data" id="sitetableid" style="display: none;" class="table-responsive">
+<table *ngIf="ticketEmployee_Report != ''" class="table table-bordered " id="tbl_posts"> 
+  <thead>
+<!--     <tr><th  colspan="8" class="center">Sumadhura Nandanam</th> </tr>
+ -->    <!-- <tr>
+    <th class="center">Employee Name</th> 
+    <th class="center">Total Tickets</th>           
+    <th class="center">New Tickets</th>       
+    <th class="center">Open Tickets</th>  
+    <th class="center">Reopen Tickets</th>  
+    <th class="center">Inprogress Tickets</th>  
+    <th class="center">Closed Tickets</th> 
+    <th class="center">Escalated Tickets</th> 
+    </tr> -->
+
+    <tr >
+      <th rowspan="2" class="center">Employee Name</th>
+      <th rowspan="2" class="center">Total Tickets</th>
+      <th  colspan="5" class="center">Tickets status</th>
+      
+     <th rowspan="2" class="center">Escalated Tickets</th>
+  
+    </tr>
+   
+   
+    <tr >
+      <th class="center">New</th>
+      <th class="center">Open</th>
+      <th class="center">Reopen</th>
+      <th class="center">Inprogress</th>
+     <th class="center">Closed</th>
+  
+    </tr>
+
+  </thead>
+  <tbody id="tbl_posts_body">
+    <tr *ngFor="let item of ticketEmployee_Report; let i=index">
+      <td class="center">{{item.employeeName}}</td>
+      <td class="center">{{item.totalTickets}}</td>
+      
+     <td class="center">{{item.newT}}</td>
+     <td class="center">{{item.openT}}</td>
+     <td class="center">{{item.reopenT}}</td>
+     <td class="center">{{item.inprogressT}}</td>
+     <td class="center">{{item.closedT}}</td>
+    <td class="center">{{item.escalatedT}}</td>
+    </tr>
+  </tbody>
+</table><br>
+
+<!-- <table class="table table-bordered " id="mobilesitetableid" *ngFor="let item of ticketEmployee_Report; let i=index" style="display:none"> 
+  <thead>
+    <tr>
+      <th class="center">Employee Name</th>
+      <td class="center">{{item.employeeName}}</td>
+    </tr>
+    <tr>
+      <th class="center">Total Tickets</th>
+      <td class="center">{{item.totalTickets}}</td>
+    </tr>
+    <tr>
+      <th class="center">New Tickets</th>
+      <td class="center">{{item.newT}}</td>
+    </tr>
+    <tr>
+      <th class="center">Open Tickets</th>
+      <td class="center">{{item.openT}}</td>
+    </tr>
+    <tr>
+      <th class="center">Reopen Tickets</th>
+      <td class="center">{{item.reopenT}}</td>
+    </tr>
+    <tr>
+      <th class="center">Inprogress Tickets</th>
+      <td class="center">{{item.inprogressT}}</td>
+    </tr>
+    <tr>
+      <th class="center">Closed Tickets</th>
+      <td class="center">{{item.closedT}}</td>
+    </tr>
+    <tr>
+      <th class="center">Escalated Tickets</th>
+      <td class="center">{{item.escalatedT}}</td>
+    </tr>
+   
+  </thead>
+  
+</table><br> -->
+
+<table *ngIf="ticketEscalationLevel_EmployeeDetails != ''" class="table table-bordered " id="escalationtableid" style="display:none">
+  <thead>
+    <tr>
+      <th class="center" colspan="2">Escalations</th>
+    </tr>
+    <tr>
+    <th class="center">Head Names</th> 
+    <th class="center">Escalations</th>           
+    
+    </tr>
+  </thead>
+  <tbody id="tbl_posts_body">
+    <tr *ngFor="let item of ticketEscalationLevel_EmployeeDetails; let i=index">
+  
+      <td class="center">{{item.employeeName}}</td>
+   
+    <td class="center">{{item.escalatedT}}</td>
+    </tr>
+  </tbody>
+</table><br>
+
+<table *ngIf="ticketReporting_Pojos != ''" class="table table-bordered " id="ticketdetailstableid" style="display:none">
+  <thead>
+   
+      <tr>
+        <th class="center" colspan="5">Ticket Details</th>
+      </tr>
+   
+    <tr>
+      <th class="center">S.No</th>
+    <th class="center">Ticket No.</th> 
+    <th class="center">Ticket Type</th>
+    <th class="center">Status</th> 
+    <th class="center">Pending With</th>             
+    
+    </tr>
+  </thead>
+  <tbody id="tbl_posts_body">
+    <tr *ngFor="let item of ticketReporting_Pojos; let i=index">
+  
+      <td class="center">{{i+1}}</td>
+      <td class="center">{{item.ticketId}}</td>
+      <td class="center">{{item.ticketType}}</td>
+      <td class="center">{{item.ticketStatus}}</td>
+      <td class="center">{{item.pendingEmployee}}</td>
+    </tr>
+  </tbody>
+</table>
+</form>
+
+
+
+  </div>
+</div>
+
+</div>
+
+

@@ -1,0 +1,344 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+    <div class="content__loader">
+      <div><i class="Favicon"></i></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  th,
+  td {
+    border: solid 0.5px;
+    white-space: nowrap;
+  }
+
+  .titileclassproject {
+    font-weight: bold;
+    font-size: 19px;
+    color: #607D8B;
+  }
+
+  .explorecls {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .sasbtn {
+    position: relative;
+    top: -32px;
+    right: 23px;
+
+  }
+
+  .fromtoclass {
+    position: relative;
+    left: 20px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    top: -2px;
+    font-weight: 600;
+    font-family: 'Poppins';
+  }
+
+  .subheadercls {
+    font-size: 15px;
+    position: relative;
+    top: 6px;
+    left: 0;
+    font-weight: 500;
+    color: #607D8B;
+  }
+
+
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+
+
+  .ng-autocomplete {
+    width: auto !important;
+  }
+</style>
+
+<section class="content">
+
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Monthly Ticket Report</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>
+                <span (click)="dashtitle()" style="cursor:pointer;">Ticketing Dashboard</span> </a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Monthly Ticket Report</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card" style="position: relative;top: -24px;">
+      <div class="card-body">
+        <form [formGroup]="fg">
+          <div class="row clearfix" >
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">From Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date" pattern="\d{4}-\d{2}-\d{2}"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">To Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date" pattern="\d{4}-\d{2}-\d{2}"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+                <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">Please add a valid from and to date</p>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-weight: bold;">Project Name :</label>
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-weight: bold;">Rating :</label>
+                <select style="width:100%;" class="form-group" id="Rating" single>
+                  <option value="select">--Select--</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-weight: bold;">Category:</label>
+                <select style="width:100%;" class="form-group" id="Category" single>
+                  <option value="select">--Select--</option>
+                  <option value="995" *ngIf="deptid == '995' && deptid !== '994' || deptid !== '995' && deptid !== '994' ">CRM Finance</option>
+                  <option value="994" *ngIf="deptid == '994' && deptid !== '995' || deptid !== '994' && deptid !== '995' ">CRM Technical</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-weight: bold;">Escalation Hierarchy :</label>
+                <select style="width:100%;" class="form-group" id="Escalationlevel" single>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+
+            <div class="col-sm-4" id="customerdata">
+              <label style="font-weight: bold;">Employee Name :</label>
+              <div class="ng-autocomplete" >
+
+                <form [formGroup]="autocompleteform">
+                  <ng-autocomplete [data]="countries" [searchKeyword]="keyword" placeHolder="Enter the employee name"
+                    (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                    (inputFocused)='onFocused($event)' (inputCleared)="onClearSearch($event)"
+                    historyIdentifier="countries" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"
+                    #auto formControlName="employeename" >
+                  </ng-autocomplete>
+                  <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                  </ng-template>
+
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                </form>
+              </div>
+            </div>
+
+
+           <div class="col-sm-4">
+            <div style="width:100%;text-align:center;">
+              <button type="button" class="btn-hover color-1" (click)="searchAllServices('submitClick')">Submit</button>
+            </div>
+           </div>
+
+
+
+          </div>
+
+          
+
+        </form>
+      </div>
+    </div>
+
+
+    <div *ngIf="MainArray?.length" style="position: relative;top: -40px;">
+      <div >
+        <div style="background-color: transparent;border:none">
+          <h4 class="subheadercls" >Note:Tickets showing only from <span>{{startdateDatavalue |
+              date:'dd-MM-yyyy'}}</span> to <span>{{enddateDatavalue | date:'dd-MM-yyyy'}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="position: relative; top: -28px;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-10">
+            <p class="titileclassproject" style="position: relative;
+        top: 30px;"> Monthly Ticket Report: </p>
+          </div>
+          <!-- <div class="col-sm-2">
+            <div *ngIf="MainArray?.length">
+              <button type="button" (click)="addmonthlyreport()" class="btn-hover color-1 sasbtn" style="position: relative;
+          top: 14px;">
+                Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+              </button>
+            </div>
+          </div> -->
+        </div>
+
+        <div style="width:100%;text-align:center;" *ngIf="loaderhideme6">
+          <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+        </div>
+
+        <br>
+        <div class="row clearfix" *ngIf="MainArray?.length">
+          <div class="col-sm-12">
+            <div class="table-responsive" style="overflow: hidden;">
+              <table style="border-radius: 10px;" id="ticketmonthlyreport" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr class="center">
+                    <th>No.Of .Tickets</th>
+                    <th>Open</th>
+                    <th>Closed</th>
+                    <th>Escalated</th>
+                    <th>Avg closing time (days)</th>
+                    <th>Avg reply time (days)</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of MainArray;let i = index;">
+                    <td class="center"><span style="text-decoration: underline; cursor: pointer;"
+                        (click)="eventclickfun(item, i,'Nooftickets')"
+                        *ngIf="item.TotalTickets !== 0">{{item.TotalTickets}}</span> <span
+                        *ngIf="item.TotalTickets == 0">0</span></td>
+
+                    <td class="center"><span style="text-decoration: underline; cursor: pointer;"
+                        (click)="eventclickfun(item, i, 'Open')" *ngIf="item.Open !== 0">{{item.Open}}</span> <span
+                        *ngIf="item.Open == 0">0</span></td>
+
+
+                    <td class="center"><span style="text-decoration: underline; cursor: pointer;"
+                        (click)="eventclickfun(item, i, 'Closed')" *ngIf="item.Closed !== 0">{{item.Closed}}</span>
+                      <span *ngIf="item.Closed == 0">0</span>
+                    </td>
+
+                    <td class="center"><span style="text-decoration: underline; cursor: pointer;"
+                        (click)="eventclickfun(item, i,'ESCALATED')"
+                        *ngIf="item.Escalated !== 0">{{item.Escalated}}</span> <span
+                        *ngIf="item.Escalated == 0">0</span></td>
+
+
+                    <td class="center">{{item.AvgClosedtime}}</td>
+                    <td class="center">{{item.AvgReplytime}}</td>
+
+                  </tr>
+                </tbody>
+
+
+              </table>
+            </div>
+
+            <div *ngIf="controller.length == 0">
+              <p *ngIf="loaderhideme6 == false" style="margin-top: 46px;">No data available</p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+

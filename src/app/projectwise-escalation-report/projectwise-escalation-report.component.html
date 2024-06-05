@@ -1,0 +1,243 @@
+<style>
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .fromtoclass {
+    position: relative;
+    left: 38px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    top: -17px;
+    font-weight: 600;
+    font-family: 'Poppins';
+    background-color: #FFF;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+
+  .loadercls {
+    position: relative;
+    left: 8px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+  }
+
+
+  .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+  }
+
+  .noteclass {
+    width: 100%;
+    text-align: justify;
+    font-size: 15px;
+    font-family: 'Poppins';
+    color: #8bc34a;
+    margin-left: 0%;
+  }
+
+  .unorderlist {
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 500;
+    color: #607d8b;
+    font-family: 'Poppins';
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Escalation tickets</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Ticketing Dashboard</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Escalation tickets</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card" style="position: relative;top: -24px;">
+      <div class="card-body" style="padding: 0px!important;">
+        <form [formGroup]="fg">
+          <div class="row clearfix" style="position: relative;top: 7px;left: 18px;">
+
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="font-weight: bold;">Select Project:</label>
+                </p>
+                <div class="center" style="position: relative;top: -11px;">
+                  <select style="width:100%;" class="form-group" id="projectID" single>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-line">
+                <label style="font-weight: bold;">From Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-line">
+                <label style="font-weight: bold;">To Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <button type="button" class="btn-hover color-1" (click)="searchAllServices('submitClick')">Submit</button>
+            </div>
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">Please add a valid from and to date</p>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div *ngIf="escalationTicketsDetailsTableData?.length" style="position: relative;top: -40px;">
+      <div>
+        <div style="background-color: transparent;border:none">
+          <h4 class="subheadercls">Note : Tickets showing only from <span>{{startdateDatavalue |
+              date:'dd-MM-yyyy'}}</span> to <span>{{enddateDatavalue | date:'dd-MM-yyyy'}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="position: relative;top: -28px;">
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-sm-10">
+            <p class="titileclassproject">Escalation tickets : </p>
+          </div>
+          <div class="col-sm-2">
+            <div *ngIf="escalationTicketsDetailsTableData?.length">
+              <button type="button" (click)="exploreTableFive()" class="btn-hover color-1  sasbtn" style="position: relative;
+              top: 0;">
+                Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="width:100%;text-align:center;" *ngIf="loaderhideme5">
+          <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+        </div>
+
+
+        <div class="row clearfix" style="position: relative;top: -36px;">
+          <div class="col-sm-12">
+            <div class="table-responsive" *ngIf="escalationTicketsDetailsTableData?.length" style="overflow-x:revert!important;position: relative;
+              top: 22px;">
+              <table style="border-radius: 10px;" id="Escalationtickets">
+                <thead>
+                  <tr class="center">
+                    <th>Project Name</th>
+                    <th>Ticket Type</th>
+                    <th>Ticket Owner</th>
+                    <th>No.of tickets escalated</th>
+                    <th>Escalation Level</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of escalationTicketsDetailsTableData; let i = index;">
+                    <td class="center">{{item.siteName}}</td>
+                    <td class="center">{{item.ticketType}}</td>
+                    <td class="center">{{item.employeeName}}</td>
+                    <td  (click)="getSiteEscalationDetails([item.siteId],[item.escalationLevel],[item.ticketTypeId],[item.empId])" class="center" style="text-decoration: underline; cursor: pointer;">{{item.ticketCount}}</td>
+                    <!-- <td class="center">{{item.ticketCount}}</td> -->
+                    <td class="center">{{item.escalationLevelEmpName}}</td>
+                  </tr>
+
+
+
+                </tbody>
+                <tfoot>
+                  <ng-container>
+                    <tr style="color: #9E9E9E;border: none;" *ngIf="escalationTicketsDetailsTableData.length != 0">
+                      <td class="center" style="font-weight: bold;">Total</td>
+                      <td class="center">-</td>
+                      <td class="center">-</td>
+                      <td class="center" style="font-weight: bold;">
+                        {{table5totalResponse.ticketReportingResponces[0].noOfTickets}}</td>
+                      <td class="center" style="font-weight: bold;">-</td>
+                    </tr>
+                  </ng-container>
+                </tfoot>
+
+              </table>
+            </div>
+
+            <div *ngIf="escalationTicketsDetailsTableData.length == 0">
+              <p *ngIf="loaderhideme5 == false" style="position: relative;
+              top: 38px;">No data available</p>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</section>

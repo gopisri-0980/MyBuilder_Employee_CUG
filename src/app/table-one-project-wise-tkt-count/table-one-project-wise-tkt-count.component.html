@@ -1,0 +1,113 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+      <div class="content__loader">
+          <div><i class="Favicon"></i></div>
+      </div>
+  </div>
+</div>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Projectwise ticket count</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>
+                 <span (click)="dashtitle()" style="cursor:pointer;">Ticketing Dashboard</span> 
+              </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Projectwise ticket count</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body" style="border-radius: 0px;">
+            <div class="table-responsive" style="overflow-x:revert!important;">
+              <table style="border-radius: 10px;" id="Projectwiseticketcounting">
+                <thead>
+                  <tr class="center">
+                    <th>Project Name</th>
+                    <th>No.Of.Tickets</th>
+                    <th>New</th>
+                    <th>Open</th>
+                    <th>Inprogress</th>
+                    <th>Reopen</th>
+                    <th>Close</th>
+                  </tr>
+                </thead>
+
+                <!-- <tbody>
+                  <tr *ngIf="projectWiseTicketCountTableData.length == 0">
+                      <td class="center" colspan="8">No data available</td>
+                  </tr>
+                </tbody> -->
+
+                <tbody>
+                  <tr *ngFor="let item of projectWiseTicketCountTableData; let i = index;">
+                    <td class="center">{{item.siteName}}</td>
+                    <td
+                      (click)="getTicketingDashBoardDetails([item.siteId],['new','open','inprogress','reopen','closed'])"
+                      class="center" style="text-decoration: underline; cursor: pointer;">{{item.totalTickets}}</td>
+                    <td (click)="getTicketingDashBoardDetails([item.siteId],['new'])" class="center"
+                      style="text-decoration: underline; cursor: pointer;">{{item.newT}}</td>
+                    <td (click)="getTicketingDashBoardDetails([item.siteId],['open'])" class="center"
+                      style="text-decoration: underline; cursor: pointer;">{{item.openT}}</td>
+                    <td (click)="getTicketingDashBoardDetails([item.siteId],['inprogress'])" class="center"
+                      style="text-decoration: underline; cursor: pointer;">{{item.inprogressT}}</td>
+                    <td (click)="getTicketingDashBoardDetails([item.siteId],['reopen'])" class="center"
+                      style="text-decoration: underline; cursor: pointer;">{{item.reopenT}}</td>
+                    <td (click)="getTicketingDashBoardDetails([item.siteId],['closed'])" class="center"
+                      style="text-decoration: underline; cursor: pointer;">{{item.closedT}}</td>
+                  </tr>
+                
+                  <tr style="color: #9E9E9E;border: none;" *ngIf="projectWiseTicketCountTableData.length != 0">
+                    <td class="center" style="font-weight: bold;">Total</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfTotal}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfNew}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfOpen}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfInprogress}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfReopen}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfClose}}</td>
+                    </tr>
+
+                </tbody>
+
+                <!-- <tbody *ngIf="projectWiseTicketCountTableData.length != 0">
+                  <tr style="color: #9E9E9E;border: none;">
+                    <td class="center" style="font-weight: bold;">Total</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfTotal}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfNew}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfOpen}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfInprogress}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfReopen}}</td>
+                    <td class="center" style="font-weight: bold;">{{sumOfClose}}</td>
+
+                     <td (click)="getTicketingDashBoardDetails(allSiteIds,['new','open','inprogress','reopen','closed'])" class="center" style="text-decoration: underline; cursor: pointer; font-weight: bold;">{{sumOfTotal}}</td>
+                    <td (click)="getTicketingDashBoardDetails(allSiteIds,['new'])" class="center" style="text-decoration: underline; cursor: pointer; font-weight: bold;">{{sumOfNew}}</td>
+                    <td (click)="getTicketingDashBoardDetails(allSiteIds,['open'])" class="center" style="text-decoration: underline; cursor: pointer; font-weight: bold;">{{sumOfOpen}}</td>
+                    <td (click)="getTicketingDashBoardDetails(allSiteIds,['inprogress'])" class="center" style="text-decoration: underline; cursor: pointer; font-weight: bold;">{{sumOfInprogress}}</td>
+                    <td (click)="getTicketingDashBoardDetails(allSiteIds,['reopen'])" class="center" style="text-decoration: underline; cursor: pointer; font-weight: bold;">{{sumOfReopen}}</td>
+                    <td (click)="getTicketingDashBoardDetails(allSiteIds,['closed'])" class="center" style="text-decoration: underline; cursor: pointer; font-weight: bold;">{{sumOfClose}}</td> 
+                  </tr>
+                </tbody> -->
+              </table>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

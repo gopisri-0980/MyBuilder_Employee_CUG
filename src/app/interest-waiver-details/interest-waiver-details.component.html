@@ -1,0 +1,220 @@
+<style>
+  textarea {
+    overflow: auto;
+    resize: vertical;
+    height: 50px;
+    border-radius: 5px;
+    border-color: #ddd5d5;
+
+  }
+
+  .trashicon {
+    position: relative;
+    left: 51px;
+    color: #2196F3;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 23px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .democls{
+    line-height: 34px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 500;
+    
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Interest waiver</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a (click)="homeClick(titlename)">
+                <i class="fas fa-home" style="cursor:pointer" ></i> {{titlename}}  </a>
+            </li>
+            <li class="breadcrumb-item active">View Interest waiver
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="controller.length == 0">
+        <div class="card-body">
+          <div >
+            <p style="font-size: 19px;font-weight: 600;">No records found</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card" *ngIf="controller.length !== 0">
+        <div class="card-body">
+
+
+         
+    
+              <div class="democls">
+                <div class="row">
+                  <div class="col-sm-4">Request Date : <span style="color: #607d8b;font-weight :600;"> {{RequestDate | date:'dd-MM-yyy'}}</span></div>
+                  <div class="col-sm-4">Project Name : <span style="color: #607d8b;font-weight :600;"> {{ProjectName}} </span></div>
+                  <div class="col-sm-4">Flat No : <span style="color: #607d8b;font-weight :600;">{{FlatNumber}}</span></div>
+                </div>
+      
+                <div class="row">
+                  <div class="col-sm-4">Customer Name : <span style="color: #607d8b;font-weight :600;"> {{customerName}} </span></div>
+                  <div class="col-sm-4">Booking Date : <span style="color: #607d8b;font-weight :600;">{{bookingDate | date:'dd-MM-yyy'}}</span></div>
+                  <div class="col-sm-4">CRM-Name : <span style="color: #607d8b;font-weight :600;">{{crmname}}</span></div>
+                </div>
+      
+                <div class="row">
+                  <div class="col-sm-4">Flat Cost : <span style="color: #607d8b;font-weight :600;"> {{flatcostdata}}</span></div>
+                  <div class="col-sm-4">Paid Amount : <span style="color: #607d8b;font-weight :600;">{{Paid_Amount}}</span></div>
+                  <div class="col-sm-4">Pending Amount : <span style="color: #607d8b;font-weight :600;">{{totalPendingAmount}}</span></div>
+                </div>
+      
+                <div class="row">
+                  <div class="col-sm-4">Total Interest  : <span style="color: #607d8b;font-weight :600;"> {{totalPenaltyAmount}}</span>
+                  </div>
+                  <div class="col-sm-4">Interest Paid : <span style="color: #607d8b;font-weight :600;">{{totalPenalityPaidAmount}}</span>
+                  </div>
+                  <div class="col-sm-4"> Interest Waived Off Amount : <span
+                      style="color: #607d8b;font-weight :600;">{{interestWaiverAdjAmount}}</span></div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-sm-4">Current Waiver Request : <span style="color: #607d8b;font-weight :600;">{{Current_Waiver_Request}}</span></div>
+                  <div class="col-sm-4">Milestone completed percentage:<span style="color: #607d8b;font-weight :600;">{{blockCompletionPercent}}</span></div>
+                  <div class="col-sm-4"></div>
+                </div>
+              </div>
+
+
+          <table id="tableExport"
+            class="display table table-hover table-checkable order-column width-per-100 table-bordered" style="margin-top: 80px;">
+            <thead>
+              <tr>
+                <th class="center">S.NO</th>
+
+                <th class="center">Milestone Name</th>
+                <th class="center"> Demand Note Date</th>
+                <th class="center"> Due Date</th>
+                <th class="center"> Demand amount </th>
+                <th class="center"> Amount Paid </th>
+                <th class="center"> Amount Due </th>
+
+                <th class="center"> Interest Amount </th>
+                <th class="center">Interest Days</th>
+                <th class="center">Interest Amount Paid</th>
+                <th class="center">Interest Due</th>
+                <th class="center">Waiver request</th>
+                <th class="center"> Interest Waiver Amount </th>
+                <th class="center"> interest Waiver Pending Amount </th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let item of controller; let i=index">
+                <td class="center">{{i+1}}</td>
+                <td class="center">{{item.milestoneName}}</td>
+                <td class="center">{{item.demandNoteDate | date:'dd-MM-yyyy'}}</td>
+                <td class="center"> {{item.mileStoneDueDate | date:'dd-MM-yyyy'}} </td>
+                <td class="center"> {{item.payAmount}} </td>
+                <td class="center"> {{item.paidAmount}} </td>
+                <td class="center"> {{item.totalDueAmount}} </td>
+
+                <td class="center"> {{item.totalPenaltyAmount}} </td>
+                <td class="center"> {{item.daysDelayed}} </td>
+                <td class="center">{{item.totalPenalityPaidAmount}} </td>
+                <td class="center">{{item.totalPendingPenaltyAmount}} </td>
+                <td class="center">{{item.setOffAmount}}</td>
+
+                <td class="center" *ngIf="item.interestWaiverAdjAmount == null">-</td>
+                <td class="center" *ngIf="item.interestWaiverAdjAmount != null">
+                  {{item.interestWaiverAdjAmount}}</td>
+
+                  <td class="center" *ngIf="item.interestWaiverPendingAmount == null">-</td>
+                  <td class="center" *ngIf="item.interestWaiverPendingAmount != null">
+                    {{item.interestWaiverPendingAmount}}</td>
+
+              </tr>
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <td class="center" colspan="7">Total</td>
+                <td class="center"> {{Totalforinterest.toFixed(2)}} </td>
+                <td class="center"></td>
+                <td class="center">{{interestamountpaid.toFixed(2)}}</td>
+                <td class="center">{{interestamountdue.toFixed(2)}}</td>
+               
+                <td class="center">{{interestwaiver.toFixed(2)}} </td>
+                <td class="center">{{interest_Waiver_Amount.toFixed(2)}}</td>
+                <td class="center">{{interestWaiverPendingAmount.toFixed(2)}}</td>
+              </tr>
+            </tfoot>
+            
+          </table>
+
+          <div class="row">
+            <div class="col-sm-2" style="font-weight: 600;"> Waiver Reason </div>
+            <div class="col-sm-1">:</div>
+            <div class="col-sm-5"> 
+              <div style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;">
+                <div class="row clearfix" *ngFor="let item of customercomments">
+                  <!-- <label class="col-sm-4 lableclass datalable">{{item.empName}}:</label> -->
+                  <p class="col-sm-8">{{item.comments}}</p>
+                </div>
+              </div>
+
+            </div>
+          </div><br>
+
+         
+          <div class="row clearfix">
+            <div class="col-sm-2" style="font-weight: 600;">Previous Comments </div>
+            <div class="col-sm-1">:</div>
+            <div class="col-sm-5">
+              <div style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;">
+                <div class="row clearfix" *ngFor="let item of previousCRMComments">
+                  <!-- <label class="col-sm-4 lableclass datalable">{{item.empName}}:</label> -->
+                  <p class="col-sm-8"> <b style="font-weight:600">{{item.empName}}</b> : {{item.comments}}</p>
+                </div>
+              </div>
+            </div>
+           
+            </div>
+            <br>
+
+          <!-- <div class="row">
+            <div class="col-sm-2" style="font-weight: 600;"> Comments </div>
+            <div class="col-sm-1">:</div>
+            <div class="col-sm-5"> <textarea rows="5" cols="5" id="Comments"></textarea></div>
+          </div> <br> -->
+
+
+          <div style="display: inline-flex;">
+            <label style="position: relative;top: 15px;"><b>Attachment File :</b></label>
+            <div *ngFor="let p of controllerdata.transactionEntryDocResponsesList">
+              <img src="assets/images/file1.png" (click)="attachmentlink(p.documentLocation)"
+                style=" width: 90px; margin-top: 18px;">
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

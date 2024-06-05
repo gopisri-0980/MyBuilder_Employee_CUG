@@ -1,0 +1,298 @@
+<style>
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  .formvalidation {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 11px;
+    color: orangered;
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .ng-autocomplete {
+    width: 300px !important;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Reference Details</h4>
+            </li>
+
+
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i> References</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">View Reference Details</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="mainDiv">
+      <form [formGroup]="autocompleteform">
+        <div class="row clearfix">
+
+         
+
+
+          <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+            <div class="row">
+              <label class="col-md-4 lableclass datalable">Reference Id</label>
+              <div class="col-md-6">
+
+                <div class="ng-autocomplete">
+                  <ng-autocomplete [data]="controller_customerData" [searchKeyword]="keyword" placeholder="Reference Id"
+                    (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputCleared)='onClearSearch($event)'
+                    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate" formControlName="ReferenceId">
+                  </ng-autocomplete>
+
+                  <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                  </ng-template>
+
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+            <div class="row">
+              <label class="col-md-4 lableclass datalable">Referee Name</label>
+              <div class="col-md-6">
+
+                <div class="ng-autocomplete">
+                  <ng-autocomplete [data]="controller_Refrence_name" [searchKeyword]="keyword"
+                    placeholder="Referee Name" (selected)='Ref_selectEvent($event)'
+                    (inputChanged)='Ref_onChangeSearch($event)' (inputFocused)='Ref_onFocused($event)' (inputCleared)='Ref_onClearSearch($event)'
+                    [itemTemplate]="Ref_itemTemplate" [notFoundTemplate]="Ref_notFoundTemplate" formControlName="RefereeName">
+                  </ng-autocomplete>
+
+                  <ng-template #Ref_itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                  </ng-template>
+
+                  <ng-template #Ref_notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+            <div class="row">
+              <label class="col-md-4 lableclass datalable">Customer Name</label>
+              <div class="col-md-6">
+
+                <div class="ng-autocomplete">
+                  <ng-autocomplete [data]="controller_Customer_name" [searchKeyword]="keyword"
+                    placeholder="Customer Name" (selected)='cust_selectEvent($event)'
+                    (inputChanged)='cust_onChangeSearch($event)' (inputFocused)='cust_onFocused($event)' (inputCleared)='Cust_onClearSearch($event)'
+                    [itemTemplate]="cust_itemTemplate" [notFoundTemplate]="cust_notFoundTemplate" formControlName="CustomerName">
+                  </ng-autocomplete>
+
+                  <ng-template #cust_itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                  </ng-template>
+
+                  <ng-template #cust_notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+            <div class="row">
+              <label class="col-md-4 lableclass datalable">Customer Flat No</label>
+              <div class="col-md-6">
+
+                <div class="ng-autocomplete">
+                  <ng-autocomplete [data]="controller_Flat_No" [searchKeyword]="keyword" placeholder="Customer Flat No"
+                    (selected)='Flat_selectEvent($event)' (inputChanged)='Flat_onChangeSearch($event)' (inputCleared)='Flat_onClearSearch($event)'
+                    (inputFocused)='Flat_onFocused($event)' [itemTemplate]="Flat_itemTemplate"
+                    [notFoundTemplate]="Flat_notFoundTemplate" formControlName="CustomerFlatNo">
+                  </ng-autocomplete>
+
+                  <ng-template #Flat_itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                  </ng-template>
+
+                  <ng-template #Flat_notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </form>
+
+          <form [formGroup]="fg">
+            <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+            <div class="row">
+              <label class="col-md-4 lableclass datalable">Start Date:</label>
+              <div class="col-md-6">
+                <div class="center" style="position: relative;top: 9px;width: 300px !important;">
+
+                  <span class="material-icons" style="position: absolute;
+                  right: 12px;top: 10px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="font-size: 14px;
+                    width: 300px !important;
+                    box-sizing: border-box;
+                    border: none;
+                    background-color: #fff;
+                    color: rgba(0,0,0,.87);
+                    width: 100%;
+                    padding: 0 15px;
+                    line-height: 40px;
+                    height: 40px;
+                    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 2px 1px -1px rgb(0 0 0 / 12%);" class=" form-control" id="fromDate"
+                    formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+            <div class="row">
+              <label class="col-md-4 lableclass datalable">End Date:</label>
+              <div class="col-md-6">
+                <div class="center" style="position: relative;top: 9px;width: 300px !important;">
+                  <span class="material-icons" style="position: absolute;
+                  right: 12px;top: 10px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="font-size: 14px;
+                    box-sizing: border-box;
+                    width: 300px !important;
+                    border: none;
+                    background-color: #fff;
+                    color: rgba(0,0,0,.87);
+                    width: 100%;
+                    padding: 0 15px;
+                    line-height: 40px;
+                    height: 40px;
+                    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 2px 1px -1px rgb(0 0 0 / 12%);" class=" form-control" id="toDate"
+                    formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+</form>
+
+
+          <div class="formvalidation">
+            <p *ngIf="fg.touched && fg.invalid" class="fromdateval">Please add a valid from and to date</p>
+          </div>
+          <div style="width: 90%;margin-left: 6%;" class="text-center m-t-20 m-b-20">
+            <div class="linecls" style="width: 45%;float:left;"></div>
+            <div style="width: 10%;float:left;">(Or)</div>
+            <div class="linecls" style="width: 45%;float:left;"></div>
+          </div>
+
+
+       
+        <div class="row" style="width: 50%;
+        margin-left: 25%; position: relative;top: 26px;">
+            
+          <label class="col-md-6 datalable">Project Wise Referral Details</label>
+          <div class="col-md-6">
+            <div class="form-line">
+              <select style="width:100%" class="form-group states" id="projectID" single>
+                <option value="">--Select--</option>
+              </select>
+              <span class="closeIcon" (click)="clearSiteName()"><i class="fa fa-times"
+                  aria-hidden="true"></i></span>
+            </div>
+          </div>
+        
+  
+       </div>
+
+
+          <div class="col-md-11 center-block text-center m-t-30">
+            <button type="button" class="btn-hover color-1" (click)="SearchRefferalFriend('true')">Submit</button>
+            <span class="showall" (click)="SearchRefferalFriend('false')">Show All Reference Details</span>
+          </div>
+
+        </div>
+    
+      <div class="card" *ngIf="referralData?.length">
+        <div class="card-body">
+
+          <div class="table-responsive">
+            <table id="tableExport" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="center">Sno</th>
+                  <th class="center">Reference Id</th>
+                  <th class="center">Referee Name </th>
+                  <th class="center"> Customer Name</th>
+                  <th class="center">Customer Flat No</th>
+                  <th class="center"> Employee Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of referralData; let i=index" style="cursor: pointer;"
+                  (click)="viewReferenceData(item)">
+                  <td class="center">{{i+1}}</td>
+                  <td class="center">{{item.refrenceId}}</td>
+                  <td class="center">{{item.referrerName}}</td>
+                  <td class="center">{{item.customerName}}</td>
+                  <td class="center">{{item.customerSiteShortName+"-"+item.customerFlatNo}}</td>
+                  <td class="center">{{item.employeeName}}</td>
+
+
+                </tr>
+              </tbody>
+
+            </table>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+</section>

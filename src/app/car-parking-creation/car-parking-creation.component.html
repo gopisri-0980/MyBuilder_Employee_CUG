@@ -1,0 +1,318 @@
+<style>
+  .accordion-item {
+    margin-bottom: 10px;
+  }
+
+  .keyname {
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-table;
+    font-size: 13px;
+    line-height: 21px;
+    width: 200px;
+  }
+
+  .keyname2 {
+    font-weight: bold;
+    margin-left: 20px;
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-table;
+    font-size: 13px;
+    line-height: 21px;
+    width: 200px;
+  }
+
+  .accordion-item-heading {
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0px 0px 10px 0px;
+    padding: 10px 20px;
+    background-color: #dddddd;
+    color: #000000;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .open .accordion-item-heading,
+  .open .accordion-item-content {
+    width: 100%;
+  }
+
+  .closed .accordion-item-content {
+    width: 60%;
+    height: 0px;
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
+    float: left;
+    display: block;
+  }
+
+  .open .accordion-item-content {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin: 0;
+    display: block;
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
+    box-sizing: border-box;
+  }
+
+  .open .accordion-item-heading {
+    margin: 0px;
+  }
+
+
+
+
+  .regular-checkbox+label {
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .regular-checkbox+label:active,
+  .regular-checkbox:checked+label:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .regular-checkbox:checked+label {
+    background-color: #e9ecee;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    color: green;
+  }
+
+  .regular-checkbox:checked+label:after {
+    content: '\2714';
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    left: 3px;
+    color: green;
+  }
+
+  .big-checkbox+label {
+    position: relative;
+    top: 4px;
+  }
+
+
+  .regular-checkbox {
+    display: none;
+  }
+
+  .big-checkbox:checked+label:after {
+    font-size: 18px;
+    left: 3px;
+    top: 2px;
+  }
+
+  .tag {
+    font-family: Arial, sans-serif;
+    position: relative;
+    top: 5px;
+    font-weight: bold;
+    text-transform: capitalize;
+    display: block;
+    float: left;
+    font-size: 14px;
+
+  }
+
+
+
+  .big-checkbox+label {
+    position: relative;
+    top: 4px;
+  }
+
+  .big-checkbox:checked+label:after {
+    font-size: 18px;
+    left: 3px;
+    top: 2px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Allot Car Parking</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>Services</a>
+            </li>
+            <li class="breadcrumb-item active">Allot Car Parking</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;" class="required">Select Project:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="blocksID" class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Block:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="BlockId">
+                  <!-- <option value="--Select--">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- <div id="floorsID" class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Floor:</label>
+              </p>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="floorSelection">
+                </select>
+              </div>
+            </div>
+          </div> -->
+          <div id="flatsID" class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <label style="font-weight: bold;">Select Flat:</label>
+              </p>
+              <div class="center" style="position: relative;">
+                <select style="width:100%;" class="form-group" id="flatSelection">
+                  <!-- <option value="--Select--">--Select--</option> id="hideflat"-->
+                </select>
+              </div>
+            </div>
+          </div>
+        </div><br>
+
+        <div class="row">
+
+
+          <!-- <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">Customer Name:</label>
+                <div class="center">
+                  <input type="text" placeholder="" autocomplete="off"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                     id="custmerName">
+                </div>
+              </div>
+            </div> -->
+          <div class="col-sm-4">
+            <label style="font-weight: bold;">Customer Name :</label>
+            <div class="ng-autocomplete" style="width: 396px!important;
+              ">
+              <!-- border: solid 0.5px lightgrey!important;id="hideflat2" -->
+              <form [formGroup]="autocompleteform">
+                <ng-autocomplete [data]="countries" [searchKeyword]="keyword" placeHolder="Enter the Customer Name"
+                  (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                  (inputCleared)="onClearSearch($event)" historyIdentifier="countries" [itemTemplate]="itemTemplate"
+                  [notFoundTemplate]="notFoundTemplate" #auto formControlName="employeename">
+                </ng-autocomplete>
+                <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.name"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                </ng-template>
+              </form>
+            </div>
+            <!-- <div class="form-line">
+                  <input type="text" style="border: 1px solid #4d474785; text-align: center;border-radius:10px;"
+                    class="form-control autocomplete" id="customername" (blur)="customerDetails($event)">
+                </div> -->
+          </div>
+
+        </div><br>
+        <form enctype="multipart/form-data" id="totalTableID">
+          <table class="table table-bordered" id="tbl_posts">
+            <thead>
+              <tr>
+
+
+                <th class="tableHeaderClass required">Basement</th>
+                <th class="tableHeaderClass required">Slot</th>
+                <th class="tableHeaderClass">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_posts_body" id="tbl_post">
+              <tr class="tabletrClass" *ngFor = "let item of milestoneArray ; let i = index;" id="{{'rec-' + i}}">
+                <td> 
+                  <select style="width:100%;display:block" [(ngModel)]="milestoneArray[i].basement"
+                    class="form-group percentages" name="{{'basement'+i}}" id="{{'basement'+i}}"
+                    (change)='changebasement($event)'>
+                    <option value="select">--Select--</option>
+                    <option *ngFor='let option of basementlist_' [value]="option.basementId">{{option.basementName}}
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <select style="width:100%;display:block" [(ngModel)]="milestoneArray[i].slot"
+                    class="form-group percentages" name="{{'slot'+i}}" id="{{'slot'+i}}" single
+                    [ngModelOptions]="{standalone: true}">
+                    <option value="select">--Select--</option>
+                  </select>
+                </td>
+
+                <td class="addDeleteRowClass">
+                  <a *ngIf="i==(milestoneArray.length)-1" (click)="addMilestone(i)" class="btn btn-xs add-record"
+                    data-id="0"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                  <a *ngIf="milestoneArray.length != 1" (click)="deleteMilestone(i)" class="btn btn-xs delete-record"
+                    data-id="0"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input id="dummyinput" style="display:none;" value="0">
+        </form>
+        <div class="row clearfix">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4 text-center">
+            <button type="submit" class="btn-hover color-1" (click)="getDetails()">Submit</button>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+</section>

@@ -1,0 +1,768 @@
+<style>
+  .pclass {
+    border: 1px solid #9E9E9E;
+    padding: 5px;
+    border-radius: 5px;
+    background: #eae3e3;
+  }
+
+  .rowtitlecls {
+    border: 1px solid #f0ecec;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-left: 0%;
+    height: auto;
+  }
+
+  .sas {
+    position: relative;
+    top: 7px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #4caf50;
+
+  }
+</style>
+
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li>
+              <h4 class="page-title">Initiate Payment</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i> Transactions</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a href="#" onClick="return false;" (click)="redirectToPenidng()">{{pathName}}</a>
+            </li>
+            <li class="breadcrumb-item active">Initiate Payment
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row clearfix center">
+      <label class="col-sm-12" style="font-size: inherit; float: right;">
+        Last edit was made on <b>{{lastTransactionEditedDate | date:'medium'}}</b> by <b>{{lastTransactionEditedBy}}</b>
+      </label>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row clearfix">
+          <label class="col-sm-2" style="font-weight: bold;">Transaction Type:
+            <label>{{transactionType}}</label></label>
+          <!-- <div class="col-sm-2">
+               <label>{{transactionType}}</label>  
+             </div> -->
+          <label class="col-sm-2" style="font-weight: bold;">Transaction ID: <label>{{transactionID}}</label></label>
+          <label class="col-sm-2" style="font-weight: bold;">Transaction Mode:
+            <label>{{transactionModeName}}</label></label>
+
+
+          <label class="col-sm-2">Payment For: <label>{{transactionFor}}</label></label>
+
+          <label class="col-sm-2">Reason: <label>{{reason}}</label></label>
+          <!-- <div class="col-sm-2">
+               <div class="form-line">
+                 <p style="border: 1px solid #4d474785; height: 28px; font-size: 16px; padding: 5px; border-radius:10px;">{{reason}}</p>
+               </div>
+             </div> -->
+        </div><br>
+
+
+
+
+
+
+
+
+        <div class="rowtitlecls" style="position: relative;top: -29px;">
+
+          <div class="row clearfix ">
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required" *ngIf="this.transactionModeName == 'Cheque'"> Cheque Number:</label>
+                <label class="required" *ngIf="this.transactionModeName != 'Cheque'"> Reference Number:</label>
+                <input type="text" (keypress)="keyPress($event)" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ChequeNumber">
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required" *ngIf="this.transactionModeName == 'Cheque'"> Cheque Date:</label>
+                <label class="required" *ngIf="this.transactionModeName != 'Cheque'"> Clearence/Paid Date:</label>
+                <input type="date" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ChequeDate">
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Amount:</label>
+                <input type="text" (keypress)="keyPressAmount($event)" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ChequeAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label>Customer Bank Name:</label>
+                <select style="width:100%" disabled class="form-group" id="bankNameID" single>
+                </select>
+              </div>
+            </div>
+
+
+
+          </div>
+
+          <div class="row clearfix" style="position: relative;">
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Company Bank A/C:</label>
+                <p class="center"
+                  style="border: 1px solid #4d474785; height: 28px; font-size: 16px; border-radius:10px;">
+                  {{companyBankAccountNo}}</p>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Project Name:</label>
+                <p class="pclass">{{projectName}}</p>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label> Block Number:</label>
+                <p class="pclass">{{blockNumber}}</p>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Flat Number:</label>
+                <p class="pclass">{{flatNumber}}</p>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="row clearfix" style="position: relative;">
+
+            <div class="col-sm-3"
+              *ngIf="(this.transactionModeName == 'Cheque' &&  this.deptid == 995) ||(this.transactionModeName == 'Cheque' &&  this.deptid == 997)">
+              <div class="form-group">
+                <label class="required"> Cheque Handling Over Date:</label>
+                <input type="date" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ChequehandoverDate">
+              </div>
+            </div>
+
+            <div class="col-sm-4" *ngIf="this.transactionModeName == 'Online'">
+              <div class="form-group">
+                <label class="required">Payment Mode : </label>
+                <select style="width:100%;" class="form-group" id="PaymentModeID" single>
+                  <option value="select">--Select--</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div><br>
+
+
+        <div style="width:100%;border:solid 1px #000;height: 40px;padding: 10px;border-radius:10px;position: relative;
+          top: -21px;">
+          <label style="float:left; width:33.33%">Customer Name: <b>{{customerName}}</b></label>
+          <label style="float:left;width:33.33%">Pending Amount:
+            <b>{{totalPendingAmount.toLocaleString('en-IN')}}</b></label>
+          <!-- <label style="float:left;width:33.33%">Interest Amount: {{totalInterestAmount | number}}</label> -->
+        </div><br><br>
+
+        <!-- <div class="row clearfix">
+             <label class="col-sm-2">Previous Comments:</label>
+             <div class="col-sm-4" style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;">
+               <div class="row clearfix" *ngFor="let item of previousCRMComments">
+                 <label class="col-sm-3">{{item.empName}}:</label>
+                 <p class="col-sm-9">{{item.comments}}</p>
+               </div>
+             </div>
+
+             <label class="col-sm-3">Attached Files:</label>
+             <div class="col-sm-3">
+               <li *ngFor="let item of docListArray">
+                 <a (click)="viewFiles(item.documentLocation)" style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+               </li>
+             </div>
+           </div><br>
+ -->
+        <!-- <div class="row clearfix">
+             <div class="col-sm-2" id="PaymentSetOffDiv">
+               <label >Payment Setoff</label>
+             </div>
+             <div class="col-sm-4"></div> -->
+
+        <!-- <label class="col-sm-3 lableclass datalable">Company Bank Account:</label>
+             <div class="col-sm-3">
+               <p>{{companyBankAccountNo}}</p>
+             </div>  -->
+        <!-- </div><br> -->
+
+        <div style="border:solid 1px #000;padding: 15px;border-radius:10px;position: relative;
+       top: -31px;">
+          <div class="row clearfix">
+            <label class="col-sm-2"> Principal Amount:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input type="text" (keypress)="keyPressAmount($event)" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="PrincipalAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Corpus Fund:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text" disabled
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="CorpusFund" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Maintenance Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text" disabled
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="MaintinaceCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Flat Khata Bifurcation:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text" disabled
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="FlatKhataBifurcation" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <label class="col-sm-2"> Refundable Advance:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input type="text" (keypress)="keyPressAmount($event)" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="refundableAdvanceID" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <label class="col-sm-2"> Cancellation Charges:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input type="text" (keypress)="keyPressAmount($event)" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="cancellationChargesID" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <!-- <label class="col-sm-2 lableclass datalable"> Corpus Fund:</label>
+           <div class="col-sm-2">
+             <div class="form-line">
+               <input type="text" disabled style="border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control"  id="CorpusFund">
+             </div>
+           </div> -->
+
+
+          </div>
+
+          <div class="row clearfix">
+            <label class="col-sm-2"> Interest:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input type="text" (keypress)="keyPressAmount($event)" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="InterstAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <!-- <label class="col-sm-2 lableclass datalable" style="font-weight: bold;"> Maintenance Charges:</label>
+           <div class="col-sm-2">
+             <div class="form-line">
+               <input type="text" disabled style="border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control"  id="MaintinaceCharges">
+             </div>
+           </div> -->
+
+            <label class="col-sm-2"> Modification Charges:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input type="text" (keypress)="keyPressAmount($event)" (keyup)="modificationInvoice($event)" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ModificationCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <label class="col-sm-2"> Legal Charges:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input type="text" (keypress)="keyPressAmount($event)" (keyup)="legalInvoice($event)" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="LeagalCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+          </div>
+
+          <div class="row clearfix">
+            <label class="col-sm-2">Modification Invoice:</label>
+            <div class="col-sm-2">
+              <div class="form-line center">
+                <select disabled style="width:100%" class="form-group" id="ModificationInvoiceId" single>
+                  <option value="">--Select--</option>
+                </select>
+              </div>
+            </div>
+
+            <label class="col-sm-2">Legal Invoice:</label>
+            <div class="col-sm-2">
+              <div class="form-line center">
+                <select disabled style="width:100%" class="form-group" id="LegalInvoiceId" single>
+                  <option value="">--Select--</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- <div class="col-sm-2">
+             <label> TDS Amount:</label>
+           </div>
+           <div class="col-sm-2">
+             <div class="form-line">
+               <input value="0" type="text"
+                 style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                 class=" form-control" id="TdsAmount">
+             </div>
+           </div>
+
+
+           <div class="col-sm-2">
+             <label> Paid By:</label>
+           </div>
+           <div class="col-sm-2">
+             <div class="form-line">
+               <select style="width:100%" class="form-group" id="paidbyname" single>
+                 <option value="">Select</option>
+               <option value="Customer">Customer</option>
+               <option value="Ams">Ams</option>
+               </select>
+             </div>
+           </div>
+
+
+           <div class="col-sm-2">
+             <label> Source of funds:</label>
+           </div>
+           <div class="col-sm-2">
+             <div class="form-line">
+               <select style="width:100%" class="form-group" id="Sourcefound" single>
+                 <option value="">Select</option>
+               <option value="Bank">Bank</option>
+               <option value="Self">Self</option>
+               </select>
+             </div>
+           </div> -->
+
+
+
+
+
+
+
+
+            <!-- <div class="col-sm-2">
+             <label> TDS Amount:</label>
+           </div>
+           <div class="col-sm-2">
+             <div class="form-line">
+               <input value="0" type="text"
+                 style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                 class=" form-control" id="TdsAmount">
+             </div>
+           </div>
+
+           <div class="col-sm-2">
+             <div class="form-line">Source of funds:</div>
+           </div>
+           <div class="col-sm-2">
+             <div class="form-line">
+               <select style="width:100%" class="form-group" id="Sourcefound" single>
+                 <option value="">Select</option>
+               <option value="Bank">Bank</option>
+               <option value="Self">Self</option>
+               </select>
+             </div>
+           </div> -->
+
+            <!-- <label class="col-sm-3 lableclass datalable" style="font-weight: bold;" id="modifiChargeInvNo" *ngIf="modificationChargeInvoiceNo">Modification Charge Invoice No:</label>
+           <div class="col-sm-3" id="modifiChargeInvNo" *ngIf="modificationChargeInvoiceNo">
+             <p>{{modificationChargeInvoiceNo}}</p>
+           </div>
+
+           <label class="col-sm-3 lableclass datalable" style="font-weight: bold;" id="legalChargeInvNo" *ngIf="legalChargeInvoiceNo">Legal Charge Invoice No:</label>
+           <div class="col-sm-3" id="legalChargeInvNo" *ngIf="legalChargeInvoiceNo">
+            <p>{{legalChargeInvoiceNo}}</p>
+           </div> -->
+          </div>
+
+
+          <div class="row" style="position: relative;top: 14px;">
+            <div class="col-sm-2">
+              <div class="form-line"> Car Parking Cost:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="carparkingcost" (keyup)="carparkingInvoice($event)"
+                  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line">Car Parking Invoice: </div>
+            </div>
+            <div class="col-sm-2">
+              <p class="sas" *ngIf="carparkingInvoiceID_binding" (click)="carparkingInvoiceNumberfun()">
+                {{carparkingInvoiceID_binding}}</p>
+              <p class="sas" *ngIf="!carparkingInvoiceID_binding"> - </p>
+              <!-- <select style="width:100%" class="form-group" id="carparkingInvoiceId" single></select> -->
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Assignment Transfer Fee :</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Assignment_transfer_fee" (keyup)="Assignment_Invoice($event)"
+                  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="row" style="position: relative;top: 14px;">
+            <div class="col-sm-2">
+              <div class="form-line">Assignment Transfer Fee Invoice: </div>
+            </div>
+            <div class="col-sm-2">
+              <p class="sas" *ngIf="Assignment_tranfer_InvoiceID" (click)="Assignment_invoicefun()">
+                {{Assignment_tranfer_InvoiceID}}</p>
+              <p class="sas" *ngIf="!Assignment_tranfer_InvoiceID"> - </p>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Registration And Mutation Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Registration_and_Mutation_Charges"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line">Non-refundable Caution Deposit:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Non_refundable_Caution_Deposit"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row" style="position: relative;top: 12px;">
+            
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Electricity Deposit:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Electricity_Deposit"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+          </div>
+
+
+        </div><br>
+
+        <div class="row clearfix" style="position: relative;
+       top: -28px;
+   ">
+
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>Previous Comments:</label>
+              <div style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;height:auto;">
+                <div *ngFor="let item of previousCRMComments">
+                  <label>{{item.empName}}:</label>
+                  <p>{{item.comments}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!-- <label class="col-sm-2">Previous Comments:</label>
+       <div class="col-sm-4" style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;">
+         <div class="row clearfix" *ngFor="let item of previousCRMComments">
+           <label class="col-sm-3">{{item.empName}}:</label>
+           <p class="col-sm-9">{{item.comments}}</p>
+         </div>
+       </div> -->
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>Customer Comments:</label>
+              <p style="border: 1px solid #4d474785; padding: 10px; border-radius:10px;height:auto;">
+                {{customerComments}}</p>
+            </div>
+          </div>
+
+
+
+          <!-- <label class="col-sm-2">Customer Comments:</label>
+       <div class="col-sm-4">
+         <div class="form-line">
+           <p style="border: 1px solid #4d474785; font-size: 16px; padding: 10px; border-radius:10px;">{{customerComments}}</p>
+         </div>
+       </div> -->
+
+          <div class="col-sm-4" id="userCommentsField">
+            <div class="form-group">
+              <label id="userCommentsLabel">Comments:</label>
+              <textarea style="border-radius:4px;height:auto;" id="CustomerCommentsId" maxlength="500"
+                data-length="120"></textarea>
+            </div>
+          </div>
+
+
+
+
+
+
+          <!-- <label class="col-sm-2" id="userCommentsLabel" style="font-weight: bold;">*Comments:</label>
+       <div class="col-sm-4" id="userCommentsField">
+         <div class="form-line">
+           <textarea maxlength="500" style="border: 1px solid #4d474785; padding: 10px; border-radius:10px;" id="CustomerCommentsId" class="materialize-textarea" data-length="120"></textarea>
+         </div>
+       </div> -->
+
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>Attached Files:</label>
+              <li *ngFor="let item of docListArray">
+                <a (click)="viewFiles(item.documentLocation)"
+                  style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+              </li>
+            </div>
+          </div>
+
+
+        </div><br>
+
+
+
+        <div *ngIf="transactionStatusNameval == 'Transaction Completed'" style="
+       position: relative;
+       top: -71px;
+   ">
+          <label style="position: relative;top: 15px;" *ngIf="documentLocation?.length"><b>Attachment File :</b></label>
+          <div *ngFor="let p of documentLocation">
+            <img src="assets/images/file1.png" (click)="attachmentlink(p.documentLocation)"
+              style=" width: 90px; margin-top: 18px;">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="modal fade" id="chequeClearedModel" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title" id="exampleModalLabel">Cheque Clearance</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="offset-md-1 col-md-10">
+                    <div class="row clearfix" style="border:solid 1px #bbb">
+                      <div class="col-md-8 offset-md-2 center-block text-center">
+
+                        <b class="col-md-12 m-b-25 m-t-25 refrenceNumber">Cheque Clearance Date :</b>
+                        <div class="col-md-12">
+                          <div class="form-line">
+                            <input type="text" placeholder="select date"
+                              style="border: 1px solid #4d474785; text-align: center;border-radius:10px;"
+                              class=" form-control" id="ChequeClearanceDateID">
+                          </div>
+                        </div>
+                        <!-- <div class="col-md-12">
+                      <div class="form-line">
+                        <input type="text" style="border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control"  id="referenceNumberID">
+                      </div>
+                    </div> -->
+                      </div>
+                      <div class="col-md-12 text-center center-block m-b-25">
+                        <!-- <button type="button" class="btn-hover color-1 cancelBtnColor" data-dismiss="modal">Cancel</button> -->
+                        <button type="button" class="btn-hover color-1"
+                          (click)="approveAccReceiptCheque('Approve')">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="modal fade" id="chequeBounceModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title" id="exampleModalLabel">Cheque Bounce</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="offset-md-1 col-md-10">
+                    <div class="row clearfix" style="border:solid 1px #bbb">
+
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-4" style="margin-top:20px" id="insufficintdiv">
+                        <div id="" style="margin-top:20px"><input type="checkbox" value="INSUFFICIENT_BALANCE"
+                            style="width:20px;height:20px;float:left" id="insuffientbalId">
+                          <div style="float:left;margin-left:2px;font-weight: bold;">In Sufficient Balance</div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-sm-3" id="otherdiv" style="margin-top:20px">
+                        <div id="" style="margin-top:20px"><input type="checkbox" value=""
+                            style="width:20px;height:20px;float:left" id="others_Id">
+                          <div style="float:left;margin-left:2px;font-weight: bold">Others</div>
+                        </div>
+
+
+                      </div>
+                      <div class="col-sm-2"></div><br>
+                      <textarea style="margin: 20px; display:none;" id="otherscomentid"
+                        placeholder="Comments"></textarea>
+
+                      <div class="col-md-12 text-center center-block m-b-25">
+                        <!-- <button type="button" class="btn-hover color-1 cancelBtnColor" data-dismiss="modal">Cancel</button> -->
+                        <button type="button" class="btn-hover color-1"
+                          (click)="rejectReceiptCheque('Reject')">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class=" row clearfix" id="actionButtons">
+
+          <div class="col-sm-4" style="text-align:center;">
+            <button type="button" class="btn-hover color-1" (click)="openChequeClearedModel()">Cheque
+              Cleared</button>
+          </div>
+
+          <div class="col-sm-4" style="text-align:center;">
+            <button type="button" class="btn-hover color-1" (click)="chequeBounceAccReceipt('Reject')">Cheque
+              Bounce</button>
+          </div>
+
+          <div class="col-sm-4" style="text-align:center;">
+            <button type="button" class="btn-hover color-1"
+              (click)="rejectAndModifytMisPaymentCheque('Reject')">Reject</button>
+          </div>
+
+        </div>
+
+        <!-- <div class="row clearfix" id="actionButtons">
+         <div class="col-sm-4" style="text-align:center;">
+           <button type="button" class="btn-hover color-1"
+             (click)="approveMisPaymentCheque('Approve')">Approve</button>
+         </div>
+
+         <div class="col-sm-4" style="text-align:center;">
+           <button type="button" class="btn-hover color-1"
+             (click)="rejectAndModifytMisPaymentCheque('Reject')">Reject</button>
+         </div>
+
+         <div class="col-sm-4" style="text-align:center;">
+           <button type="button" class="btn-hover color-1"
+             (click)="rejectAndModifytMisPaymentCheque('Modify')">Modify</button>
+         </div>
+       </div> -->
+
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="container" style="text-align:center;"
+  *ngIf="transactionStatusNameval == 'Transaction Completed' && deptid == 993">
+  <button type="button" class="btn-hover color-1" (click)="Deletelistfun()">Delete</button>
+</div>

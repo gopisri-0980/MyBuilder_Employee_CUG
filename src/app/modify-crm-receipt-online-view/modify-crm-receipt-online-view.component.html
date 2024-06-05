@@ -1,0 +1,661 @@
+<style>
+  .rowtitlecls {
+    border: 1px solid #f0ecec;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-left: 0%;
+    height: 180px;
+  }
+
+  .trashicon {
+    position: relative;
+    left: 51px;
+    color: #2196F3;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 23px;
+    width: 30px;
+    height: 30px;
+  }
+
+
+  .trashicon1 {
+    position: relative;
+    left: 0px;
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .sas {
+    position: relative;
+    top: 7px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #4caf50;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Receipt Online</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i> Transactions</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a href="#" onClick="return false;" (click)="redirectToPenidng()">Modify Transactions</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Receipt Online</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="row clearfix center">
+                <label class="col-sm-12" style="font-size: inherit; float: right;">
+                  Last edit was made on <b>{{lastTransactionEditedDate | date:'medium'}}</b> by <b>{{lastTransactionEditedBy}}</b>
+                </label>
+              </div> -->
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row clearfix">
+          <label class="col-sm-3" style="font-weight: bold;">Transaction Type:
+            <label>{{transactionType}}</label></label>
+          <!-- <div class="col-sm-2">
+                <label>{{transactionType}}</label>  
+              </div> -->
+          <label class="col-sm-3" style="font-weight: bold;">Transaction ID: <label>{{transactionID}}</label></label>
+
+        </div><br>
+
+        <!-- <div class="row clearfix">
+              <label class="col-sm-2 lableclass" style="font-weight: bold;"> Transaction ID:</label>
+              <div class="col-sm-2">
+                <label>{{transactionID}}</label>  
+              </div>
+            </div><br><br> -->
+
+        <div class="rowtitlecls">
+
+          <div class="row clearfix">
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required"> Reference No:</label>
+                <input type="text"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ReferenceID">
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Received Date:</label>
+                <input type="date"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="transactionDateID">
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Payment Mode:</label>
+                <input type="text"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="paymentModeID">
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Transaction Amount:</label>
+                <input type="number" disabled
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="transactionAmountID" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+          </div><br>
+
+          <!-- <div class="row clearfix">
+              <label class="col-sm-2 lableclass"> From Bank:</label>
+              <div class="col-sm-2">
+                <div class="form-line center">
+                  <select style="width:100%" disabled class="form-group"  id="bankNameID" single>
+                  </select>
+                </div>
+              </div> -->
+
+          <!-- <label class="col-sm-2 lableclass"> Transaction Amount:</label>
+              <div class="col-sm-2">
+                <div class="form-line">
+                  <input type="number" disabled style="border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control"  id="transactionAmountID">
+                </div>
+              </div> -->
+
+          <!-- <label class="col-sm-2 lableclass datalable"> Payable Amount:</label>
+              <div class="col-sm-2">
+                <div class="form-line">
+                  <input type="text" disabled style="border: 1px solid #4d474785; text-align: center;border-radius:10px;" class=" form-control"  id="PayableAmount">
+                </div>
+              </div> -->
+          <!-- </div><br> -->
+
+
+          <div class="row clearfix" style="position: relative;
+        top: -23px;">
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Customer Bank Name:</label>
+                <select style="width:100%" class="form-group" id="bankNameID" single>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Project Name:</label>
+                <select disabled style="width:100%" class="form-group" id="ProjectId" single></select>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label>Block Name:</label>
+                <select disabled style="width:100%" class="form-group" id="BlockId" single></select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Flat No:</label>
+                <select disabled style="width:100%" class="form-group" id="FaltId" single></select>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div id="custdet_div"
+          style="width:100%;border:solid 1px #000;height: 40px;padding: 10px;border-radius:10px;margin-top: 24px;display:none">
+          <div style="float:left; width:50%"><b>Customer Name:</b> <span id="custname"
+              style="font-weight: 900;">{{customerName}}</span></div>
+          <div style="float:left;width:20%">Pending Amount:<span id="pendingamnt"
+              style="font-weight: 900;">{{totaldueamount | number}}</span></div>
+          <!-- <div style="float:left;width:33.33%">Interest Amount:<span id="interestamnt"
+              style="font-weight: 900;">{{totalPenaltyAmount | number}}</span></div> -->
+        </div><br>
+
+        <!-- <div class="row clearfix">
+                <div class="col-sm-2" *ngIf="this.crmcomentsArray != ''"><div class="form-line"> Bank Comments:</div></div>
+                <div class="col-sm-4" *ngFor="let item of crmcomentsArray">
+                  <div class="form-line">
+                   <div style="font-weight: 600;">{{item.comments }}</div>
+                  </div>
+                </div>
+
+                <div class="col-sm-2" *ngIf="this.miscommentsArray != ''"><div class="form-line"> MIS Comments:</div></div>
+                <div class="col-sm-4" *ngFor="let item of miscommentsArray">
+                  <div class="form-line">
+                   <div style="font-weight: 600;">{{item.comment }}</div>
+                  </div>
+                </div>
+              </div><br> -->
+
+        <!-- <div class="row clearfix" style="margin-top: 20px;">
+                <div class="col-sm-2" *ngIf="this.attachmentArray != ''"><div class="form-line"> Attachments:</div></div>
+                <div class="col-sm-4" *ngFor="let item of attachmentArray">
+                  <div class="form-line">
+                    <div style="color:blue;text-decoration: underline;" (click)="fileview(item.location)">{{item.docName }}</div> 
+                 </div>
+                </div>
+              
+              </div><br> -->
+
+        <!-- <div class="row clearfix">
+                <label class="col-sm-2 lableclass">Previous Comments:</label>
+                <div class="col-sm-4" style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;">
+                  <div class="row clearfix" *ngFor="let item of previousCRMComments">
+                    <label class="col-sm-3 lableclass datalable">{{item.empName}}:</label>
+                    <p class="col-sm-9">{{item.comments}}</p>
+                  </div>
+                </div>
+  
+                <label class="col-sm-3 lableclass datalable">Attached Files:</label>
+                <div class="col-sm-3">
+                  <li *ngFor="let item of docListArray">
+                    <a (click)="viewFiles(item.documentLocation)" style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+                  </li>
+                </div> -->
+        <!-- <label class="col-sm-3 lableclass">Attached Files:</label>
+                <div class="col-sm-3">
+                  <a (click)="attacheFiles()" style="text-decoration: underline; color: #007bff; cursor: pointer;">{{attachedFiles}}</a>
+                </div> -->
+        <!-- </div><br> -->
+
+        <!-- <div class="row clearfix">
+                <div class="col-sm-2" id="PaymentSetOffDiv">
+                  <label style="font-weight: bold;">Payment Setoff</label>
+                </div>
+                <div class="col-sm-4"></div>
+              </div> -->
+
+        <div id="PaymentSetOffDiv" style="border:solid 1px #000;padding: 15px;border-radius:10px;">
+          <div class="row clearfix">
+            <label class="col-sm-2">Principal Amount:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input disabled value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="PrincipalAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line"> Corpus Fund:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0"  (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="CorpusFund" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Maintinance Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0"  (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="MaintinaceCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+          </div>
+
+          <div class="row clearfix">
+
+            <div class="col-sm-2">
+              <div class="form-line"> Flat Khata Bifurcation:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0"  (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="FlatKhataBifurcation" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+            
+            <label class="col-sm-2">Interest:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input disabled value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="InterstAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <label class="col-sm-2">Modification Charges:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input disabled value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ModificationCharges" (keyup)="modificationInvoice($event)"
+                  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+         
+          </div>
+
+          <div class="row clearfix">
+
+            <label class="col-sm-2">Legal Charges:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input disabled value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="LeagalCharges" (keyup)="legalInvoice($event)" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <label class="col-sm-2">Refundable Advance:</label>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input disabled value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="refundableAdvanceID" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+            <label class="col-sm-2">Modification Invoice:</label>
+            <div class="col-sm-2">
+              <div class="form-line" class="center">
+                <p class="sas" *ngIf="modificationInvoiceNumber" (click)="modificationInvoiceNumberfun()">
+                  {{modificationInvoiceNumber}}</p>
+                <p class="sas1" *ngIf="!modificationInvoiceNumber"> - </p>
+
+                <!-- <select disabled style="width:100%" class="form-group" id="ModificationInvoiceId" single>
+                  <option value="">--Select--</option>
+                </select> -->
+              </div>
+            </div>
+            <label class="col-sm-2">Legal Invoice:</label>
+            <div class="col-sm-2">
+              <div class="form-line" class="center">
+
+                <p class="sas" *ngIf="legalChargeInvoiceNumber" (click)="legalChargeInvoiceNumberfun()">
+                  {{legalChargeInvoiceNumber}}</p>
+                <p class="sas" *ngIf="!legalChargeInvoiceNumber"> - </p>
+
+                <!-- <select disabled style="width:100%" class="form-group" id="LegalInvoiceId" single>
+                  <option value="">--Select--</option>
+                </select> -->
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <label> TDS Amount:</label>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="TdsAmount" (keyup)="paidbynamefun($event)" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <label> Paid By:</label>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <select style="width:100%;text-transform: lowercase!important;" class="form-group" id="paidbyname"
+                  single>
+                  <option value="select">Select</option>
+                  <option value="Customer">Customer</option>
+                 <option value="Ams">Ams</option>
+                </select>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+          <div class="row" style="position: relative;top: 14px;">
+            <div class="col-sm-2">
+              <div class="form-line"> Car Parking Cost:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="carparkingcost" (keyup)="carparkingInvoice($event)" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line">Car Parking Invoice: </div>
+            </div>
+            <div class="col-sm-2">
+              <p class="sas" *ngIf="carparkingInvoiceID" (click)="carparkingInvoiceNumberfun()">
+                {{carparkingInvoiceID}}</p>
+              <p class="sas" *ngIf="!carparkingInvoiceID"> - </p>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Registration And Mutation Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Registration_and_Mutation_Charges"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="row" style="position: relative;top: 12px;">
+            <div class="col-sm-2">
+              <div class="form-line">Non-refundable Caution Deposit:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Non_refundable_Caution_Deposit"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Electricity Deposit:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Electricity_Deposit"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+          </div>
+          
+
+
+        </div><br>
+
+
+        <!-- <div class="row clearfix">
+                <div class="col-sm-2"><div class="form-line"> CRM Comments:</div></div>
+                <div class="col-sm-4">
+                  <div class="form-line">
+                    <textarea id="CrmCommentsId" class="materialize-textarea" data-length="120"></textarea>
+                  </div>
+                </div>
+ 
+               
+              </div><br> -->
+
+        <div class="row clearfix">
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Previous Comments:</label>
+              <div style="border: 1px solid #d5bbbb;
+              border-radius: 5px;
+              padding: 20px;
+              overflow: auto;
+              ">
+                <div class="row clearfix" *ngFor="let item of previousCRMComments">
+                  <label style="position: relative;left: 16px;">{{item.empName}}: {{item.comments}}</label>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-sm-6" id="userCommentsField">
+            <div class="form-group">
+              <label>Comments:</label>
+              <textarea style="border-radius:4px;" id="CustomerCommentsId" maxlength="500" data-length="120"></textarea>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="required">Source of funds:</label>
+              <select style="width:100%" class="form-group" disabled id="Sourcefound" single>
+                <option value="select">Select</option>
+                <option value="Bank">Bank</option>
+                <option value="Self">Self</option>
+              </select>
+            </div>
+          </div>
+
+
+
+          <div class="col-sm-4" id="companyAccBlock">
+            <div class="form-group">
+              <label class="required">Company Account Number: </label>
+              <select style="width:100%;" class="form-group" id="companyAccnumberID" single>
+                <option value="select">--Select--</option>
+              </select>
+            </div>
+          </div>
+  
+
+
+          
+          <!-- <div class="col-sm-4">
+            <div class="form-group">
+              <label class="required"> Bank A/C Number:</label>
+              <select  style="width:100%" class="form-group" id="companybankAcId" single ></select>
+            </div>
+          </div> -->
+          <div class="col-sm-3" *ngIf="bindingFileInfo?.length">
+            <div class="form-group">
+              <label>Attached Files:</label>
+              <li *ngFor="let item of bindingFileInfo;let i = index;">
+                <a (click)="viewFiles(item.url)"
+                  style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.name}}</a>
+                <img src="assets/images/trash.jpg" class="trashicon1" (click)="Deleteimage1(i,item)"
+                  style="cursor:pointer;">
+
+              </li>
+
+            </div>
+          </div>
+          <!-- <div class="col-sm-4" *ngIf="docListArray?.length">
+            <div class="form-group">
+              <label>Attached Files:</label>
+              <li *ngFor="let item of docListArray">
+                <a (click)="viewFiles(item.documentLocation)"
+                  style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+              </li>
+            </div>
+          </div> -->
+
+
+          <!-- <label class="col-sm-2" id="userCommentsLabel" style="font-weight: bold;">*Comments:</label>
+                <div class="col-sm-4" id="userCommentsField">
+                  <div class="form-line">
+                    <textarea maxlength="500" style="border-radius:4px;" id="CustomerCommentsId" data-length="120"></textarea>
+                  </div>
+                </div> -->
+
+          <!-- <label class="col-sm-2 lableclass datalable">Customer Comments:</label>
+                <div class="col-sm-4">
+                  <div class="form-line">
+                    <p style="border: 1px solid #4d474785; padding: 10px; border-radius:10px;">{{customerComments}}</p>
+                  </div>
+                </div> -->
+        </div>
+        <div class="row clearfix rowtitlecls" style="position: relative;
+        top: 0px;">
+          <div class="col-sm-4" style="margin-top:10px;">
+            <div class="form-group">
+              <label>Attach Files:</label><br>
+              <input type="file" id="files" accept="image/x-png,image/gif,image/jpeg"
+                (change)="handle_FileSelect($event)" style="position: relative;color: rgb(0, 0, 0); cursor:pointer;">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container" style="position: relative;
+            top: 22px;display: inline-flex;margin-top: 20px;overflow-x: auto;">
+            <div *ngFor='let url of urls; let i = index;' style="margin-left: 20px;min-width: 20%;">
+              <span *ngIf="url.Type == 'jpg' || url.Type =='png' || url.Type == 'svg' || url.Type == 'jpeg'">
+                <img [src]="url.upload" height="150" width="150" (click)="fileClickfun(url.upload , url.Type)"
+                  style="cursor:pointer;">
+                <br />
+                <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)" style="cursor:pointer;">
+              </span>
+              <span *ngIf="url.Type == 'N/A' || url.Type == 'pdf' || url.Type == 'PDF' ">
+                <img src="assets/images/file1.png" height="150" width="150"
+                  (click)="fileClickfun(url.upload , url.Type)" style="cursor:pointer;">
+                <br />
+                <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)" style="cursor:pointer;">
+              </span>
+
+              <p style="position: relative;
+                    text-align: center;width: 150px;
+top: -18px;">{{url.Name}}</p>
+            </div>
+            <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body" style="text-align: center;">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                    <object style="width:100%!important;" height="500" [attr.data]="fileName" type={{filetypeurlsplit1}}
+                      *ngIf="filesplitdata !== 'image' &&  filetypeurlsplit1 == 'application/pdf'"></object>
+
+
+                    <img [src]="imgsrc" height="450" style="width:auto" *ngIf="filesplitdata == 'image'">
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="transactionStatusNameval == 'Transaction Completed'">
+          <label style="position: relative;top: 15px;" *ngIf="documentLocation?.length"><b>Attachment File :</b></label>
+          <div *ngFor="let p of documentLocation">
+            <img src="assets/images/file1.png" (click)="attachmentlink(p.documentLocation)"
+              style=" width: 90px; margin-top: 18px;">
+          </div>
+        </div>
+
+
+        <div style="text-align:center;" id="actionButtons">
+          <button type="button" class="btn-hover color-1" (click)="CRMReceiptonlineSubmit()">Submit</button>
+          <button type="button" class="btn-hover color-1"
+            (click)="rejectAndModifytMisReceiptOnline('Reject')">Reject</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container" style="text-align:center;"
+      *ngIf="transactionStatusNameval == 'Transaction Completed' && deptid == 993">
+      <button type="button" class="btn-hover color-1" (click)="Deletelistfun()">Delete</button>
+    </div>
+
+  </div>
+
+</section>

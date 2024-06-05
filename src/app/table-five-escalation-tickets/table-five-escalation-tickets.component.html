@@ -1,0 +1,100 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+      <div class="content__loader">
+          <div><i class="Favicon"></i></div>
+      </div>
+  </div>
+</div>
+
+<section class="content">
+
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Escalation Tickets</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeclick()"></i> 
+                <span (click)="dashtitle()" style="cursor:pointer;">ProjectWise Escalation Report </span></a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Escalation Tickets</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body" style="border-radius: 0px;">
+
+            <div class="table-responsive" style="overflow-x:revert!important;">
+              <table id="Escalationtable" class="table table-bordered">
+                <thead>
+                  <tr class="center">
+                    <th>Project Name</th>
+                    <th>Ticket Type</th>
+                    <th>Ticket Owner</th>
+                    <th>No.of tickets escalated</th>
+                    <th>Escalation Level</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of escalationTicketCountTableData | paginate: { itemsPerPage: totalItems, currentPage: current_Page,totalItems: itemsPer_Page}; let i = index;">
+                    <td class="center">{{item.siteName}}</td>
+                    <td class="center">{{item.ticketType}}</td>
+                    <td class="center">{{item.employeeName}}</td>
+                    <td
+                      (click)="getSiteTickettypeLevelWiseEscalationDetails([item.siteId],[item.escalationLevel],[item.ticketTypeId],[item.empId])"
+                      class="center" style="text-decoration: underline; cursor: pointer;">
+                      {{item.ticketCount}}
+                    </td>
+                    <td class="center">{{item.escalationLevelEmpName}}</td>
+                  </tr>
+
+              
+                  <!-- <tr style="color: #9E9E9E;border: none;" *ngIf="escalationTicketCountTableData.length != 0">
+                    <td class="center" colspan="3" style="font-weight: bold;">Total</td>
+                    <td class="center" style="font-weight: bold;">
+                      {{totalnumberoftickets}}
+                    </td>
+                    <td class="center" style="font-weight: bold;">-</td>
+                  </tr> -->
+
+
+                </tbody>
+                <tfoot>
+                  <ng-container>
+                    <tr style="color: #9E9E9E;border: none;" *ngIf="escalationTicketCountTableData.length != 0">
+                      <td class="center" style="font-weight: bold;">Total</td>
+                      <td class="center" style="font-weight: bold;">-</td>
+                      <td class="center" style="font-weight: bold;">-</td>
+                      <td class="center" style="font-weight: bold;"> {{totalnumberoftickets}}</td>
+                      <td class="center" style="font-weight: bold;">-</td>
+                    </tr>
+  
+                  </ng-container>
+                </tfoot>
+
+              </table>
+            </div><br>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- <td (click)="getSiteTickettypeLevelWiseEscalationDetails(uniqueAllSiteIdArray,uniqueAllLevelIdArray,uniqueAllTktTypeIdArray)" class="center" style="font-weight: bold;">
+                            {{json_response_EscalationTickets.ticketReportingResponces[0].noOfTickets}}
+                          </td> -->

@@ -1,0 +1,345 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<style>
+   .my-class1 {
+        color: blue !important;
+    }
+
+    .my-class2 {
+        color: gray !important;
+    }
+    
+  .backbutton {
+    position: absolute;
+    right: 24px;
+    top: 98px;
+    width: auto;
+    color: #FFF;
+    background: #F44336;
+    border: none;
+  }
+
+  .marksofcomplaint {
+    position: relative;
+    right: 0;
+    top: -12px;
+  }
+
+  .loadercls {
+    position: relative;
+    left: 8px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+  }
+</style>
+
+
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+    <div class="content__loader">
+      <div><i class="Favicon"></i></div>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Escalation Ticket Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i> Ticketing</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <span (click)="escalationticketlist()">Escalation Tickets</span></a>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;" routerLink="escalation-tickets">Escalation Ticket</a>
+              </li> -->
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Escalation Ticket Details</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <mat-paginator [length]="tickettotaldetailsresponse.length" [pageSize]="1" [pageIndex]="pageIndex"
+    (page)="getServerData($event)">
+  </mat-paginator>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-lg-8">
+      <div class="card" style="border:solid #000000 0.5px;">
+        <div class="card-body">
+          <h3>Ticket</h3>
+          <p>{{this.ticketINfomessage}}</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-xs-6 col-sm-6 col-lg-11">
+              <h4>Ticket Replies</h4>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-lg-1">
+              <i style="font-size:24px" class="fa" (click)="getTicketDetails()">&#xf021;</i>
+
+            </div>
+          </div>
+          <ul class="list-unstyled m-t-40" style="height: 500px; overflow-y: auto">
+            <div *ngFor="let data of ticketmessageData">
+              <li class="media">
+                <img *ngIf="data.profilepic == null" alt="Generic placeholder image" class="m-r-15" alt="user_image"
+                  src="https://img.icons8.com/bubbles/2x/user.png" width="60">
+                <img *ngIf="data.profilepic != null" alt="Generic placeholder image" class="m-r-15"
+                  src="{{data.profilepic}}" width="60">
+                <div class="media-body" style="float:left">
+                  <h5 class="mt-0 mb-1">{{data.name}}</h5>
+                  <p>{{data.desc}}</p>
+                  <p><span [innerHTML]="data.message"></span>&nbsp;&nbsp;
+                  </p>
+                  <span class="pull-right">{{data.commentsDate|date : 'fullDate'}}<span
+                    [ngClass]="(data.viewStatus=='NOT_VIEWED')?'my-class2':'my-class1'">✔✔</span></span>
+                </div>
+               
+              </li>
+              <hr>
+            </div>
+          </ul>
+        </div>
+      </div>
+      <!-- CKEditor -->
+      <div class="card">
+        <div class="card-body">
+          <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card" style="border:0">
+                <div class="header">
+                  <h2>
+                    <strong>Write a reply</strong>
+                  </h2>
+                </div>
+                <div class="body">
+                  <div id="CKEditiorDiv">
+                    <textarea id="ckeditor">
+                      </textarea>
+                  </div>
+                  <p class="text-danger ckeditorerrormessage" id="ckeditorError">{{ckeditorError}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- #END# CKEditor -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input type="file" id="files" multiple (change)="handleFileSelect($event)">
+
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button class="m-t-20 btn btn-warning btn-border-radius waves-effect m-r-10" type="button"
+              (click)="replyMessage()">Reply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title" style="margin-bottom: -1.25rem;">Ticket Info</h4>
+        </div>
+        <!-- <div class="card-body bg-light">
+            <div class="row text-center">
+              <div class="col-6 m-t-10 m-b-10">
+                <span class="label label-warning">{{ticketInfo_status}}</span>
+              </div>
+              <div class="col-6 m-t-10 m-b-10"> {{ticketInfo_createdDate| date : 'fullDate'}}</div>
+            </div>
+          </div> -->
+        <div class="card-body">
+          <div class="row clearfix">
+            <div class="col-md-6">
+              <h5 class="m-t-30">Ticket Type</h5><span>{{ticket_type}}</span>
+              <h5 class="m-t-30">Status</h5><span>{{ticketInfo_status}}</span>
+              <h5 class="m-t-30">Pending Department</h5><span>{{pending_department}}</span>
+              <h5 class="p-t-20">Flat Number</h5><span><a href="javascript:void(0);"
+                  (click)="viewflatDetails(customer_id,flat_Id)">{{flat_number}}</a></span>
+            </div>
+            <div class="col-md-6">
+              <h5 class="m-t-30">Ticket Number</h5><span>{{ticket_Id}}</span>
+              <h5 class="m-t-30">Created Date</h5>
+              <span>{{ticketInfo_createdDate| date : 'EEEE, MMMM d, y h:mm a'}}</span>
+              <h5 class="m-t-30">Escalation Date</h5><span>{{ticket_escalationdate| date : 'fullDate'}}</span>
+              <h5 class="m-t-30">Project Name</h5><span>{{this.project_name}}</span>
+              <!-- <i class="fas fa-calendar-alt m-l-10"
+                data-toggle="modal" data-target="#basicModal"></i> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card">
+        <div class="card-body" style="height:360px;overflow-y: auto" id="customerinfoid1">
+
+          <div class="card-body text-center">
+            <h4 class="card-title">Attachments</h4>
+          </div>
+          <div class="row text-center">
+
+            <ul class="list-unstyled">
+              <div *ngFor="let item of pdflist">
+                <li class="media">
+                  <img src="assets/images/file1.jpg" (click)="pdfClick(item.url)" class="m-r-15" width="60">
+                  <div class="media-body" style="float:left;margin-right: 20px;">
+                    <p style="text-align: left;" class="mt-0 mb-1">
+                      <span *ngIf="item.createdType=='CUSTOMER'"
+                        style="width: 80%;float: left;word-break: break-all;font-size: 16px;font-weight: 600;">Customer:
+                        {{item.createdBy}}</span>
+                      <span *ngIf="item.createdType=='EMPLOYEE'"
+                        style="width: 80%;float: left;word-break: break-all;font-size: 16px;font-weight: 600;">{{item.createdBy}}</span>
+                      <span style="float: left;width: 20%;"><img *ngIf="item.visibilty == 2" class="m-r-15"
+                          src="assets/images/filename.png" (click)="makeasPublic(item.name,item.id)"
+                          style="float: right;margin-right: 0px;height: 30px;width: 30px;"></span>
+                    </p>
+                    <p style="text-align: left;word-break: break-all;margin-top: 13px;clear: both;">{{item.name}}</p>
+                  </div>
+                </li>
+                <hr>
+              </div>
+            </ul>
+
+          </div>
+        </div>
+
+
+
+
+
+        <div style="position: absolute;
+        margin-top: 40%;
+        width: 100%;
+        text-align: center;" *ngIf="customerhideme1">
+          <button [disabled]="loading1" class="btn-hover color-1"
+            style="width: auto;font-size: 15px;height: auto!important;text-align: left;padding: 10px;"
+            (click)="Attachmentsfun()">
+            Click here to view attachments
+            <span *ngIf="loading1" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+          </button>
+        </div>
+
+
+      </div>
+
+
+
+
+
+      <div class="card">
+        <div class="card-body text-center" id="customerinfoid">
+          <h4 class="card-title">Customer Info</h4>
+          <div class="profile-pic m-b-20 m-t-20">
+            <img id="customerinfoid" *ngIf="this.profilepic != null" alt="user" class="rounded-circle"
+              src="{{this.profilepic}}" width="150">
+            <img id="customerinfoid" *ngIf="this.profilepic == null" alt="user" class="rounded-circle"
+              src="assets/images/customerimage.png" width="150">
+
+            <h4 class="m-t-20 m-b-0"><a href="javascript:void(0)"
+                (click)="viewCustomerDetails(customer_id,flat_Id)"><span>{{customer_name}}</span></a>
+            </h4><a>{{customer_email}}</a>
+          </div>
+          <div class="row text-center m-t-40">
+            <div class="col-4">
+              <h3 class="font-bold">{{total_tickets}}</h3>
+              <h6>Total</h6>
+            </div>
+            <div class="col-4">
+              <h3 class="font-bold">{{total_open}}</h3>
+              <h6>Open</h6>
+            </div>
+            <div class="col-4">
+              <h3 class="font-bold">{{tickets_closed}}</h3>
+              <h6>Closed</h6>
+            </div>
+          </div>
+        </div>
+
+        <div style="position: absolute;
+           margin-top: 40%;
+           width: 100%;
+           text-align: center;" *ngIf="customerhideme">
+          <button [disabled]="loading2" class="btn-hover color-1" style="width:200px!important;font-size: 15px;"
+            (click)="Customerinfofun()">
+            Customer Info
+            <span *ngIf="loading2" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+          </button>
+        </div>
+
+
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="seekinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">{{modellabel_name}}</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="offset-md-1 col-md-10">
+              <div class="row clearfix" style="border:1px solid #000;">
+                <div class="col-md-8 offset-md-2 center-block text-center">
+
+                  <b class="col-md-12 m-b-25 m-t-25 dept">Select Department :</b>
+                  <div class="col-md-12">
+                    <select class="form-group" id="sel">
+                      <option value="select">--Select--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 text-center center-block m-b-25">
+                  <button type="button" class="btn-hover btn-border-radius color-2"
+                    (click)="sendSeekInfo_forward_Data()">Submit</button>
+                  <button type="button" class="btn btn-default btn-border-radius waves-effect"
+                    data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>

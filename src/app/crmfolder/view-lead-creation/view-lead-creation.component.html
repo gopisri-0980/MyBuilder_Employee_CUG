@@ -1,0 +1,874 @@
+<section class="content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <ul class="breadcrumb breadcrumb-style ">
+                      <li class="breadcrumb-item">
+                          <h4 class="page-title">VIEW LEAD DETAILS</h4>
+                      </li>
+                      <li class="breadcrumb-item bcrumb-1">
+                          <a (click)="homeClick()">
+                              <i class="fas fa-home"></i> Home</a>
+                      </li>
+                      <li class="breadcrumb-item bcrumb-2">
+                          <a href="#" onClick="return false;"> View Lead Details</a>
+                      </li>
+                      <!-- <li class="breadcrumb-item active">Wizard</li> -->
+                  </ul>
+              </div>
+          </div>
+      </div>
+    
+      <!-- Advanced Form Example With Validation -->
+   
+       
+      <div class="body">
+
+        <div class="tabbable">
+            <ul class="nav nav-tabs" style="border: 0px;">
+            
+            </ul>
+            <div class="tab-content">
+            
+            </div>
+        </div>
+          
+        <!-- Basic Example | Vertical Layout -->
+        <!-- <div id="wizard_vertical"> -->
+            <div class="tabbable" style="position: relative; top: -33px;">
+                <ul class="nav nav-tabs">
+                   <li *ngFor="let data of tabList;let i=index;" class="active"><a [ngClass]="customCsstabs(i)" href="#tab{{i}}" data-toggle="tab">{{data}}</a></li>
+                </ul>
+
+            <div class="tab-content">
+
+            <!-- <h2>KYC DOCUMENTS (ALL APPLICANTS)</h2> -->
+            <!-- <section class="wizardView"> -->
+        
+
+                <div class="tab-pane active" id="tab0">
+                    <!-- <h2>KYC DOCUMENTS (ALL APPLICANTS)</h2> -->
+                    <div class="row clearfix" >
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 divView">
+                            <div class="row clearfix">
+              
+                                <div class="col-md-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="lead_id" class="form-control" type="number" name="bday"
+                                                disabled >
+                                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                class="form-label">Lead Id:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="nameid" class="form-control" type="text" name="nameid"
+                                              value="" required>
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Name:</label>
+                                      </div>
+                                  </div>
+                              </div>
+              
+                              <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="company_id" class="form-control datepicker" type="text" name="bday"
+                                           >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Company:</label>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            </div>
+              
+                            <div class="row clearfix">
+                                
+                             
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input id="disignation_id" class="form-control datepicker" type="text" name="bday"
+                                          >
+                                      <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                          class="form-label">Designation:</label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="registeredon_id" class="form-control datepicker" type="date" name="bday"
+                                          value="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Registerd On:</label>
+                                </div>
+                            </div>
+                        </div>
+              
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="location_id" class="form-control datepicker" type="text" name="bday"
+                                     >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Location:</label>
+                              </div>
+                          </div>
+                      </div>
+                          </div>
+              
+                          <div class="row clearfix">
+                                
+                           
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="lead_crtd_sit_scdule_id" class="form-control datepicker" type="text" name="bday"
+                                         >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Lead created to site scheduled:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="email_id" class="form-control datepicker" type="text" name="bday"
+                                       value="" required>
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Email:</label>
+                              </div>
+                          </div>
+                      </div>
+              
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="aternative_email_id" class="form-control datepicker" type="text" name="bday"
+                                    >
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">Alternate Email:</label>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+              
+                        <div class="row clearfix">
+                                
+                        
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="alter_email2_id" class="form-control datepicker" type="text" name="bday"
+                                      >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Alternate Email 2:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="mobileid" class="form-control " type="number" name="mobileid"
+                                    value="" required>
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">Mobile:</label>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <div class="col-md-4">
+                      <div class="form-group form-float">
+                          <div class="form-line">
+                              <input id="addi_mob_id" class="form-control datepicker" type="number" name="bday"
+                                  >
+                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                  class="form-label">Additional Mobile:</label>
+                          </div>
+                      </div>
+                  </div>
+                      </div>
+                      
+                      <div class="row clearfix">
+                                
+                       
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="add_mob2_id" class="form-control datepicker" type="number" name="bday"
+                                    >
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">Additional Mobile 2:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group form-float">
+                          <div class="form-line">
+                              <input id="phone_id" class="form-control datepicker" type="text" name="bday"
+                                  value="">
+                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                  class="form-label">Phone:</label>
+                          </div>
+                      </div>
+                  </div>
+              
+                  <div class="col-md-4">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input id="extension_id" class="form-control datepicker" type="text" name="bday"
+                                >
+                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                class="form-label">Extension:</label>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+              
+                    <div class="row clearfix">
+
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="projectID" class="form-control datepicker" type="text" name="bday"
+                                        >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Projects:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="timeslotID" class="form-control datepicker" type="text" name="bday"
+                                        >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Time Slot:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="projectlocID" class="form-control datepicker" type="text" name="bday"
+                                        >
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Prefered Project Location:</label>
+                                </div>
+                            </div>
+                        </div>
+                     
+                   
+                     
+                    </div>
+                    <div class="row clearfix">
+                    <div class="col-md-6">
+                      <div class="form-check m-l-10">
+                          <label class="form-check-label">
+                              <input class="form-check-input datepicker salesHeadCheckList" id="channel_partner_id" type="checkbox"
+                                  value="Booking Date">
+                             Channel Partner Lead Id
+                              <span class="form-check-sign">
+                                  <span class="check"></span>
+                              </span>
+                          </label>
+                      </div>
+                  </div>
+              
+                  <div class="col-md-6">
+                    <div class="form-check m-l-10">
+                        <label class="form-check-label">
+                            <input class="form-check-input datepicker salesHeadCheckList" id="walkinformId" type="checkbox"
+                                value="Booking Date">
+                          Walkin Form 1
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                </div>
+                </div>
+                <div class="col-md-1"></div>
+
+                </div>
+                   <!-- <div class="row clearfix ">
+
+                    <div class="col-md-12 center" >
+                        <button id="finishButton" type="button" class="btn-hover color-1 "
+                        (click)="createLead()">Submit</button>
+                    </div>  
+                 
+                </div> -->
+                </div>
+            
+            <div class="tab-pane" id="tab1">
+                <!-- <h2>FIRST APPLICANT (MANDATORY)</h2> -->
+                <div class="row clearfix" >
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10 divView">
+                        <div class="row clearfix">
+              
+     
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                           >
+                                      <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                          class="form-label">Second source:</label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                       value="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Thired Source:</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Reactived source:</label>
+                              </div>
+                          </div>
+                      </div>
+                          </div>
+        
+                          <div class="row clearfix">
+                          
+                 
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                          >
+                                      <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                          class="form-label">Reason:</label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                       value="">
+                                    <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                        class="form-label">Last task comments:</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Rating:</label>
+                              </div>
+                          </div>
+                      </div>
+                          </div>
+        
+                          <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                            max="3000-12-31" min="1000-01-01" >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Lead sub status:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="sourcedescID" class="form-control datepicker" type="text" name="bday"
+                                            max="3000-12-31" min="1000-01-01" >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Source Description:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="firstsourceID" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">First Source:</label>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                        
+                          </div>
+        
+                          <div class="row clearfix">
+                          
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="latsrcID" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Latest Source:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="leadownerID" class="form-control datepicker" type="text" name="bday"
+                                            max="3000-12-31" min="1000-01-01" >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Lead Owner:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="leadstatusID" class="form-control datepicker" type="text" name="bday"
+                                             >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Lead status:</label>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                      
+                          </div>
+                    </div>
+                <div class="col-md-1"></div>
+
+            </div>
+            <!-- <div class="row clearfix ">
+
+                <div class="col-md-12 center" >
+                    <button id="finishButton" type="button" class="btn-hover color-1 "
+                    (click)="createLead()">Submit</button>
+                </div>  
+             
+            </div> -->
+            </div>
+            
+        
+            <div class="tab-pane" id="tab2">
+          
+
+
+            <div class="row clearfix">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 divView">
+                    <div class="row clearfix">
+                
+       
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="house_type_id" class="form-control datepicker" type="text" name="bday"
+                                      >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">House Type:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="comments_id" class="form-control datepicker" type="text" name="bday"
+                                   >
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label"> Comments:</label>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4">
+                      <div class="form-group form-float">
+                          <div class="form-line">
+                              <input id="max_budget" class="form-control datepicker" type="text" name="bday"
+                                   >
+                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                  class="form-label">Maximum Budget:</label>
+                          </div>
+                      </div>
+                  </div>
+                      </div>
+                      <div class="row clearfix">
+                      
+             
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="mini_budget_id" class="form-control datepicker" type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Minimum Budget:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="budge_range_id" class="form-control datepicker" type="text" name="bday"
+                                    max="3000-12-31" min="1000-01-01" value="">
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label"> Budget Range:</label>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4">
+                      <div class="form-group form-float">
+                          <div class="form-line">
+                              <input id="req_type" class="form-control datepicker" type="text" name="bday"
+                                   >
+                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                  class="form-label">Requirement Type:</label>
+                          </div>
+                      </div>
+                  </div>
+                      </div>
+                        <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="flat_area_id" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Flat Area:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="timeframepurID" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Time Frame To Purchase:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="housinreqID" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Housing Requirements:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                    
+                  
+                      
+                        </div>
+                </div>
+               
+                <div class="col-md-1"></div>
+            </div>
+            <!-- <div class="row clearfix ">
+                <div class="col-md-12 center" >
+                    <button id="finishButton" type="button" class="btn-hover color-1 "
+                    (click)="createLead()">Submit</button>
+                </div>  
+             
+            </div> -->
+
+            </div>
+
+           
+            <div class="tab-pane" id="tab3">
+           
+            <div class="row clearfix">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 divView">
+                    <div class="row clearfix">
+                
+       
+                        <div class="col-md-4">
+                          <div class="form-group form-float">
+                              <div class="form-line">
+                                  <input id="area_id" class="form-control datepicker" type="text" name="bday"
+                                       >
+                                  <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                      class="form-label">Area:</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input id="lacality_id" class="form-control datepicker" type="text" name="bday"
+                                   >
+                                <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                    class="form-label">Locality:</label>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4">
+                      <div class="form-group form-float">
+                          <div class="form-line">
+                              <input id="alt_address" class="form-control datepicker" type="text" name="bday"
+                                  >
+                              <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                  class="form-label"> Alternative Address:</label>
+                          </div>
+                      </div>
+                  </div>
+                      </div>
+                        <div class="row clearfix">
+                        
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="cityID" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">City:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="stateID" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">State:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                      
+                        </div>
+                </div>
+               
+            
+                <div class="col-md-1"></div>
+                </div>
+                <!-- <div class="row clearfix ">
+
+                    <div class="col-md-12 center" >
+                        <button id="finishButton" type="button" class="btn-hover color-1 "
+                        (click)="createLead()">Submit</button>
+                    </div>  
+                 
+                </div> -->
+            </div>
+           
+                <div class="tab-pane" id="tab4">
+                    <div class="row clearfix">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 divView">
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="marketingID" class="form-control datepicker" type="text" name="bday"
+                                               >
+                                            <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                                class="form-label">Marketing Type:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                          
+                              </div> 
+            
+                              <div class="row clearfix" id="fbid" style="display: none;">
+                              
+                                <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="facebook_leadId" class="form-control datepicker" type="text" name="bday"
+                                             >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Facebook Lead Id:</label>
+                                      </div>
+                                  </div>
+                              </div>
+                             
+                              </div>
+            
+                              <div class="row clearfix" id="linkedinid" style="display: none;">
+                              
+                                <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="linked_lead_id" class="form-control datepicker" type="text" name="bday"
+                                              >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">LinkedIn Lead Id:</label>
+                                      </div>
+                                  </div>
+                              </div>
+                             
+                              </div>
+            
+                              <div class="row clearfix" id="livechat" style="display: none;">
+                              
+                                <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                              max="3000-12-31" min="1000-01-01" >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Live Chat Lead Id:</label>
+                                      </div>
+                                  </div>
+                              </div>
+            
+                              <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="date_of_birth" class="form-control datepicker" type="text" name="bday"
+                                            max="3000-12-31" min="1000-01-01" >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Raw Transcript Id link:</label>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                              </div>
+            
+                              <div class="row clearfix" id="channelpartner" style="display: none;">
+                              
+                                <div class="col-md-3">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="chanel_partnr_leadId" class="form-control datepicker" type="text" name="bday"
+                                             >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Chanel Partner Lead Id:</label>
+                                      </div>
+                                  </div>
+                              </div>
+            
+                              <div class="col-md-3">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="chanel_partnr_name" class="form-control datepicker" type="text" name="bday"
+                                            >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Channel Partner Name:</label>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="col-md-3">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="chanel_partnr_address" class="form-control datepicker" type="text" name="bday"
+                                             >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Channel Partner Address:</label>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="col-md-3">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="chanel_partnr_number" class="form-control datepicker" type="text" name="bday"
+                                             >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Channel Partner Number:</label>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                              </div>
+            
+                              <div class="row clearfix" id="referencediv" style="display: none;">
+                              
+                                <div class="col-md-4">
+                                  <div class="form-group form-float">
+                                      <div class="form-line">
+                                          <input id="reference_name" class="form-control datepicker" type="text" name="bday"
+                                              >
+                                          <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                              class="form-label">Reference Name:</label>
+                                      </div>
+                                  </div>
+                              </div>
+            
+                              <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="reference_project" class="form-control datepicker" type="text" name="bday"
+                                             >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Reference Project:</label>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="col-md-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="reference_unit_number" class="form-control datepicker" type="text" name="bday"
+                                             >
+                                        <label style="top: -10px;left: 0;font-size: 15px;color:#26a69a"
+                                            class="form-label">Reference Unit Number:</label>
+                                    </div>
+                                </div>
+                            </div>
+            
+                          
+                             
+                              </div>  
+                        </div>
+                       
+                    <div class="col-md-1"></div>
+                </div>
+                <!-- <div class="row clearfix ">
+
+                    <div class="col-md-12 center" >
+                        <button id="finishButton" type="button" class="btn-hover color-1 "
+                        (click)="createLead()">Submit</button>
+                    </div>  
+                 
+                </div> -->
+            </div>
+
+          
+
+        
+      
+
+ 
+
+
+     
+</div>
+</div>
+</div>
+         
+     
+      <!-- #END# Advanced Form Example With Validation -->
+  </div>
+</section>

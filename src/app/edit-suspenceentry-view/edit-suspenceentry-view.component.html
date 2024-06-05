@@ -1,0 +1,309 @@
+<style>
+  .rowtitlecls {
+    border: 1px solid #f0ecec;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-left: 0%;
+  }
+  .rowtitlecls1 {
+    /* border: 1px solid #f0ecec;*/
+    border-radius: 5px; 
+    padding: 10px;
+    width: 100%;
+    margin-left: 0%;
+  }
+  .invalid_feedback {
+    color: red;
+    position: relative;
+    top: 4px;
+    left: 0px;
+    font-size: 11px;
+    font-family: 'Poppins';
+    font-weight: 500;
+  }
+  .trashicon1 {
+    position: relative;
+    left: 0px;
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+  }
+  .trashicon {
+    position: relative;
+    left: 51px;
+    color: #2196F3;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 23px;
+    width: 30px;
+    height: 30px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Suspense Entry</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i> Transactions</a>
+            </li>
+
+            <li class="breadcrumb-item active">Suspense Entry</li>
+
+
+          </ul>
+        </div> -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Modify Suspence Entry</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item"><a style="cursor: pointer;" (click)="goToList()">Modify Suspence Entry</a></li>
+            <li class="breadcrumb-item active">View Edit Suspence Entry</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mainDiv">
+      <div class="row clearfix">
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="required">Reference Number : </label>
+            <input style="border: 1px solid #4d474785; text-align: center; border-radius:10px; height: 28px;
+    font-size: 16px;" (keypress)="keyPress($event)" type="text" class="form-control" id="referenceNumberID"
+              placeholder="Enter Number">
+          </div>
+        </div>
+
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="required">Received Date : </label>
+            <input style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;
+              font-size: 16px;" type="text" placeholder="Choose Date" id="receivedDateID">
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="required">Received Amount : </label>
+            <input style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;
+    font-size: 16px;" type="text" (keypress)="keyPressAmount($event)" class="form-control" id="receivedAmountID"
+              placeholder="Enter Amount" pattern="^\d*(\.\d{0,2})?$">
+          </div>
+        </div>
+
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="required">Payment Mode : </label>
+            <select style="width:100%;" class="form-group" id="PaymentModeID" single>
+              <option value="select">--Select--</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="required"> Customer Bank Name : </label>
+            <select style="width:100%;" class="form-group" id="bankNamesID" single>
+              <option value="select">--Select--</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="required">Project Name: </label>
+            <select style="width:100%;" class="form-group" id="projectID" single>
+              <!-- <option value="select">--Select--</option> -->
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Bank Statement Comments: </label>
+            <textarea rows="5" cols="5" style="border-radius: 4px;height:50px;" id="bankStatementCommentsID"
+              maxlength="500" data-length="120"></textarea>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>MIS Comments: </label>
+            <textarea rows="5" cols="5" style="border-radius: 4px;height:50px;" id="misStatementCommentsID"
+              maxlength="500" data-length="120"></textarea>
+          </div>
+        </div>
+
+
+        <div class="col-sm-4" id="companyAccBlock">
+          <div class="form-group">
+            <label class="required">Company Account Number: </label>
+            <select style="width:100%;" class="form-group" id="companyAccnumberID" single>
+              <option value="select">--Select--</option>
+            </select>
+          </div>
+        </div>
+
+
+        <!-- <div class="col-sm-4">
+          <div class="form-group">
+            <label>Attachment</label>
+            <div class="file-field input-field" style="position: relative;top: -15px;">
+              <div class="btn">
+                <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                <input type="file" id="files" accept=".jpeg,.jpg,.png,.pdf,.xlsx,.xls,.txt,.docx"
+                  (change)="handle_FileSelect($event)">
+              </div>
+              <div class="file-path-wrapper">
+                <input style="border-bottom: 0px solid #9e9e9e; text-decoration: underline;" id="filee"
+                  class="file-path validate" type="text" placeholder="Upload File">
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="row clearfix rowtitlecls">
+
+
+          <div class="col-sm-4" *ngIf="this.crmcomentsArray != ''">
+            <label>Previous Bank Comments:</label>
+            <div style="border: 1px solid #4d474785;
+            border-radius: 4px;
+            height: auto;
+            text-align: justify;
+            padding:10px;overflow: scroll;">
+              <div class="form-line">
+                <div style="font-weight: 600;" *ngFor="let item of crmcomentsArray"><span *ngIf = "item.metadataName == 'BANK_STATEMENT'">{{item.comments }}</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4" *ngIf="this.miscommentsArray != ''">
+            <label>Previous MIS Comments:</label>
+            <div style="border: 1px solid #4d474785;
+            border-radius: 4px;
+            height: auto;
+            text-align: justify;
+            padding:10px;overflow: scroll;">
+              <div class="form-line">
+                <div style="font-weight: 600;" *ngFor="let item of miscommentsArray">{{item.comment }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4" *ngIf="this.crmcomentsArray != ''">
+            <label>Previous CRM Comments:</label>
+            <div style="border: 1px solid #4d474785;
+            border-radius: 4px;
+            height: auto;
+            text-align: justify;
+            padding:10px;overflow: scroll;">
+              <div class="form-line">
+                <div style="font-weight: 600;" *ngFor="let item of crmcomentsArray"><span *ngIf = "item.metadataName == 'CRM'">{{item.comments }}</span></div>
+              </div>
+            </div>
+          </div>
+
+         
+          </div>
+          <div class="row clearfix rowtitlecls1">
+            <div class="col-sm-4" *ngIf="bindingFileInfo?.length">
+              <div class="form-group">
+                <label> Attached Files:</label>
+                <li *ngFor="let item of bindingFileInfo;let i = index;">
+                  <a (click)="viewFiles(item.url)"
+                    style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.name}}</a>
+                    <img src="assets/images/trash.jpg" class="trashicon1" (click)="Deleteimage1(i,item)" style="cursor:pointer;">
+  
+                </li>
+              </div>
+            </div> 
+          </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Attach Files:</label><br>
+            <input type="file" id="files" accept="image/x-png,image/gif,image/jpeg" (change)="handle_FileSelect($event)"
+              style="position: relative;color: rgb(0, 0, 0); cursor:pointer;">
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+
+
+      <div class="row">
+        <div class="container" style="position: relative;
+        top: 22px;display: inline-flex;margin-top: 20px;overflow-x: auto;">
+          <div *ngFor='let url of urls; let i = index;' style="margin-left: 20px;min-width: 20%;">
+            <span *ngIf="url.Type == 'jpg' || url.Type =='png' || url.Type == 'svg' || url.Type == 'jpeg'">
+              <img [src]="url.upload" height="150" width="150" (click)="fileClickfun(url.upload , url.Type)"
+                style="cursor:pointer;">
+              <br />
+              <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)" style="cursor:pointer;">
+            </span>
+            <span *ngIf="url.Type == 'N/A' || url.Type == 'pdf' || url.Type == 'PDF' ">
+              <img src="assets/images/file1.png" height="150" width="150" (click)="fileClickfun(url.upload , url.Type)"
+                style="cursor:pointer;">
+              <br />
+              <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)" style="cursor:pointer;">
+            </span>
+
+            <p style="position: relative;
+                text-align: center;width: 150px;
+top: -18px;">{{url.Name}}</p>
+          </div>
+          <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body" style="text-align: center;">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                      class="sr-only">Close</span></button>
+
+                  <object style="width:100%!important;" height="500" [attr.data]="fileName" type={{filetypeurlsplit1}}
+                    *ngIf="filesplitdata !== 'image' &&  filetypeurlsplit1 == 'application/pdf'"></object>
+
+
+                  <img [src]="imgsrc" height="450" style="width:auto" *ngIf="filesplitdata == 'image'">
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="col-md-11 center-block text-center m-t-30">
+      <button type="button" class="btn-hover color-1" (click)="suspenseEntry()">Submit</button>
+   
+      <button type="button" class="btn-hover color-1" (click)="suspenseEntry_reject()">Reject</button>
+    </div>
+
+  </div>
+</section><br>

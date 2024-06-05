@@ -1,0 +1,110 @@
+
+<style>
+  .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+  }
+
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Escalation Complaints</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i> Complaints</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><span>Escalation Complaints</span></a>
+            </li>
+           
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="position: relative;top: -29px;">
+      <div class="card-body">
+
+        <div class="table-responsive">
+          <ul>
+            <li>
+              <div class="col-md-2" style="float: left; display:none!important">
+                <div class="form-line">
+                  <select style="width:100%;" id="tableSelect">
+                    <option value="select">Select</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="All">All</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2" style="float: right;">
+             
+                <input style="text-align:center;border:1px solid" class="effect-9" name="search"
+                  [(ngModel)]="searchText" type="text" placeholder="Search Here">
+                <span class="focus-border">
+                  <i></i>
+                </span>
+              </div>
+              <table
+              class="display table table-hover table-checkable table-striped order-column width-per-100">
+                <thead>
+                  <tr>
+                    <th class="center">S.NO</th>
+                    <th class="center">Complaint Number</th>
+                    <th class="center">Description</th>
+                    <th class="center">Project Name</th>
+                    <th class="center">Complaint type</th>
+                    <th class="center">Pending Department</th>
+                    <th class="center">Status</th>
+                    <th class="center">Received Date</th>
+                    <th class="center">Escalation Date</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="total_length == 0 || total_length == null">
+                    <td class="center" colspan="8" id="noData"> No Data Available</td>
+                  </tr>
+
+                 
+                  <tr
+                    *ngFor="let data of ticketList | filter : searchText | paginate: { itemsPerPage: totalItems, currentPage: current_Page,totalItems: itemsPer_Page};let i=index;"
+                    class="ticketList" (click)="gotoTicketDetailspage(data)">
+
+                    <td class="center">{{i+1}}</td>
+                    <td class="center"><a>{{data.complaintId}}</a></td>
+                    <td class="center"><a class="leadId my__textoverflow">{{data.description}}</a></td>
+                    <td class="center">{{data.customerPropertyDetails.siteName}}</td>
+                    <td class="center">{{data.complaintType.complaintType}}</td>
+                    <td class="center">{{data.department.departmentName}}</td>
+                    <td class="center">
+                      <div class="badge" [ngStyle]="{'color':getColor(data.status)}">{{data.status}}</div>
+                    </td>
+                    <td class="center">{{data.createdDate| date : 'fullDate'}}</td>
+                    <td class="center">{{data.estimatedResolvedDate| date : 'fullDate'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ul>
+         <pagination-controls style="float: right; font-size: 18px" (pageChange)="pageChanged($event)">
+          </pagination-controls> 
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

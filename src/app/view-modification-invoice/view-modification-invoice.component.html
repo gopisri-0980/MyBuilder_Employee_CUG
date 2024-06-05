@@ -1,0 +1,204 @@
+<style>
+  .table-bordered {
+    border: 1px solid #fffdfd;
+    border-color: rgb(230 234 239);
+  }
+
+  textarea {
+    overflow: auto;
+    resize: vertical;
+    height: 50px;
+    border-radius: 5px;
+    border-color: #ddd5d5;
+  
+}
+</style>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Modification Invoice</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1" (click)="homeClick()">
+              <a><i class="fas fa-home" ></i>Approve Pending Invoice</a>
+            </li>
+            <li class="breadcrumb-item active">Modification Invoice</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row" *ngIf="modificationdetails?.length">
+            <div class="col-sm-3">
+              <div>
+                <label>Customer Name: &nbsp; <span>{{customerName}}</span></label>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div>
+                <label>Project Name: &nbsp; <span>{{siteName}}</span></label>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div>
+                <label>Floor Name: &nbsp; <span>{{floorName}}</span></label>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div>
+                <label>Flat Number: &nbsp; <span>{{flatNo}}</span></label>
+              </div>
+            </div>
+
+          </div><br>
+
+          <form #raiseInvoice="ngForm" (ngSubmit)="onSubmit(raiseInvoice.value)" enctype="multipart/form-data"
+            id="totalTableID" *ngIf="modificationdetails?.length" style="line-height: 30px;">
+            <table class="table table-bordered" id="tbl_posts"
+              [ngStyle]="{'border-color': (!raiseInvoice.valid && !raiseInvoice.pristine) ? 'red' : '#4d474785' }">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th class="tableHeaderClass">*Details Of Modification</th>
+                  <th class="tableHeaderClass">*Units</th>
+                  <th class="tableHeaderClass">*Quantity</th>
+                  <th class="tableHeaderClass">*Rate</th>
+                  <th class="tableHeaderClass">*Amount</th>
+                </tr>
+              </thead>
+              <tbody id="tbl_posts_body">
+                <tr class="tabletrClass" *ngFor="let p of modificationdetails; let i = index;">
+                  <td>
+                    <p style="padding: 9px; border: 1px solid #f4efef; text-align:center;">{{i+1}}</p>
+                  </td>
+                  <td class="tdDateClass">
+                    <input type="text" style="border: 1px solid #f4efef;text-align:center;" class="milestone_name"
+                      placeholder="Enter modification" value="{{p.modificationChargeDesc}}" disabled>
+                  </td>
+                  <td class="tdDateClass">
+                    <input type="text" style="border: 1px solid #f4efef;text-align:center;" class="units"
+                      placeholder="Enter units" value="{{p.units}}" disabled>
+                  </td>
+                  <td>
+                    <input type="text" style="border: 1px solid #f4efef;text-align:center;" class="quantity"
+                      value="{{p.quantity}}" disabled>
+                  </td>
+                  <td>
+                    <input type="text" style="border: 1px solid #f4efef;text-align:center;" class="rate"
+                      value="{{p.rate}}" disabled>
+                  </td>
+                  <td>
+                    <input type="text" style="border: 1px solid #f4efef;text-align:center;" class="amount"
+                      value="{{p.basicAmount}}" disabled>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table><br>
+
+
+            <div class="row" style="font-size: 14px;font-weight: 600;">
+              <div class="col-sm-3"><b>Total Amount Before Tax</b></div>
+              <div class="col-sm-1"> : </div>
+              <div class="col-sm-8">{{transactionAmount}}/- </div>
+            </div>
+
+            <div class="row" style="font-size: 14px;font-weight: 600;">
+              <div class="col-sm-3"><b>Percentage</b></div>
+              <div class="col-sm-1"> : </div>
+              <div class="col-sm-8"><span id="percentageID">{{percentageID}}</span>/-</div>
+            </div>
+
+            <div class="row" style="font-size: 14px;font-weight: 600;">
+              <div class="col-sm-3"><b>CGST</b></div>
+              <div class="col-sm-1"> :</div>
+              <div class="col-sm-8">{{CGSTAmount}}/-</div>
+            </div>
+
+            <div class="row" style="font-size: 14px;font-weight: 600;">
+              <div class="col-sm-3"><b>SGST</b></div>
+              <div class="col-sm-1"> : </div>
+              <div class="col-sm-8">{{SGSTAmount}}/-</div>
+            </div>
+
+            <div class="row" style="font-size: 14px;font-weight: 600;">
+              <div class="col-sm-3"><b>Total Amount After Tax</b></div>
+              <div class="col-sm-1"> : </div>
+              <div class="col-sm-8">{{afterGST}}/-</div>
+            </div><br>
+            <!-- <div class="row">
+              <div class="col-sm-6">
+              <div class="form-group" >
+                <label class="required"><b>Company bank Account:</b></label>
+                <select style="width:100%" class="form-group" id="companybankAcId" single></select>
+              </div>
+              </div>
+             
+
+
+
+            </div> -->
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group" >
+                  <label class="required"><b>Company bank Account:</b></label>
+                  <select style="width:100%" class="form-group" id="companybankAcId" single></select>
+                </div>
+                </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label style="font-size: 13px;
+                  font-weight: 600;font-family: 'Poppins';">previous comments :</label>
+                  <textarea rows="10" cols="10" disabled style="  background: #f9f7f5;">
+                  {{commentstext}}
+                  </textarea>
+                </div>
+              </div>
+
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label style="font-size: 13px;
+                  font-weight: 600;font-family: 'Poppins';">Comments :</label>
+                  <textarea rows="10" cols="10" id="Comments">
+                  
+                  </textarea>
+                </div>
+              </div>
+
+
+            </div>
+
+
+          </form>
+          <p *ngIf="modificationdetails.length == 0" style="font-size: 18px;
+          font-weight: 600;">No records found</p>
+          <div class="row"  *ngIf="modificationdetails.length !== 0">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">
+              <button type="button" style="margin-top: 1px;position: relative;top: 16px;"
+                class="btn-hover color-1" (click)="Approvefun('Approve')">Approve</button>
+            </div>
+            <div class="col-sm-2">
+              <button type="button" style="margin-top: 1px;position: relative;top: 16px;"
+                class="btn-hover color-1" (click)="Approvefun('Reject')">Reject</button>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

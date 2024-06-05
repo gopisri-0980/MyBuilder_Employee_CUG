@@ -1,0 +1,92 @@
+<style>
+  th td {
+    width: 20% !important;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Suspense Entries Report </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a (click)="homeClick()">
+                <i class="fas fa-home" style="cursor:pointer;"></i>
+                <span style="cursor:pointer;"> Dashboard</span></a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a>Suspense Entries Report </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="card">
+      <div class="card-body">
+
+        <p *ngIf="controller.length == 0 ">No Records Found</p>
+
+        <div class="table-responsive" *ngIf="controller?.length">
+          <table id="tableExport" class="table table-bordered">
+            <thead>
+              <tr class="center">
+                <th style="width: 10% !important;">S.No</th>
+                <th style="width: 20% !important;">Project Name</th>
+                <th style="width: 10% !important;">0-30</th>
+                <th style="width: 10% !important;">30-45</th>
+                <th style="width: 10% !important;">45-60</th>
+                <th style="width: 10% !important;">60-90</th>
+                <th style="width: 10% !important;">90 & Above</th>
+                <th style="color:#777;width: 10% !important;">Grand Total</th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+
+              <tr *ngFor="let item of controller; let i = index;">
+                <td style="text-align: center;width: 10% !important;">{{i + 1}}</td>
+                <td style="text-align: left;width: 20% !important;">{{item.NAME}}</td>
+                <td style="text-align: right;width: 10% !important;">{{item.ZERO_TO_THIRTY}}</td>
+                <td style="text-align: right;width: 10% !important;">{{item.THIRTY_TO_FOUTYFIVE}}</td>
+                <td style="text-align: right;width: 10% !important;">{{item.FOUTYFIVE_TO_SIXTY}}</td>
+                <td style="text-align: right;width: 10% !important;">{{item.SIXTY_TO_NINTY}}</td>
+                <td style="text-align: right;width: 10% !important;">{{item.NINTY_TO_ABOVE}}</td>
+                <td style="text-align: right;color:#777;width: 10% !important;"><b>{{item.SUM_OF_ALL}}</b></td>
+              </tr>
+            </tbody>
+            
+            <ng-container>
+              <tr  *ngIf="controller.length != 0" style="background: rgb(212 202 202 / 14%);font-weight:800; color: #9E9E9E;">
+              <td colspan="2" class="center">Grand Total :</td>
+              <td class="center"> <span id="invoiceamount"></span></td>
+              <td class="center"><span id="payedamount"></span></td>
+              <td class="center"><span id="dueamount"></span></td>
+              <td class="center"><span id="sixtonineAmount"></span></td>
+              <td class="center"><span id="nineaboveAmount"></span></td>
+              <td class="center"><span id="rowwisetotal"></span></td>
+            </tr>
+            </ng-container>
+
+          </table>
+
+         
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

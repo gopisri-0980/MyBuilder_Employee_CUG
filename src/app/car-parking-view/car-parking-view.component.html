@@ -1,0 +1,367 @@
+<style>
+  .norecordclass {
+    position: relative;
+    top: 14px;
+    left: 26px;
+    font-size: 17px;
+    font-family: 'Poppins';
+  }
+
+  .validationcls {
+    position: relative;
+    top: 6px;
+    font-family: 'Poppins';
+    color: orangered;
+    left: 0px;
+    font-size: 12px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Car Parking</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>Services</a>
+            </li>
+            <li class="breadcrumb-item active">View Car Parking Slots </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div id="blocksID" class="col-sm-4">
+            <div class="form-line">
+              <label style="font-family: 'Poppins'" class="required">Status :</label>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="statusId">
+                  <option value="select">--Select--</option>
+                  <option value="All">All</option>
+                  <option value="Open">Open</option>
+                  <option value="Allotted">Allotted</option>
+                  <option value="Hold">Hold</option>
+                  <option value="Cancelled">Cancelled</option>
+                  <option value="Pending For Approval">Pending For Approval</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-family: 'Poppins'" class="required">Select Project :</label>
+              <div class="center">
+                <select style="width:100%;" class="form-group" id="projectID" single>
+                  <!-- <option value="select">--Select--</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 ">
+            <button type="submit" class="btn-hover color-1" (click)="getDetails()">Submit</button>
+          </div>
+        </div><br>
+      </div>
+    </div>
+
+
+
+
+    <div class="card" *ngIf="controller?.length">
+      <div class="card-body">
+        <div class="table-responsive" id="carparktablediv">
+          <table id="tableExport" class="table table-bordered" style="width:100%">
+            <thead>
+              <tr class="center">
+                <th>S.No</th>
+                <th> Basement</th>
+                <th>Flat No</th>
+                <th> Slot No</th>
+                <th>Status</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of controller; let i = index;" class="customersList">
+                <td class="center">{{i + 1}}</td>
+                <td class="center">{{item.basementName}}</td>
+                <td class="center">{{item.flatNo}}</td>
+                <td class="center">{{item.slotName}}</td>
+                <td class="center"><a style="text-decoration: underline;color: #007bff;"
+                    (click)="open(content , item)">{{item.slotStatusName}}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card" *ngIf="controller.length == 0">
+      <div class="card-body">
+        <div style="position: relative; bottom: 10px;">
+          <p class="norecordclass">No records found</p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div style="margin-top: 100px;width: 100%;height: 50px;"></div>
+
+  </div>
+</section>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+
+    <h4 class="modal-title" id="modal-basic-title">{{controllername.slotStatusName}} State</h4>
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div *ngIf="controllername.slotStatusName == 'Open'">
+      <div style="display: inline-flex;">
+        <p style="font-size: 15px;font-family: 'Poppins';">Basement : {{controllername.basementName}}</p>
+        <p style="position: relative; left: 54px;font-size: 15px;font-family: 'Poppins';">Slot No :
+          {{controllername.slotName}}</p>
+      </div>
+
+      <div class="row">
+        <div id="blocksID" class="col-sm-6">
+          <div class="form-line">
+            <label class="required">Select Block :</label>
+            <div class="center">
+              <select style="width:100%;" class="form-group" id="BlockId">
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="flatsID" class="col-sm-6">
+          <div class="form-line">
+            <label class="required">Select Flat :</label>
+            <div class="center">
+              <select style="width:100%;" class="form-group" id="flatSelection">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div> <br>
+
+      <div style="width:100%;text-align:center;">
+        <button type="button" class="btn-hover color-1" (click)="Allotparkingfun()">Allot Parking</button>
+
+        <button type="button" class="btn-hover color-1"
+        (click)="Holdslotfun()">Hold Slot</button>
+
+      </div>
+    </div>
+
+
+    <div *ngIf="controllername.slotStatusName == 'Allotted'">
+
+      <div style="line-height: 30px;">
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Basement</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.basementName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Slot Number</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.slotName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Block Name</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.blockName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">flat Number</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.flatNo}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Customer Name</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.custName}}</div>
+        </div> <br>
+
+        <div style="width:100%;text-align:center;">
+
+       
+
+          <button type="button" class="btn-hover color-1" style="position: relative;top: 20px;"
+            (click)="cancleslotfun()" id="cancleslot">Cancel Slot</button>
+
+
+            <button type="button" class="btn-hover color-1" style="position: relative;top: 20px;"
+            (click)="Holdslotfun()" id="holdslot">Hold Slot</button>
+
+          
+
+          <img *ngIf="controllername.allotmentLetterPath != null && controllername.allotmentLetterPath.split('.').pop() == 'pdf'"
+            style="height: 50px;margin-left: 3px;
+            width: 36px;position: relative;
+            top: 17px;" src="assets/images/pdficon.png" class="img"
+            (click)="myfile(controllername.allotmentLetterPath)" />
+
+            <img *ngIf="controllername.allotmentLetterPath != null && controllername.allotmentLetterPath.split('.').pop() !== 'pdf'"
+            style="height: 50px;margin-left: 3px;width: 50px;position: relative;
+            top: 17px;" src="assets/images/wordicon.png" class="img"
+            (click)="myfile(controllername.allotmentLetterPath)" />
+
+
+            
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="controllername.slotStatusName == 'Hold' || controllername.slotStatusName == 'Cancelled'">
+
+      <div style="line-height: 30px;">
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Basement</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.basementName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Slot Number</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.slotName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Block Name</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.blockName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">flat Number</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.flatNo}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Customer Name</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.custName}}</div>
+        </div> <br>
+
+        <div style="width:100%;text-align:center;">
+
+          <img *ngIf="controllername.allotmentLetterPath != null && controllername.allotmentLetterPath.split('.').pop() == 'pdf'"
+          style="height: 50px;margin-left: 3px;
+          width: 36px;position: relative;" src="assets/images/pdficon.png" class="img"
+          (click)="myfile(controllername.allotmentLetterPath)" />
+
+          <img *ngIf="controllername.allotmentLetterPath != null && controllername.allotmentLetterPath.split('.').pop() !== 'pdf'"
+          style="height: 50px;margin-left: 3px;width: 50px;position: relative;" src="assets/images/wordicon.png" class="img"
+          (click)="myfile(controllername.allotmentLetterPath)" />
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    
+    <div *ngIf="controllername.slotStatusName == 'Pending For Approval'">
+
+      <div style="line-height: 30px;">
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Basement</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.basementName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Slot Number</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.slotName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Block Name</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.blockName}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">flat Number</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.flatNo}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3" style="position: relative;font-size: 15px;font-family: 'Poppins';">Customer Name</div>
+          <div class="col-sm-1">:</div>
+          <div class="col-sm-8" style="position: relative;font-size: 15px;font-family: 'Poppins';color: #000;">
+            {{controllername.custName}}</div>
+        </div> <br>
+
+        <div style="width:100%;text-align:center;">
+
+          <button type="button" class="btn-hover color-1" style="position: relative;top: 20px;"
+            (click)="Approvefun('Approve' , controllername)" *ngIf="Approvebtn">Approve</button>
+
+            <button type="button" class="btn-hover color-1" style="position: relative;top: 20px;"
+            (click)="Approvefun('Reject' , controllername)" *ngIf="Rejectbtn">Reject</button>
+
+            <img *ngIf="PdfPreview != null && PdfPreview.split('.').pop() == 'pdf'"
+            style="height: 50px;margin-left: 3px;
+            width: 36px;position: relative;
+            top: 17px;" src="assets/images/pdficon.png" class="img"
+            (click)="myfile(PdfPreview)" />
+
+            <img *ngIf="PdfPreview != null && PdfPreview.split('.').pop() !== 'pdf'"
+            style="height: 50px;margin-left: 3px;width: 50px;position: relative;
+            top: 17px;" src="assets/images/wordicon.png" class="img"
+            (click)="myfile(PdfPreview)" />
+
+       
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</ng-template>

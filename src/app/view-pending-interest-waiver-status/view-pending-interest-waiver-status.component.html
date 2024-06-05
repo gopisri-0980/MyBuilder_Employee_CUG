@@ -1,0 +1,404 @@
+<style>
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  .fromdateval {
+    font-size: 14px;
+    position: relative;
+    top: 14px;
+    color: orangered;
+  }
+
+  /* .material-icons {
+  z-index: none!important;
+}  */
+
+  .sweet-alert {
+    margin-top: -250px !important;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+    /* border-left: 1px solid #8c8c8c; */
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+    /* border-left: 1px solid #8c8c8c; */
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View pending interest waiver status</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer" (click)="homeClick()"></i>Transactions</a>
+            </li>
+          
+
+            <li class="breadcrumb-item active">View pending interest waiver status </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <form [formGroup]="userForm">
+      <div class="card">
+        <div class="card-body">
+          <div class="row clearfix">
+            <div class="col-sm-3">
+              <div class="form-line">
+                <label> <b>Select Project:</b></label>
+  
+                <angular2-multiselect [data]="project_wise_project" formControlName="project_wise_form"
+                [settings]="singledd1" (onSelect)="selectedSIDs($event);" (onSelectAll)="onSelectAll($event)"
+                (onDeSelect)="onItemDeSelect($event)" (onDeSelectAll)="onDeSelectAll($event)" [(ngModel)]="title1">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.name }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.name }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+  
+  
+                <!-- <select style="width:100%;" class="form-group" id="projectID" single>
+                </select> -->
+  
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label><b>Company bank Account :</b></label>
+  
+                <angular2-multiselect [data]="Bank_account_number_wise" formControlName="Bank_account_number_form"
+                [settings]="singledd2" (onSelect)="company_selectedSIDs($event);" (onSelectAll)="company_onSelectAll($event)"
+                (onDeSelect)="company_onItemDeSelect($event)" (onDeSelectAll)="company_onDeSelectAll($event)" [(ngModel)]="title2">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.siteBankAccountNumber }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.siteBankAccountNumber }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+  
+  
+                <!-- <select style="width:100%" class="form-group" id="companybankAcId" single></select> -->
+              </div>
+            </div>
+  
+            <div class="col-sm-3">
+              <div class="form-line">
+                <label><b>Transaction Set Off Type :</b></label>
+  
+                <angular2-multiselect [data]="Transaction_Set_Off" formControlName="Transaction_set_off_form"
+                [settings]="singledd3" (onSelect)="Transaction_set_off_selectedSIDs($event);" (onSelectAll)="Transaction_set_off_onSelectAll($event)"
+                (onDeSelect)="companTransaction_set_offy_onItemDeSelect($event)" (onDeSelectAll)="Transaction_set_off_onDeSelectAll($event)" [(ngModel)]="title3">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.key }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.key }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+  
+  
+                <!-- <select style="width:100%" class="form-group" id="transaction_setoff_type" single></select> -->
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-line">
+                <label><b>Pending At :</b></label>
+                <select style="width:100%" class="form-group" id="pending_at" single></select>
+              </div>
+            </div>
+  
+          </div><br>
+  
+          <div class="row clearfix" style="
+          position: relative;
+          top: -33px;">
+            <!-- <div class="col-sm-3">
+              <div class="form-line">
+                <label><b>Transaction Type</b></label>
+                <select style="width:100%" class="form-group" id="transaction_type" single></select>
+              </div>
+            </div> -->
+            <!-- <div class="col-sm-3">
+              <div class="form-line">
+                <label><b>Transaction mode</b></label>
+                <select style="width:100%" class="form-group" id="transaction_mode" single></select>
+              </div>
+            </div> -->
+  
+  
+            <div class="col-sm-3" id="fistdaterow">
+              <div class="form-line">
+                <label><b>Transaction Created From Date:</b></label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;right: 10px;top: -5px;z-index: 999;
+                  font-size: 20px;" (click)="trans_from_date()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: -2px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: -2px;font-weight: 600;">/</span>
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY" style="border: 1px solid #4d474785;text-align: center;border-radius: 5px;
+                    height: 28px; position: relative; top: -10px;" class=" form-control" id="fromDate"
+                    [max]="getToday()">
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-sm-3" id="fistdaterow1">
+              <div class="form-line">
+                <label><b>Transaction Created To Date:</b></label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;right: 10px;z-index: 999;
+                  top: -5px;font-size: 20px;" (click)="trans_to_date()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: -2px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: -2px;font-weight: 600;">/</span>
+                  <input type="date" placeholder="Select Date" style="border: 1px solid #4d474785;text-align: center;border-radius: 5px;
+                  height: 28px; position: relative; top: -10px;" class=" form-control" id="toDate" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+  
+  
+  
+            <div class="col-sm-3" id="seconddaterow">
+              <div class="form-line">
+                <label><b>Received From Date:</b></label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;right: 8px;z-index: 999;
+                  top: -5px;font-size: 20px;" (click)="received_from_date()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: -2px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: -2px;font-weight: 600;">/</span>
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY" style="border: 1px solid #4d474785;text-align: center;border-radius: 5px;
+                  height: 28px; position: relative; top: -10px;" class=" form-control" id="fromDate2" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-sm-3" id="seconddaterow1">
+              <div class="form-line">
+                <label><b>Received To Date:</b></label>
+                <div class="center" style="position: relative;top: 9px;">
+                  <span class="material-icons" style="position: absolute;right: 11px;z-index: 999;
+                  top: -4px;font-size: 20px;" (click)="received_to_date()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: -2px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: -2px;font-weight: 600;">/</span>
+                  <input type="date" placeholder="Select Date" style="border: 1px solid #4d474785;text-align: center;border-radius: 5px;
+                  height: 28px; position: relative; top: -10px;" class=" form-control" id="toDate2" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+  
+  
+  
+  
+          </div>
+  
+          <!-- <div style="width: 100%;text-align: center;">
+            <button type="button" style="margin-top: 1px;position: relative;
+        top: 16px;" class="btn-hover color-1" (click)="searchFun()">Search</button>
+          </div> -->
+  
+  
+          <div class="row" style="position: absolute;bottom: 7px;
+          text-align: center; width: 100%;">
+            <div class="col-sm-12 center">
+              <button type="button" style="margin-top: 1px;
+            position: relative;top: 16px;" class="btn-hover color-1" (click)="searchFun()">Search</button>
+  
+              <span style="position: relative;top: 15px;">(OR)</span>
+  
+              <button type="button" class="btn-hover color-1" (click)="showallfun()"
+                style="margin-top: 1px;position: relative;top: 16px;">Show
+                All</button>
+  
+  
+            </div>
+          </div>
+  
+  
+          <!-- <div class="row clearfix" style="padding: 10px;">
+            <div class="col-sm-4 center"></div>
+            <div class="col-sm-4 center">
+              <button type="button" style="margin-top: 1px;position: relative;
+                        top: 16px;" class="btn-hover color-1" (click)="searchFun()">Search</button>
+            </div>
+            <div class="col-sm-4 center"></div>
+          </div> -->
+        </div>
+      </div>
+      </form>
+
+      <div style="width:100%;text-align:center;" *ngIf="loaderhideme">
+        <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+      </div>
+
+
+  
+      <div class="card" *ngIf="pendingTransData?.length">
+        <div class="card-body">
+           <p style="font-size: 18px;"> Note : Not showing suspense entry</p>
+          <!-- Table code start -->
+          <!-- <form enctype="multipart/form-data" id="milestone_blocks_tables">
+        <table class="table table-bordered" id="tbl_posts">
+          <thead>
+            <tr>
+            <th class="center">S.NO</th> 
+            <th class="center">Transaction Id</th>           
+            <th class="center">Transaction Type</th>       
+            <th class="center">Customer Name</th>  
+            <th class="center">Transaction Amount</th>  
+            <th class="center">Pending By</th>  
+            </tr>
+          </thead>
+          <tbody id="tbl_posts_body">
+            <tr *ngFor="let item of pendingTransData; let i=index">
+              <td class="center"></td>
+              <td class="center" >{{item.finTransactionNo}}</td>
+              <td class="center" >{{item.transactionTypeName}}</td>
+              <td class="center">{{item.customerName}}</td>
+              <td class="center" >{{item.transactionAmount}}</td>
+              <td class="center" ></td>
+            </tr>
+          </tbody>
+        </table>
+        <input id ="dummyinput" style="display:none;" value="0">
+      </form> -->
+  
+          <div class="table-responsive">
+       
+  
+            <table id="tableExport" class="table table-bordered" >
+              <thead>
+                <tr>
+                  <th class="center">S.NO</th>
+                  <th class="center">Online / Cheque Date</th>
+                  <th class="center">Approval Req Receive Date</th>
+                  <th class="center">Project Name</th>
+                  <th class="center">Flat No</th>
+  
+                  <th class="center">Cheque OR Reference No</th>
+                  <th class="center">Transaction Amount</th>
+                  <th class="center">Transaction Id</th>
+                  <th class="center">Transaction Type</th>
+                  <th class="center">Transaction Mode</th>
+                  <th class="center">Customer Name</th>
+                  <th class="center">SetOff</th>
+                  <!-- <th class="center">Cheque/Transaction Received Date</th>   -->
+                  <th class="center">Pending By</th>
+                  <th class="center">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr *ngIf="pendingTransData.length == 0">
+                  <td class="center" colspan="12" style="font-size: medium;"> No data available in table</td>
+                </tr> -->
+                <tr *ngFor="let item of pendingTransData; let i=index" style="cursor: pointer;"
+                  (click)="goToDetails(item)">
+                  <td class="center">{{i+1}}</td>
+                  <td class="center" (click)="goToDetails(item)">
+  
+                    <!-- <span *ngIf="item.transactionDate != null" style="display: none;">{{item.transactionDate}}</span> -->
+                    <span *ngIf="item.transactionDate != null">{{item.transactionDate| date:'dd-MM-yyy '}}</span>
+                    <span *ngIf="item.transactionDate == null"> - </span>
+  
+                  </td>
+                  <td class="center">
+  
+                    <!-- <span *ngIf="item.lastApprovedDate != null" style="display: none;">{{item.lastApprovedDate}}</span> -->
+                    <span *ngIf="item.lastApprovedDate != null">{{item.lastApprovedDate| date:'dd-MM-yyy h:mm a'}}</span>
+                    <span *ngIf="item.lastApprovedDate == null"> - </span>
+  
+                  </td>
+                  <td class="center">{{item.siteName}}</td>
+                  <td class="center">{{item.flatNo}}</td>
+                  <td class="center">{{item.chequeOrReferenceNo}}</td>
+                  <td class="center">{{item.transactionAmount}}</td>
+                  <td class="center">{{item.finTransactionNo}}</td>
+                  <td class="center">{{item.transactionTypeName}}</td>
+                  <td class="center">{{item.transactionModeName}}</td>
+                  <td class="center">{{item.customerName}}</td>
+                  <td class="center">{{item.transactionPaymentSetOff}}</td>
+  
+                  <!-- <td class="center">{{item.transactionReceiveDate | date:'fullDate'}}</td> -->
+                  <td class="center">{{item.pendingByLevel}}</td>
+                  <td class="center">{{item.transactionStatusName}}</td>
+                </tr>
+              </tbody>
+            </table>
+  
+  
+  
+     
+          </div>
+        
+  
+        </div>
+      </div>
+  
+     <div class="card" *ngIf="hideme">
+      <div class="card-body">
+        <p>No records found</p>
+      </div>
+    </div> 
+  
+    </div>
+    </section>

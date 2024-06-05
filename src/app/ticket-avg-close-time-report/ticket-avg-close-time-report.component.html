@@ -1,0 +1,253 @@
+<style>
+  .fromtoclass {
+    position: relative;
+    left: 38px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    top: -17px;
+    font-weight: 600;
+    font-family: 'Poppins';
+  }
+
+  .subheadercls {
+    font-size: 15px;
+    position: relative;
+    top: 6px;
+    left: 0;
+    font-weight: 500;
+    color: #607D8B;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  .form-group {
+    width: 100%;
+     margin-bottom: 15px!important;
+}
+
+
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Ticket Avg Closing Time Report </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>
+                <span style="cursor:pointer;">Ticketing Dashboard</span> </a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Ticket Avg Closing Time Report </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="position: relative;top: -24px;">
+      <div class="card-body" style="padding: 0px!important;">
+
+       <form [formGroup]="userForm">
+
+        <div class="row" style="width: 100% !important;position: relative;top: 13px;left: 20px;">
+
+          <div class="col-sm-4" style="position: relative;top: 5px;">
+            <div class="form-group">
+              <label style="font-weight: bold;">Select States:</label>
+              <select style="width:100%;position: relative!important;top: 5px!important;" class="form-group" id="StatesID" single>
+              </select>
+            </div>
+          </div>
+          
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label style="font-weight: bold;">Project Name :</label>
+              <angular2-multiselect [data]="project_wise_project" formControlName="Family_status" [settings]="singledd8" 
+              (onSelect)="selectedSIDs($event);"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             (onDeSelect)="onItemDeSelect($event)"
+                                             (onDeSelectAll)="onDeSelectAll($event)"  [(ngModel)]="title6">
+              <c-badge>
+                <ng-template let-item="item">
+                  <label>{{ item.name }}</label>
+                </ng-template>
+              </c-badge>
+              <c-item>
+                <ng-template let-item="item">
+                  <label>{{ item.name }}</label>
+                </ng-template>
+              </c-item>
+            </angular2-multiselect>
+            </div>
+           
+          </div>
+
+          <div class="col-sm-4" style="position: relative;top: 5px;">
+            <div class="form-group">
+              <label style="font-weight: bold;">Category:</label>
+              <select style="width:100%;position: relative!important;top: 5px!important;" class="form-group" id="Category" single>
+                <option value="select">--Select--</option>
+                <option value="crmFinance">CRM Finance</option>
+                <option value="crmTech">CRM Technical</option>
+              </select>
+            </div>
+          </div>
+
+          
+        </div>
+       </form>
+        
+
+        <form [formGroup]="fg">
+          <div class="row" style="position: relative;width:100%;left: 20px;">
+
+            <div class="col-sm-4" >
+              <div class="form-line">
+                <label style="font-weight: bold;" class="required"> From Date:</label>
+                <div class="center">
+                  <span class="material-icons" style="position: absolute;
+                  right: 24px;top: 28px;font-size: 20px;z-index: 99" (click)="startdatefun()">cancel </span>
+                  <input type="date" placeholder="Select Date" pattern="\d{4}-\d{2}-\d{2}" style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px;position: relative;
+                    top: -4px;" class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;" class="required">To Date:</label>
+                <div class="center" style="position: relative;top: -3px;">
+                  <span class="material-icons" style="position: absolute;
+                  right: 15px;top: 6px;font-size: 20px;" (click)="enddatefun()">cancel </span>
+
+                  <input type="date" placeholder="Select Date" pattern="\d{4}-\d{2}-\d{2}"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <button type="button" class="btn-hover color-1" (click)="searchAllServices('submitClick')">Submit</button>
+            </div>
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">Please add a valid from and to date</p>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div *ngIf="controller?.length" style="position: relative;top: -40px;">
+      <div>
+        <div style="background-color: transparent;border:none">
+          <h4 class="subheadercls">Note: Tickets showing only from <span>{{startdateDatavalue
+              |
+              date:'dd-MM-yyyy'}}</span> to <span>{{enddateDatavalue | date:'dd-MM-yyyy'}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="card" style="position: relative; top: -28px;">
+      <div class="card-body">
+
+      
+        <h3>Note points :</h3>
+        <ul class="unorderlist">
+          <li>Below are few points to consider on trying to understand the count of the tickets. </li>
+          <li> 1. If a ticket is reopened after closing it in any of the 4 days, then such tickets count is shown under "Number of reopened tickets" column.</li>
+          <li> 2. Irrespective of the ticket status,if a ticket is escalated,then such tickets count is shown under "Escalations" column.</li>
+          <li> 3. Any action like escalation, close etc done for a reopened ticket the count will be shown in "No.of reopened tickets" column. </li>
+        </ul><br>
+
+
+        <div class="table-responsive" *ngIf="controller?.length">
+          <table id="Alltickettypes" class="table table-bordered">
+            <thead>
+              <tr>
+                <th><b>SI No.</b></th>
+                <th> Project Name</th>
+                <th>Total no. of tickets</th>
+                <th>Open tickets</th>
+                <th>Closed in 1 Day</th>
+                <th>Closed in 2 days</th>
+                <th>Closed in 3 days</th>
+                <th>Closed in 4 and more days</th>
+                <th>Escalations</th>
+                <th>No. of reopened tickets</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of controller ; let i = index;">
+                <td class="center">{{i + 1}}</td>
+                <td>{{item.siteName}}</td>
+                <td>{{item.ticketCount}}</td>
+
+                <td>{{item.openT}}</td>
+                <td>{{item.onedayClosedTickets}}</td>
+                <td>{{item.twodaysClosedTickets}}</td>
+                <td>{{item.threedaysClosedTickets}}</td>
+                <td>{{item.fourdaysClosedTickets}}</td>
+                <td>{{item.escaltionCount}}</td>
+                <td>{{item.reopenCount}}</td>
+              </tr>
+
+
+            </tbody>
+            <tfoot style="text-align: center;color: #607D8B; font-weight: 700;">
+              <tr>
+
+                <td colspan="2" style="text-align: center;"> Total :</td>
+                <td id="Total_num_of_tickets"></td>
+                <td id="Open_tickets"></td>
+                <td id="closedinoneday"></td>
+                <td id="closedintwodays"></td>
+                <td id="closedinthreedays"></td>
+                <td id="closedinfourdays"></td>
+                <td id="escalation_tickets"></td>
+                <td id="no_ofticketsreopen"></td>
+              </tr>
+            </tfoot>
+
+          </table>
+        </div>
+
+        <div *ngIf="controller.length == 0">
+          <p style="margin-top: 46px;">No data available</p>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>

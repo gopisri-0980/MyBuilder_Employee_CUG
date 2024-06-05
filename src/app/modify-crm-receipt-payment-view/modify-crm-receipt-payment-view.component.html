@@ -1,0 +1,565 @@
+<style>
+  .rowtitlecls {
+    border: 1px solid #f0ecec;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-left: 0%;
+    top: -40px;
+
+  }
+
+  .trashicon {
+    position: relative;
+    left: 51px;
+    color: #2196F3;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 23px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .trashicon1 {
+    position: relative;
+    left: 0px;
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Initiate Payment</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+
+
+            <li class="breadcrumb-item active" style="cursor: pointer;" (click)="backfun()"> Modify Transactions
+            </li>
+
+            <li class="breadcrumb-item active">Initiate Payment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="row clearfix center">
+                <label class="col-sm-12" style="font-size: inherit; float: right;">
+                  Last edit was made on <b>{{lastTransactionEditedDate | date:'medium'}}</b> by <b>{{lastTransactionEditedBy}}</b>
+                </label>
+              </div> -->
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-4">
+            <div class="form-line" style="font-weight: bold;"> Transaction Type: <label> Payment</label></div>
+          </div>
+          <!-- <label class="col-sm-4" style="font-weight: bold;">Transaction Type: <label>{{transactionTypeName}}</label></label> -->
+          <div class="col-sm-4">
+            <label class="required">Transaction Mode: </label>
+            <select style="width:100%" class="form-group" id="transactionmodeid" single></select>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label> Payment For:</label>
+              <select style="width:100%" class="form-group" id="Paymentfor" single></select>
+            </div>
+          </div>
+
+
+        </div><br>
+        <div class="row clearfix">
+
+          <!-- <div class="col-sm-3">
+            <div class="form-group">
+              <label>Transaction Type:</label>
+              <select  style="width:100%" class="form-group" id="transaction_type" single></select>
+            </div>
+          </div> -->
+
+
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>Cancel Reason:</label>
+              <textarea
+                style="border: 1px solid #4d474785; padding: 10px; border-radius:10px;    text-transform: lowercase!important;"
+                id="CancelreasonId" class="materialize-textarea" data-length="120"></textarea>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="required">Amount:</label>
+              <input type="text" (keypress)="keyPressAmount($event)"
+                style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                class=" form-control" id="ChequeAmount" pattern="^\d*(\.\d{0,2})?$">
+            </div>
+          </div>
+
+
+          <!-- <div class="col-sm-3" *ngIf="docListArray?.length">
+            <div class="form-group">
+              <label>Attached Files:</label>
+              <li *ngFor="let item of docListArray">
+                <a (click)="viewFiles(item.documentLocation)"
+                  style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+              </li>
+            </div>
+          </div> -->
+
+
+
+
+          <!-- <div class="col-sm-2"><div class="form-line"> Bank Name:</div></div>
+              <div class="col-sm-2">
+                <div class="form-line">
+                  <select style="width:100%" class="form-group"  id="bank_type" single></select>
+                </div>
+              </div> -->
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="required">Customer Bank Name:</label>
+              <select style="width:100%" class="form-group" id="bank_type" single></select>
+            </div>
+          </div>
+
+        </div><br>
+
+        <div class="rowtitlecls" style="position: relative;">
+
+          <div class="row clearfix">
+
+            <!-- <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Cheque Number:</label>
+                <input type="text" (keypress)="keyPress($event)" maxlength=8
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ChequeNumber">
+              </div>
+            </div> -->
+
+
+            <!-- <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required">Cheque Date:</label>
+                <input type="date" value="{{chequeDate| date:'yyyy-MM-dd'}}"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class="form-control" id="ChequeDate">
+              </div>
+            </div> -->
+
+
+
+
+
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required"> Bank A/C Number:</label>
+                <select style="width:100%" class="form-group" id="companybankAcId" single></select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required"> Project:</label>
+                <select style="width:100%" class="form-group" id="ProjectId" single disabled></select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label> Block:</label>
+                <select style="width:100%" class="form-group" id="BlockId" single disabled></select>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="required"> Flat:</label>
+                <select style="width:100%" class="form-group" id="FaltId" single disabled></select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div id="custdet_div" style="width:100%;border:solid 1px #000;height: 40px;padding: 10px;
+          border-radius:10px;display:none;position: relative;top: -29px;">
+          <div style="float:left; width:50%"><b>Customer Name:</b> <span id="custname" style="font-weight: 900;"></span>
+          </div>
+          <div style="float:left;width:20%">Pending Amount:<span id="pendingamnt" style="font-weight: 900;"></span>
+          </div>
+          <!-- <div style="float:left;width:33.33%">Interest Amount:<span id="interestamnt" style="font-weight: 900;"></span>
+          </div> -->
+        </div><br>
+
+        <!-- <div class="row clearfix"> 
+          <label class="col-sm-2 lableclass datalable">Previous Comments:</label>
+          <div class="col-sm-4" style="border: 1px solid #4d474785; border-radius:10px; padding: 10px;">
+            <div class="row clearfix" *ngFor="let item of previousCRMComments">
+              <label class="col-sm-3 lableclass datalable">{{item.empName}}:</label>
+              <p class="col-sm-9">{{item.comments}}</p>
+            </div>
+          </div> -->
+        <!-- <label class="col-sm-3 lableclass datalable">Attached Files:</label>
+               <div class="col-sm-3">
+                 <li *ngFor="let item of docListArray">
+                   <a (click)="viewFiles(item.documentLocation)" style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.documentName}}</a>
+                 </li>
+               </div> -->
+        <!-- </div> -->
+        <!-- <div style="margin-top:20px;"><input type="checkbox" value="" style="width:20px;height:20px;float:left;"
+            id="checlist" checked>
+          <div style="float:left;margin-left:2px;">payment Set Off</div>
+        </div><br><br> -->
+        <div id="PaymentSetOffDiv" style="border:solid 1px #000;padding: 10px;border-radius:10px;position: relative;
+        top: -34px;">
+          <div class="row clearfix">
+            <div class="col-sm-2">
+              <div class="form-line"> Principal Amount:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="PrincipalAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Corpus Fund:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="CorpusFund" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Maintinance Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="MaintinaceCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Flat Khata Bifurcation:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="FlatKhataBifurcation" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Interest:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="InterstAmount" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line"> Cancellation Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="CancelationCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row clearfix">
+
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Modification Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="ModificationCharges" (keyup)="modificationInvoice($event)"
+                  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line"> Legal Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="LeagalCharges" (keyup)="legalInvoice($event)" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line"> Refundable Advance:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" type="text" (keypress)="keyPressAmount($event)"
+                  style="border: 1px solid #4d474785; height: 28px; text-align: center;border-radius:10px;"
+                  class=" form-control" id="refunableCharges" pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+          </div>
+          <div class="row clearfix">
+            <div class="col-sm-2">
+              <div class="form-line"> Modification Invoice:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line center">
+
+                <p class="sas" *ngIf="modificationInvoiceNumber" (click)="modificationInvoiceNumberfun()">
+                  {{modificationInvoiceNumber}}</p>
+                <p class="sas1" *ngIf="!modificationInvoiceNumber"> - </p>
+
+
+                <!-- <select style="width:100%" class="form-group" id="ModificationInvoiceId" single></select> -->
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <div class="form-line">Legal Invoice:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line center">
+
+                <p class="sas" *ngIf="legalChargeInvoiceNumber" (click)="legalChargeInvoiceNumberfun()">
+                  {{legalChargeInvoiceNumber}}</p>
+                <p class="sas" *ngIf="!legalChargeInvoiceNumber"> - </p>
+
+                <!-- <select style="width:100%" class="form-group" id="LegalInvoiceId" single></select> -->
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Registration And Mutation Charges:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Registration_and_Mutation_Charges"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="row" style="position: relative;top: 12px;">
+            <div class="col-sm-2">
+              <div class="form-line">Non-refundable Caution Deposit:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Non_refundable_Caution_Deposit"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+
+
+            <div class="col-sm-2">
+              <div class="form-line"> Electricity Deposit:</div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-line">
+                <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="Electricity_Deposit"  pattern="^\d*(\.\d{0,2})?$">
+              </div>
+            </div>
+          </div>
+
+
+
+          
+        </div><br>
+        <div class="row clearfix rowtitlecls" style="position: relative;
+        top: -34px;">
+
+          <div class="col-sm-4">
+            <label>Previous Comments:</label>
+            <div
+              style="border: 1px solid #4d474785; border-radius:5px;height: auto;padding:10px;text-transform: lowercase!important;">
+              <div *ngFor="let item of previousCRMComments">
+                <label>{{item.empName}}:</label>
+                <p>{{item.comments}}</p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <label>Customer Comments:</label>
+            <textarea disabled
+              style="border: 1px solid #4d474785; border-radius:5px;height: auto;padding:10px;text-transform: lowercase!important;"
+              id="CustomerCommentsId" class="materialize-textarea">{{customerComments}}</textarea>
+          </div>
+
+          <div class="col-sm-4" style="margin-top:5px;">
+            <label>Comments:</label>
+            <textarea style="border-radius: 4px;height: auto;" id="CrmCommentsId"></textarea>
+          </div>
+
+
+
+
+        </div>
+        <div class="row clearfix rowtitlecls" style="position: relative">
+          <div class="col-sm-3" *ngIf="bindingFileInfo?.length">
+            <div class="form-group">
+              <label> Attached Files:</label>
+              <li *ngFor="let item of bindingFileInfo;let i = index;">
+                <a (click)="viewFiles(item.url)"
+                  style="text-decoration: underline; color: #007bff; cursor: pointer;">{{item.name}}</a>
+                <img src="assets/images/trash.jpg" class="trashicon1" (click)="Deleteimage1(i,item)"
+                  style="cursor:pointer;">
+
+              </li>
+            </div>
+          </div>
+        </div>
+        <div class="row clearfix rowtitlecls" style="position: relative;
+        top: -34px;">
+          <div class="col-sm-4" style="margin-top:10px;">
+            <div class="form-group">
+              <label>Attach Files:</label><br>
+              <input type="file" id="files" accept="image/x-png,image/gif,image/jpeg"
+                (change)="handle_FileSelect($event)" style="position: relative;color: rgb(0, 0, 0); cursor:pointer;">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container" style="position: relative;
+            top: 22px;display: inline-flex;margin-top: 20px;overflow-x: auto;">
+            <div *ngFor='let url of urls; let i = index;' style="margin-left: 20px;min-width: 20%;">
+              <span *ngIf="url.Type == 'jpg' || url.Type =='png' || url.Type == 'svg' || url.Type == 'jpeg'">
+                <img [src]="url.upload" height="150" width="150" (click)="fileClickfun(url.upload , url.Type)"
+                  style="cursor:pointer;">
+                <br />
+                <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)" style="cursor:pointer;">
+              </span>
+              <span *ngIf="url.Type == 'N/A' || url.Type == 'pdf' || url.Type == 'PDF' ">
+                <img src="assets/images/file1.png" height="150" width="150"
+                  (click)="fileClickfun(url.upload , url.Type)" style="cursor:pointer;">
+                <br />
+                <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)" style="cursor:pointer;">
+              </span>
+
+              <p style="position: relative; text-align: center;width: 150px;top: -18px;">{{url.Name}}</p>
+            </div>
+            <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                    <object style="width:100%!important;" height="500" [attr.data]="fileName" type={{filetypeurlsplit1}}
+                      *ngIf="filesplitdata !== 'image' &&  filetypeurlsplit1 == 'application/pdf'"></object>
+
+
+                    <img [src]="imgsrc" height="450" style="width:100%" *ngIf="filesplitdata == 'image'">
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row clearfix">
+                <div class="col-sm-2"><div class="form-line"> Bank A/C Number:</div></div>
+                <div class="col-sm-4">
+                  <div class="form-line">
+                    <select disabled style="width:100%" class="form-group"  id="companybankAcId" single disabled></select>
+                  </div>
+                </div> -->
+        <!-- <div *ngIf='this.operationType == "approveTransaction"' class="col-sm-2"><div class="form-line"> Attache File:</div></div>
+                <div *ngIf='this.operationType == "approveTransaction"' class="col-sm-4">
+                  <div class="file-field input-field">
+                    <div class="btn">
+                        <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                        <input  type="file" id="files" accept=".pdf,.xlsx,.xls,.txt,.docx" (change)="handle_FileSelect($event)">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="filee" class="file-path validate" type="text" placeholder="Upload File" >
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf='this.operationType != "approveTransaction"' class="col-sm-2"><div class="form-line"> Attache File:</div></div>
+                <div *ngIf='this.operationType != "approveTransaction"' class="col-sm-4">
+                  <div class="file-field input-field">
+                    <div class="btn">
+                        <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                        <input disabled type="file" id="files" accept=".pdf,.xlsx,.xls,.txt,.docx" (change)="handle_FileSelect($event)">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="filee" class="file-path validate" type="text" placeholder="Upload File" >
+                    </div>
+                  </div>
+                </div> -->
+        <!-- </div><br> -->
+
+        <div *ngIf="transactionStatusNameval == 'Transaction Completed'" style="position: relative;">
+          <label style="position: relative;top: 15px;" *ngIf="documentLocation?.length"><b>Attachment File :</b></label>
+          <div *ngFor="let p of documentLocation">
+            <img src="assets/images/file1.png" (click)="attachmentlink(p.documentLocation)"
+              style=" width: 90px; margin-top: 18px;">
+          </div>
+        </div>
+
+        <div style="text-align:center;">
+
+          <button type="button" class="btn-hover color-1" (click)="CRMPaymentChequeSubmit()">Submit</button>
+          <button type="button" class="btn-hover color-1"
+            (click)="rejectAndModifytMisPaymentCheque('Reject')">Reject</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container" style="text-align:center;"
+      *ngIf="transactionStatusNameval == 'Transaction Completed' && deptid == 993">
+      <button type="button" class="btn-hover color-1" (click)="Deletelistfun()">Delete</button>
+    </div>
+
+
+  </div>
+
+</section>

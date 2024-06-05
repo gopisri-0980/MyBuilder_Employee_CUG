@@ -1,0 +1,66 @@
+
+th,td {
+    border: solid 0.5px;
+    white-space: nowrap;
+}
+
+
+
+.titileclassproject{
+    font-weight: bold;
+    font-size: 19px;
+    color: #607D8B;
+}
+    
+
+.explorecls{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+  
+
+.sasbtn{
+    position: relative;
+    top: -32px;
+    right: 23px;
+
+}
+   
+
+
+
+
+.subheadercls{
+    font-size: 15px;
+    position: relative;
+    top: 6px;
+    left: 0;
+    font-weight: 500;
+    color: #607D8B;
+}
+   
+
+.table-responsive {
+    margin-top: 20px;
+
+  }
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }

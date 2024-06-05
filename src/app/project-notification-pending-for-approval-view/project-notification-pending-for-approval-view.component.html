@@ -1,0 +1,720 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<style>
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  .table td {
+    display: block;
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+
+  }
+
+  .notecls {
+    width: 96%;
+    margin-left: 2%;
+    font-size: 14px;
+    font-family: 'Poppins';
+    color: rgb(0 0 0 / 87%);
+    font-weight: 600;
+  }
+
+  .democls {
+    width: 98%;
+    height: auto;
+    border: 1px solid #00bcd4;
+    padding: 15px;
+    border-radius: 5px;
+    margin-left: 1%;
+
+  }
+
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font: 16px/1.3 "Roboto", sans-serif;
+    background: linear-gradient(45deg,
+        hsl(39, 100%, 60%, 0.4),
+        hsl(300, 100%, 60%, 0.3));
+  }
+
+  .container {
+
+    display: grid;
+    place-content: center;
+    max-width: 60rem;
+    margin-inline: auto;
+  }
+
+  .address-book {
+    --row-block: 4rem;
+    --list-block: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    --block-size: 33.5rem;
+    --inline-size: 17.5rem;
+    width: var(--inline-size);
+    height: var(--block-size);
+    background: var(--light-400);
+    overflow: hidden;
+    position: relative;
+    border-radius: 2.25rem;
+    box-shadow: 0 0.25em 0.5em #0003, 0 0.6em 0.96em #0003,
+      0 1.4em 1.2em -0.125em #0003;
+  }
+
+
+
+  .main--header,
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #5f5656;
+    height: var(--row-block);
+    color: #FFF;
+  }
+
+  .main--title,
+  .footer--title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--light-400);
+  }
+
+  .navigation::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y proximity;
+    scroll-snap-stop: always;
+    height: 100%;
+    gap: 0.25rem;
+    scrollbar-width: none;
+    background: #f5ebeb;
+    border-inline: 0.25em solid var(--dark-200);
+  }
+
+  .navigation__content--flow {
+    /* A bit different layout if flex enabled  */
+    /* /* display: flex; */
+    scroll-snap-align: start;
+  }
+
+
+  .notificationcls {
+    background: #FFF;
+    width: 96%;
+    height: 100px;
+    margin-top: 50%;
+    margin-left: 2%;
+    border-radius: 5px;
+    opacity: 0.4;
+  }
+
+  .notificationcls1 {
+    width: 96%;
+    margin-left: 2%;
+    position: absolute;
+    top: 34%;
+    left: 16px;
+    color: #FFF;
+  }
+
+  .card_notification_list {
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    height: 100px;
+    margin: 1rem;
+    position: relative;
+    width: 96%;
+    margin-left: 2%;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  }
+
+  .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Send Notifications</h4>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home"></i> Home</a>
+            </li> -->
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i><span>Project Notifications</span></a>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" routerLink="/project-notification-list"> Notifications</a>
+            </li> -->
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" (click)="notification_list()"> View Notifications</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;"> View Notifications Details</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row clearfix">
+          <div class="input-field col-sm-6">
+            <input type="text" id="projectID" class="form-control">
+            <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+              for="projectID">Project:</label>
+          </div>
+
+          <div class="input-field col-sm-6">
+            <input type="text" id="BlockId" class="form-control">
+            <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+              for="BlockId">Block:</label>
+          </div>
+
+          <div class="input-field col-sm-6">
+            <input type="text" id="FloorId" class="form-control">
+            <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+              for="FloorId">Floor:</label>
+          </div>
+          <div class="input-field col-sm-6">
+            <input type="text" id="FlatId" class="form-control">
+            <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="FlatId">Flat:</label>
+          </div>
+        </div>
+        <div class="row clearfix">
+          <div class="input-field col-sm-6">
+            <input type="text" id="sbuaID" class="form-control">
+            <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+              for="projectID">SBUA:</label>
+          </div>
+
+          <div class="input-field col-sm-6">
+            <input type="text" id="facingId" class="form-control">
+            <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+              for="BlockId">Facing:</label>
+          </div>
+
+          <div class="input-field col-sm-6">
+            <input type="text" id="typeId" class="form-control">
+            <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+              for="FloorId">Type:</label>
+          </div>
+          <div class="input-field col-sm-6">
+            <input type="text" id="seriesId" class="form-control">
+            <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+              for="FlatId">Series:</label>
+          </div>
+        </div>
+        <div class="row clearfix">
+          <div class="col-sm-12">
+            <input type="text" id="title_id" class="form-control">
+            <label style="position: relative; top: -64px;font-size: 16px;color:#26a69a" for="title_id">Title:</label>
+          </div>
+        </div><br>
+
+        <!-- <div class="row clearfix">
+      <div class="input-field col-sm-12">
+                         <input type="text" id="notificationtext_id" class="form-control" >
+                         <label  style="margin-left: 17px;top: -25px;left: 0;font-size: 16px;color:#26a69a" for="title_id" >Notification Text:</label>
+         </div>
+ </div><br> -->
+        <span *ngIf="datesrelatedflatesstatus">
+          <div class="row clearfix">
+            <div class="col-sm-5" style="font-weight: 600;"></div>
+            <div class="col-sm-2" style="font-weight: 600;">(OR)</div>
+            <div class="col-sm-5" style="font-weight: 600;"></div>
+          </div><br><br>
+
+          <div class="row clearfix">
+            <div class="input-field col-sm-4">
+              <input type="text" id="projectID" value="{{startdate| date:'dd-MM-yyyy'}}" class="form-control" disabled>
+              <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="projectID">Booking
+                From Date:</label>
+            </div>
+
+            <div class="input-field col-sm-4">
+              <input type="text" id="BlockId" class="form-control" value="{{enddate| date:'dd-MM-yyyy'}}" disabled>
+              <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="BlockId">Booking To
+                Date:</label>
+            </div>
+
+            <div class="col-sm-3" *ngIf="this.fltsCount !=0" style="margin-top: 28px">
+              <span style="font-weight: 600; text-decoration: underline;"
+                (click)="forModelpopupclick(this.fltsCount)">{{this.fltsCount}} flats selected</span>
+            </div>
+
+          </div><br><br>
+
+        </span>
+
+        <div class="row clearfix">
+          <div class="col-sm-12">
+            <div class=" col-sm-12">
+              <label style="
+              left: 0;
+              font-size: 17px;
+              color: #26a69a;
+              position: relative;" for="notificationtext_id">Notification Text:</label>
+              <textarea id="notificationtext_id" style="height:auto;font-size:16px;" data-length="120"></textarea>
+
+            </div>
+          </div>
+
+        </div><br>
+
+
+        <!-- <div class="row clearfix">
+          <div class="col-sm-12">
+            <div class=" col-sm-12">
+              <textarea id="textarea2" style="height:170px;font-size:16px;" data-length="120"></textarea>
+              <label style="top: -201px;
+                        left: 0;
+                        font-size: 17px;
+                        color: #26a69a;
+                        position: relative;" for="textarea2">Notification Description</label>
+            </div>
+          </div>
+
+        </div> -->
+
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card" style="border:0">
+              <div class="header replayheader">
+                <h2>
+                  <strong>Notification Description:</strong>
+                </h2>
+              </div>
+
+              <div [innerHTML]="textdisc" class="democls"></div>
+              <!-- <p class="notecls"> <span style="color: #f44336;font-weight: 600;">Note :</span> For a better view of
+                Tables and its data, Please add the tables which has
+                borders and also data with shorter table, If longer tables it is suggested to use attachments.
+              </p> -->
+
+              <!-- <div class="body" id="ckeditorMainDiv">
+                <div id="CKEditiorDiv">
+                  <textarea id="ckeditor">
+                  </textarea>
+                </div>
+                <p class="text-danger ckeditorerrormessage" id="ckeditorError">{{ckeditorError}}</p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="header">
+              <!-- <h3><strong>Booking</strong> Form</h3><br> -->
+              <div class="row clearfix">
+                <!-- <div class="col-sm-3"></div> -->
+                <div class="col-sm-12">
+                  <form action="#">
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                        <input type="file" id="imgfile" accept="image/x-png,image/gif,image/jpeg"
+                          (change)="handleFileSelect($event)">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input id="imagefilee" class="file-path validate" type="text"
+                          placeholder="Upload notification image">
+                      </div>
+                    </div>
+                  </form>
+
+                  <div class="row clearfix" id="imageLinkField" style="display: none;">
+                    <div class="col-sm-8" style="padding-left: 32px;">
+                      <div class="form-line">
+                        <label style="font-weight: bold;">Please copy the google drive image link here:</label>
+                        <textarea style="border-radius: 4px; height: 52px; padding: 5px;" maxlength="500"
+                          id="driveImageLinkField" data-length="120"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <img id="myImg" src="#"  style="width:350;height:100px;display:none" /> -->
+                  <div class="image-area">
+                    <img id="myImg" style="width:200px;height:200px;" />
+                    <img id="driveImg" style="height:100px; margin-left:3px;display: none;"
+                      src="assets/images/defaultImage.png" class="img" (click)="myimage(this.imageLocation)" />
+                    <!-- <span  class="remove-image" href="#" style="display: inline;" (click)="delete_image()">&#215;</span> -->
+                    <!-- <img src="https://blog.codepen.io/wp-content/uploads/2012/06/White-Large.png"  alt="Preview"> -->
+                    <!-- <a class="remove-image" href="#" style="display: inline;">&#215;</a> -->
+                  </div>
+                  <form action="#">
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <i class="fa fa-paperclip" aria-hidden="true"></i>
+                        <input type="file" id="files" accept=".pdf,.xlsx,.xls,.docx"
+                          (change)="handle_FileSelect($event)">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input id="filee" class="file-path validate" type="text" placeholder="Upload file">
+                      </div>
+                    </div>
+                    <!-- <div  id="myfilebinding" class="remove-image2" href="#"  (click)="delete_file()" >&#215;</div> -->
+                  </form>
+
+                  <div class="row clearfix" id="fileLinkField" style="display: none;">
+                    <div class="col-sm-8" style="padding-left: 32px;">
+                      <div class="form-line">
+                        <label style="font-weight: bold;">Please copy the google drive file link here:</label>
+                        <textarea style="border-radius: 4px; height: 52px; padding: 5px;" maxlength="500"
+                          id="driveFileLinkField" data-length="120"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <span id="hidefile">
+                    <img style="width:350;height:100px;margin-left:3px" *ngIf="this.fileExtension == 'gDriveFile'"
+                      src="assets/images/file1.jpg" class="img" (click)="myimage(this.linkFileLoc)" />
+                    <img style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'jpg'"
+                      [src]="(this.linkFileLoc)" class="img" (click)="myimage(this.filename_forview)" />
+
+                    <img style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'jpeg'"
+                      [src]="(this.linkFileLoc)" class="img" (click)="myimage(this.filename_forview)" />
+
+                    <img style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'png'"
+                      [src]="(this.linkFileLoc)" class="img" (click)="myimage(this.filename_forview)" />
+                    <img style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'xlsx'"
+                      src="assets/images/xlsxicon.png" class="img" (click)="myimage(this.filename_forview)" />
+                    <img style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'docx'"
+                      src="assets/images/wordicon.png" class="img" (click)="myimage(this.filename_forview)" />
+
+                    <img style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'doc'"
+                      src="assets/images/wordicon.png" class="img" (click)="myimage(this.filename_forview)" />
+
+
+                    <img style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'txt'"
+                      src="assets/images/txticon.jpg" class="img" style="width:350;height:100px;"
+                      (click)="myimage(this.filename_forview)" />
+
+                    <img *ngIf="this.fileExtension == 'ppt'" src="assets/images/pptxicon.png" class="img"
+                      style="width:350;height:100px;" (click)="myimage(this.filename_forview)" />
+
+                    <img *ngIf="this.fileExtension == 'pdf'" src="assets/images/pdf.png" class="img"
+                      style="width:350;height:100px;" (click)="myimage(this.filename_forview)" />
+
+                    <img *ngIf="this.fileExtension == 'pptx'" src="assets/images/pptxicon.png" class="img"
+                      style="width:350;height:100px;margin-left:3px" (click)="myimage(this.filename_forview)" />
+                  </span>
+                  <div class="row clearfix" style="margin-top:28px;">
+                    <div class="col-sm-12">
+
+                      <div class="col-sm-12">
+                        <label for="coments" style="color:#26a69a;">Comments:</label>
+                        <textarea type="text" id="coments" class="form-control" maxlength="300"
+                          autocomplete="off"></textarea>
+                      </div>
+                      <!-- <div class=" col-sm-12">
+                          <textarea id="coments" style="height:170px;font-size:16px;" data-length="120"></textarea>
+                          <label style="top: -201px;left: 0;font-size: 17px;color: #26a69a;position: relative;" for="coments">Comments</label>
+                        </div> -->
+                    </div>
+
+                  </div>
+                  <!-- The Modal -->
+                  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <button type="button" class="close" data-dismiss="modal"><span
+                              aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                          <img src="#" class="imagepreview" style="width: 100%;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-sm-3"></div> -->
+
+              </div>
+              <div style="text-align:center;">
+                <button type="button" class="btn-hover color-1"
+                  (click)="Approve_modify_submit('APPROVED')">Approve</button>
+                <button type="button" class="btn-hover color-1"
+                  (click)="Approve_modify_submit('Modify')">Modify</button>
+                <button type="button" class="btn-hover color-1" (click)="Rejectsubmit()">Reject</button>
+
+                <button type="button" class="btn-hover color-1" (click)="Previewfun(content3)">Preview</button>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="flatsmodelId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Flat List</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <div class="card">
+                <div style="width:100%;float:left">
+                  <div *ngFor="let roleObj1 of fltsList" style="width:33.33%;float:left;padding: 10px;">
+                    <input disabled type="checkbox" id={{roleObj1.flatId}}
+                      (change)="onChange($event,$event.target.checked, roleObj1)" checked
+                      style="width:20px;height:20px;float: left;" />
+                    <div style="margin-left: 10px;float: left;">{{roleObj1.flatNo}}</div>
+                  </div>
+                </div>
+                <!-- <table style="font-size: 18px;">
+                <tr style="width:700px">
+                  <td *ngFor="let roleObj1 of fltsList" style="width:100%;float:left;clear:left">
+                     <input disabled type="checkbox"   id ={{roleObj1.flatId}} (change)="onChange($event,$event.target.checked, roleObj1)"  checked style="width:20px;height:20px;float: left;"/><div style="margin-left: 10px;float: left;">{{roleObj1.flatNo}}</div>
+                 </td>
+              </tr>
+            </table> -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #content3 let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Send Notification : </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+          <div class="col-sm-4">
+              <div class="container">
+                  <article class="address-book">
+                      <header class="main--header">
+                          <h2 class="title main--title">Project Updates</h2>
+                      </header>
+                      <nav class="navigation" style="background-image: url(assets/images/notification.jpg);
+                      background-size: 100% 100%;">
+                          <div class="notificationcls" style="background: #607d8b!important;">
+
+                          </div>
+                          <div class="notificationcls1">
+                              <small>Ams apps
+                                  {{dateandtime}}</small>
+                              <p style="position: relative;
+                              top: -29px;" class="my__textoverflow">{{main_notification_title}}</p>
+                          </div>
+                      </nav>
+                      <footer class="footer">
+                          <h2 class="title footer--title"></h2>
+                      </footer>
+                  </article>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="container">
+                  <article class="address-book">
+                      <header class="main--header">
+                          <h2 class="title main--title"><i class="fa fa-bars" style="font-size: 13px;
+                              color: #FFF;
+                              position: relative;
+                              left: -12px;
+                              top: -2px;"></i> Project Updates</h2>
+                      </header>
+                      <nav class="navigation">
+                          <div class="card_notification_list">
+
+                              <div class="row">
+                                  <div class="col-sm-4">
+
+                                      <img id="myImg_view" src="#"
+                                          style="position: relative;top: 7px;width: 96%; margin-left: 2%;width:50px;" />
+
+
+
+                                  </div>
+                                  <div class="col-sm-8">
+
+                                      <p style="position: relative;
+                                      top:0px;
+                                      color: #000;
+                                      font-size: 10px;
+                                      left: -12px;
+                                      font-weight: 600;width: 149px!important;" class="my__textoverflow">
+                                          {{main_notification_title}}</p>
+
+                                      <p style="position: relative;
+                                      top: -58px;
+                                      color: #000;
+                                      font-size: 9px;
+                                      left: -12px;
+                                      font-weight: 600;
+                                      width: 100px!important;" class="my__textoverflow"
+                                           [innerHTML]="truncateHTML(main_notification_dec)">..</p>
+                                      <small style="color: #000; position: relative;
+                                       top: -110px;">
+                                          {{dateString}}</small>
+
+                                      <small style="position: absolute;
+                                      top: 57px;right: 0;"><i class='fas fa-arrow-right' style='font-size: 15px;
+                                              color: red;position: absolute;right: 29px;'></i></small>
+                                  </div>
+                              </div>
+
+
+
+                          </div>
+
+                      </nav>
+                      <footer class="footer">
+                          <h2 class="title footer--title"></h2>
+                      </footer>
+                  </article>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="container">
+                  <article class="address-book">
+                      <header class="main--header">
+                          <h2 class="title main--title"> <i class="fa fa-bars" style="font-size: 13px;
+                              color: #FFF;
+                              position: relative;
+                              left: -12px;
+                              top: -2px;"></i>Project Updates</h2>
+                      </header>
+                      <nav class="navigation">
+
+                          <p style="position: relative;
+                          top: 0px;
+                          color: #000;
+                          font-size: 14px;
+                          left: 16px;
+                          font-weight: 600;" class="my__textoverflow">{{main_notification_title}}</p>
+
+
+                          <p style="position: relative;
+                          top: -44px;
+                          color: #000;
+                          font-size: 9px;
+                          left: 17px;
+                          font-weight: 600;
+                          width: 171px!important;" class="my__textoverflow"  [innerHTML]="truncateHTML(main_notification_dec)">..
+                          </p>
+
+
+                          <img id="myImg_view1" src="#" style="position: relative;
+                              top: -43px;
+                              width: 90%;
+                              height: 150px;
+                              margin-left: 5%;" />
+
+
+                          <div style="width:100%;text-align: center;">
+                              <button type="button" class="btn btn-info" style="    background-color: #e91e63 !important;
+                              color: #fff !important;box-shadow: none;
+  border-radius: 5px;
+  position: relative;
+  top: -31px;">VIEW ATTACHMENT</button>
+                          </div>
+                      </nav>
+                      <footer class="footer">
+                          <h2 class="title footer--title"></h2>
+                      </footer>
+                  </article>
+              </div>
+          </div>
+      </div>
+
+
+  </div>
+
+</ng-template>

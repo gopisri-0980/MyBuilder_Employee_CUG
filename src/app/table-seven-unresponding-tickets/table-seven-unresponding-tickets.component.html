@@ -1,0 +1,84 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+      <div class="content__loader">
+          <div><i class="Favicon"></i></div>
+      </div>
+  </div>
+</div>
+<section class="content">
+  
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Unresponding Tickets</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()" style="cursor:pointer;"></i>  <span (click)="dashtitle()" style="cursor:pointer;"> Ticketing Dashboard </span></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" >Unresponding Tickets</a>
+            </li>
+         
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card" style="border:0">
+          
+          <div class="body" style="border:0.2px solid;margin-top: 10px;">
+
+            <div class="table-responsive">
+                
+              
+              <table id="tableExport" class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="center">Ticket Number</th>
+                    <th class="center">Project Name</th>            
+                    <th class="center">Ticket type</th>
+                    <th class="center">Creation Date</th>
+                    <th class="center">Hrs Pending</th>
+                    <th class="center">Status</th>        
+                    <th class="center">Last Activity Date</th>
+                    <th class="center">Ticket Owner</th>
+                    <th class="center">Pending At</th>                    
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                  <tr *ngIf="getTicketsData.length == 0">
+                      <td class="center" colspan="8" id="noData"> No Data Available</td>
+                  </tr>
+
+                  <tr *ngFor="let data of getTicketsData| paginate: { itemsPerPage: totalItems, currentPage: current_Page,totalItems: itemsPer_Page};let i=index;" class="ticketList" (click)="gotoTicketDetailspage(data)">
+                    <td class="center"><a>{{data.ticketId}}</a></td>
+                    <td class="center">{{data.siteName}}</td>
+                    <td class="center">{{data.ticketType}}</td>
+                    <td class="center">{{data.ticketRecivedDate| date : 'dd-MM-yyyy h:mm a'}}</td>
+                    <td class="center">{{data.hrsPending}}</td>                            
+                    <td class="center">
+                      <div class="badge" [ngStyle]="{'color':getColor(data.ticketHighLevelStatus)}">{{data.ticketHighLevelStatus}}</div>
+                    </td>      
+                    <td class="center">{{data.lastActivityDate| date : 'dd-MM-yyyy h:mm a'}}</td>
+                    <td class="center">{{data.ticketOwner}}</td> 
+                    <td class="center">{{data.pendingDeptOrEmpName}}</td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+           
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</section>
+

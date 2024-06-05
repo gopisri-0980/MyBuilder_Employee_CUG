@@ -1,0 +1,392 @@
+<style>
+  .radiocls {
+    position: relative;
+    top: -9px;
+    left: 0%;
+    font-family: 'Poppins';
+    font-weight: bold !important;
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  [type="radio"]:not(:checked),
+  [type="radio"]:checked {
+    opacity: 1 !important;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -6px;
+    left: 68px;
+  }
+
+  .radioclass {
+    border: 1px solid #e3d2d2;
+    border-radius: 5px;
+    width: 100%;
+    margin-left: 0%;
+    padding: 7px;
+    background: linear-gradient(105deg, rgba(255, 190, 0, 0), #8fd8ee);
+    position: relative;
+    top: 11px;
+  }
+
+
+  .myList {
+    display: inline-flex;
+  }
+
+  .tgl {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.5);
+    /* IE */
+    -moz-transform: scale(1.5);
+    /* FF */
+    -webkit-transform: scale(1.5);
+    /* Safari and Chrome */
+    -o-transform: scale(1.5);
+    /* Opera */
+    transform: scale(1.5s);
+    padding: 10px;
+  }
+
+  /* Might want to wrap a span around your checkbox text */
+  .checkboxtext {
+    /* Checkbox text */
+    font-size: 10%;
+    display: inline;
+  }
+
+
+  ul.myList {
+    margin: 0;
+    list-style: none !important;
+    width: 100%;
+    overflow: overlay;
+  }
+
+  ul.myList li {
+    display: inline;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title"> Module and site access masters</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>Module and site access
+                masters</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div style="border: 1px solid #e3d2d2;
+        border-radius: 5px;width: 80%;position: relative;top: -1px;
+        margin-left: 10%;padding: 7px;background: linear-gradient(105deg, rgba(255, 190, 0, 0), #8fd8ee);">
+          <div class="row" style="position: relative!important;top: 10px!important;">
+            <div class="col-sm-6 radio" *ngFor="let p of radio_Controller">
+              <input [id]="p.id" name="radio" type="radio" (change)="handleChange($event,p)" [value]="p.id"
+                [checked]="p.id == 1">
+              <label [for]="p.id" class="radio-label radiocls"> &nbsp;<span style="position: relative;
+                left: 50px;">{{p.Name}}</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <form style="width: 70%;margin-left: 20%;" [formGroup]="userForm">
+          <div class="row" *ngIf="employee_div">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-family: 'Poppins'"><b style="font-size: 15px;">Employee</b></label>
+              </div>
+            </div>
+            <div class="col-sm-1"> <label><b style="font-size: 15px;">:</b></label></div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <angular2-multiselect [data]="employee_list" formControlName="Employee" [settings]="singledd1"
+                  [(ngModel)]="employee_name" (onSelect)="emp_selectedSIDs($event);"
+                  (onDeSelect)="emp_onItemDeSelect($event)">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.employeeName }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.employeeName }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row" *ngIf="department_div">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-family: 'Poppins'"><b style="font-size: 15px;">Department</b></label>
+              </div>
+            </div>
+            <div class="col-sm-1"> <label><b>:</b></label></div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <angular2-multiselect [data]="department_list" formControlName="Department" [settings]="singledd2"
+                  (onSelect)="dep_selectedSIDs($event);" (onDeSelect)="dep_onItemDeSelect($event)"
+                  [(ngModel)]="department_name">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.departmentName }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.departmentName }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row" *ngIf="role_div">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-family: 'Poppins'"><b style="font-size: 15px;">Role</b></label>
+              </div>
+            </div>
+            <div class="col-sm-1"> <label><b>:</b></label></div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <angular2-multiselect [data]="role_list" formControlName="Role" [settings]="singledd3"
+                  (onSelect)="role_selectedSIDs($event);" (onDeSelect)="role_onItemDeSelect($event)"
+                  [(ngModel)]="role_name">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row" *ngIf="project_div">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-family: 'Poppins'"><b style="font-size: 15px;"> Project</b></label>
+              </div>
+            </div>
+
+            <div class="col-sm-1"> <label><b>:</b></label></div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <angular2-multiselect [data]="controller_sites_list" formControlName="Project_name"
+                  [settings]="singledd4" (onSelect)="sites_selectedSIDs($event);"
+                  (onSelectAll)="sites_onSelectAll($event)" (onDeSelect)="sites_onItemDeSelect($event)"
+                  (onDeSelectAll)="sites_onDeSelectAll($event)" [(ngModel)]="project_list_name">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.name }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row" *ngIf="menu_div">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-family: 'Poppins'"><b style="font-size: 15px;"> Menu Name</b></label>
+              </div>
+            </div>
+
+            <div class="col-sm-1"> <label><b>:</b></label></div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <angular2-multiselect [data]="moduleName_list" formControlName="Menu_name" [settings]="singledd6"
+                  (onSelect)="menu_selectedSIDs($event);" (onSelectAll)="menu_onSelectAll($event)"
+                  (onDeSelect)="menu_onItemDeSelect($event)" (onDeSelectAll)="menu_onDeSelectAll($event)"
+                  [(ngModel)]="moduleName">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.moduleName }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.moduleName }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="row" *ngIf="sub_menu_div">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label style="font-family: 'Poppins'"><b style="font-size: 15px;">Sub Menu Name</b></label>
+              </div>
+            </div>
+
+            <div class="col-sm-1"> <label><b>:</b></label></div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <angular2-multiselect [data]="subModuleName_list" formControlName="Sub_menu_name" [settings]="singledd7"
+                  (onSelect)="sub_menus_selectedSIDs($event);" (onSelectAll)="sub_menus_onSelectAll($event)"
+                  (onDeSelect)="sub_menus_onItemDeSelect($event)" (onDeSelectAll)="sub_menus_onDeSelectAll($event)"
+                  [(ngModel)]="sub_menu_names">
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <label>{{ item.subModuleName }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <label>{{ item.subModuleName }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+          <div style="width:100%;text-align: center;" *ngIf="second_submit">
+            <button type="button" style="margin-top: 1px;position: relative;
+            top: 16px;" class="btn-hover color-1" (click)="second_submitFun()">Submit</button>
+          </div>
+
+          <div style="width:100%;text-align: center;" *ngIf="Update_menu_and_sub_menu">
+            <button type="button" style="margin-top: 1px;position: relative;
+            top: 16px;" class="btn-hover color-1" (click)="update_menu_submitFun()">Submit</button>
+          </div>
+
+
+        </form>
+
+
+
+
+        <div class="row" id="ireport1" *ngIf="controller?.length">
+          <div class="col-xl-12 col-lg-12 col-sm-12 mx-width">
+            <div class="row">
+              <ng-container *ngFor="let item of controller; let i = index">
+                <div class="col-12 mx-width">
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h5 style="color: #607d8b; font-weight: 800;"> <input class="tgl tgl-skewed"
+                          id="{{item.moduleName}}{{i}" [(ngModel)]="item.checked" type="checkbox"
+                          (change)="allNonTrades($event ,item ,i)" [checked]="checked" disabled/> &nbsp;&nbsp;
+                        {{item.moduleName}}</h5>
+                    </div>
+                  </div>
+
+                  <div class="row align-items-end " style="width: 90%;margin-left: 5%;">
+                    <div class="col-md-12">
+                      <ul class="myList">
+                        <li *ngFor="let checkbox of item.subMenuModuleList; let j = index;" style="margin: 20px;">
+                          <h6 style="font-size: 14px;font-weight: 700;">
+                            <input id="{{checkbox.subModuleName}}{{i}}{{j}}" [(ngModel)]="checkbox.checked"
+                              type="checkbox" (change)="subNonTrades($event ,checkbox)" disabled/> &nbsp; &nbsp;
+                            {{checkbox.subModuleName}}
+                          </h6>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <div style="width:100%;text-align: center;">
+            <button type="button" style="margin-top: 1px;position: relative;
+            top: 16px;" class="btn-hover color-1" (click)="submitFun()">Submit</button>
+          </div>
+
+        </div>
+
+        <!-- <div class="row" id="ireport1" *ngIf="menu_and_submenu_controller?.length">
+          <div class="col-xl-12 col-lg-12 col-sm-12 mx-width">
+            <div class="row">
+              <ng-container *ngFor="let item of menu_and_submenu_controller; let i = index">
+                <div class="col-12 mx-width">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h5 style="color: #607d8b; font-weight: 800;"> <input class="tgl tgl-skewed"
+                          id="{{item.moduleName}}{{i}" [(ngModel)]="item.checked" type="checkbox"
+                          (change)="sub_menu_allNonTrades($event ,item ,i)" [checked]="checked" /> &nbsp;&nbsp;
+                        {{item.moduleName}}</h5>
+                    </div>
+                  </div>
+
+                  <div class="row align-items-end " style="width: 90%;margin-left: 5%;">
+                    <div class="col-md-12">
+                      <ul class="myList">
+                        <li *ngFor="let checkbox of item.subMenuModuleList; let j = index;" style="margin: 20px;">
+                          <h6 style="font-size: 14px;font-weight: 700;">
+                            <input id="{{checkbox.subModuleName}}{{i}}{{j}}" [(ngModel)]="checkbox.checked"
+                              type="checkbox" (change)="sub_menu_NonTrades($event ,checkbox)" /> &nbsp; &nbsp;
+                            {{checkbox.subModuleName}}
+                          </h6>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div style="width:100%;text-align: center;">
+            <button type="button" style="margin-top: 1px;position: relative;
+            top: 16px;" class="btn-hover color-1" (click)="sub_model_submitFun()">Submit</button>
+          </div>
+        </div> -->
+
+
+      </div>
+    </div>
+
+  </div>
+</section>

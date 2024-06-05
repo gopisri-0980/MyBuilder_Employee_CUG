@@ -1,0 +1,163 @@
+<style>
+    .nodata {
+        position: relative;
+        font-size: 18px;
+        color: #607d8b;
+        /* font-weight: 600; */
+        font-family: 'Poppins';
+        left: 39px;
+        top: 5px;
+    }
+</style>
+
+<section class="content">
+
+    <div class="container-fluid">
+
+        <div class="block-header">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Customer Details</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a>
+                                <i class="fas fa-home" (click)="homeClick()"></i>Customer Details</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">App Registered Or Not</a>
+                        </li>
+                        <!-- <li class="breadcrumb-item bcrumb-2">Customer Details</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Basic Examples -->
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="body">
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-line">
+                                    <p class="fieldHeaders">
+                                        <label style="font-weight: bold;">Location:</label>
+                                    </p>
+                                    <div class="center">
+                                        <select style="width:100%" id="stateID">
+                                            <option value="select">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" style="margin-top: 7px;">
+
+                                <form [formGroup]="userForm">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold;">Project Name :</label>
+                                        <angular2-multiselect [data]="project_wise_project" [settings]="singledd8"
+                                            formControlName="project_wise_form" (onSelect)="selectedSIDs($event);"
+                                            (onSelectAll)="onSelectAll($event)" (onDeSelect)="onItemDeSelect($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)" [(ngModel)]="title6">
+                                            <c-badge>
+                                                <ng-template let-item="item">
+                                                    <label>{{ item.name }}</label>
+                                                </ng-template>
+                                            </c-badge>
+                                            <c-item>
+                                                <ng-template let-item="item">
+                                                    <label>{{ item.name }}</label>
+                                                </ng-template>
+                                            </c-item>
+                                        </angular2-multiselect>
+                                    </div>
+
+                                </form>
+
+
+
+                            </div>
+
+                            <div id="blocksID" class="col-sm-4" style="margin-top:12px">
+
+                                <div style="text-align:center;">
+                                    <button style="width: 235px!important;" type="button" class="btn-hover color-1"
+                                        (click)="viewcustomerData()">Submit</button>
+                                </div>
+
+
+                            </div>
+
+
+                        </div><br>
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="card" *ngIf="tabledata.length == 0">
+                    <div class="card-body">
+                        <div>
+                            <p class="nodata">No Records Found</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" *ngIf="tabledata?.length">
+                    <div class="card-body">
+                        <div class="table-responsive" >
+                            <table id="tableExport" class="table table-bordered" style="width:100%">
+                                <thead>
+                                    <tr class="center">
+                                        <th>S.No</th>
+                                        <th>Project Name</th>
+                                        <th>Total Flats Booked</th>
+                                        <th>App Registered</th>
+                                        <th>App Not Registered</th>
+        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of tabledata; let i = index;" class="customersList">
+                                        <td class="center">{{i + 1}}</td>
+                                        <td class="center">{{item.Project_Name}}</td>
+                                        <td class="center">{{item.Total_Flats_Booked}}</td>
+                                        <td class="center">{{item.App_Registered}}</td>
+                                        <td class="center">{{item.App_Not_Registered}}</td>
+        
+        
+                                    </tr>
+        
+                                </tbody>
+                                <tfoot style="text-align: center;color: #607D8B; font-weight: 700;">
+                                    <tr style="background: #fef8f8;">
+                                        <td class="center"></td>
+                                        <td class="center">Total</td>
+                                        <td class="center" id="totalflatsBooked"></td>
+                                        <td class="center"><span id="appregistered"></span></td>
+                                        <td class="center"><span id="appNotregistered"></span></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+               
+
+
+
+            </div>
+        </div>
+        <!-- #END# Basic Examples -->
+
+    </div>
+</section>

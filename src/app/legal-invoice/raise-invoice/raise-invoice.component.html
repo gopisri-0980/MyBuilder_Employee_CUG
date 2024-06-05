@@ -1,0 +1,122 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Legal Invoice</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active">Legal Invoice </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-4">
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b class="required">Select Project:</b>
+              </p>
+              <select style="width:100%;" class="form-group" id="projectID" single>
+              </select>
+            </div>
+          </div>
+          <div id="blocksID" class="col-sm-4" >
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>Select Block:</b>
+              </p>
+              <select style="width:100%;" class="form-group" id="BlockId">
+              </select>
+            </div>
+          </div>
+          <!-- <div id="floorsID" class="col-sm-3" >
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b>*Select Floor:</b>
+              </p>
+              <select style="width:100%;" class="form-group" id="floorSelection">
+              </select>
+            </div>
+          </div> -->
+          <div id="flatsID" class="col-sm-4" >
+            <div class="form-line">
+              <p class="fieldHeaders">
+                <b class="required">Select Flat:</b>
+              </p>
+              <select style="width:100%;" class="form-group" id="flatSelection" >
+              </select>
+            </div>
+          </div>
+        </div><br>
+        <div class="row clearfix">
+          <div id="customerName" class="col-sm-6" style="display: none;">
+            <div class="form-line">
+              <label style="float:left;font-weight: bold;">Customer Name: {{customerName}}</label>
+            </div>
+          </div>
+        </div><br>
+        <!-- Table code start -->
+        <form (ngSubmit)="onSubmit()" #invoiceForm="ngForm" enctype="multipart/form-data" id="totalTableID" style="display: none;">
+          <table class="table table-bordered" id="tbl_posts">
+            <thead>
+              <tr>
+                <th class="tableHeaderClass required">SNo</th>
+                <th class="tableHeaderClass required">Description</th>
+                <th class="tableHeaderClass required">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_posts_body">
+              <tr class="tabletrClass">
+                <td class="tdDateClass">
+                  <input type="text" style="border: 1px solid #4d474785;text-align:center;" class="milestone_name" value = "1" id="sno" readonly>
+                </td>
+                <td>
+                  <input type="text" style="border: 1px solid #4d474785;text-align:center;" class="milestone_name" value = "Flat Legal and Documentation charges"  id="description"  readonly>
+                </td>
+                <td>
+                  <input type="text" (keypress)="keyPress($event)" minlength=1 maxlength=7 style="border: 1px solid #4d474785;text-align:center;" class="amount" id="amount" min="1" max="7" required
+                  [(ngModel)]='transactionAmount' name="amount" #amountref="ngModel"
+                   (input) = "onChange($event)" 
+                   [ngStyle]="{'border-color': !amountref.valid  ? 'red' : '#4d474785' }"
+                   >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row clearfix" id="calculationPart" style="display: none;" [hidden]="!amountref.valid ||  !amountref.dirty ">
+            <div class="col-sm-8"></div>
+            <div class="col-sm-4">
+              <label style="font-weight: bold;font-size: 17px;">Total Amount Before Tax : {{transactionAmount}}/-</label><br>
+              <label style="font-weight: bold;font-size: 17px;">CGST : {{CGSTAmount}}/- </label><br>
+              <label style="font-weight: bold;font-size: 17px;">SGST : {{SGSTAmount}}/-</label><br>
+              <label style="font-weight: bold;font-size: 17px;">Total Amount After Tax : {{afterGST | currency: 'INR':'symbol-narrow':'1.2-2'}}/-</label><br>
+              <div class="form-group" style="margin-top:10px">
+                <label class="required"><b>Company bank Account:</b></label>
+                <select style="width:100%" class="form-group" id="companybankAcId" single></select>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix" id="calculateButton" style="display: none;">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-5 text-center" id="submitButtonID">
+              <button type="submit" class="btn-hover color-1"  [hidden]="!amountref.valid || !amountref.dirty"> Raise Invoice</button>
+            </div>
+           
+            <div class="col-sm-3"></div>
+          </div><br>
+        </form><br>
+      </div>
+    </div>
+
+  </div>
+
+</section><br>

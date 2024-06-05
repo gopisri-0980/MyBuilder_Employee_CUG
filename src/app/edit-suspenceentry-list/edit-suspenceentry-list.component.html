@@ -1,0 +1,69 @@
+<section class="content">
+  <div class="container-fluid">
+          <div class="block-header">
+                  <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                          <ul class="breadcrumb breadcrumb-style ">
+                              <li class="breadcrumb-item">
+                                  <h4 class="page-title">Modify Suspence Entry</h4>
+                              </li>
+
+                              <li class="breadcrumb-item bcrumb-1">
+                                <a>
+                                  <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+                              </li>
+
+                              <li class="breadcrumb-item active">Modify Suspence Entry</li>
+
+                              
+                             
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+      <div class="card">
+          <div class="card-body">
+            <div class="table-responsive" id="milestone_blocks_tables">
+              
+            <table id="tableExport" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="center">S.NO</th>
+                  <th class="center">Transaction Received Date</th>  
+                  <th class="center">Approval Req Receive Date</th>
+                  <th class="center">Project Name</th> 
+                  <th class="center">Ref.No</th> 
+                  <th class="center">Amount</th> 
+                           
+                  <th class="center">Customer Bank Name</th>        
+                  <th class="center">Company Account No</th>            
+                  <th class="center">Mode</th>
+                </tr>
+              </thead>
+              <tbody>
+    
+              
+                <tr   *ngFor="let item of anonymous_list; let i=index" style="cursor: pointer;" (click)="redirectCrmOnlineReceipt(item)">
+                  <td class="center">{{i+1}}</td>
+                  <td class="center">{{item.transactionReceiveDate| date:'dd-MM-yyy'}}</td>
+                  <td class="center" >{{item.lastApprovedDate| date:'dd-MM-yyy h:mm a'}}  </td>                  <td class="center">{{item.siteName}}</td>
+                  <td class="center">{{item.referenceNo}}</td>
+                  <td class="center">{{item.amount.toLocaleString('en-IN')}}</td>
+                 
+                  <td class="center">{{item.bankName}}</td>
+                  <td class="center">{{item.siteBankAccountNumber}}</td>
+                  <td class="center">{{item.transferMode}}</td>                  
+                </tr>
+                
+          
+              </tbody>
+            </table>
+        
+          </div>
+
+          </div>
+      </div>
+  </div>
+
+</section><br>

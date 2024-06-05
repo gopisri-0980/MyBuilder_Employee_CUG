@@ -1,0 +1,610 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<style>
+    .notecls {
+    width: 96%;
+    margin-left: 2%;
+    font-size: 14px;
+    font-family: 'Poppins';
+    color: rgb(0 0 0 / 87%);
+    font-weight:600;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+   
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Send Notifications</h4>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home"></i> Home</a>
+            </li> -->
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i><span >Project Notifications</span></a>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" routerLink="/project-notification-list"> Notifications</a>
+            </li> -->
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" (click)="notification_list()"> View Notifications For Modifications</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;" > View Notifications Details</a>
+              </li>
+ 
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- <mat-paginator [length]="tickettotaldetailsresponse.length" [pageSize]="1" [pageIndex]="pageIndex"
+    (page)="getServerData($event)">
+  </mat-paginator> -->
+
+    <div class="card">
+      <div class="card-body">
+       
+        <div class="row clearfix">
+          <div class="input-field col-sm-6">
+              <input type="text" id="projectID1" class="form-control">
+              <label  style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="projectID" >Project:</label>
+            </div>
+
+            <div class="input-field col-sm-6">
+                <input type="text" id="BlockId1" class="form-control">
+                <label  style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="BlockId" >Block:</label>
+              </div>
+
+              <div class="input-field col-sm-6">
+                  <input type="text" id="FloorId1" class="form-control">
+                  <label  style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="FloorId" >Floor:</label>
+                </div>
+                <div class="input-field col-sm-6">
+                  <input type="text" id="seriesId1" class="form-control">
+                  <label  style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="FlatId" >Series:</label>
+                </div>
+            </div>
+            <div class="row clearfix">
+              <div class="input-field col-sm-6">
+                  <input type="text" id="sbuaID1" class="form-control">
+                  <label  style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="projectID" >SBUA:</label>
+                </div>
+    
+                <div class="input-field col-sm-6">
+                    <input type="text" id="facingId1" class="form-control">
+                    <label  style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="BlockId" >Facing:</label>
+                  </div>
+    
+                  <div class="input-field col-sm-6">
+                      <input type="text" id="typeId1" class="form-control">
+                      <label  style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="FloorId" >Type:</label>
+                    </div>
+
+                    <div class="input-field col-sm-6">
+                      <input type="text" id="FlatId1" class="form-control">
+                      <label  style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a" for="FlatId" >Flat:</label>
+                    </div>
+                    
+                </div>
+                <!-- *ngIf="datesrelatedflatesstatus1" -->
+              <span >
+                  <div class="row clearfix">
+                    <div class="col-sm-5" style="font-weight: 600;"></div>
+                  <div class="col-sm-2" style="font-weight: 600;">(OR)</div>
+                  <div class="col-sm-5" style="font-weight: 600;"></div>
+                </div><br><br>
+                
+                <div class="row clearfix">
+                  <div class="input-field col-sm-4">
+                    <input type="text"  value="{{startdate| date:'dd-MM-yyyy'}}" class="form-control" disabled>
+                    <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+                      for="projectID">Booking From Date:</label>
+                  </div>
+                
+                  <div class="input-field col-sm-4">
+                    <input type="text"  class="form-control" value="{{enddate| date:'dd-MM-yyyy'}}" disabled>
+                    <label style="margin-left: 11px;top: -25px;left: 0;font-size: 17px;color:#26a69a"
+                      for="BlockId">Booking To Date:</label>
+                  </div>
+                
+                  <div class="col-sm-3" *ngIf="this.fltsCount1 !=0" style="margin-top: 28px">
+                    <span style="font-weight: 600; text-decoration: underline;" (click)="forModelpopupclick1(this.fltsCount1)">{{this.fltsCount1}} flat(s) selected</span>
+                  </div>
+                
+                </div><br><br>
+                
+                </span> 
+                <div class="row clearfix">
+                  <div class="col-sm-3">
+                    <div class="form-line">
+                      <p> 
+                        <b >Select Project:</b>
+                      </p>
+                      <select style="width:100%" class="form-group states" id="projectID" single >
+                        <option value="select">--Select--</option>
+                      </select>
+                   
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-line">
+                      <p>
+                        <b >Select Block:</b>
+                      </p>
+                      <select style="width:100%" class="form-group states" id="BlockId" multiple disabled>
+                          <!-- <option value="1">Block 1</option>
+                          <option value="2">Block 2</option>
+                          <option value="3">Block 3</option>
+                          <option value="4">Block 4</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-line">
+                      <p>
+                        <b >Select Floor:</b>
+                      </p>
+                      <select style="width:100%" class="form-group states" id="FloorId" multiple disabled>
+                          <!-- <option value="1">Floor 1</option>
+                          <option value="2">Floor 2</option>
+                          <option value="3">Floor 3</option>  
+                          <option value="4">Floor 4</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-line">
+                      <p> 
+                        <b >Series:</b>
+                      </p>
+                      <select style="width:100%" class="form-group states" id="seriesId" multiple disabled>
+                        <!-- <option value="select">--Select--</option>
+                        <option value="select">01</option>
+                        <option value="select">02</option>
+                        <option value="select">03</option> -->
+                      </select>
+                   
+                    </div>
+                  </div>
+               
+                </div><br>
+        
+                <div class="row clearfix">
+                  
+                  <div class="col-sm-3">
+                    <div class="form-line">
+                      <p>
+                        <b >SBUA:</b>
+                      </p>
+                      <select style="width:100%" class="form-group states" id="SBUAId" multiple disabled>
+                        <!-- <option value="select">--Select--</option>
+                        <option value="select">1283</option>
+                        <option value="select">1284</option>
+                        <option value="select">1285</option>  -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-line">
+                      <p>
+                        <b >Facing:</b>
+                      </p>
+                      <select style="width:100%" class="form-group states" id="FacingId" multiple disabled>
+                        <!-- <option value="select">--Select--</option>
+                        <option value="select">East</option>
+                        <option value="select">West</option>
+                        <option value="select">North</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-line">
+                      <p>
+                        <b >Type:</b>
+                      </p>
+                      <select style="width:100%;" class="form-group states" id="typeId" multiple disabled>
+                        <!-- <option value="select">--Select--</option>
+                        <option value="select">1 BHK</option>
+                        <option value="select">2 BHK</option>
+                        <option value="select">3 BHK</option> -->
+                      </select>
+                    </div>
+                  </div>
+        
+                  <div class="col-sm-3">
+                    <div class="form-line">
+                      <p>
+                        <b >Select Flat:</b>
+                      </p>
+                      <select style="width:100%;" class="form-group states" id="FlatId" multiple disabled>
+                          <!-- <option value="1">Flat 1</option>
+                          <option value="2">Flat 2</option>
+                          <option value="3">Flat 3</option>
+                          <option value="4">Flat 4</option> -->
+                      </select>
+                    </div>
+                  </div>
+                </div><br>
+
+                <span *ngIf="datesrelatedflatesstatus" id="datesrelatedflatesstatus">
+                  <div class="row clearfix">
+                    <div class="col-sm-5" style="font-weight: 600;"></div>
+                  <div class="col-sm-2" style="font-weight: 600;">(OR)</div>
+                  <div class="col-sm-5" style="font-weight: 600;"></div>
+                </div>
+                <div class="row clearfix">
+                  <div class="col-sm-3" style="margin-top: -13px">
+                    <div class="form-line">
+                      <label style="position: relative;top: 10px;">Booking From Date:</label>
+                      <div class="center" style="position: relative;top: 9px;">
+        
+                        <span class="material-icons" style="position: absolute;
+                      right: 19px;top: 7px;font-size: 20px;" (click)="startdatefun()">cancel </span>
+        
+                        <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+        
+                        <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+        
+        
+                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" 
+                          style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                          class=" form-control" id="fromDate" formControlName="from" >
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-sm-3" style="margin-top: -13px">
+                    <div class="form-line">
+                      <label style="position: relative;top: 10px;">Booking To Date:</label>
+                      <div class="center" style="position: relative;top: 9px;">
+                        <span class="material-icons" style="position: absolute;
+                      right: 19px;top: 7px;font-size: 20px;" (click)="endtimefun()">cancel </span>
+        
+                        <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+        
+                        <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+        
+                        <input type="date" placeholder="Select Date"
+                          style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                          class=" form-control" id="toDate" formControlName="to" >
+                      </div>
+                    </div>
+                  </div>
+               
+                  <!-- <p style="width: 100%;text-align: center;" *ngIf="fg.touched && fg.invalid"> <span  class="fromtoclass">To Date should be greater than or equal to
+                    From Date </span></p> -->
+                    <!-- <div class="col-sm-3" style="margin-top: -13px">
+                      <button (click)="okSubmission()">ok</button>
+                    </div> -->
+                    <div class="col-sm-3" *ngIf="this.fltsCount !=0" style="margin-top: 28px">
+                      <span style="font-weight: 600; text-decoration: underline;" (click)="forModelpopupclick(this.fltsCount)">{{this.fltsCount}} flat(s) selected</span>
+                    </div>
+                    
+                </div><br>
+              </span><br><br>
+        <div class="row clearfix">
+         <div class="col-sm-12">
+                            <input type="text" id="title_id" class="form-control" >
+                            <label  style="position: relative; top: -64px;font-size: 16px;color:#26a69a" for="title_id" >Title:</label>
+            </div>
+    </div><br>
+
+    <!-- <div class="row clearfix">
+      <div class="input-field col-sm-12">
+                         <input type="text" id="notificationtext_id" class="form-control" >
+                         <label  style="margin-left: 17px;top: -25px;left: 0;font-size: 16px;color:#26a69a" for="title_id" >Notification Text:</label>
+         </div>
+ </div><br> -->
+ <div class="row clearfix">
+  <div class="col-sm-12">
+      <div class=" col-sm-12">
+        <textarea id="notificationtext_id" style="height:170px;font-size:16px;" data-length="120"></textarea>
+        <label style="top: -201px;
+        left: 0;
+        font-size: 17px;
+        color: #26a69a;
+        position: relative;" for="notificationtext_id">Notification Text:</label>
+      </div>
+  </div>
+
+</div><br>
+       
+     
+          <!-- <div class="row clearfix">
+                  <div class="col-sm-12">
+                      <div class=" col-sm-12">
+                        <textarea id="textarea2" style="height:170px;font-size:16px;" data-length="120"></textarea>
+                        <label style="top: -201px;
+                        left: 0;
+                        font-size: 17px;
+                        color: #26a69a;
+                        position: relative;" for="textarea2">Notification Description</label>
+                      </div>
+                  </div>
+          </div> -->
+
+
+
+          <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card" style="border:0">
+                <div class="header replayheader">
+                  <h2>
+                    <strong>Notification Description:</strong>
+                  </h2>
+
+                </div>
+                <p class="notecls"> <span style="color: #f44336;font-weight: 600;">Note :</span> For a better view of Tables and its data, Please add the tables which has
+                  borders and also data with shorter table, If longer tables it is suggested to use attachments.
+                </p>
+
+                <div class="body" id="ckeditorMainDiv">
+                  <div id="CKEditiorDiv">
+                    <textarea id="ckeditor">
+                      </textarea>
+                  </div>
+                  <p class="text-danger ckeditorerrormessage" id="ckeditorError">{{ckeditorError}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="header">
+                <!-- <h3><strong>Booking</strong> Form</h3><br> -->
+                <div class="row clearfix">
+                  <!-- <div class="col-sm-3"></div> -->
+                  <div class="col-sm-12">
+                    <form action="#">
+                      <div class="file-field input-field">
+                        <div class="btn">
+                          <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                          <input type="file" id="imgfile" accept="image/x-png,image/gif,image/jpeg" (change)="handleFileSelect($event)">
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input id="imagefilee" class="file-path validate" type="text" placeholder="Upload notification image">
+                        </div>
+                      </div>
+                    </form>
+
+                    <div class="row clearfix" id="imageLinkField" style="display: none;">
+                      <div class="col-sm-8" style="padding-left: 32px;">
+                        <div class="form-line">
+                        <label style="font-weight: bold;">Please copy the google drive image link here:</label>
+                          <textarea style="border-radius: 4px; height: 52px; padding: 5px;" maxlength="500" id="driveImageLinkField" data-length="120"></textarea>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- <img id="myImg" src="#"  style="width:350;height:100px;display:none" /> -->
+                    <div class="image-area">
+                      <img  id="myImg"  style="width:200px;height:200px;" />
+                      <img id="driveImg" style="height:100px; margin-left:3px;display: none;" src="assets/images/defaultImage.png"
+                              class="img" (click)="myimage(this.imageLocation)" />
+                      <!-- <span  class="remove-image" href="#" style="display: inline;" (click)="delete_image()">&#215;</span> -->
+                  <!-- <img src="https://blog.codepen.io/wp-content/uploads/2012/06/White-Large.png"  alt="Preview"> -->
+                  <!-- <a class="remove-image" href="#" style="display: inline;">&#215;</a> -->
+                </div>
+                    <form action="#">
+                      <div class="file-field input-field">
+                          <div class="btn">
+                              <i class="fa fa-paperclip" aria-hidden="true" style="color:gray"></i>
+                              <input  type="file" id="files" accept=".pdf,.xlsx,.xls,.docx" (change)="handle_FileSelect($event)">
+                          </div>
+                          <div class="file-path-wrapper">
+                              <input id="filee" class="file-path validate" type="text"
+                                  placeholder="Upload file">
+                          </div>
+                      </div>
+                      <!-- <div  id="myfilebinding" class="remove-image2" href="#"  (click)="delete_file()" >&#215;</div> -->
+                  </form>
+
+                  <div class="row clearfix" id="fileLinkField" style="display: none;">
+                    <div class="col-sm-8" style="padding-left: 32px;">
+                      <div class="form-line">
+                      <label style="font-weight: bold;">Please copy the google drive file link here:</label>
+                        <textarea style="border-radius: 4px; height: 52px; padding: 5px;" maxlength="500" id="driveFileLinkField" data-length="120"></textarea>
+                      </div>
+                    </div>
+                  </div><br>
+
+                  <span id="hidefile">
+                    <img  style="width:350;height:100px;margin-left:3px" *ngIf="this.fileExtension == 'gDriveFile'" src="assets/images/file1.jpg"
+                              class="img" (click)="myimage(this.linkFileLoc)" />
+                  <img  style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'jpg'"  [src]="(this.linkFileLoc)" class="img"
+                    (click)="myimage(this.filename_forview)" />
+                  
+
+                    <img  style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'jpeg'"  [src]="(this.linkFileLoc)" class="img"
+                    (click)="myimage(this.filename_forview)" />
+
+                    <img  style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'png'"  [src]="(this.linkFileLoc)" class="img"
+                    (click)="myimage(this.filename_forview)" />
+                    <img  style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'xlsx'" src="assets/images/xlsxicon.png"
+                    class="img" (click)="myimage(this.filename_forview)" /> 
+                    <img  style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'docx'" src="assets/images/wordicon.png"
+                    class="img" (click)="myimage(this.filename_forview)" /> 
+
+                    <img  style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'doc'" src="assets/images/wordicon.png"
+                    class="img" (click)="myimage(this.filename_forview)" />
+
+
+                <img  style="width:350;height:100px;;margin-left:3px" *ngIf="this.fileExtension == 'txt'" src="assets/images/txticon.jpg"
+                class="img"  style="width:350;height:100px;" (click)="myimage(this.filename_forview)" />
+    
+              <img *ngIf="this.fileExtension == 'ppt'"  src="assets/images/pptxicon.png"
+                class="img"  style="width:350;height:100px;" (click)="myimage(this.filename_forview)" />
+    
+              <img *ngIf="this.fileExtension == 'pptx'"  src="assets/images/pptxicon.png"
+                class="img"  style="width:350;height:100px;margin-left:3px" (click)="myimage(this.filename_forview)" />
+                </span>
+                <div class="row clearfix" style="margin-top:28px;">
+                    <div class="col-sm-12">
+                        <!-- <div class=" col-sm-12">
+                          <textarea id="coments" style="height:170px;font-size:16px;" data-length="120"></textarea>
+                          <label style="top: -201px;left: 0;font-size: 17px;color: #26a69a;position: relative;" for="textarea2">Comments</label>
+                        </div> -->
+                        <div class="col-sm-12">
+                          <label for="coments" style="color:#26a69a;">Comments:</label>
+                          <textarea type="text" id="coments" class="form-control" maxlength="300" autocomplete="off"></textarea>
+                      </div>
+                    </div>
+  
+            </div>
+                    <!-- The Modal -->
+                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">             
+                          <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <img src="#" class="imagepreview" style="width: 100%;" >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-sm-3"></div> -->
+             
+              </div>
+              <div style="text-align:center;">
+                <button type="button" class="btn-hover color-1" (click)="modify_submit()">Submit</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="flatsmodelId1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Flat List</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <div class="card">
+                <div style="width:100%;float:left">
+                  <div *ngFor="let roleObj1 of fltsList1" style="width:33.33%;float:left;padding: 10px;">
+                    <input  type="checkbox"   id ={{roleObj1.flatId}} (change)="onChange($event,$event.target.checked, roleObj1)"  checked style="width:20px;height:20px;float: left;"/><div style="margin-left: 10px;float: left;">{{roleObj1.flatNo}}</div>
+                  </div>
+                  </div>
+           <!-- <table style="font-size: 18px;">
+                <tr>
+                  <td *ngFor="let roleObj of fltsList">
+                     <input type="checkbox"   id ={{roleObj.flatId}} (change)="onChange($event,$event.target.checked, roleObj)"  checked style="width:20px;height:20px;float: left;"/><div style="margin-left: 10px;float: left;">{{roleObj.flatNo}}</div>
+                 </td>
+              </tr>
+            </table> -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="modal fade" id="flatsmodelId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Flat List</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <div class="card">
+                <div style="width:100%;float:left">
+                  <div *ngFor="let roleObj1 of fltsList" style="width:33.33%;float:left;padding: 10px;">
+                    <input  type="checkbox"   id ={{roleObj1.flatId}} (change)="onChange($event,$event.target.checked, roleObj1)"  checked style="width:20px;height:20px;float: left;"/><div style="margin-left: 10px;float: left;">{{roleObj1.flatNo}}</div>
+                  </div>
+                  </div>
+           <!-- <table style="font-size: 18px;">
+                <tr>
+                  <td *ngFor="let roleObj of fltsList">
+                     <input type="checkbox"   id ={{roleObj.flatId}} (change)="onChange($event,$event.target.checked, roleObj)"  checked style="width:20px;height:20px;float: left;"/><div style="margin-left: 10px;float: left;">{{roleObj.flatNo}}</div>
+                 </td>
+              </tr>
+            </table> -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div> 
+</section>

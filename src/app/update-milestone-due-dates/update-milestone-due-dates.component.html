@@ -1,0 +1,337 @@
+<!-- <style>
+   input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+
+  }
+
+</style> -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Update Milestones Due Dates </h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Milestones</a>
+            </li>
+            <li class="breadcrumb-item active">Update Milestones Due Dates</li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="userForm">
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+
+            <div class="form-line">
+              <p>
+                <b class="required">Select Project:</b>
+              </p>
+              <select style="width:100%" class="form-group states" id="projectID" single>
+                <option value="select">--Select--</option>
+
+              </select>
+            </div>
+
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+
+        <div class="row clearfix" id="blockslinksid">
+          <div class="col-sm-3" *ngFor="let item of Blocklinks;let i=index;"
+            (click)="blocksClickEvent(item.mileStoneAliasName+'$'+item.finMilestoneClassifidesId+'$'+item.siteId+'$'+item.siteName)"
+            style="margin-top:10px;height: 50px; overflow-y: auto;overscroll-behavior-y: none">
+
+            <a [class.selectedname]="item.mileStoneAliasName == milestoneAlias" class="anchor" href="#"
+              style="text-decoration: underline; pointer-events: none;">{{item.mileStoneAliasName}}</a><br><br>
+          </div>
+        </div>
+        <!-- <div id="interestDiv" style="margin-top:20px"><input type="checkbox" value=""
+            style="width:20px;height:20px;float:left" class="checlist1">
+          <div style="float:left;margin-left:2px;"> &nbsp; Interest</div>
+        </div> -->
+
+        <div class="table-responsive" style="border:0.2px solid;padding:5px;margin-top:60px"
+        id="milestone_blocks_tables">
+          <ul>
+            <li>
+
+              <table id="tableExport" class="display table table-hover table-checkable order-column width-per-100">
+                <thead>
+                  <tr>
+                    <!-- <th class="center">S.NO</th>  -->
+                    <th class="center">Action</th>
+                  
+                    <th class="center">Milestone</th>
+                   
+                    <th class="center">Demand Note Date</th>
+                    <!-- <th class="center">Demand Note Date</th>        -->
+                    <th class="center">Due Date</th>
+                  
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of milestonedemand_details; let i=index">
+                    <!-- <td class="center">{{i+1}}</td> -->
+                    <td class="center"><input type="checkbox" id="{{'tablerowdata'+(i+1)}}"
+                        value="{{item.mileStoneNo+'#'+item.percentagesId+'#'+item.finMilestoneClassifidesId+'#'+item.projectMilestoneId+'#'+item.milestoneDate+'#'+item.milestoneName+'#'+item.mileStonePercentage+'#'+item.mileStoneDueDate+'#'+item.statusName}}"
+                        style="width:20px;height:20px;" class="checlist"></td>
+                  
+                    <td class="center">{{item.milestoneName}}</td>
+                   
+                    <td class="center"><input disabled type="date" class ="demandnotedateclass" id="{{'demand_note_date'+(i+1)}}"
+                      value="{{item.masterDemandNotedate | date:'yyyy-MM-dd'}}" class="completedate"></td>
+                    <!-- <td class="center" ><input type="text" id="{{'demandnotedateselection'+(i+1)}}" value=""></td> -->
+                    <td class="center"><input type="date" id="{{'duedateselection'+(i+1)}}"
+                        value="{{item.mileStoneDueDate | date:'yyyy-MM-dd'}}" class="duedate"></td>
+                
+
+                  </tr>
+
+
+                </tbody>
+              </table>
+            </li>
+          </ul>
+        </div><br>
+        <!-- <div class="row clearfix" id="demandnotedatediv" style="display:none;">
+          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+            <label for="leave_start_date">Demand Note Date</label>
+          </div> -->
+          <!-- <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+            <div class="form-group">
+              <div class="form-line">
+                <input type="text" class="datepicker form-control" placeholder="Please choose Start date"
+                  id="demand_note_date">
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="row clearfix">
+
+          <div class="col-sm-4" style="margin-top:20px" id="allblockdiv">
+            <div id="" style="margin-top:20px"><input type="checkbox" value="" style="width:20px;height:20px;float:left"
+                id="all_blocksId">
+              <div style="float:left;margin-left:2px;">All Blocks</div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-4" id="blockwisediv" style="margin-top:20px">
+            <div id="" style="margin-top:20px"><input type="checkbox" value="" style="width:20px;height:20px;float:left"
+                id="Blockwise_Id">
+              <div style="float:left;margin-left:2px;">Block Wise</div>
+            </div>
+
+
+          </div>
+
+          <div class="col-sm-4" id="Faltwisediv" style="margin-top:20px">
+            <div id="" style="margin-top:20px"><input type="checkbox" value="" style="width:20px;height:20px;float:left"
+                id="flatwise_Id">
+              <div style="float:left;margin-left:2px;">Flat Wise</div>
+            </div>
+
+
+          </div>
+
+
+        </div> -->
+<span id="showhidediv" style="display:none">
+  
+        <div class="row clearfix">
+
+          <div class="col-sm-4" >
+
+            <div class="form-line" >
+              <p>
+                <b>Project:</b>
+              </p>
+              <input style="border:solid 1px #000;padding-left:10px" value="{{project_binding}}" />
+             
+              <!-- <select style="width:100%" class="form-group states" id="projectID2" single disabled>
+                <option value="select">--Select--</option>
+
+              </select> -->
+
+
+            </div>
+
+          </div>
+          
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-family: 'Poppins'"><b class="required">Select Blocks:</b></label>
+
+              <angular2-multiselect  [data]="project_wise_project" formControlName="project_wise_form"
+                [settings]="singledd1" (onSelect)="selectedSIDs($event);" (onSelectAll)="onSelectAll($event)"
+                (onDeSelect)="onItemDeSelect($event)" (onDeSelectAll)="onDeSelectAll($event)" (ngModelChange)="onChange1($event)" [(ngModel)]="title1">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.blockName }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.blockName }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+
+
+              <!-- <select style="width:100%;" class="form-group" id="projectID" multiple>
+            </select> -->
+            </div>
+          </div>
+
+        </div>
+        <div class="row clearfix" style="margin-top:20px" id="floor_flatID">
+
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-family: 'Poppins'"><b>Select Floors:</b></label>
+
+              <angular2-multiselect (ngModelChange)="onChange2($event)" [data]="floor_wise_project" formControlName="floor_wise_form"
+                [settings]="singledd2" (onSelect)="selectedSIDs2($event);" (onSelectAll)="onSelectAll2($event)"
+                (onDeSelect)="onItemDeSelect2($event)" (onDeSelectAll)="onDeSelectAll2($event)" [(ngModel)]="title2">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.floorName }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.floorName }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+
+
+              <!-- <select style="width:100%;" class="form-group" id="projectID" multiple>
+            </select> -->
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-line">
+              <label style="font-family: 'Poppins'"><b>Select Flats:</b></label>
+
+              <angular2-multiselect (ngModelChange)="onChange3($event)" [data]="flat_wise_project" formControlName="flat_wise_form"
+                [settings]="singledd3" (onSelect)="selectedSIDs3($event);" (onSelectAll)="onSelectAll3($event)"
+                (onDeSelect)="onItemDeSelect3($event)" (onDeSelectAll)="onDeSelectAll3($event)" [(ngModel)]="title3">
+                <c-badge>
+                  <ng-template let-item="item">
+                    <label>{{ item.flatNo }}</label>
+                  </ng-template>
+                </c-badge>
+                <c-item>
+                  <ng-template let-item="item">
+                    <label>{{ item.flatNo }}</label>
+                  </ng-template>
+                </c-item>
+              </angular2-multiselect>
+
+
+              <!-- <select style="width:100%;" class="form-group" id="projectID" multiple>
+            </select> -->
+            </div>
+          </div>
+        </div>
+
+        <div id="divforhide" >
+          <div class="row clearfix" style="margin-top: 10px;" id="ordiv">
+
+
+             <div class="col-sm-3" style="font-weight: 600;"></div>
+            <div class="col-sm-5" style="font-weight: 600;">(OR)</div>
+            <div class="col-sm-4" style="font-weight: 600;"></div>
+          </div>
+          
+          <form [formGroup]="fg">
+            <div class="row clearfix" style="margin-top:10px">
+              <div class="fistdaterow col-sm-4" >
+                <label style="position: relative;bottom: 2px;font-weight: bold">Booking From Date:</label>
+
+                <input style="border:solid 1px #000"type="date" class ="demandnotedateclass" id="frmdate"
+                value="" class="completedate">
+              </div>
+  
+              <div class="fistdaterow col-sm-4" >
+                <label style="position: relative;bottom: 2px;font-weight: bold">Booking To Date:</label>
+
+                <input style="border:solid 1px #000" type="date" class ="demandnotedateclass" id="todate"
+                value="" class="completedate">
+              </div>
+  
+             
+  
+            </div>
+  
+          </form>
+        </div>
+</span>
+        <div style="text-align:center;">
+          <button type="button" style="width:200px;" class="btn-hover color-1" (click)="update_dates()">Update</button>
+
+        </div>
+
+      </div>
+    </div>
+    </form>
+  </div>
+
+</section>

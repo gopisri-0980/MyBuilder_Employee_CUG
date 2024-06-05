@@ -1,0 +1,499 @@
+<style>
+  .loadercls {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    right: -14px;
+    top: 3px;
+  }
+
+  .fromtoclass {
+    position: relative;
+    left: 38px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    top: 0px;
+    font-weight: 600;
+    font-family: 'Poppins';
+    background-color: #FFF;
+  }
+
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.8);
+    position: absolute;
+    right: 35px;
+  }
+
+  ::ng-deep .my-class .modal-dialog {
+    max-width: 30%;
+    width: 30%;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 70px;
+
+  }
+
+  input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+
+    padding: 2px;
+    color: #000;
+    left: 33px;
+    content: "-";
+  }
+
+  input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Interest Paid And Waived Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>View Interest Paid And Waived Details</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+
+        <form [formGroup]="fg">
+          <div class="row clearfix">
+            <div class="col-sm-3" style="margin-top: -13px">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold;">Start Date:</label>
+                <div class="center" style="position: relative;top: 25px;">
+                  <span class="material-icons" style="position: absolute;
+              right: 19px;top: 7px;font-size: 20px;z-index: 9999;" (click)="startdatefun()">cancel </span>
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+                  <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3" style="margin-top: -13px">
+              <div class="form-line">
+                <label style="position: relative;top: 10px;font-weight: bold;">End Date:</label>
+                <div class="center" style="position: relative;top: 25px;">
+                  <span class="material-icons" style="position: absolute;
+              right: 19px;top: 7px;font-size: 20px;z-index: 9999;" (click)="endtimefun()">cancel </span>
+
+                  <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+
+                  <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #6d6c6c85; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="font-weight: bold;"><span style="color: red;">*</span>Select Project:</label>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="projectID" single>
+                    <!-- <option value="select">--Select--</option> -->
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-3">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="font-weight: bold;">Select Flat:</label>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="flatSelection">
+                    <!-- <option value="--Select--">--Select--</option> -->
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">To Date should be greater than or equal to From
+              Date</p>
+
+            <div style="width:100%;text-align:center;">
+              <button type="button" class="btn-hover color-1" style="width: 260px;"
+                (click)="viewinterestpendingdetailsfun()">View interest report</button>
+              <button type="button" class="btn-hover color-1" style="width: 260px;"
+                (click)="viewinterestpaidandwaiveddetailsfun()">View interest paid and waived
+                details</button>
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">View Interest Paid And Waived Details :</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="color: #137b89;font-size: 14px;">Do you really want to Submit ?</p>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" id="unreadid" class="btn-hover color-1" [disabled]="loading"
+          (click)="submitfunction_data(card)">
+          Submit
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+        </button>
+
+
+        <button type="button" class="btn-hover color-1" (click)="modal.close('Save click')">Cancel</button>
+      </div>
+    </ng-template> -->
+
+
+    <!-- <ng-template #content_data let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">View Interest Paid And Waived Details :</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="color: #137b89;font-size: 14px;">Do you really want to Submit ?</p>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" id="unreadid" class="btn-hover color-1" [disabled]="loading1"
+          (click)="interestwaiver_paid_datails(card)">
+          Submit
+          <span *ngIf="loading1" class="spinner-border spinner-border-sm mr-1 loadercls"></span>
+        </button>
+
+
+        <button type="button" class="btn-hover color-1" (click)="modal.close('Save click')">Cancel</button>
+      </div>
+    </ng-template> -->
+
+
+
+
+    <div class="card" *ngIf="hideme">
+      <div class="card-body">
+        <div>
+          <p style="font-size: 19px;font-weight: 600;">No records found</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="controller1?.length">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="tableExport1"
+            class="display table table-hover table-checkable order-column width-per-100 table-bordered"
+            style="margin-top: 80px;">
+            <thead>
+              <tr class="center">
+                <th class="center" style="font-weight:bolder"><b>S.No</b></th>
+                <th class="center" style="font-weight:bolder"><b> Project Name</b></th>
+                <th class="center" style="font-weight:bolder"><b>customer Name</b></th>
+                <th class="center" style="font-weight:bolder"><b>Flat No</b></th>
+                <th class="center" style="font-weight:bolder"><b>Booking Date</b></th>
+                <th class="center" style="font-weight:bolder"><b>Sale Deed Date</b></th>
+                <th class="center" style="font-weight:bolder"><b>Handing Over Date</b></th>
+                <th class="center" style="font-weight:bolder"><b>Agreement Date</b></th>
+                <th class="center" style="font-weight:bolder"><b>Total Interest Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Amount waived off</b></th>
+                <th class="center" style="font-weight:bolder"><b>Waiver amount request pending</b></th>
+                <th class="center" style="font-weight:bolder"><b>Interest Collected</b></th>
+                <th class="center" style="font-weight:bolder"><b>Bal Interest</b></th>
+                <th class="center" style="font-weight:bolder"><b>Basic Flat Cost</b></th>
+                <th class="center" style="font-weight:bolder"><b>Amenities Flat Cost</b></th>
+                <th class="center" style="font-weight:bolder"><b>Total Flat Cost Excl Gst</b></th>
+                <th class="center" style="font-weight:bolder"><b>Total Agreement Cost</b></th>
+                <th class="center" style="font-weight:bolder"><b>Total Paid Amount</b></th>
+
+                <th class="center" style="font-weight:bolder"><b>Legal Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Legal Paid Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Flat Khata Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Flat Khata Paid Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Maintenance Charge Pay Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Maintenance Charge Paid Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Modification Charges Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Modification Charges Paid Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Corpus Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Corpus Paid Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Car Parking Pay Amount</b></th>
+                
+                <th class="center" style="font-weight:bolder"><b>Assignment Transfer Fee Paid Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Assignment Transfer Fee Pay Amount</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of controller1; let i = index;" class="customersList"
+                (click)="viewcustomerdata(item)" style="cursor:pointer;">
+                <td class="center">{{i + 1}}</td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center">{{item.customerName}}</td>
+                <td class="center">{{item.flatNo}}</td>
+
+                <td class="center">
+
+                  <!-- <span *ngIf="item.bookingDate != null" style="display: none;">{{item.bookingDate}}</span> -->
+                  <span *ngIf="item.bookingDate != null">{{item.bookingDate}}</span>
+                  <span *ngIf="item.bookingDate == null"> - </span>
+                </td>
+
+
+                <td class="center">
+                  <!-- <span *ngIf="item.saleDeedDate != null" style="display: none;">{{item.saleDeedDate}}</span> -->
+                  <span *ngIf="item.saleDeedDate != null">{{item.saleDeedDate}}</span>
+                  <span *ngIf="item.saleDeedDate == null"> - </span>
+
+                </td>
+
+                <td class="center">
+                  <!-- <span *ngIf="item.handingOverDate != null" style="display: none;">{{item.handingOverDate}}</span> -->
+                  <span *ngIf="item.handingOverDate != null">{{item.handingOverDate}}</span>
+                  <span *ngIf="item.handingOverDate == null"> - </span>
+                </td>
+
+                <td class="center">
+
+                  <!-- <span *ngIf="item.agreementDate != null" style="display: none;">{{item.agreementDate}}</span> -->
+                  <span *ngIf="item.agreementDate != null">{{item.agreementDate}}</span>
+                  <span *ngIf="item.agreementDate == null"> - </span>
+
+
+
+                </td>
+                <td class="center">{{item.totalInterestAmount.toLocaleString('en-IN')}}</td>
+                <td class="center"> {{item.totalInterestWaiverAdjAmount.toLocaleString('en-IN')}} </td>
+                <td class="center"> {{item.sumOfInitiatedWaiverAmount.toLocaleString('en-IN')}} </td>
+                <td class="center"> {{item.totalPenalityPaidAmount.toLocaleString('en-IN')}} </td>
+                <td class="center"> {{item.penaltybalanceAmount.toLocaleString('en-IN')}} </td>
+                <td class="center">{{item.basicFlatCost.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.amenitiesFlatCost.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.totalFlatCostExclGst.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.totalAgreementCost.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.totalPaidAmount.toLocaleString('en-IN')}}</td>
+
+
+
+                <td class="center">{{item.legalPayAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.legalPaidAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.flatKhataPayAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.flatKhataPaidAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.maintenanceChargePayAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.maintenanceChargePaidAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.modificationPayAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.modificationPaidAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.corpusPayAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.corpusPaidAmount.toLocaleString('en-IN')}}</td>
+
+
+                <td class="center">{{item.carParkingPayAmount.toLocaleString('en-IN')}}</td>
+          
+                <td class="center">{{item.assignmentTransferFeePayAmount.toLocaleString('en-IN')}}</td>
+                <td class="center">{{item.assignmentTransferFeePaidAmount.toLocaleString('en-IN')}}</td>
+
+                
+              </tr>
+            </tbody>
+            <ng-container *ngIf="controller1?.length">
+              <tr style="background: #fef8f8;">
+                <td colspan="7"></td>
+                <td style="color: #9E9E9E;font-weight:600">Grand Total :</td>
+                <td>
+
+                  <span id="Total_Cost1" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td><span id="Total_Cost2" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td><span id="Total_Cost3" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost4" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost5" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost6" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost7" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost8" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost9" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost10" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost11" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost12" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost13" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost14" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost15" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost16" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost17" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost18" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost19" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost20" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+
+                <td>
+                  <span id="Total_Cost21" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+
+
+
+                <td>
+                  <span id="Total_Cost22" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <td>
+                  <span id="Total_Cost23" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td>
+                <!-- <td>
+                  <span id="Total_Cost24" style="color: #9E9E9E;position: relative;left: 9px;font-weight:600"></span>
+                </td> -->
+
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="controller?.length">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="tableExport"
+            class="display table table-hover table-checkable order-column width-per-100 table-bordered"
+            style="margin-top: 80px;">
+            <thead>
+              <tr class="center">
+                <th class="center" style="font-weight:bolder"><b>S.No</b></th>
+                <th class="center" style="font-weight:bolder"><b>Transaction Date</b></th>
+                <th class="center" style="font-weight:bolder"><b>Project Name</b></th>
+                <th class="center" style="font-weight:bolder"><b>Flat No</b></th>
+                <th class="center" style="font-weight:bolder"><b>Waiver Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Paid Amount</b></th>
+                <!-- <th class="center" style="font-weight:bolder"><b>Documents</b></th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of controller; let i = index;" class="customersList" style="cursor:pointer;">
+                <td class="center">{{i + 1}}</td>
+                <td class="center">
+
+                  <!-- <span *ngIf="item.transactionClosedDate != null"
+                    style="display: none;">{{item.transactionClosedDate}}</span> -->
+                  <span *ngIf="item.transactionClosedDate != null">{{item.transactionClosedDate| date:'dd-MM-yyy
+                    '}}</span>
+                  <span *ngIf="item.transactionClosedDate == null"> - </span>
+
+
+
+
+                </td>
+                <td class="center">{{item.siteName}}</td>
+                <td class="center">{{item.flatNo}}</td>
+                <td class="center">{{item.interestWaivedAmount}} <span
+                    *ngIf="item.interestWaivedAmount == null">-</span></td>
+                <td *ngIf="item.location != null" class="center"><span
+                    style="text-decoration: underline;cursor: pointer;"
+                    (click)='opendocument(item)'>{{item.paidPenaltyAmount}}</span></td>
+                <td *ngIf="item.location == null" class="center"><span>{{item.paidPenaltyAmount}}</span></td>
+
+
+                <!-- <td class="center" (click)='opendocument(item)'>
+                  <span style="color: #007bff;text-decoration: none;
+                  background-color: transparent;">{{item.docName}}</span>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</section>

@@ -1,0 +1,116 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Interest Letter</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>View Interest Letter</a>
+            </li>
+         
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+      <div class="row clearfix">
+        <div class="col-sm-4">
+          <div class="form-line">
+            <p class="fieldHeaders">
+              <label style="font-weight: bold;"><span style="color: red;">*</span>Select Project:</label>
+            </p>
+            <div class="center">
+              <select style="width:100%;" class="form-group" id="projectID" single>
+                <!-- <option value="select">--Select--</option> -->
+              </select>
+            </div>
+          </div>
+        </div>
+
+        
+        <div id="blocksID" class="col-sm-4">
+          <div class="form-line">
+            <p class="fieldHeaders">
+              <label style="font-weight: bold;">Select Block:</label>
+            </p>
+            <div class="center">
+              <select style="width:100%;" class="form-group" id="BlockId">
+                <!-- <option value="--Select--">--Select--</option> -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <div  class="col-sm-4">
+          <div class="form-line">
+            <p class="fieldHeaders">
+              <label style="font-weight: bold;">Select Flat:</label>
+            </p>
+            <div class="center" >
+              <select style="width:100%;" class="form-group" id="flatSelection">
+                <!-- <option value="--Select--">--Select--</option> -->
+              </select>
+            </div>
+          </div>
+        </div>
+      </div><br>
+
+      <br>
+      <div style="text-align:center;">
+        <button type="button" class="btn-hover color-1" (click)="demandNotes()">Search</button>
+      </div>
+
+      <div class="table-responsive " style="padding:5px;margin-top:60px;margin-bottom: 30px;" >
+       
+      
+      <table id="tableExport" class="table table-bordered" *ngIf="milestonedemand_table?.length">
+        <thead>
+          <tr>
+              <!-- <th class="center">S.NO</th>  -->
+              <th class="center">S.No</th> 
+            <th class="center">Customer Name</th>           
+            <th class="center">Amount</th>        
+            <th class="center">Interest Letter Date</th>  
+            <th class="center">Raised By</th>
+            <th class="center">Interest Letter</th> 
+            <!-- <th class="center">Due Date</th>          
+            <th class="center">Status</th> -->
+        
+          </tr>
+        </thead>
+       
+        <tbody>
+        
+          <tr *ngFor="let item of milestonedemand_table; let i=index" style="cursor: pointer;">
+              <!-- <td class="center">{{i+1}}</td> -->
+             <td class="center" (click)="attachmentlink(item.documentLocation)">{{i+1}}</td>
+            <td class="center" (click)="attachmentlink(item.documentLocation)">{{item.custName}}</td>
+            <td class="center" (click)="attachmentlink(item.documentLocation)">{{item.interestAmountWithFormat.toLocaleString('en-IN')}}</td>
+            <td class="center" (click)="attachmentlink(item.documentLocation)">{{item.createdDate| date:'dd-MM-yyyy'}}</td>
+            <td class="center" (click)="attachmentlink(item.documentLocation)">{{item.employeeName}}</td>
+            <td class="center" (click)="attachmentlink(item.documentLocation)"><img
+              style="width:20px;height:20px;;margin-left:3px" src="assets/images/pdficon.png"
+              ></td>
+            <!-- <td class="center" >{{item.dueDate| date:'yyyy-mm-dd'}}</td>
+            <td class="center" >{{item.status}}</td>                   -->
+
+          </tr>
+          
+    
+        </tbody>
+      </table>
+   
+    </div>
+    </div>
+  </div>
+</div>
+    
+ </div>
+
+</section>
+
+

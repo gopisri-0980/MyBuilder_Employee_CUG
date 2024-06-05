@@ -1,0 +1,141 @@
+<style>
+    .fromtoclass {
+    position: relative;
+    left: 38px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    top: -17px;
+    font-weight: 600;
+    font-family: 'Poppins';
+}
+
+.subheadercls {
+    font-size: 15px;
+    position: relative;
+    top: 6px;
+    left: 0;
+    font-weight: 500;
+    color: #607D8B;
+  }
+  
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Ticket Monthly Report-Projectwise</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;"></i>
+                <span style="cursor:pointer;">Report</span> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Ticket monthly report -projectwise</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div class="card" style="position: relative;top: -24px;">
+      <div class="card-body" style="padding: 0px!important;">
+        <form [formGroup]="fg">
+          <div class="row clearfix" style="position: relative;top: 7px;left: 18px;">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;"> From Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date" pattern="\d{4}-\d{2}-\d{2}"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+
+                   
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">To Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date" pattern="\d{4}-\d{2}-\d{2}"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <button type="button" class="btn-hover color-1" (click)="searchAllServices('submitClick')">Submit</button>
+            </div>
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">Please add a valid from and to date</p>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div *ngIf="controller?.length" style="position: relative;top: -40px;">
+      <div>
+        <div  style="background-color: transparent;border:none">
+          <h4 class="subheadercls" >Note: Tickets showing only from <span>{{startdateDatavalue |
+              date:'dd-MM-yyyy'}}</span> to <span>{{enddateDatavalue | date:'dd-MM-yyyy'}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card" style="position: relative; top: -28px;">
+      <div class="card-body">
+        <div class="table-responsive" *ngIf="controller?.length"> 
+          <table id="Alltickettypes" class="table table-bordered">
+          <thead>
+            <tr>
+              <th><b>S.No</b></th>
+              <!-- <td><b>Ticket Type</b></td> -->
+              <td *ngFor="let p of controller_data"><b>{{p}}</b></td>
+                <!-- <td style="color: #9E9E9E;"><b>Grand Total</b></td> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of controller ; let i = index;">
+              <td class="center">{{i + 1}}</td>
+              <td>{{item.ticketType}}</td>
+              <td *ngFor="let p of item.siteList">{{p.totalTickets}}</td>
+              <td style="color: #9E9E9E;"><b>{{item.totalTickets}}</b></td>
+            </tr>
+
+           
+          </tbody>
+          <tfoot>
+            <tr *ngIf="total_main_controller?.length">
+              <td *ngFor="let p of total_main_controller"  style="color: #9E9E9E;">{{p}}</td>
+            </tr>
+          </tfoot>
+          </table>
+        </div>
+
+        <div *ngIf="controller.length == 0">
+          <p style="margin-top: 46px;">No data available</p>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,284 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+    <div class="content__loader">
+      <div><i class="Favicon"></i></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  th,
+  td {
+    border: solid 0.5px;
+    white-space: nowrap;
+  }
+
+
+
+  .titileclassproject {
+    font-weight: bold;
+    font-size: 19px;
+    color: #607D8B;
+  }
+
+
+  .explorecls {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+
+  .sasbtn {
+    position: relative;
+    top: -32px;
+    right: 23px;
+
+  }
+
+
+
+  .fromtoclass {
+    position: relative;
+    left: 38px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    top: -17px;
+    font-weight: 600;
+    font-family: 'Poppins';
+}
+  
+
+
+  .subheadercls {
+    font-size: 15px;
+    position: relative;
+    top: 6px;
+    left: 0;
+    font-weight: 500;
+    color: #607D8B;
+  }
+
+
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+
+  .table-responsive {
+    display: block;
+    height: 300px!important;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+</style>
+
+<section class="content">
+
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Feedback Report</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>
+                <span (click)="dashtitle()" style="cursor:pointer;">Ticketing Dashboard</span> </a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Feedback Report</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card" style="position: relative;top: -24px;">
+      <div class="card-body" style="padding: 0px!important;">
+        <form [formGroup]="fg">
+          <div class="row clearfix" style="position: relative;top: 7px;left: 18px;">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">Ticket creation from date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date" pattern="\d{4}-\d{2}-\d{2}"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+
+                   
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">Ticket creation to date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date" pattern="\d{4}-\d{2}-\d{2}"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <button type="button" class="btn-hover color-1" (click)="searchAllServices('submitClick')">Submit</button>
+            </div>
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">Please add a valid from and to date</p>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div *ngIf="MainArray?.length" style="position: relative;top: -40px;">
+      <div>
+        <div style="background-color: transparent;border:none">
+          <h4 class="subheadercls">Note:Tickets showing only from <span>{{startdatevalue | date:'dd-MM-yyyy'}}</span> to <span>{{enddatevalue | date:'dd-MM-yyyy'}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="position: relative; top: -28px;">
+      <div class="card-body">
+
+
+        <!-- <div class="row">
+          <div class="col-sm-10">
+            <p class="titileclassproject" style="position: relative;
+        top: 30px;"> Feedback - projectwise report: </p>
+          </div>
+          <div class="col-sm-2">
+            <div *ngIf="MainArray?.length">
+              <button type="button" (click)="exploreTableSix()" class="btn-hover color-1 sasbtn" style="position: relative;
+          top: 14px;">
+                Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+              </button>
+
+
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div style="width:100%;text-align:center;" *ngIf="loaderhideme6">
+          <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+        </div> -->
+
+
+        <div class="row clearfix">
+          <div class="col-sm-12">
+            <div class="table-responsive" *ngIf="MainArray?.length">
+              <table style="border-radius: 10px;" id="ticketmonthlyreport" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr class="center">
+                    <th>Project Name</th>
+                    <th>Rating (10 stars) </th>
+                    <th>Rating (9 stars)</th>
+                    <th>Rating (8 stars)</th>
+                    <th>Rating (7 stars)</th>
+                    <th>Rating (6 stars)</th>
+
+                    <th>Rating (5 stars) </th>
+                    <th>Rating (4 stars)</th>
+                    <th>Rating (3 stars)</th>
+                    <th>Rating (2 stars)</th>
+                    <th>Rating (1 stars)</th>
+                    <th>Rating (0 stars)</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of MainArray;  let i = index;">
+                    <td class="center">{{item.Sitename}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,10)">{{item.Ten}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,9)">{{item.Nine}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,8)">{{item.Eight}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,7)">{{item.Seven}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,6)">{{item.Six}}</td>
+
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,5)">{{item.Five}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,4)">{{item.Four}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,3)">{{item.Three}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,2)">{{item.Two}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,1)">{{item.One}}</td>
+                    <td class="center" style="text-decoration: underline; cursor: pointer;" (click)="eventclickfun(item , i ,0)">{{item.Zero}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="margin-top:100px;"></div>
+            </div>
+
+            <div *ngIf="controller.length == 0">
+              <p style="margin-top: 46px;">No data available</p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+

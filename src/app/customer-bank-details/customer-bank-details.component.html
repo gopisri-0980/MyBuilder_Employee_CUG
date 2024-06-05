@@ -1,0 +1,261 @@
+
+<style>
+   .norecordclass {
+    position: relative;
+    top: 14px;
+    left: 26px;
+    font-size: 17px;
+    font-family: 'Poppins';
+  }
+.labelclass{
+  font-weight:bold;
+}
+  .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 250px;
+    display: block;
+  }
+
+
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Customer Account Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>View Customer Account Details</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-4">
+
+            <div class="form-group">
+              <label style="font-weight: bold;" class="required">Project Name:</label>
+              <select style="width:100%;" class="form-group" id="projectID" single>
+              </select>
+            </div>
+
+          </div>
+
+
+          <div id="blocksID" class="col-sm-4">
+            <div class="form-group">
+              <label style="font-weight: bold;">Block Name:</label>
+              <select style="width:100%;" class="form-group" id="BlockId">
+              </select>
+            </div>
+          </div>
+
+          <div id="flatsID" class="col-sm-4">
+
+            <div class="form-group">
+              <label style="font-weight: bold;">Flat Number:</label>
+              <select style="width:100%;" class="form-group" id="flatSelection">
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row clearfix">
+
+          <div class="col-sm-4" style="position: relative; top: -11px;">
+            <label style="font-weight: bold;">Customer Name :</label>
+            <div class="ng-autocomplete">
+              <!-- border: solid 0.5px lightgrey!important;id="hideflat2" -->
+              <form [formGroup]="autocompleteform">
+                <ng-autocomplete [data]="countries" [searchKeyword]="keyword" placeHolder="Enter the Customer Name"
+                  (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                  (inputCleared)="onClearSearch($event)" historyIdentifier="countries" [itemTemplate]="itemTemplate"
+                  [notFoundTemplate]="notFoundTemplate" #auto formControlName="employeename">
+                </ng-autocomplete>
+                <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.name"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                </ng-template>
+              </form>
+            </div>
+
+          </div>
+
+
+          <div class="col-sm-4 ">
+            <button type="submit" class="btn-hover color-1" (click)="getDetails()">Submit</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+    <div class="card" *ngIf="controller_table_data?.length">
+      <div class="card-body">
+
+
+        <div class="table-responsive">
+          <table id="tablecomplete" class="table table-bordered">
+
+            <thead>
+              <tr>
+                <th class="center">S.No</th>
+                <th class="center">Customer Name</th>
+                <th class="center">Project Name</th>
+                <th class="center">Block</th>
+                <th class="center">Flat</th>
+                <th class="center">Name as per bank</th>
+                <th class="center">Branch Name</th>
+                <th class="center">Account Number</th>
+                <th class="center">Bank Name</th>
+                <th class="center">IFSC Code</th>
+                <th class="center">Action</th> 
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of controller_table_data; let i=index">
+                <td class="center">{{i+1}}</td>
+                <td class="center">{{item.custName}}</td>
+                <td class="center">{{item.site}}</td>
+                <td class="center">{{item.block}}</td>
+                <td class="center">{{item.flat}}</td>
+                <td class="center">{{item.accountHolderName}}</td>
+                <td class="center">{{item.branchName}}</td>
+                <td class="center">{{item.accountNumber}}</td>
+                <td class="center"><span class="my__textoverflow">{{item.bankName}}</span></td>
+                <td class="center">{{item.ifscCode}}</td>
+              <td class="center"><i class="fa fa-edit" style="font-size:24px" (click)="editDetails(item)"></i>
+                <i class="fa fa-trash" aria-hidden="true" style="font-size:24px;color: red;margin-left: 5px;" (click)="DeleteFunc(item)"></i>
+              </td> 
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="card" *ngIf="controller_table_data.length == 0">
+      <div class="card-body">
+        <div style="position: relative; bottom: 10px;">
+          <p class="norecordclass">No Data Avaliable</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editbankmodal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Bank Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="height:330px;">
+
+            <div class="card">
+              <div class="card-body">
+                <form>
+
+                  <div class="rowtitlecls" style="height: 210px;">
+                    <div class="row clearfix" >
+                 
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label class="required labelclass">Name as per bank</label>
+                          <input  [(ngModel)]="bankname"  (keypress)="keyPress_name($event)" maxlength="15" type="text" placeholder="Enter bank name"
+                            style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                            class=" form-control" id="name">
+                        </div>
+                      </div>
+                     
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label class="required labelclass">Branch Name</label>
+                          <input  [(ngModel)]="brancname"  (keypress)="keyPress_name($event)" maxlength="15" type="text" placeholder="Enter bank name"
+                            style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                            class=" form-control" id="branch_name">
+                        </div>
+                      </div>
+                     
+                      </div>
+    
+                    
+                      <div class="row clearfix" style="position: relative;top: -17px;">
+                      
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label class="required labelclass">Account Number</label>
+                            <input   type="number" maxlength="15" placeholder="Enter account number"
+                              style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                              class=" form-control" id="accountnumber">
+                          </div>
+                        </div>
+    
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label class="required labelclass">Bank Name</label>
+                            <input   type="text" (keypress)="keyPress_name($event)" maxlength="15" placeholder="Enter bank name"
+                              style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                              class=" form-control" id="bankName">
+                          </div>
+                        </div>
+                      
+                        </div>
+                      
+                          <div class="row clearfix" style="position: relative;top: -35px;">
+                             
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <label class="required labelclass">IFSC code</label>
+                                <input  (keypress)="keyPress_ack($event)" type="text" placeholder="Enter IFSC code"
+                                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                                  class=" form-control" id="ifsccode">
+                              </div>
+                            </div>
+                           
+                            </div>
+                      </div>
+                      </form>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer" style="height: 0!important;">
+            <button type="button" style='position: relative;
+            top: -33px;' class="btn-hover color-1" (click)="Submit()">Submit</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</section>

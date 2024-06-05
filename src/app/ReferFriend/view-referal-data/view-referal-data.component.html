@@ -1,0 +1,177 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Reference Details</h4>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">View Reference Details</a>
+            </li> -->
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" ></i> <span style="cursor: pointer;" (click)="referencelistClick()" >References</span></a>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-1" style="cursor: pointer;" (click)="referencelistClick()">
+              <a>View Reference List</a>
+            </li> -->
+            <li class="breadcrumb-item bcrumb-1">
+              <a>View Reference Details</a>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mainDiv">
+      <div class="row clearfix">
+        <div class="col-md-2 col-sm-6 text-center">
+          <img *ngIf="viewData.customerImg" alt="Generic placeholder image" class="m-r-15 imgStyles" alt="Customer Image" src="{{viewData.customerImg}}"
+            width="60">
+          <img  *ngIf="!viewData.customerImg" alt="Generic placeholder image" class="m-r-15 imgStyles" alt="Customer Image" src="assets/images/customerimage.png"
+            width="60">
+          <p style="word-break: break-all;"> {{viewData.customerName}}</p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Reference Id</label>
+                <div class="col-md-6 font-16">
+                  {{viewData.refrenceId}}
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Referee Project Name</label>
+                <div class="col-md-6 font-16">
+                  {{viewData.interestedSiteNames}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Customer Name</label>
+                <div class="col-md-6 font-16">
+                  {{viewData.customerName}}
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Referee Name</label>
+                <div class="col-md-6 font-16">
+                  {{viewData.referrerName}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Referee Email Id</label>
+                <div class="col-md-6 font-16">
+                  {{viewData.referrerEmailId}}
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Referee Mobile No</label>
+                <div class="col-md-6 font-16">
+                  {{viewData.mobileNo}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Customer Project Name</label>
+                <div class="col-md-6 font-16">
+                  {{viewData.customerSiteName}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Referee Interested Flat</label>
+                <div class="col-md-6 font-16">
+                  {{viewData.flatPreferences}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+                  <div class="row">
+                    <label class="col-md-4 datalable" style="padding: 0px !important;">Customer Flat Number</label>
+                    <div class="col-md-6 font-16">
+                      {{viewData.customerFlatNo}}
+                    </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+                <div class="row">
+                  <label class="col-md-4 datalable" style="padding: 0px !important;">Referral Status</label>
+                  <div class="col-md-6">
+                    <select style="width:100%" id="statusID" single>
+                      <!-- <option value="select">--Select status--</option>
+                      <option value="ELIGIBLE">Eligible</option>
+                      <option value="NON-ELIGIBLE">Non-Eligible</option>
+                      <option value="BOOKED">Booked</option>
+                      <option value="AGREEMENT-DONE">Agreement-Done</option>
+                      <option value="PAYMENT-INITIATED">Payment-Initiated</option>
+                      <option value="PAYMENT-DONE">Payment-Done</option> -->
+                    </select>
+                    </div>
+               
+                </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+                  <div class="row">
+                    <label class="col-md-4 datalable" style="padding: 0px !important;">Employee Name</label>
+                    <div class="col-md-6 font-16">
+                      {{viewData.employeeName}}
+                    </div>
+                  </div>
+                </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 padding1per">
+              <div class="row">
+                <label class="col-md-4 datalable" style="padding: 0px !important;">Company Comments</label>
+                <div class="col-md-6">
+                  <!--*ngIf="viewData.comments==null" <span class="font-16" *ngIf="viewData.comments!=null">{{viewData.comments}}</span> -->
+                  <textarea rows="5" cols="5"  [(ngModel)]="comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+          
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-6 text-center">
+          <!-- <img *ngIf="viewData.referrerImg" alt="Generic placeholder image" class="m-r-15 imgStyles" alt="Referrer Image" src="{{viewData.referrerImg}}"
+            width="60"> -->
+            <img  alt="Generic placeholder image" class="m-r-15 imgStyles" alt="Referrer Image" src="assets/images/customerimage.png"
+            width="60">
+            <p style="word-break: break-all;">{{viewData.referrerName}}</p>
+        </div>
+        <!-- *ngIf="viewData.comments==null && this.viewData.referralStatusName=='NON-ELIGIBLE'" -->
+        <div class="col-md-11 center-block text-center m-t-40" >
+          <button type="button" class="btn-hover color-1" (click)="SearchRefferalFriend()">Submit</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

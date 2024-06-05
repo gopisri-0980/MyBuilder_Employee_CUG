@@ -1,0 +1,116 @@
+<style>
+     .my__textoverflow {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 200px;
+        display: block;
+    }
+</style>
+
+<section class="content">
+
+    <div class="container-fluid">
+
+        <div class="block-header">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">View Notifications For Approvals</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a>
+                                <i class="fas fa-home" (click)="homeClick()"></i>Company Notifications</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">View Notifications For Approvals</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+              
+
+                <div class="card" style="border:0px;">
+                    <!-- Basic Examples -->
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card" style="border:0px;">
+
+                                <div class="body">
+
+                                    <div class="table-responsive" style="border:0.2px solid;padding:10px;">
+
+                                        <!-- <div class="col-md-2" style="float: right;"> 
+                                                <input style="text-align:center;border:1px solid;margin-top: 10px;" class="effect-9" name="search" [(ngModel)]="searchText" type="text" placeholder="Search Here">  
+                                                <span class="focus-border">
+                                                    <i></i>
+                                                  </span>
+                                              </div> -->
+                                        <table id="tableExport"
+                                            class="display table table-hover table-checkable order-column width-per-100">
+                                            <thead>
+                                                <tr class="center">
+                                                    <th>S.NO</th>
+                                                    <th>Notification Id</th>
+                                                    <th>Title</th>
+                                                    <!-- <th>States</th> -->
+                                                    <th>Created By</th>
+                                                    <th>Created Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- <span *ngIf="tabledata == 0">
+                                            <div class="center" id="noData"> No Data Available</div>   -->
+                                                <!-- <tr  *ngFor="let data of ticketList| paginate: { itemsPerPage: totalItems, currentPage: current_Page,totalItems: itemsPer_Page};let i=index;" class="ticketList"> -->
+                                                <!-- <tr  *ngFor="let data of ticketList| filter : searchText | paginate: { itemsPerPage: totalItems, currentPage: current_Page,totalItems: itemsPer_Page};let i=index;" class="ticketList">
+                                          </tr>
+                                    </span> -->
+                                                <!-- <tr *ngIf="tabledata == 0">
+                                                    <td class="center" colspan="8" id="noData"> No Data Available</td>
+                                                </tr> -->
+
+                                                <tr *ngFor="let item of tabledata;let i=index;"
+                                                    class="notificationsList" (click)="leadId(item)">
+                                                    <td class="center">{{i+1}}</td>
+                                                    <td class="center">{{item.notificationId}}</td>
+                                                    <td class="center"
+                                                        style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden; width: 40%;max-width: 1px;">
+                                                      
+
+                                                        <span class="my__textoverflow">{{item.message}}</span>
+                                                    
+                                                    </td>
+                                                        <!-- <td class="center">{{item.responseObjList}}</td> -->
+                                                       <td>{{item.createdByName}}</td>
+                                                    <td class="center">{{item.createdDate | date:'fullDate'}}</td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+
+                                        <!-- <pagination-controls style="float: right; font-size: 18px" (pageChange)="pageChanged($event)"></pagination-controls> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- #END# Basic Examples -->
+
+                </div>
+
+
+               
+
+
+            </div>
+        </div>
+    </div>
+</section>

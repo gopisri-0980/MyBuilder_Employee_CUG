@@ -1,0 +1,446 @@
+<style>
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      border-radius: 4px;
+      margin-right: 2px;
+      opacity: 0.9;
+      filter: invert(0.8);
+      position: absolute;
+      right: 35px;
+    }
+  
+    ::ng-deep .my-class .modal-dialog {
+      max-width: 30%;
+      width: 30%;
+  
+    }
+  
+    input[type="date"]::-webkit-datetime-edit,
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button {
+      color: #fff;
+      position: relative;
+    }
+  
+    input[type="date"]::-webkit-datetime-edit-year-field {
+      position: absolute !important;
+  
+      padding: 2px;
+      color: #000;
+      left: 70px;
+  
+    }
+  
+    input[type="date"]::-webkit-datetime-edit-month-field {
+      position: absolute !important;
+     
+      padding: 2px;
+      color: #000;
+      left: 33px;
+      content: "-";
+    }
+  
+    input[type="date"]::-webkit-datetime-edit-day-field {
+      position: absolute !important;
+      color: #000;
+      padding: 2px;
+      left: 4px;
+  
+    }
+    .bottomcls {
+      position: relative;
+      top: 0px;
+      font-weight: 600;
+      font-size: 18px;
+      width: 40%;
+    }
+    .ng-autocomplete {
+      width: 100% !important;
+    }
+    .fromtoclass {
+      position: relative;
+      left: 38px;
+      color: orangered;
+      font-weight: bold;
+      font-size: 13px;
+      width: 90%;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      top: -17px;
+      font-weight: 600;
+      font-family: 'Poppins';
+      background-color: #FFF;
+    }
+  
+    .sas {
+      padding: 10px;
+      border: solid#bbb 0.5px;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+  </style>
+  
+  <section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row" style="position: relative;
+        left: 19px;top: 5px;">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">View All Complaints</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a>
+                  <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>Complaints</a>
+              </li>
+              <!-- <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Ticket</a>
+              </li> -->
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">View All Complaints</a>
+              </li>
+  
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="card" style="border:0;position: relative; top: -35px;">
+  
+          
+            <div class="body">
+  
+  
+                <div class="card" style="height: 170px;">
+                  <div class="card-body">
+                    <form [formGroup]="fg">
+                      <div class="row clearfix" style="position: relative;
+                      top: -7px;">
+                        <div class="col-sm-3">
+  
+                          <div class="form-line">
+                            <label style="font-weight: bold;">Project:</label>
+                            <div class="center">
+                              <select style="width:100%;height: 41px!important" id="siteID">
+                                <option value="select">--Select--</option>
+                              </select>
+                            </div>
+                          </div>
+  
+                        </div>
+                        <div class="col-sm-3">
+  
+                          <div class="form-line">
+                            <label style="font-weight: bold;">Customer Name / Flat No:</label>
+                            <div class="center">
+                              <select style="width:100%;height: 41px!important" id="customerID">
+                                <option value="select">--Select--</option>
+                              </select>
+                            </div>
+                          </div>
+  
+                        </div>
+                        <!-- <div class="col-sm-3">
+                          <div class="form-line">
+                            <label style="font-weight: bold;">From Date:</label>
+                            <div class="center">
+                              <input type="date" placeholder="Select Date"
+                                style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                                class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="form-line">
+                            <label style="font-weight: bold;">To Date:</label>
+                            <div class="center">
+                              <input type="date" placeholder="Select Date"
+                                style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                                class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                            </div>
+                          </div>
+                        </div> -->
+                        <div class="col-sm-3" style="margin-top: -13px">
+                          <div class="form-line">
+                            <label style="position: relative;top: 10px;font-weight: bold;">Start Date:</label>
+                            <div class="center" style="position: relative;top: 9px;">
+            
+                              <span class="material-icons" style="position: absolute;
+                            right: 19px;top: 7px;font-size: 20px;z-index: 9999;" (click)="startdatefun()">cancel </span>
+            
+                              <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+            
+                              <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+            
+            
+                              <input type="date" data-date="" data-date-format="DD MMMM YYYY"
+                                style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height:30px"
+                                class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                            </div>
+                          </div>
+                        </div>
+            
+                        <div class="col-sm-3" style="margin-top: -13px">
+                          <div class="form-line">
+                            <label style="position: relative;top: 10px;font-weight: bold;">End Date:</label>
+                            <div class="center" style="position: relative;top: 9px;">
+                              <span class="material-icons" style="position: absolute;
+                            right: 19px;top: 7px;font-size: 20px;z-index: 9999;" (click)="endtimefun()">cancel </span>
+            
+                              <span style="position: absolute;left: 28px;top: 8px;font-weight: 600;">/</span>
+            
+                              <span style="position: absolute;left: 64px;top: 8px;font-weight: 600;">/</span>
+            
+                              <input type="date" placeholder="Select Date"
+                                style="border: 1px solid #6d6c6c85; text-align: center;border-radius:5px;height:30px"
+                                class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                            </div>
+                          </div>
+                        </div>
+  
+  
+                        
+                        <p style="width: 100%;text-align: center;" *ngIf="fg.touched && fg.invalid"> <span  class="fromtoclass">To Date should be greater than or equal to
+                          From Date </span></p>
+                        <div class="col-sm-3">
+                          <label style="font-weight: bold;">Complaint Number:</label>
+                          <div class="form-line">
+                            <input type="number"
+                              style="border: 1px solid #4d474785; text-align: center;border-radius:5px;height: 30px;"
+                              class=" form-control" id="Ticketnumber">
+                          </div>
+                        </div>
+  
+                       
+                        <!-- <div class="col-sm-3">
+                          <label style="font-weight: bold;">Customer Name:</label>
+                          <div class="ng-autocomplete">
+                            <form [formGroup]="autocompleteform">
+                              <ng-autocomplete [data]="countries" [searchKeyword]="keyword"
+                                placeHolder="Enter the Customer Name" (selected)='selectEvent($event)'
+                                (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+                                (inputCleared)="onClearSearch($event)" historyIdentifier="countries"
+                                [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" #auto
+                                formControlName="employeename">
+                              </ng-autocomplete>
+                              <ng-template #itemTemplate let-item>
+                                <a [innerHTML]="item.name"></a>
+                              </ng-template>
+        
+                              <ng-template #notFoundTemplate let-notFound>
+                                <div [innerHTML]="notFound"></div>
+                              </ng-template>
+        
+                            </form>
+                          </div>
+        
+                         
+                        </div> -->
+                        <!-- <div class="col-sm-3">
+                          <button type="button" class="btn-hover color-1"
+                            (click)="searchviewallticketList()">Search</button>
+                        </div> -->
+        
+                        <div class="col-sm-8">
+                          <button type="button" class="btn-hover color-1" (click)="searchviewallticketList()"
+                            style="width: 200px;position: relative;top: 8px;">Search</button>
+                          <span style="position: relative;top: 8px;">(OR)</span>
+                          <button type="button" class="btn-hover color-1" (click)="showallfun()"
+                            style="width: 200px;position: relative;top: 8px;">Show
+                            All</button>
+                        </div>
+  
+                        
+  
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+                
+              
+  
+              <div style="width:100%;text-align:center;" *ngIf="loaderhideme">
+                <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+              </div>
+              
+  
+              <div class="table-responsive sas" *ngIf='ticketList?.length' style="position: relative;
+              top: -20px;">
+                <ul>
+                  <li>
+  
+                    <table id="tableExport"
+                      class="display table table-hover table-checkable table-striped order-column width-per-100">
+                      <thead>
+                        <tr>
+                        <th class="center">S.NO</th>  
+                          <th class="center">Complaint Number</th>
+                          <th class="center">Description</th>
+                          <th class="center">Received Date</th>
+  
+                          <th class="center">Customer Name</th>
+                          <th class="center">Project Name</th>
+                          <th class="center">Complaint type</th>
+                          <th class="center">Pending Department</th>
+                          <th class="center">Status</th>
+
+                          <th class="center">Escalation Date</th>
+                          <th class="center">Owner Name</th>
+                          <th class="center">Flat No</th>
+                          <!-- <th class="center">Action</th> -->
+                        </tr>
+                      </thead>
+  
+                      <!-- <tbody>
+                        <tr *ngIf="total_length == 0">
+                          <td class="center" colspan="8" id="noData"> No Data Available</td>
+                        </tr>
+                      </tbody>
+  
+                      <tbody -->
+                      
+                        <!-- <tr *ngIf="total_length == 0">
+                      <td class="center" colspan="8" id="noData"> No Data Available</td>              
+                    </tr> -->
+                    <ng-container *ngFor="let data of ticketList; let i=index">
+  
+                        <tr
+                          *ngIf="data.estimatedResolvedDateStatus  != '17' || data.estimatedResolvedDateStatus  == 'null'"
+                          class="ticketList" (click)="gotoTicketDetailspage(data)">
+                          <!-- <div *ngIf="ticketList.estimatedResolvedDateStatus  != '17'" style="background-color: rgb(189, 67, 67);"> -->
+                          <td class="center">{{i+1}}</td> 
+                          <td class="center"><a class="leadId">{{data.complaintId}}</a></td>
+                          <td class="center" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden; width: 80%;max-width: 1px;"><a class="leadId">{{data.description}}</a></td>
+                          
+  
+                          <td class="center">
+                            <!-- <span *ngIf="data.createdDate != null" style="display: none;">{{data.createdDate}}</span> -->
+                            <span *ngIf="data.createdDate != null">{{data.createdDate| date : 'dd/MM/yyyy'}}</span>
+                            <span *ngIf="data.createdDate == null"> - </span>
+  
+                          
+                          
+                          </td>
+  
+                          <td class="center">{{data.customerPropertyDetails.customerName}}</td>
+                          <td class="center">{{data.customerPropertyDetails.siteName}}</td>
+                          <td class="center">{{data.complaintType.complaintType}}</td>
+                          <td class="center">{{data.department.departmentName}}</td>
+                          <td class="center">
+                            <div class="badge" [ngStyle]="{'color':getColor(data.status)}">{{data.status}}</div>
+                          </td>
+  
+  
+                          <td class="center">
+                            
+                       
+                            <!-- <span *ngIf="data.estimatedResolvedDate != null" style="display: none;">{{data.estimatedResolvedDate}}</span> -->
+                            <span *ngIf="data.estimatedResolvedDate != null">{{data.estimatedResolvedDate| date : 'dd/MM/yyyy'}}</span>
+                            <span *ngIf="data.estimatedResolvedDate == null"> - </span>
+                          </td>
+                          <td class="center">{{data.complaintOwnerName}}</td>
+                          <td class="center">{{data.customerPropertyDetails.flatNo}}</td>
+  
+  
+                         
+                        </tr>
+  
+                        <tr *ngIf="data.estimatedResolvedDateStatus  == '17'"
+                          style="background-color: rgb(207, 199, 227);" class="ticketList"
+                          (click)="gotoTicketDetailspage(data)">
+                          <!-- <div *ngIf="ticketList.estimatedResolvedDateStatus  != '17'" style="background-color: rgb(189, 67, 67);"> -->
+                          <td class="center">{{i+1}}</td>
+                          <td class="center"><a class="leadId">{{data.complaintId}}</a></td>
+                          <td class="center" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden; width: 80%;max-width: 1px;"><a class="leadId">{{data.description}}</a></td>
+                          <td class="center">
+  
+                            <!-- <span *ngIf="data.createdDate != null" style="display: none;">{{data.createdDate}}</span> -->
+                            <span *ngIf="data.createdDate != null">{{data.createdDate| date : 'dd/MM/yyyy'}}</span>
+                            <span *ngIf="data.createdDate == null"> - </span>
+                          </td>
+  
+  
+                          <td class="center">{{data.customerPropertyDetails.customerName}}</td>
+                          <td class="center">{{data.customerPropertyDetails.siteName}}</td>
+                          <td class="center">{{data.complaintType.complaintType}}</td>
+                          <td class="center">{{data.department.departmentName}}</td>
+                          <td class="center">
+                            <div class="badge" [ngStyle]="{'color':getColor(data.status)}">{{data.status}}</div>
+                          </td>
+  
+  
+  
+  
+  
+                          <td class="center">
+                            <!-- <span *ngIf="data.estimatedResolvedDate != null" style="display: none;">{{data.estimatedResolvedDate}}</span> -->
+                            <span *ngIf="data.estimatedResolvedDate != null">{{data.estimatedResolvedDate| date : 'dd/MM/yyyy'}}</span>
+                            <span *ngIf="data.estimatedResolvedDate == null"> - </span>
+                          </td>
+                          <td class="center">{{data.complaintOwnerName}}</td>
+                          <td class="center">{{data.customerPropertyDetails.flatNo}}</td>
+                         
+                        </tr>
+                      </ng-container>
+                      </tbody>
+                    </table>
+                  </li>
+                </ul>
+  
+  
+  
+  
+                <div class="bottomcls" *ngIf='ticketList?.length'>Total Complaints : <span
+                    *ngIf="total_tickets == null">-</span> <span *ngIf="total_tickets !== null">{{total_tickets}}</span>
+                </div>
+  
+  
+              </div>
+              <div style="padding: 10px; border: solid#bbb 0.5px; border-radius: 10px;width: 100%;
+              margin-left: 0;margin-top:-15px;" *ngIf='ticketList?.length'>
+               
+                <div class="row clearfix">
+                  <div class="col-md-4">
+                    <p style="font-size: xx-small;"><span style="font-weight: 600;">NEW: </span>Complaints which are raised
+                      by
+                      the customer but complaints owner doesn't open.</p>
+                  </div>
+                  <div class="col-md-4">
+                    <p style="font-size: xx-small;"><span style="font-weight: 600;">OPEN: </span>Complaints owner opens the
+                      complaints but no action is taken.</p>
+                  </div>
+                  <div class="col-md-4">
+                    <p style="font-size: xx-small;"><span style="font-weight: 600;">IN PROGRESS: </span>Complaints owner
+                      responds to the complaints by taking actions like Reply, Forward & Seek info.</p>
+                  </div>
+                </div>
+                <div class="row clearfix">
+                  <div class="col-md-4">
+                    <!-- <p style="font-size: xx-small;"><span style="font-weight: 600;">REPLIED: </span>Getting reply form the
+                      employee to whom ticket is forwarded by Ticket owner.</p> -->
+                      <p style="font-size: xx-small;"><span style="font-weight: 600;">Escalated: </span>Getting reply from the
+                        Complaints is not "closed" within the configured time, then the complaints is escalated to next level.</p>
+                  </div>
+                  <div class="col-md-4">
+                    <p style="font-size: xx-small;"><span style="font-weight: 600;">CLOSED: </span>Customer or Complaints
+                      owner
+                      closes the complaints.</p>
+                  </div>
+                  <div class="col-md-4">
+                    <p style="font-size: xx-small;"><span style="font-weight: 600;">RE-OPEN: </span>Customer opens the
+                      already closed complaints.</p>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

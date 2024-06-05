@@ -1,0 +1,158 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Report</h4>
+            </li>
+            <!-- <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home"></i> Home</a>
+            </li> -->
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i><span >Company Notifications</span></a>
+            </li>
+           
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" (click)="notification_list(title_name)">{{title_name}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;" (click)="notification_list1(title_name , title_name1)">{{title_name1}}</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;" > View Report</a>
+              </li>
+ 
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line" style="font-weight: bold;"> Project:</div>
+          </div>
+         
+          <div class="col-sm-6">
+            <div class="form-line" style="font-weight: bold;"> <label>{{project_name}} </label></div>
+          </div>
+         
+        </div><br>
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line" style="font-weight: bold;"> Notification Title:</div>
+          </div>
+         
+          <div class="col-sm-6">
+            <div class="form-line" style="font-weight: bold;"> <label>{{notification_title}}</label> </div>
+          </div>
+         
+        </div><br>
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line" style="font-weight: bold;"> Notification Text:</div>
+          </div>
+         
+          <div class="col-sm-6">
+            <div class="form-line" style="font-weight: bold;"> <label>{{notification_text}} </label></div>
+          </div>
+         
+        </div><br>
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line" style="font-weight: bold;"> Notification Desc:</div>
+          </div>
+         
+          <div class="col-sm-6">
+            <div class="form-line" style="font-weight: bold;width:800px"><label [innerHTML]='notification_description' style="width:800px;text-align: justify;"></label> </div>
+          </div>
+         
+        </div><br>
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line" style="font-weight: bold;"> Notification Type(Project/Block/Flat):</div>
+          </div>
+         
+          <div class="col-sm-6">
+            <div class="form-line" style="font-weight: bold;"> <label>{{notification_type}}</label> </div>
+          </div>
+         
+        </div><br>
+
+        <div class="row clearfix">
+          <div class="col-sm-4">
+            <div class="form-line" style="font-weight: bold;"> Push notification -registered flats Target Count: <label> {{target_count}}</label></div>
+          </div>
+         
+
+          <div class="col-sm-4">
+            <div class="form-line" style="font-weight: bold;"> Push Notification Received  flat Count: <label>{{received_count}}</label></div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-line" style="font-weight: bold;"> Viewed flat Count: <label>{{view_count}}</label></div>
+          </div>
+        </div><br>
+
+        <span style="font-weight: bold;font-size: 22px;text-decoration: underline;">Flat and device wise details:</span><br><br>
+        <span style="font-weight: bold;font-size: 14px;"> Note :  In the single flat if we have two registered mobiles in the table we are showing 2 records.</span><br>
+
+       
+        <div class="table-responsive" id="milestone_blocks_tables">
+          <ul>
+            <li>
+
+              <table id="tableExport"
+                class="display table table-hover table-checkable order-column width-per-100 table-bordered">
+                <thead>
+                  <tr>
+                    <th class="center">S.NO</th>
+                 
+                    <th class="center">Flat No</th>
+                    <th class="center">Customer Name</th>
+                    <th class="center">Push Notification Delivered Status</th>
+                    <th class="center">Delivered Date</th>
+                    <th class="center">Viewed Status</th>
+                    <th class="center">Viewed Date</th>
+                    <th class="center">OS Type(IOS/Android)</th>
+                    <th class="center">Device Model(IOS/Android)</th>
+                    
+
+                  </tr>
+                </thead>
+                <tbody>
+
+
+                  <tr *ngFor="let item of viewDetails; let i=index">
+                    <td class="center">{{i+1}}</td>
+                   
+
+                    <td class="center">{{item.flatNo}}</td>
+                    <td class="center">{{item.customerName}}</td>
+                    <td class="center">{{item.deliveredStatus}}</td>
+                    <td class="center" *ngIf="item.deliveredTime == null">-</td>
+                    <td class="center" *ngIf="item.deliveredTime != null">{{item.deliveredTime| date:'dd-MM-yyyy'}}</td>
+                    
+                    <td class="center" >{{item.viewStatus}}</td>
+                    <td class="center" *ngIf="item.viewedTime == null">-</td>
+                    <td class="center" *ngIf="item.viewedTime != null">{{item.viewedTime| date:'dd-MM-yyyy'}}</td>
+                    <td class="center">{{item.osType}}</td>
+                    <td class="center">{{item.deviceModel}}</td>
+                   
+                   
+
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div> 
+</section>

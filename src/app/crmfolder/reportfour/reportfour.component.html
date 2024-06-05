@@ -1,0 +1,31 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">BUDGET</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" (click)="homeClick()"></i>Budget</a>
+            </li>
+         
+          </ul>
+        </div>
+      </div>
+  <div class="container">
+   <div>
+    <canvas baseChart [datasets]="barChartData"
+    [labels]="barChartLabels" [options]="barChartOptions"
+       [plugins]="barChartPlugins" [legend]="barChartLegend" 
+       [chartType]="barChartType"  [colors]="pieChartColors">
+   </canvas>
+   </div>
+   
+  </div>
+</div>
+</div>
+  </section>

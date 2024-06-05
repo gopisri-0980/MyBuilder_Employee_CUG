@@ -1,0 +1,217 @@
+<style>
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      border-radius: 4px;
+      margin-right: 2px;
+      opacity: 0.9;
+      filter: invert(0.8);
+      position: absolute;
+      right: 35px;
+    }
+  
+    ::ng-deep .my-class .modal-dialog {
+      max-width: 30%;
+      width: 30%;
+  
+    }
+  
+    input[type="date"]::-webkit-datetime-edit,
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button {
+      color: #fff;
+      position: relative;
+    }
+  
+    input[type="date"]::-webkit-datetime-edit-year-field {
+      position: absolute !important;
+  
+      padding: 2px;
+      color: #000;
+      left: 70px;
+  
+    }
+  
+    input[type="date"]::-webkit-datetime-edit-month-field {
+      position: absolute !important;
+     
+      padding: 2px;
+      color: #000;
+      left: 33px;
+      content: "-";
+    }
+  
+    input[type="date"]::-webkit-datetime-edit-day-field {
+      position: absolute !important;
+      color: #000;
+      padding: 2px;
+      left: 4px;
+  
+    }
+    .bottomcls {
+      position: relative;
+      top: 0px;
+      font-weight: 600;
+      font-size: 18px;
+      width: 40%;
+    }
+    .ng-autocomplete {
+      width: 100% !important;
+    }
+    .fromtoclass {
+      position: relative;
+      left: 38px;
+      color: orangered;
+      font-weight: bold;
+      font-size: 13px;
+      width: 90%;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      top: -17px;
+      font-weight: 600;
+      font-family: 'Poppins';
+      background-color: #FFF;
+    }
+  
+    .sas {
+      padding: 10px;
+      border: solid#bbb 0.5px;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+
+    .nodata {
+      position: relative;
+      font-size: 18px;
+      color: #607d8b;
+      /* font-weight: 600; */
+      font-family: 'Poppins';
+      left: 39px;
+      top: 5px;
+    }
+
+
+  </style>
+  
+  <section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row" style="position: relative;
+        left: 19px;top: 5px;">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Lendor</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a>
+                  <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>Lendor</a>
+              </li>
+              <!-- <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Ticket</a>
+              </li> -->
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Lendor List</a>
+              </li>
+  
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="width: 96%; margin-left: 2%; margin-right: 2%;">
+        <div class="card-body">
+          <div class="row clearfix">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <p class="fieldHeaders">
+                  <label style="font-weight: bold;">Select Project*:</label>
+                </p>
+                <div class="center">
+                  <select style="width:100%;" class="form-group" id="statusID" single>
+                 <option value="select">Select status</option> 
+                 <option value="0">All</option> 
+                 <option value="6">Active</option> 
+                 <option value="7">Inactive</option> 
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4 text-center">
+              <button type="submit" class="btn-hover color-1" (click)="getDetails()">Submit</button>
+            </div>
+          
+  
+        </div>
+        </div>
+      </div>
+             
+          
+          <div class="card" style="border:0;position: relative;" *ngIf='lenderList?.length' >
+  
+          
+            <div class="card-body">
+  
+              <div class="table-responsive sas" style="position: relative;
+              top: -40px;">
+                 <table id="tableExport"
+                 class="display table table-hover table-checkable table-striped order-column width-per-100">
+                 <thead>
+                   <tr>
+                   <th class="center">S.NO</th>  
+                     <th class="center">Alias Name</th>
+                     <th class="center">Name</th>
+                     <th class="center">Address</th>
+                     <th class="center">Mobile Number</th>
+                     <th class="center">Email Id</th>
+                     <th class="center">Created Date</th>
+                     <th class="center">Status</th>
+                   </tr>
+                 </thead>
+
+               
+             
+
+                   <tr *ngFor="let data of lenderList; let i=index"
+                     class="ticketList" (click)="lenderDetailspage(data)">
+                     <td class="center">{{i+1}}</td> 
+                     <td class="center"><a class="leadId">{{data.aliasName}}</a></td>
+                     <td class="center"><a class="leadId">{{data.name}}</a></td>
+                     <td class="center">{{data.address}}</td>
+                     <td class="center">{{data.mobileNo}}</td>
+                     <td class="center">{{data.emailId}}</td>
+                     <td class="center">
+                     <span *ngIf="data.createdDate != null">{{data.createdDate| date : 'dd/MM/yyyy'}}</span>
+                       <span *ngIf="data.createdDate == null"> - </span></td>
+
+                     <td class="center">{{data.status}}</td>
+
+                   </tr>
+
+                  
+                
+                 </tbody>
+               </table>
+  
+  
+              
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <div class="card" *ngIf="lenderList.length == 0" style="position: relative;
+        top: -14px;width: 96%;margin-left: 2%;">
+          <div class="card-body">
+            <div>
+              <p class="nodata">No records found</p>
+            </div>
+          </div>
+        </div>
+
+
+    </div>
+  </section>

@@ -1,0 +1,205 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+    <div class="content__loader">
+      <div><i class="Favicon"></i></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .fromtoclass {
+    position: relative;
+    left: 38px;
+    color: orangered;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    top: -17px;
+    font-weight: 600;
+    font-family: 'Poppins';
+    background-color: #FFF;
+}
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+</style>
+
+
+<section class="content">
+
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Ticket projectwise report</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>
+                <span (click)="dashtitle()" style="cursor:pointer;">Ticketing Dashboard</span> </a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">All ticket types - Projectwise report</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card" style="position: relative;top: -24px;">
+      <div class="card-body" style="padding: 0px!important;">
+        <form [formGroup]="fg">
+          <div class="row clearfix" style="position: relative;top: 7px;left: 18px;">
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">From Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="fromDate" formControlName="from" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-line">
+                <label style="font-weight: bold;">To Date:</label>
+                <div class="center">
+                  <input type="date" placeholder="Select Date"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px;height:30px"
+                    class=" form-control" id="toDate" formControlName="to" [max]="getToday()">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <button type="button" class="btn-hover color-1" (click)="searchAllServices('submitClick')">Submit</button>
+            </div>
+
+            <p *ngIf="fg.touched && fg.invalid" class="fromtoclass">Please add a valid from and to date</p>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- <div>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="subheadercls"> Tickets showing only from <span>{{fromreport}}</span> to <span>{{toreport}}</span>
+          </h4>
+        </div>
+      </div>
+    </div> -->
+
+
+    <div *ngIf="ticketTypeWiseReports?.length" style="position: relative;top: -40px;">
+      <div >
+        <div  style="background-color: transparent;border:none">
+          <h4 class="subheadercls">Note: Tickets showing only from <span>{{startdateDatavalue |
+              date:'dd-MM-yyyy'}}</span> to <span>{{enddateDatavalue | date:'dd-MM-yyyy'}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card" style="position: relative; top: -28px;">
+      <div class="card-body">
+
+        <div class="row" style="position: relative; top: -33px;">
+          <div class="col-sm-10">
+            <p class="titileclassproject" style="position: relative;
+            top: 30px;">All ticket types - Projectwise report (Ticket type project wise) : </p>
+          </div>
+          <div class="col-sm-2">
+            <div *ngIf="ticketTypeWiseReports?.length">
+
+              <button type="button" (click)="exploreTableThree()" class="btn-hover color-1 sasbtn" style="position: relative;
+              top: 14px;">
+                Explore <img style="margin-left: 20px;" src="assets/images/twotone_double_arrow_black_18dp.png">
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div style="width:100%;text-align:center;" *ngIf="loaderhideme3">
+          <img src="https://i.redd.it/ounq1mw5kdxy.gif" style="width: 400px;height: 400px;">
+        </div>
+
+        <div class="row clearfix" style="overflow-y: hidden;padding:10px;">
+          <div class="col-sm-12" style="padding: 10px;">
+            <div class="table-responsive" *ngIf="ticketTypeWiseReports?.length" style="position: relative;
+            top: -36px;">
+              <table style="border-radius: 10px;" id="Alltickettypes" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr class="center">
+                    <th *ngFor="let item of headersArray">{{item}}</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngIf="ticketTypeWiseReports.length == 0">
+                    <td class="center" colspan="7">No data available</td>
+                  </tr>
+                  <tr *ngFor="let mainItem of ticketTypeWiseReports; let i = index;">
+                    <td *ngFor="let Item of mainItem; let j = index;" class="center">
+                      <span *ngIf="mainItem[j] !== 'N/A'" [ngStyle]="{'font-weight':getColor(mainItem[j])}">
+                        {{mainItem[j]}}</span>
+                      <span *ngIf="mainItem[j] == 'N/A'"> - </span>
+
+                    </td>
+                  </tr>
+
+                  <tr class="center" style="color: #9E9E9E;border: none;" *ngIf="ticketTypeWiseReports.length != 0">
+                    <td class="center" style="font-weight: bold;" *ngFor="let item of sumOfArray">{{item}}</td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+
+            <div *ngIf="ticketTypeWiseReports.length == 0">
+              <p *ngIf="loaderhideme3 == false">No data available</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

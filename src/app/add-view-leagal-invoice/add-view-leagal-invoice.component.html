@@ -1,0 +1,165 @@
+<style>
+  .labelclass {
+    font-weight: 400;
+    color: #9e9e9e;
+  }
+
+  .table-responsive {
+    margin-top: 20px;
+
+  }
+
+
+  .dataTables_wrapper {
+    width: 800px !important;
+    margin: 0 auto !important;
+  }
+
+  .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    width: auto;
+    min-height: 300 px;
+    margin-left: 0px;
+    border-bottom: 1px solid black !important;
+    border-top: 1px solid black !important;
+    border-left: 1px solid black !important;
+    border-right: 1px solid black !important;
+    background-color: #9D9C9D;
+    zoom: 1;
+  }
+
+  .my__textoverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+  }
+
+
+  .norecordclass {
+    position: relative;
+    left: 0px;
+    font-size: 19px;
+    font-weight: bold;
+    border: 1px solid #9E9E9E;
+    padding: 10px;
+  }
+</style>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">View Invoices Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a><i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active" style="cursor:pointer;" (click)="viewinvoicefun()">View Invoices</li>
+            <li class="breadcrumb-item active">View Invoices Details</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label style="position: relative;top: 12px;"> <span class="labelclass">Name : </span>
+                {{controller.customerName}}</label>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label style="position: relative;top: 12px;"><span class="labelclass">Project Name : </span>
+                {{controller.siteName}}</label>
+            </div>
+          </div>
+
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label style="position: relative;top: 12px;"><span class="labelclass"> Block : </span>
+                {{controller.blockName}}</label>
+            </div>
+          </div>
+
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label style="position: relative;top: 12px;"><span class="labelclass">Flat No : </span>
+                {{controller.flatNo}}</label>
+            </div>
+          </div>
+
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label style="position: relative;top: 12px;"><span class="labelclass"> Booking Date : </span>
+                {{controller.bookingDate |
+                date:'dd-MM-yyyy'}}</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive" *ngIf="invoicedatatable?.length">
+          <h3>View Legal Invoices Details</h3>
+          <table id="tableExport" class="display nowrap">
+            <thead>
+              <tr class="center">
+                <th class="center" style="font-weight:bolder"><b>S.No</b></th>
+                <th class="center" style="font-weight:bolder"><b>Invoice Type</b></th>
+                <th class="center" style="font-weight:bolder"><b>Invoice No</b></th>
+                <th class="center" style="font-weight:bolder"><b> Invoice Amount</b></th>
+                <th class="center" style="font-weight:bolder"><b>Paid Amount</b></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of invoicedatatable; let i = index;" class="customersList"
+                (click)="viewcustomerdata(item)" style="cursor:pointer;">
+                <td class="center">{{i + 1}}</td>
+                <td class="center">{{item.metadataDesc}}</td>
+
+                <td class="center">
+
+                  <p *ngIf="item.documentLocation != '' && item.documentLocation != null"
+                    (click)="openDocument(item.documentLocation)"
+                    style="cursor:pointer; color: blue; text-decoration: underline;">
+                    {{item.finBokAccInvoiceNo}}</p>
+                </td>
+
+                <td class="center">{{item.payAmount}}</td>
+                <td class="center">{{item.paidAmount}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+
+        <div *ngIf="hideme" style="position: relative;margin-top:40px;">
+          <p class="norecordclass">No records found</p>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+</section>

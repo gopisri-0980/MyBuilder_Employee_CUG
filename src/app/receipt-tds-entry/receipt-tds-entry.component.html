@@ -1,0 +1,325 @@
+<style>
+  .rowtitlecls {
+    border: 1px solid #f0ecec;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-left: 0%;
+  }
+
+  .invalid_feedback {
+    color: red;
+    position: relative;
+    top: 4px;
+    left: 0px;
+    font-size: 11px;
+    font-family: 'Poppins';
+    font-weight: 500;
+  }
+
+  .trashicon {
+    position: relative;
+    left: 51px;
+    color: #2196F3;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 23px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .carparkinginvoicecls{
+    position: absolute;
+    right: 4px;
+    top: 5px;
+    font-weight: 600;
+    color: #4caf50;
+    font-size: 14px;
+    text-decoration: underline;
+    text-transform: capitalize;
+    display: none;
+  }
+
+  .viewinvoicecls {
+    position: absolute;
+    right: 32px;
+    top: 5px;
+    font-weight: 600;
+    color: #4caf50;
+    font-size: 14px;
+    text-decoration: underline;
+    text-transform: capitalize;
+    display: none;
+  }
+
+  .Modificationinvoicecls {
+    position: absolute;
+    right: 0px;
+    top: 5px;
+    font-weight: 600;
+    color: #4caf50;
+    font-size: 14px;
+    text-decoration: underline;
+    text-transform: capitalize;
+    display: none;
+  }
+</style>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Receipt TDS</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor: pointer;" (click)="homeClick()"></i>Transactions</a>
+            </li>
+            <li class="breadcrumb-item active">Receipt TDS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row clearfix">
+          <div class="col-sm-3">
+            <div class="form-line" style="font-weight: bold;"> Transaction Type: <label> Receipt</label></div>
+          </div>
+
+
+          <div class="col-sm-3">
+            <div class="form-line" style="font-weight: bold;"> Transaction Mode: <label>TDS</label></div>
+          </div>
+
+        </div><br>
+
+        <form>
+
+          <div class="rowtitlecls">
+            <div class="row clearfix" style="position: relative;
+            top: 9px;">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="required">Challan Number</label>
+                  <input (keypress)="keyPress($event)" maxlength=8 type="text" placeholder="Enter Number"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                    class=" form-control" id="ChequeNumber" (keyup)="Cheque_numberfun($event)">
+
+
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="required">Challan Date</label>
+
+                  <input type="date" placeholder="select date" format="DD/MM/YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                    class="form-control" id="ChequeDate" [max]="getToday()">
+
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="required">Challan Amount</label>
+                  <input (keypress)="keyPressAmount($event)" type="text" placeholder="Enter Amount"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                    class=" form-control" id="ChequeAmount" autocomplete="off" pattern="^\d*(\.\d{0,2})?$"
+                    (keyup)="Cheque_amountfun($event)">
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="required">ACK Number</label>
+                  <input (keypress)="keyPress_ack($event)" maxlength=16 type="text" placeholder="Enter Number"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                    class=" form-control" id="ackNumber" (keyup)="ack_numberfun($event)">
+                </div>
+              </div>
+              <!-- <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="required">Challan Receive Date</label>
+                  <input type="date" placeholder="select date" format="DD/MM/YYYY"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                    class=" form-control" id="ChequeRecDate">
+                </div>
+              </div> -->
+
+            </div>
+
+
+
+            <div class="row clearfix">
+              
+
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="required">Project</label>
+                  <select style="width:100%" class="form-group" id="ProjectId" single></select>
+                </div>
+              </div>
+
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Block</label>
+                  <select style="width:100%" class="form-group" id="BlockId" single disabled></select>
+                </div>
+              </div>
+
+              <div class="col-sm-3" style="position: relative;top: -3px;">
+                <div class="form-group">
+                  <label class="required">Flat</label>
+                  <select style="width:100%" class="form-group" id="FaltId" single disabled></select>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="required">BSR Code</label>
+                  <input (keypress)="keyPress($event)" maxlength=8 type="text" placeholder="Enter Code"
+                    style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                    class=" form-control" id="bsrNumber" (keyup)="bsr_numberfun($event)">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+            
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="required">Principal Amount</label>
+                  <input value="0" (keypress)="keyPressAmount($event)" type="text"
+                  style="border: 1px solid #4d474785; text-align: center;border-radius:10px; height: 28px;"
+                  class=" form-control" id="PrincipalAmount" pattern="^\d*(\.\d{0,2})?$">
+                </div>
+              </div>
+              <!-- <div class="col-sm-3" id="checkdepositeddate">
+                <label  class="chequedepositedateshowhide required" 
+                  >Cheque Deposited Date:</label>
+                <div >
+                  <div class="form-line">
+                    <input type="text"  placeholder="select date"
+                       style="border: 1px solid #4d474785; text-align: center;border-radius:5px; height: 33px;"
+                      class="form-control" id="ChequeDepositedDateID">
+                  </div>
+  
+                </div>
+              </div> -->
+            </div>
+
+          </div>
+
+          <div id="custdet_div"
+            style="width:100%;border:solid 1px #000;height: 40px;padding: 10px;border-radius:10px;margin-top:10px;display:none">
+            <div style="float:left;width:50%;"><b>Customer Name:</b> &nbsp; <span id="custname"
+                style="font-weight: 900;"></span></div>
+            <div style="float:left; width: 50%;">Pending Amount: &nbsp; <span id="pendingamnt"
+                style="font-weight: 900;"></span>
+            </div>
+
+          </div><br>
+
+
+
+          <div class="rowtitlecls">
+            <div class="row clearfix">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>CRM Comments</label>
+                  <textarea rows="5" cols="5" style="border-radius: 4px;height: 50px;" id="CrmCommentsId"
+                    data-length="120"></textarea>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label> Customer Comments </label>
+                  <textarea style="border-radius: 4px;height: 50px;" rows="5" cols="5" id="CustomerCommentsId"
+                    data-length="120"></textarea>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="required">Attach Files:</label><br>
+                  <input type="file" id="files" accept="image/x-png,image/gif,image/jpeg"
+                    (change)="handle_FileSelect($event)"
+                    style="position: relative;color: rgb(0, 0, 0); cursor:pointer;">
+                </div>
+              </div>
+
+
+
+            </div>
+
+            
+
+
+            <div class="row">
+              <div class="container" style="position: relative;
+              top: 22px;display: inline-flex;margin-top: 20px;overflow-x: auto;">
+                <div *ngFor='let url of urls; let i = index;' style="margin-left: 20px;min-width: 20%;">
+                  <span *ngIf="url.Type == 'jpg' || url.Type =='png' || url.Type == 'svg' || url.Type == 'jpeg'">
+                    <img [src]="url.upload" height="150" width="150" (click)="fileClickfun(url.upload , url.Type)"
+                      style="cursor:pointer;">
+                    <br />
+                    <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)"
+                      style="cursor:pointer;">
+                  </span>
+                  <span *ngIf="url.Type == 'N/A' || url.Type == 'pdf' || url.Type == 'PDF' ">
+                    <img src="assets/images/file1.png" height="150" width="150"
+                      (click)="fileClickfun(url.upload , url.Type)" style="cursor:pointer;">
+                    <br />
+                    <img src="assets/images/trash.jpg" class="trashicon" (click)="Deleteimage(i)"
+                      style="cursor:pointer;">
+                  </span>
+
+                  <p style="position: relative;text-align: center;width: 150px;top: -18px;">{{url.Name}}</p>
+                </div>
+                <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body"style="text-align:center;">
+                        <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                        <object style="width:100%!important;" height="500" [attr.data]="fileName"
+                          type={{filetypeurlsplit1}}
+                          *ngIf="filesplitdata !== 'image' &&  filetypeurlsplit1 == 'application/pdf'"></object>
+
+
+                        <img [src]="imgsrc" height="450" style="width:auto" *ngIf="filesplitdata == 'image'">
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div style="text-align:center;">
+            <button type="button" class="btn-hover color-1" (click)="CRMReceiptTDSSubmit()">Submit</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</section><br>

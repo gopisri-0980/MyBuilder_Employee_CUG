@@ -1,0 +1,144 @@
+<div class="row" *ngIf="preloader">
+  <div class="col-sm-12">
+      <div class="content__loader">
+          <div><i class="Favicon"></i></div>
+      </div>
+  </div>
+</div>
+
+
+<style>
+  #Alltickettypes_paginate ul .pagination{
+    position: absolute!important;
+    right: 0!important;
+    width: 100%!important;
+    margin-right: -92%!important;
+  }
+</style>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Employeewise ticket average closing time</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a>
+                <i class="fas fa-home" style="cursor:pointer;" (click)="homeClick()"></i> 
+                <span (click)="dashtitle()" style="cursor:pointer;" *ngIf="this.statusitem !== 'Ticketaveragetimeside'"> Ticketing Dashboard </span>
+                <span (click)="dashtitle1()" style="cursor:pointer;" *ngIf="this.statusitem == 'Ticketaveragetimeside'"> Ticket average time report</span>
+              
+              </a>
+            </li>
+
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">EmployeeWise ticket average closing time</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body" style="border-radius: 0px;">
+
+
+            <div class="table-responsive" style="overflow-x:revert!important;">
+              <table style="border-radius: 10px;" id="tableExportdata">
+                <thead>
+                  <tr class="center">
+                    <th>Ticket Type</th>
+                    <th>Project Name</th>
+                    <th>Total</th>
+                    <th>Open</th>
+                    <th>Close</th>
+                    <th>Avg closing time</th>
+                    <th>Avg reply time</th>
+                    <th>Emp Name</th>
+                  </tr>
+                </thead>
+                <!-- && avgClosingNoDataAvailable -->
+                <tbody *ngIf="json_response_avgTktClosingTimeEmpWiseArray.length == 0 ">
+                  <tr>
+                    <td class="center" colspan="9">No data available</td>
+                  </tr>
+                </tbody>
+
+                <tbody>
+                  <tr *ngFor="let item of json_response_avgTktClosingTimeEmpWiseArray; let i = index;">
+                    <td class="center">{{item.ticketType}}</td>
+                    <td class="center">{{item.projectName}}</td>
+                    <td
+                      (click)="getEmployeeWiseTicketAverageClosingAndReplyTimeDtls(item.startDate,item.endDate,[item.ticketTypeIds],[item.siteIds] ,item.ticketsids)"
+                      class="center" style="text-decoration: underline; cursor: pointer;">
+                      {{item.totalTickets}}
+                    </td>
+                    <td
+                      (click)="getTicketingDashBoardDetails(item.startDate,item.endDate,[item.siteIds],['Open'],item.ticketTypeDetailsId)"
+                      class="center" style="text-decoration: underline; cursor: pointer;">
+                      {{item.openTickets}}
+                    </td>
+                    <td
+                      (click)="getTicketingDashBoardDetails(item.startDate,item.endDate,[item.siteIds],['Closed'],item.ticketTypeDetailsId)"
+                      class="center" style="text-decoration: underline; cursor: pointer;">
+                      {{item.closedTickets}}
+                    </td>
+                    <td class="center">{{item.avgClosingTime + ' hrs'}}</td>
+                    <td class="center">{{item.avgReplyTime + ' hrs'}}</td>
+                    <td class="center">{{item.empName}}</td>
+                  </tr>
+
+                  <tr style="color: #9E9E9E;border: none;"
+                    *ngIf="json_response_avgTktClosingTimeEmpWiseArray.length != 0">
+                    <td class="center" style="font-weight: bold;">Total</td>
+                    <td class="center">-</td>
+                    <td class="center" style="font-weight: bold;">
+                      {{tab6sumOfTotal1}}
+                    </td>
+                    <td class="center" style=" font-weight: bold;">
+                      {{tab6sumOfOpen1}}
+                    </td>
+                    <td class="center" style="font-weight: bold;">
+                      {{tab6sumOfClosed1}}
+                    </td>
+                    <td class="center" style="font-weight: bold;">{{tab6sumOfAvgClosingTime1}} hrs</td>
+                    <td class="center" style="font-weight: bold;">{{tab6sumOfAvgReplyTime1}} hrs</td>
+                    <td class="center" style="font-weight: bold;">-</td>
+                  </tr>
+                </tbody>
+
+                <!-- <tbody *ngIf="json_response_avgTktClosingTimeEmpWiseArray.length != 0">
+                  <tr  style="color: #9E9E9E;border: none;">
+                    <td class="center"  style="font-weight: bold;">Total</td>
+                    <td class="center">-</td>
+                    <td (click)="getEmployeeWiseTicketAverageClosingAndReplyTimeDtls(startDate,endDate,allTktTypeIds,allSiteIds)" class="center" style="font-weight: bold;">
+                      {{tab6sumOfTotal}}
+                    </td>
+                    <td (click)="getTicketingDashBoardDetails(startDate,endDate,allSiteIds,['Open'],allTktTypeDetailsIds)" class="center" style=" font-weight: bold;">
+                      {{tab6sumOfOpen}}
+                    </td>
+                    <td (click)="getTicketingDashBoardDetails(startDate,endDate,allSiteIds,['Closed'],allTktTypeDetailsIds)" class="center" style="font-weight: bold;">
+                      {{tab6sumOfClosed}}
+                    </td>
+                    <td class="center" style="font-weight: bold;">{{tab6sumOfAvgClosingTime| number}} hrs</td>
+                    <td class="center" style="font-weight: bold;">{{tab6sumOfAvgReplyTime| number}} hrs</td>
+                    <td class="center" style="font-weight: bold;">-</td>
+                  </tr>
+                </tbody> -->
+
+
+              </table>
+            </div><br>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
